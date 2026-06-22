@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+<title>画面構成ドキュメント | ランステック（内部）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:        #E07898;
+    --pink-dark:   #C0587A;
+    --pink-light:  #FBF0F4;
+    --green:       #009944;
+    --green-dark:  #007a36;
+    --ink:         #333333;
+    --sub:         #666666;
+    --bg:          #ffffff;
+    --bg-soft:     #f5f5f5;
+    --line:        #e0e0e0;
+    --radius:      8px;
+    --maxw:        1080px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.75; font-weight: 400; text-wrap: pretty; word-break: auto-phrase; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+  .eyebrow { font-size: 12px; font-weight: 500; color: var(--pink); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+  h2.title { font-size: 28px; font-weight: 700; margin-bottom: 12px; line-height: 1.5; }
+
+  /* ── INTERNAL TOPBAR ── */
+  .doc-topbar { position: sticky; top: 0; z-index: 100; background: #1e1e1e; color: #fff; border-bottom: 1px solid #000; }
+  .doc-topbar .wrap { display: flex; align-items: center; gap: 16px; height: 60px; }
+  .doc-topbar img { height: 22px; width: auto; display: block; filter: brightness(0) invert(1); }
+  .doc-topbar .doc-title { font-size: 14px; font-weight: 700; letter-spacing: .02em; }
+  .doc-badge { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--pink); border-radius: 4px; padding: 3px 9px; }
+  .doc-logo { display: inline-flex; align-items: center; }
+  .doc-back { margin-left: auto; font-size: 13px; font-weight: 700; color: #fff; text-decoration: none; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28); border-radius: 6px; padding: 7px 14px; transition: background .15s; white-space: nowrap; }
+  .doc-back:hover { background: rgba(255,255,255,.22); }
+
+  /* ── LAYOUT (TOC + MAIN) ── */
+  .doc-shell { padding: 48px 0 96px; }
+  .doc-grid { display: grid; grid-template-columns: 200px 1fr; gap: 56px; align-items: start; }
+  .doc-toc { position: sticky; top: 84px; }
+  .doc-toc-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--sub); margin-bottom: 12px; }
+  .doc-toc a { display: block; font-size: 13px; color: var(--sub); text-decoration: none; padding: 5px 0; border-left: 2px solid transparent; padding-left: 12px; margin-left: -12px; transition: color .15s, border-color .15s; }
+  .doc-toc a:hover { color: var(--ink); border-left-color: var(--line); }
+  .doc-toc a.toc-sub { font-size: 12px; padding-left: 24px; color: #888; }
+  .doc-toc hr { border: none; border-top: 1px solid var(--line); margin: 12px 0; }
+
+  /* ── SECTIONS ── */
+  .doc-sec { margin-bottom: 64px; scroll-margin-top: 84px; }
+  .doc-sec > p.lead { font-size: 15px; color: var(--sub); line-height: 1.9; max-width: 720px; }
+  .doc-sec h2.title { font-size: 22px; }
+
+  /* OVERVIEW callout */
+  .doc-callout { background: var(--pink-light); border: 1px solid #f0d7e1; border-radius: var(--radius); padding: 16px 20px; font-size: 13px; color: var(--ink); line-height: 1.8; margin-top: 18px; }
+
+  /* tables */
+  .doc-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  .doc-table th, .doc-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.6; }
+  .doc-table th { font-weight: 700; color: var(--sub); font-size: 12px; background: var(--bg-soft); white-space: nowrap; }
+  .doc-table code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; }
+  .doc-table .badge-pub { font-size: 10px; font-weight: 700; color: var(--green-dark); background: var(--green-light, #eaf5ef); border: 1px solid #cfe8d8; border-radius: 4px; padding: 2px 7px; white-space: nowrap; }
+
+  /* common element cards */
+  .doc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  .doc-mini { border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; }
+  .doc-mini h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .doc-mini p { font-size: 13px; color: var(--sub); line-height: 1.75; }
+  .token-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; border: 1px solid var(--line); vertical-align: -1px; margin-right: 6px; }
+
+  /* SCREEN spec cards */
+  .spec-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 28px 24px; margin-bottom: 20px; scroll-margin-top: 84px; }
+  .spec-card .eyebrow { margin-bottom: 6px; }
+  .spec-title { font-size: 18px; font-weight: 700; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .spec-file { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 400; color: var(--sub); background: var(--bg-soft); border: 1px solid var(--line); border-radius: 4px; padding: 2px 8px; }
+  .spec-purpose { font-size: 14px; color: var(--sub); line-height: 1.8; margin-bottom: 20px; }
+  .spec-block { margin-bottom: 18px; }
+  .spec-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); margin-bottom: 10px; }
+
+  /* reused: flow-steps (番号付き縦リスト) */
+  .flow-steps { display: flex; flex-direction: column; gap: 0; }
+  .flow-step { display: flex; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .flow-step:last-child { border-bottom: none; }
+  .step-num { font-size: 11px; font-weight: 700; color: var(--pink); letter-spacing: .08em; flex-shrink: 0; min-width: 24px; }
+  .step-body h4 { font-size: 13.5px; font-weight: 500; }
+
+  /* reused: tags */
+  .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { display: inline-block; background: var(--pink-light); border: 1px solid var(--line); color: var(--ink); font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 4px; }
+
+  .notes-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .notes-list li { font-size: 13px; color: var(--sub); line-height: 1.75; padding-left: 18px; position: relative; }
+  .notes-list li::before { content: "•"; color: var(--pink); position: absolute; left: 0; font-weight: 700; }
+
+  .doc-foot { border-top: 1px solid var(--line); margin-top: 24px; padding-top: 24px; font-size: 12px; color: var(--sub); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .wrap { padding: 0 20px; }
+    .doc-grid { grid-template-columns: 1fr; gap: 24px; }
+    .doc-toc { position: static; top: auto; border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+    .doc-cols { grid-template-columns: 1fr; }
+    .spec-card { padding: 22px 18px 18px; }
+    .doc-topbar .doc-date { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="doc-topbar">
+  <div class="wrap">
+    <a href="/index.html" class="doc-logo"><img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック"></a>
+    <span class="doc-title">画面構成ドキュメント</span>
+    <span class="doc-badge">Internal</span>
+    <a class="doc-back" href="/index.html" onclick="if(history.length>1){history.back();return false;}">← サイトに戻る</a>
+  </div>
+</header>
+
+<div class="doc-shell">
+  <div class="wrap">
+    <div class="doc-grid">
+
+      <!-- TOC -->
+      <nav class="doc-toc">
+        <p class="doc-toc-label">目次</p>
+        <a href="#overview">§1 概要</a>
+        <a href="#sitemap">§2 サイトマップ</a>
+        <a href="#common">§3 共通要素</a>
+        <hr>
+        <a href="#s-index" class="toc-sub">01 トップ</a>
+        <a href="#s-about" class="toc-sub">02 会社概要</a>
+        <a href="#s-service" class="toc-sub">03 事業内容</a>
+        <a href="#s-recruit" class="toc-sub">04 採用情報</a>
+        <a href="#s-news" class="toc-sub">05 お知らせ</a>
+        <a href="#s-contact" class="toc-sub">06 お問い合わせ</a>
+        <a href="#s-privacy" class="toc-sub">07 プライバシー</a>
+        <hr>
+        <a href="#notes">§5 凡例・編集方針</a>
+      </nav>
+
+      <!-- MAIN -->
+      <main class="doc-main">
+
+        <!-- §1 OVERVIEW -->
+        <section class="doc-sec" id="overview">
+          <p class="eyebrow">Overview</p>
+          <h2 class="title">このドキュメントについて</h2>
+          <p class="lead">公開コーポレートサイト（全7ページ）の画面構成を1枚で俯瞰する内部用早見表です。各ページの「目的・URL・セクション構成・主要コンポーネント」を、現在公開されているライブの状態に合わせてまとめています。</p>
+        </section>
+
+        <!-- §2 SITEMAP -->
+        <section class="doc-sec" id="sitemap">
+          <p class="eyebrow">Sitemap</p>
+          <h2 class="title">ページ一覧</h2>
+          <table class="doc-table">
+            <thead>
+              <tr><th>ページ</th><th>ファイル / URL</th><th>区分</th><th>目的（一言）</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>トップ</td><td><code>index.html</code> · <code>/</code></td><td><span class="badge-pub">公開</span></td><td>サイトの玄関。事業・サービス・採用・ニュースを俯瞰し問い合わせへ誘導</td></tr>
+              <tr><td>会社概要</td><td><code>about.html</code></td><td><span class="badge-pub">公開</span></td><td>理念・会社情報・沿革・西原商会グループとの関係を伝える</td></tr>
+              <tr><td>事業内容</td><td><code>service.html</code></td><td><span class="badge-pub">公開</span></td><td>3事業の内容・進め方・実績を説明</td></tr>
+              <tr><td>採用情報</td><td><code>recruit.html</code></td><td><span class="badge-pub">公開</span></td><td>募集背景〜要項〜選考までを網羅し応募へ</td></tr>
+              <tr><td>お知らせ</td><td><code>news.html</code></td><td><span class="badge-pub">公開</span></td><td>ニュース記事の一覧（詳細は news/ 配下）</td></tr>
+              <tr><td>お問い合わせ</td><td><code>contact.html</code></td><td><span class="badge-pub">公開</span></td><td>問い合わせ・採用応募の受付フォーム</td></tr>
+              <tr><td>プライバシーポリシー</td><td><code>privacy.html</code></td><td><span class="badge-pub">公開</span></td><td>個人情報の取り扱い方針</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- §3 COMMON -->
+        <section class="doc-sec" id="common">
+          <p class="eyebrow">Common</p>
+          <h2 class="title">共通要素</h2>
+          <div class="doc-cols">
+            <div class="doc-mini">
+              <h4>ヘッダー（site-nav）</h4>
+              <p>sticky。ロゴ ／ 会社概要・事業内容・採用情報・お知らせ ／ お問い合わせCTA。現在ページは下線（ピンク）でハイライト。768px以下はハンバーガー＋mobile-nav。</p>
+            </div>
+            <div class="doc-mini">
+              <h4>フッター（footer）</h4>
+              <p>余白広め。ロゴ＋住所＋西原商会グループ ピル ／ ナビ＋お問い合わせ枠線ボタン ／ 破線 ／ コピーライト＋プライバシー。右上に PAGE TOP（先頭へスムーズスクロール）。</p>
+            </div>
+            <div class="doc-mini">
+              <h4>共通CTA（contact-cta）</h4>
+              <p>各ページ下部・フッター直前。背景 #1e1e1e、"CONTACT" ＋ 見出し ＋ ピンクボタン。全ページ共通デザイン。</p>
+            </div>
+            <div class="doc-mini">
+              <h4>デザイントークン</h4>
+              <p>
+                <span class="token-swatch" style="background:#E07898"></span>--pink #E07898（アクセント/CTA）<br>
+                <span class="token-swatch" style="background:#009944"></span>--green #009944（グループ/数値）<br>
+                <span class="token-swatch" style="background:#333333"></span>--ink #333 ／ <span class="token-swatch" style="background:#666666"></span>--sub #666<br>
+                <span class="token-swatch" style="background:#f5f5f5"></span>--bg-soft #f5f5f5 ／ 角丸 8px ／ 幅 1080px ／ Noto Sans JP
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- §4 SCREENS -->
+        <section class="doc-sec" id="screens">
+          <p class="eyebrow">Screens</p>
+          <h2 class="title">各ページの画面構成</h2>
+
+          <!-- 01 index -->
+          <div class="spec-card" id="s-index">
+            <p class="eyebrow">Screen 01</p>
+            <div class="spec-title">トップ <span class="spec-file">index.html · /</span></div>
+            <p class="spec-purpose">サイトの玄関ページ。事業概要・サービス・採用・ニュースを縦長ワンページで俯瞰させ、問い合わせ（CV）へ誘導する。</p>
+            <div class="spec-block">
+              <p class="spec-label">セクション構成（上から順）</p>
+              <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">01</span><div class="step-body"><h4>ヒーロー（FV）</h4></div></div>
+                <div class="flow-step"><span class="step-num">02</span><div class="step-body"><h4>ABOUT（企業紹介）</h4></div></div>
+                <div class="flow-step"><span class="step-num">03</span><div class="step-body"><h4>SERVICES（サービス3カード）</h4></div></div>
+                <div class="flow-step"><span class="step-num">04</span><div class="step-body"><h4>AT A GLANCE（数値4列）</h4></div></div>
+                <div class="flow-step"><span class="step-num">05</span><div class="step-body"><h4>RECRUIT（採用への導線）</h4></div></div>
+                <div class="flow-step"><span class="step-num">06</span><div class="step-body"><h4>NEWS（直近3件）</h4></div></div>
+                <div class="flow-step"><span class="step-num">07</span><div class="step-body"><h4>CONTACT CTA</h4></div></div>
+              </div>
+            </div>
+            <div class="spec-block">
+              <p class="spec-label">主要コンポーネント</p>
+              <div class="tag-list"><span class="tag">ヒーロー</span><span class="tag">サービスカード×3</span><span class="tag">数値グリッド</span><span class="tag">ニュースティーザー</span><span class="tag">CTA</span></div>
+            </div>
+          </div>
+
+          <!-- 02 about -->
+          <div class="spec-card" id="s-about">
+            <p class="eyebrow">Screen 02</p>
+            <div class="spec-title">会社概要 <span class="spec-file">about.html</span></div>
+            <p class="spec-purpose">企業の理念・会社情報・沿革・西原商会グループとの関係を伝える。</p>
+            <div class="spec-block">
+              <p class="spec-label">セクション構成（上から順）</p>
+              <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">01</span><div class="step-body"><h4>ページヒーロー（COMPANY）</h4></div></div>
+                <div class="flow-step"><span class="step-num">02</span><div class="step-body"><h4>MISSION（ABOUT US）</h4></div></div>
+                <div class="flow-step"><span class="step-num">03</span><div class="step-body"><h4>TOP MESSAGE（社長メッセージ）</h4></div></div>
+                <div class="flow-step"><span class="step-num">04</span><div class="step-body"><h4>VISION &amp; VALUES（5バリュー）</h4></div></div>
+                <div class="flow-step"><span class="step-num">05</span><div class="step-body"><h4>COMPANY INFO（会社情報テーブル＋地図）</h4></div></div>
+                <div class="flow-step"><span class="step-num">06</span><div class="step-body"><h4>OUR HISTORY（沿革）</h4></div></div>
+                <div class="flow-step"><span class="step-num">07</span><div class="step-body"><h4>GROUP（西原商会グループ図）</h4></div></div>
+                <div class="flow-step"><span class="step-num">08</span><div class="step-body"><h4>CONTACT CTA</h4></div></div>
+              </div>
+            </div>
+            <div class="spec-block">
+              <p class="spec-label">主要コンポーネント</p>
+              <div class="tag-list"><span class="tag">社長メッセージカード</span><span class="tag">バリューリスト</span><span class="tag">会社情報テーブル</span><span class="tag">Google Maps</span><span class="tag">沿革タイムライン</span><span class="tag">グループ図</span></div>
+            </div>
+          </div>
+
+          <!-- 03 service -->
+          <div class="spec-card" id="s-service">
+            <p class="eyebrow">Screen 03</p>
+            <div class="spec-title">事業内容 <span class="spec-file">service.html</span></div>
+            <p class="spec-purpose">3事業（新規開発／改修・連携・リプレイス／保守・運用）の内容・進め方・実績を説明する。</p>
+            <div class="spec-block">
+              <p class="spec-label">セクション構成（上から順）</p>
+              <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">01</span><div class="step-body"><h4>ページヒーロー（SERVICES）</h4></div></div>
+                <div class="flow-step"><span class="step-num">02</span><div class="step-body"><h4>LEAD（リード文）</h4></div></div>
+                <div class="flow-step"><span class="step-num">03</span><div class="step-body"><h4>SERVICE 01 新規システム開発</h4></div></div>
+                <div class="flow-step"><span class="step-num">04</span><div class="step-body"><h4>SERVICE 02 改修・連携・リプレイス</h4></div></div>
+                <div class="flow-step"><span class="step-num">05</span><div class="step-body"><h4>SERVICE 03 保守・運用</h4></div></div>
+                <div class="flow-step"><span class="step-num">06</span><div class="step-body"><h4>ACHIEVEMENT（実績数値）</h4></div></div>
+                <div class="flow-step"><span class="step-num">07</span><div class="step-body"><h4>CASES（導入事例3）</h4></div></div>
+                <div class="flow-step"><span class="step-num">08</span><div class="step-body"><h4>REPORTS（技術記事・研究）</h4></div></div>
+                <div class="flow-step"><span class="step-num">09</span><div class="step-body"><h4>CONTACT CTA</h4></div></div>
+              </div>
+            </div>
+            <div class="spec-block">
+              <p class="spec-label">主要コンポーネント</p>
+              <div class="tag-list"><span class="tag">サービスブロック×3（tag＋flow-steps）</span><span class="tag">数値グリッド</span><span class="tag">事例カード</span><span class="tag">記事リスト</span></div>
+            </div>
+          </div>
+
+          <!-- 04 recruit -->
+          <div class="spec-card" id="s-recruit">
+            <p class="eyebrow">Screen 04</p>
+            <div class="spec-title">採用情報 <span class="spec-file">recruit.html</span></div>
+            <p class="spec-purpose">募集背景から要項・選考までを網羅し、応募（お問い合わせ）へつなぐ。最もセクション数が多い。</p>
+            <div class="spec-block">
+              <p class="spec-label">セクション構成（上から順）</p>
+              <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">01</span><div class="step-body"><h4>ページヒーロー（RECRUIT）</h4></div></div>
+                <div class="flow-step"><span class="step-num">02</span><div class="step-body"><h4>MESSAGE</h4></div></div>
+                <div class="flow-step"><span class="step-num">03</span><div class="step-body"><h4>WHY LANSTECH</h4></div></div>
+                <div class="flow-step"><span class="step-num">04</span><div class="step-body"><h4>POSITIONS（募集職種）</h4></div></div>
+                <div class="flow-step"><span class="step-num">05</span><div class="step-body"><h4>THE WORK（仕事内容・タブ）</h4></div></div>
+                <div class="flow-step"><span class="step-num">06</span><div class="step-body"><h4>TECH STACK</h4></div></div>
+                <div class="flow-step"><span class="step-num">07</span><div class="step-body"><h4>WHO WE WANT</h4></div></div>
+                <div class="flow-step"><span class="step-num">08</span><div class="step-body"><h4>DATA（数字）</h4></div></div>
+                <div class="flow-step"><span class="step-num">09</span><div class="step-body"><h4>WORK STYLE（働き方）</h4></div></div>
+                <div class="flow-step"><span class="step-num">10</span><div class="step-body"><h4>REQUIREMENTS（募集要項・表）</h4></div></div>
+                <div class="flow-step"><span class="step-num">11</span><div class="step-body"><h4>PROCESS（選考フロー）</h4></div></div>
+                <div class="flow-step"><span class="step-num">12</span><div class="step-body"><h4>INTERVIEW（社員インタビュー）</h4></div></div>
+                <div class="flow-step"><span class="step-num">13</span><div class="step-body"><h4>FAQ</h4></div></div>
+                <div class="flow-step"><span class="step-num">14</span><div class="step-body"><h4>APPLY CTA（＋モバイル追従バー）</h4></div></div>
+              </div>
+            </div>
+            <div class="spec-block">
+              <p class="spec-label">主要コンポーネント</p>
+              <div class="tag-list"><span class="tag">タブ</span><span class="tag">タグ</span><span class="tag">募集要項テーブル</span><span class="tag">フローステップ</span><span class="tag">FAQアコーディオン</span><span class="tag">モバイル追従バー</span><span class="tag">JobPosting構造化データ</span></div>
+            </div>
+          </div>
+
+          <!-- 05 news -->
+          <div class="spec-card" id="s-news">
+            <p class="eyebrow">Screen 05</p>
+            <div class="spec-title">お知らせ <span class="spec-file">news.html</span></div>
+            <p class="spec-purpose">ニュース記事の一覧表示。</p>
+            <div class="spec-block">
+              <p class="spec-label">セクション構成（上から順）</p>
+              <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">01</span><div class="step-body"><h4>ページヒーロー（NEWS）</h4></div></div>
+                <div class="flow-step"><span class="step-num">02</span><div class="step-body"><h4>NEWS LIST（記事一覧）</h4></div></div>
+              </div>
+            </div>
+            <div class="spec-block">
+              <p class="spec-label">主要コンポーネント</p>
+              <div class="tag-list"><span class="tag">記事リスト（日付／カテゴリ／タイトル）</span></div>
+            </div>
+          </div>
+
+          <!-- 06 contact -->
+          <div class="spec-card" id="s-contact">
+            <p class="eyebrow">Screen 06</p>
+            <div class="spec-title">お問い合わせ <span class="spec-file">contact.html</span></div>
+            <p class="spec-purpose">問い合わせ・採用応募の受付。2カラム（フォーム＋サイドバー情報）。</p>
+            <div class="spec-block">
+              <p class="spec-label">セクション構成（上から順）</p>
+              <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">01</span><div class="step-body"><h4>ページヒーロー（CONTACT）</h4></div></div>
+                <div class="flow-step"><span class="step-num">02</span><div class="step-body"><h4>FORM（左:フォーム ／ 右:対応項目・営業時間）</h4></div></div>
+              </div>
+            </div>
+            <div class="spec-block">
+              <p class="spec-label">主要コンポーネント</p>
+              <div class="tag-list"><span class="tag">フォーム（氏名／メール／種別select／本文／送信）</span><span class="tag">サイドバー情報</span></div>
+            </div>
+          </div>
+
+          <!-- 07 privacy -->
+          <div class="spec-card" id="s-privacy">
+            <p class="eyebrow">Screen 07</p>
+            <div class="spec-title">プライバシーポリシー <span class="spec-file">privacy.html</span></div>
+            <p class="spec-purpose">個人情報の収集・利用・管理に関する方針。</p>
+            <div class="spec-block">
+              <p class="spec-label">セクション構成（上から順）</p>
+              <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">01</span><div class="step-body"><h4>ページヒーロー（PRIVACY POLICY）</h4></div></div>
+                <div class="flow-step"><span class="step-num">02</span><div class="step-body"><h4>本文（全10条）</h4></div></div>
+              </div>
+            </div>
+            <div class="spec-block">
+              <p class="spec-label">主要コンポーネント</p>
+              <div class="tag-list"><span class="tag">条文ブロック×10</span></div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- §5 NOTES -->
+        <section class="doc-sec" id="notes">
+          <p class="eyebrow">Legend / Notes</p>
+          <h2 class="title">凡例・編集方針</h2>
+          <ul class="notes-list">
+            <li>本ページは内部用ドキュメント（<code>noindex</code>・公開ナビ非掲載）。到達は画面右下のフローティングボタンから。</li>
+            <li>事業はグループ内案件中心。サイトのコピーは外部営業トーンを避ける。</li>
+            <li>人名は「苗字 名前」の半角スペース区切りで統一。</li>
+            <li>写真不使用は 7/1 公開向けの暫定対応（恒久方針ではない）。</li>
+            <li>ニュース詳細ページは保存後に <code>news/</code> 配下へ、アセットは <code>/assets/</code> へ自動再配置される。</li>
+          </ul>
+          <p class="doc-foot">画面構成ドキュメント（内部）／ 株式会社ランステック ／ 更新日: 2026-06-16</p>
+        </section>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

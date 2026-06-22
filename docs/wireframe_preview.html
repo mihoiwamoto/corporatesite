@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="0;url=index.html">
+<title>ランステック コーポレートサイト ─ プレビュー（トップページ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:       #555555;
+    --pink-dark:  #333333;
+    --pink-light: #eeeeee;
+    --ink:        #333333;
+    --sub:        #666666;
+    --bg:         #ffffff;
+    --bg-soft:    #f5f5f5;
+    --line:       #e0e0e0;
+    --radius:     8px;
+    --maxw:       1080px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.75; font-weight: 400; }
+
+  /* TOOLBAR */
+  #wf-toolbar { position: fixed; top: 0; left: 0; right: 0; z-index: 9000; height: 52px; background: #1A1A1A; display: flex; align-items: center; gap: 12px; padding: 0 24px; box-shadow: 0 2px 8px rgba(0,0,0,.5); }
+  .tb-logo { font-size: 13px; font-weight: 700; color: #fff; flex: 1; }
+  .tb-logo span { color: #888; }
+  #wf-about-link { height: 32px; padding: 0 18px; border-radius: 16px; border: 1.5px solid #888; background: transparent; color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; text-decoration: none; white-space: nowrap; transition: background .15s; }
+  #wf-about-link:hover { background: rgba(255,255,255,.12); }
+
+  /* BASE */
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+  section { padding: 88px 0; }
+  section.soft { background: var(--bg-soft); }
+  .eyebrow { font-size: 12px; font-weight: 500; color: var(--pink); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+  h2.title { font-size: 28px; font-weight: 700; margin-bottom: 12px; line-height: 1.5; }
+  p.lead { font-size: 15px; color: var(--sub); line-height: 1.8; }
+  .btn { display: inline-block; padding: 14px 32px; border-radius: 4px; font-size: 14px; font-weight: 700; text-decoration: none; letter-spacing: .03em; transition: all .2s; }
+  .btn-primary { background: var(--pink); color: #fff; }
+  .btn-primary:hover { background: var(--pink-dark); }
+  .btn-ghost { background: #fff; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn-ghost:hover { background: var(--bg-soft); }
+
+  /* SITE NAV */
+  .site-nav { position: sticky; top: 52px; z-index: 100; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .site-nav .wrap { display: flex; align-items: center; gap: 32px; height: 64px; }
+  .site-nav .logo { flex: 1; }
+  .site-nav .logo img { height: 32px; width: auto; display: block; }
+  .site-nav a.nav-link { color: var(--sub); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
+  .site-nav a.nav-link:hover { color: var(--ink); }
+  .site-nav a.nav-cta { background: var(--ink); color: #fff; padding: 9px 20px; border-radius: 4px; font-size: 13px; font-weight: 700; text-decoration: none; transition: background .15s; }
+  .site-nav a.nav-cta:hover { background: #555; }
+
+  /* FV */
+  .fv { background: linear-gradient(150deg, #fff 0%, var(--pink-light) 60%, #fff 100%); padding-top: 120px; padding-bottom: 88px; }
+  .fv .wrap { max-width: 720px; }
+  .fv-badge { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 500; color: var(--sub); margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .fv-badge::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); }
+  .fv h1 { font-size: 42px; font-weight: 700; line-height: 1.45; letter-spacing: -.02em; margin-bottom: 20px; }
+  .fv p.sub { font-size: 15px; color: var(--sub); line-height: 1.85; margin-bottom: 32px; }
+  .fv-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* NEWS TEASER */
+  .news-teaser { background: #fff; border-bottom: 1px solid var(--line); }
+  .news-teaser-inner { display: flex; align-items: stretch; gap: 0; min-height: 88px; }
+  .news-teaser-label { font-size: 11px; font-weight: 700; color: var(--pink); letter-spacing: .12em; flex-shrink: 0; padding-right: 28px; border-right: 1px solid var(--line); display: flex; align-items: center; }
+  .news-teaser-list { flex: 1; padding: 0 28px; }
+  .news-teaser-item { display: flex; gap: 16px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .news-teaser-item:last-child { border-bottom: none; }
+  .news-teaser-item:hover .news-title { color: var(--pink); }
+  .news-teaser-more { flex-shrink: 0; font-size: 12px; color: var(--pink); text-decoration: none; font-weight: 500; padding-left: 28px; border-left: 1px solid var(--line); display: flex; align-items: center; white-space: nowrap; }
+  .news-teaser-more:hover { opacity: .7; }
+
+  /* ABOUT */
+  .about { background: #fff; }
+  .about .inner { max-width: 680px; margin: 0 auto; text-align: center; }
+  .about h2 { font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 24px; }
+  .about p { font-size: 15px; color: var(--sub); line-height: 1.9; text-align: left; }
+  .about-link { display: inline-block; margin-top: 24px; font-size: 14px; color: var(--pink); font-weight: 500; text-decoration: none; }
+  .about-link:hover { text-decoration: underline; }
+
+  /* SERVICES */
+  .services { background: var(--bg-soft); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  .service-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 24px; transition: box-shadow .2s, transform .2s; }
+  .service-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); transform: translateY(-2px); }
+  .service-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--pink-light); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .service-icon svg { width: 24px; height: 24px; stroke: var(--pink); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .service-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+  .service-card p { font-size: 13px; color: var(--sub); line-height: 1.75; }
+  .service-card a { display: inline-block; margin-top: 16px; font-size: 13px; color: var(--pink); font-weight: 500; text-decoration: none; }
+  .service-card a:hover { text-decoration: underline; }
+
+  /* NUMBERS */
+  .numbers { background: #fff; }
+  .numbers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 48px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .number-item { text-align: center; padding: 32px 24px; border-right: 1px solid var(--line); background: #fafafa; }
+  .number-item:last-child { border-right: none; }
+  .number-val { font-size: 40px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .number-val span { font-size: 18px; font-weight: 400; }
+  .number-label { font-size: 13px; color: var(--sub); margin-top: 8px; }
+  .number-note { font-size: 11px; color: var(--sub); margin-top: 4px; }
+
+  /* RECRUIT */
+  .recruit { background: #1e1e1e; }
+  .recruit-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .recruit .eyebrow { color: rgba(255,255,255,.45); }
+  .recruit-lead h2 { font-size: 30px; font-weight: 700; color: #fff; margin-bottom: 20px; line-height: 1.5; margin-top: 12px; }
+  .recruit-lead p { font-size: 15px; color: rgba(255,255,255,.6); line-height: 1.85; margin-bottom: 32px; }
+  .recruit-note { font-size: 12px; color: rgba(255,255,255,.28); margin-top: 12px; }
+  .recruit .btn-primary { background: #fff; color: #1e1e1e; }
+  .recruit .btn-primary:hover { background: rgba(255,255,255,.88); }
+  .recruit-jobs { display: flex; flex-direction: column; gap: 16px; padding-top: 4px; }
+  .job-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 28px; transition: box-shadow .2s; }
+  .job-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+  .job-badge { display: inline-block; background: var(--pink-light); color: var(--ink); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; border: 1px solid var(--line); }
+  .job-card h3 { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .job-card p { font-size: 13px; color: var(--sub); line-height: 1.6; margin-bottom: 16px; }
+  .job-link { font-size: 13px; color: var(--pink); text-decoration: none; font-weight: 500; }
+  .job-link:hover { text-decoration: underline; }
+
+  /* NEWS */
+  .news { background: var(--bg-soft); }
+  .news-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px; }
+  .news-header a { font-size: 13px; color: var(--pink); text-decoration: none; font-weight: 500; }
+  .news-list { border-top: 1px solid var(--line); }
+  .news-item { display: flex; gap: 20px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: background .12s; }
+  .news-item:hover .news-title { color: var(--pink); }
+  .news-date { font-size: 13px; color: var(--sub); flex-shrink: 0; width: 88px; font-weight: 300; }
+  .news-cat { display: inline-block; background: var(--pink-light); color: var(--pink); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; flex-shrink: 0; }
+  .news-title { font-size: 14px; color: var(--ink); transition: color .12px; }
+
+  /* FOOTER */
+  .footer { background: var(--bg-soft); border-top: 1px solid var(--line); padding: 48px 0 32px; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+  .footer-logo img { height: 28px; width: auto; display: block; }
+  .footer-nav { display: flex; gap: 28px; }
+  .footer-nav a { color: var(--sub); text-decoration: none; font-size: 13px; transition: color .15s; }
+  .footer-nav a:hover { color: var(--ink); }
+  .footer-copy { font-size: 12px; color: var(--sub); text-align: center; border-top: 1px solid var(--line); padding-top: 24px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    section { padding: 64px 0; }
+    .wrap { padding: 0 20px; }
+    .fv { padding-top: 80px; padding-bottom: 56px; }
+    .fv h1 { font-size: 30px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+    .number-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .number-item:nth-child(2n) { border-right: none; }
+    .recruit-layout { grid-template-columns: 1fr; gap: 32px; }
+    .news-item { flex-wrap: wrap; gap: 8px; }
+    .news-date { width: auto; }
+    .news-teaser-inner { flex-direction: column; min-height: auto; padding: 16px 0; gap: 12px; }
+    .news-teaser-label { padding-right: 0; border-right: none; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .news-teaser-list { padding: 0; }
+    .news-teaser-more { padding-left: 0; border-left: none; padding-top: 4px; }
+    .footer-inner { flex-direction: column; gap: 24px; }
+    .footer-nav { flex-wrap: wrap; gap: 16px; }
+    h2.title { font-size: 22px; }
+    .recruit-lead h2 { font-size: 24px; }
+    .site-nav a.nav-link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="wf-toolbar">
+  <div class="tb-logo">ランステック コーポレートサイト <span>プレビュー｜トップページ</span></div>
+  <a id="wf-about-link" href="about.html">会社概要ページへ →</a>
+</div>
+
+<!-- SITE NAV -->
+<header class="site-nav">
+  <div class="wrap">
+    <div class="logo">
+      <a href="#"><img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック"></a>
+    </div>
+    <a href="about.html" class="nav-link">会社概要</a>
+    <a href="#services" class="nav-link">事業内容</a>
+    <a href="#recruit" class="nav-link">採用情報</a>
+    <a href="#news" class="nav-link">お知らせ</a>
+    <a href="#contact" class="nav-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<!-- FV -->
+<section class="fv">
+  <div class="wrap">
+    <div>
+      <div class="fv-badge">西原商会グループ</div>
+      <h1>テクノロジーで、<br>たしかな前進を。</h1>
+      <p class="sub">ランステックは、業務システムの企画・開発から運用・保守までを手がける東京のIT企業です。<br>お客様の課題に向き合い、動き続けるシステムを届けます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS TEASER -->
+<section class="news-teaser">
+  <div class="wrap">
+    <div class="news-teaser-inner">
+      <span class="news-teaser-label">NEWS</span>
+      <div class="news-teaser-list">
+        <a href="#" class="news-teaser-item">
+          <span class="news-date">2026.06.15</span>
+          <span class="news-cat">お知らせ</span>
+          <span class="news-title">コーポレートサイトをリニューアルしました（仮）</span>
+        </a>
+        <a href="#" class="news-teaser-item">
+          <span class="news-date">2026.07.01</span>
+          <span class="news-cat">採用</span>
+          <span class="news-title">エンジニア採用を再開しました（仮）</span>
+        </a>
+      </div>
+      <a href="#news" class="news-teaser-more">すべて見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="wrap">
+    <div class="inner">
+      <p class="eyebrow" style="text-align:center;">ABOUT</p>
+      <h2>システムの企画・開発から<br>運用・保守まで、ワンストップで。</h2>
+      <p>私たちランステックは、システムの企画・開発から運用・保守までをワンストップで担うIT企業です。2023年の設立以来、合併・グループ参画を経て体制を拡大し、現在は西原商会グループの一員として、食品流通をはじめとする様々な業界の業務システムを支えています。</p>
+      <p style="margin-top:16px;">つくって納品したら終わり、ではなく、お客様の業務と共に動き続けるシステムを。それが私たちの仕事の流儀です。</p>
+      <a href="about.html" class="about-link">会社概要を見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <p class="eyebrow">SERVICES</p>
+    <h2 class="title">私たちにできること</h2>
+    <div class="services-grid" style="grid-template-columns: 1fr; max-width: 560px;">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>システム開発</h3>
+        <p>業務システムの企画・設計・開発・運用。要件定義から保守まで一貫対応します。販売管理・在庫管理・受発注など、業務に寄り添うシステムを提供します。</p>
+        <a href="service.html">詳しく見る →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="numbers">
+  <div class="wrap">
+    <p class="eyebrow">NUMBERS</p>
+    <h2 class="title">数字で見るランステック</h2>
+    <div class="numbers-grid">
+      <div class="number-item">
+        <div class="number-val">2019<span>年</span></div>
+        <div class="number-label">設立</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val pink">●●<span>名</span></div>
+        <div class="number-label">社員数</div>
+        <div class="number-note">※確認中</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val" style="font-size:28px;">東京</div>
+        <div class="number-label">拠点（江東区）</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val" style="font-size:20px; line-height:1.5;">西原商会<br>グループ</div>
+        <div class="number-label">グループ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECRUIT -->
+<section class="recruit" id="recruit">
+  <div class="wrap">
+    <div class="recruit-layout">
+      <div class="recruit-lead">
+        <p class="eyebrow">RECRUIT</p>
+        <h2>一緒に、<br>つくりませんか。</h2>
+        <p>ランステックはエンジニア採用を再開しました。安定した経営基盤のうえで、設計から運用まで幅広く手を動かしたいエンジニアを歓迎します。</p>
+        <a href="recruit.html" class="btn btn-primary">募集職種を見る</a>
+        <p class="recruit-note">エンジニア社員の紹介はこちら（公開後に有効化）</p>
+      </div>
+      <div class="recruit-jobs">
+        <div class="job-card">
+          <span class="job-badge">正社員</span>
+          <h3>システムエンジニア（Web系）</h3>
+          <p>業務システム・Webアプリケーションの設計・開発・運用。要件定義から保守まで一気通貫で関われます。</p>
+          <a href="recruit.html" class="job-link">詳細を見る →</a>
+        </div>
+        <div class="job-card">
+          <span class="job-badge">正社員</span>
+          <h3>Webデザイナー / フロントエンドエンジニア</h3>
+          <p>コーポレートサイト・サービスサイトのデザイン・実装。デザインから実装まで担当できる方を歓迎します。</p>
+          <a href="recruit.html" class="job-link">詳細を見る →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news" id="news">
+  <div class="wrap">
+    <div class="news-header">
+      <h2 class="title" style="margin-bottom:0;">お知らせ</h2>
+      <a href="news.html">一覧を見る →</a>
+    </div>
+    <div class="news-list">
+      <a href="#" class="news-item">
+        <span class="news-date">2026.06.15</span>
+        <span class="news-cat">お知らせ</span>
+        <span class="news-title">コーポレートサイトをリニューアルしました（仮）</span>
+      </a>
+      <a href="#" class="news-item">
+        <span class="news-date">2026.07.01</span>
+        <span class="news-cat">採用</span>
+        <span class="news-title">エンジニア採用を再開しました（仮）</span>
+      </a>
+      <a href="#" class="news-item">
+        <span class="news-date">2025.00.00</span>
+        <span class="news-cat">お知らせ</span>
+        <span class="news-title">お知らせ見出し3（仮）</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-logo"><img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック"></div>
+      <nav class="footer-nav">
+        <a href="about.html">会社概要</a>
+        <a href="service.html">事業内容</a>
+        <a href="recruit.html">採用情報</a>
+        <a href="news.html">お知らせ</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+    <div class="footer-copy">© 2024 Lans Tech Co., Ltd. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="/assets/js/review-mode.js"></script>
+</body>
+</html>

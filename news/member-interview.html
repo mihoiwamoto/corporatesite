@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!--
+  ===========================================================================
+  お知らせ詳細ページ（社員インタビュー・デモ）
+  ※ 掲載している氏名・経歴・コメントはすべてレイアウト確認用の仮サンプルです。
+  本番ではWordPressテーマの single.php に相当します。
+  ===========================================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+<title>社員インタビュー：分業せず、最後まで関わる開発がしたくて | お知らせ | 株式会社ランステック</title>
+<meta name="description" content="株式会社ランステックの社員インタビュー（サンプル）。グループの業務システムを自社内で開発するエンジニアに、入社の理由や仕事のやりがいを聞きました。">
+<meta property="og:title" content="社員インタビュー：分業せず、最後まで関わる開発がしたくて | 株式会社ランステック">
+<meta property="og:description" content="グループの業務システムを自社内で開発するエンジニアのインタビュー（サンプル）。">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="株式会社ランステック">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:       #E07898;
+    --pink-dark:  #C0587A;
+    --pink-light: #FBF0F4;
+    --ink:        #333333;
+    --sub:        #666666;
+    --bg:         #ffffff;
+    --bg-soft:    #f5f5f5;
+    --line:       #e0e0e0;
+    --radius:     8px;
+    --maxw:       1080px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.75; text-wrap: pretty; word-break: auto-phrase; }
+
+  /* BASE */
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+  .eyebrow { font-size: 12px; font-weight: 500; color: var(--pink); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+
+  /* SITE NAV */
+  .site-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .site-nav .wrap { display: flex; align-items: center; gap: 32px; height: 64px; }
+  .site-nav .logo { flex: 1; }
+  .site-nav .logo img { height: 32px; width: auto; display: block; }
+  .site-nav a.nav-link { color: var(--sub); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
+  .site-nav a.nav-link:hover, .site-nav a.nav-link.current { color: var(--ink); }
+  .site-nav a.nav-link.current { border-bottom: 2px solid var(--pink); padding-bottom: 2px; }
+  .site-nav a.nav-cta { background: var(--pink); color: #fff; padding: 9px 20px; border-radius: 4px; font-size: 13px; font-weight: 700; text-decoration: none; transition: background .15s; }
+  .site-nav a.nav-cta:hover { background: var(--pink-dark); }
+
+  /* HAMBURGER / MOBILE NAV */
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all .2s; }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-nav { display: none; position: fixed; top: 64px; left: 0; right: 0; background: #fff; border-bottom: 1px solid var(--line); z-index: 99; flex-direction: column; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+  .mobile-nav a { padding: 16px 24px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); font-size: 15px; font-weight: 500; display: block; transition: background .12s; }
+  .mobile-nav a:hover { background: var(--bg-soft); }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav.open { display: flex; }
+
+  /* PAGE HERO */
+  .page-hero { padding: 64px 0 40px; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .breadcrumb { font-size: 12px; color: var(--sub); margin-bottom: 24px; line-height: 1.7; }
+  .breadcrumb a { color: var(--sub); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--ink); }
+  .breadcrumb span { margin: 0 6px; }
+
+  /* ARTICLE HEAD */
+  .article-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .article-date { font-size: 13px; color: var(--sub); font-weight: 300; letter-spacing: .03em; }
+  .article-cat { display: inline-block; background: var(--pink-light); border: 1px solid var(--line); color: var(--pink); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; }
+  .article-title { font-size: 30px; font-weight: 700; line-height: 1.5; letter-spacing: -.01em; }
+
+  /* ARTICLE BODY */
+  .article-section { padding: 56px 0 96px; }
+  .article-body { max-width: 800px; }
+  .article-body > * + * { margin-top: 22px; }
+  .article-body p { font-size: 15px; line-height: 2; color: var(--ink); }
+  .article-body .lead { font-size: 16px; color: var(--sub); line-height: 2; }
+  .article-body a { color: var(--pink); text-decoration: underline; text-underline-offset: 3px; }
+  .article-body a:hover { color: var(--pink-dark); }
+  .article-body strong { font-weight: 700; }
+  .article-note { background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 24px; font-size: 14px; color: var(--sub); line-height: 1.9; }
+  .article-note.demo { background: #fff8e6; border-color: #f0dca8; color: #8a6d1f; }
+
+  /* INTERVIEW: プロフィール */
+  .iv-profile { display: flex; align-items: center; gap: 18px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 24px; }
+  .iv-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--pink-light); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 700; color: var(--pink-dark); flex-shrink: 0; }
+  .iv-profile-name { font-size: 18px; font-weight: 700; }
+  .iv-profile-name .iv-en { font-size: 12px; font-weight: 500; color: var(--sub); margin-left: 8px; letter-spacing: .04em; }
+  .iv-profile-role { font-size: 13px; color: var(--sub); margin-top: 5px; line-height: 1.6; }
+
+  /* INTERVIEW: Q&A */
+  .iv-block { margin-top: 44px; }
+  .iv-q { display: flex; gap: 12px; align-items: baseline; font-size: 18px; font-weight: 700; line-height: 1.6; }
+  .iv-q .iv-mark { color: var(--pink); font-size: 18px; font-weight: 700; flex-shrink: 0; min-width: 20px; }
+  .iv-a { display: flex; gap: 12px; margin-top: 14px; }
+  .iv-a .iv-mark { color: #c9c9c9; font-size: 18px; font-weight: 700; flex-shrink: 0; min-width: 20px; }
+  .iv-a p { font-size: 15px; line-height: 2; color: var(--ink); }
+  .iv-a p + p { margin-top: 14px; }
+
+  /* ARTICLE FOOT */
+  .article-foot { max-width: 800px; margin-top: 64px; }
+  .back-to-list { display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: #fff; text-decoration: none; font-size: 13px; font-weight: 700; padding: 12px 28px; border-radius: 4px; transition: opacity .15s; }
+  .back-to-list:hover { opacity: .8; }
+  .post-nav { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); margin-top: 40px; padding-top: 28px; }
+  .post-nav a { font-size: 13px; color: var(--sub); text-decoration: none; max-width: 45%; line-height: 1.6; transition: color .15s; }
+  .post-nav a:hover { color: var(--ink); }
+  .post-nav .pn-label { display: block; font-size: 11px; color: var(--pink); font-weight: 700; margin-bottom: 4px; }
+  .post-nav .pn-next { text-align: right; margin-left: auto; }
+
+  /* FOOTER */
+  .footer { background: var(--bg-soft); border-top: 1px solid var(--line); padding: 48px 0 28px; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 32px; }
+  .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+  .footer-logo img { height: 28px; width: auto; display: block; }
+  .footer-brand address { font-style: normal; font-size: 12px; color: var(--sub); line-height: 1.8; }
+  .footer-group { margin-top: 4px; }
+  .footer-group-label { display: block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sub); margin-bottom: 8px; }
+  .footer-group-link { display: inline-flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 16px; text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 500; transition: border-color .15s, box-shadow .15s; }
+  .footer-group-link:hover { border-color: var(--sub); box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+  .footer-group-link img { height: 18px; width: auto; display: block; }
+  .footer-group-link .fg-arrow { color: var(--sub); font-size: 12px; }
+  .footer-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px 24px; }
+  .footer-nav a { color: var(--sub); text-decoration: none; font-size: 13px; transition: color .15s; }
+  .footer-nav a:hover, .footer-nav a.current { color: var(--ink); }
+  .footer-nav a.footer-contact { border: 1px solid var(--ink); border-radius: 4px; padding: 9px 22px; color: var(--ink); font-weight: 700; transition: background .15s, color .15s; }
+  .footer-nav a.footer-contact:hover { background: var(--ink); color: #fff; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid var(--line); padding-top: 22px; }
+  .footer-copy { font-size: 12px; color: var(--sub); }
+  .footer-privacy { font-size: 12px; color: var(--sub); text-decoration: none; transition: color .15s; }
+  .footer-privacy:hover { color: var(--ink); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .wrap { padding: 0 20px; }
+    .page-hero { padding: 40px 0 32px; }
+    .article-title { font-size: 23px; }
+    .article-section { padding: 40px 0 72px; }
+    .iv-q { font-size: 16px; }
+    .iv-profile { flex-direction: row; }
+    .footer-inner { flex-direction: column; gap: 28px; }
+    .footer-nav { justify-content: flex-start; gap: 14px 20px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .site-nav a.nav-link { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap">
+    <div class="logo"><a href="/"><img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック"></a></div>
+    <a href="/about.html" class="nav-link">会社概要</a>
+    <a href="/service.html" class="nav-link">事業内容</a>
+    <a href="/recruit.html" class="nav-link">採用情報</a>
+    <a href="/news.html" class="nav-link current">お知らせ</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="/contact.html" class="nav-cta">お問い合わせ</a>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <a href="/about.html">会社概要</a>
+  <a href="/service.html">事業内容</a>
+  <a href="/recruit.html">採用情報</a>
+  <a href="/news.html">お知らせ</a>
+  <a href="/contact.html">お問い合わせ</a>
+</nav>
+
+<!-- 記事ヘッダー -->
+<div class="page-hero">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="/">ホーム</a><span>/</span><a href="/news.html">お知らせ</a><span>/</span>社員インタビュー</p>
+    <div class="article-meta">
+      <span class="article-date">2026.06.16</span>
+      <span class="article-cat">社員インタビュー</span>
+    </div>
+    <h1 class="article-title">分業せず、最後まで関わる開発がしたくて</h1>
+  </div>
+</div>
+
+<!-- 記事本文 -->
+<section class="article-section">
+  <div class="wrap">
+    <article class="article-body">
+
+      <div class="article-note demo">
+        ※ このページは社員インタビュー記事のレイアウト確認用<strong>デモ</strong>です。氏名・経歴・コメントはすべて仮のサンプル内容です。
+      </div>
+
+      <p class="lead">グループの業務システムを、自社内で企画から運用まで担うランステック。中途入社のエンジニアに、入社のきっかけや日々の仕事、これからについて聞きました。</p>
+
+      <div class="iv-profile">
+        <div class="iv-avatar" aria-hidden="true">山</div>
+        <div>
+          <div class="iv-profile-name">山田 太郎<span class="iv-en">Taro Yamada</span></div>
+          <div class="iv-profile-role">システムエンジニア／2024年 中途入社<br>グループ向け業務システムの設計・開発・運用を担当</div>
+        </div>
+      </div>
+
+      <div class="iv-block">
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>これまでの経歴と、ランステックに入社した理由を教えてください。</p>
+        <div class="iv-a">
+          <span class="iv-mark" aria-hidden="true">A.</span>
+          <div>
+            <p>前職では受託開発の会社で、いろいろな業界のシステムを担当していました。やりがいはありましたが、納品したら離れてしまうことが多く、「つくったものがその後どう使われているのか」を見届けにくいのが、ずっと心残りでした。</p>
+            <p>ランステックはグループの業務システムを自社内で開発していて、企画から運用まで同じチームで一貫して担当します。途中で分業せず、最後まで自分の手で関われるところに惹かれて入社を決めました。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="iv-block">
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>普段はどんな仕事をしていますか。</p>
+        <div class="iv-a">
+          <span class="iv-mark" aria-hidden="true">A.</span>
+          <div>
+            <p>販売管理や受発注まわりの業務システムを、要件定義から設計・開発・運用保守まで一貫して担当しています。実際に使う現場の人と近い距離で、「ここが使いにくい」「この作業を減らしたい」といった声を聞きながら改善していけるのが、この仕事ならではだと思います。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="iv-block">
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>仕事のやりがいや、難しさはどんなところですか。</p>
+        <div class="iv-a">
+          <span class="iv-mark" aria-hidden="true">A.</span>
+          <div>
+            <p>自分が直した画面が現場の作業時間を短くできたときは、素直にうれしいです。一方で、長く使われるシステムだからこそ、その場しのぎではなく将来も保守しやすい形でつくる必要があって、そこは難しさでもあり面白さでもあります。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="iv-block">
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>チームや働き方の雰囲気はどうですか。</p>
+        <div class="iv-a">
+          <span class="iv-mark" aria-hidden="true">A.</span>
+          <div>
+            <p>いろいろな会社から集まったメンバーが多く、やり方も得意分野もさまざまです。「自分のやり方に揃えてもらう」のではなく、互いのやり方に理由があると認め合いながら進める雰囲気があります。客先常駐がなく、腰を据えて開発に向き合えるのも働きやすさにつながっていると感じます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="iv-block">
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>これから応募を考えている方へ、メッセージをお願いします。</p>
+        <div class="iv-a">
+          <span class="iv-mark" aria-hidden="true">A.</span>
+          <div>
+            <p>派手さよりも、企画から運用まで一気通貫で関わる仕事に魅力を感じる方には、合う環境だと思います。経験の幅は問いません。気になることがあれば、まずは気軽に話を聞きに来てもらえたらうれしいです。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-note" style="margin-top:44px;">
+        採用に関するご質問・ご応募は、<a href="/contact.html?type=recruit">お問い合わせフォーム</a>（種別「採用への応募・ご質問」）よりお気軽にどうぞ。
+      </div>
+    </article>
+
+    <!-- 記事フッター -->
+    <div class="article-foot">
+      <a href="/news.html" class="back-to-list">‹ お知らせ一覧へ戻る</a>
+      <nav class="post-nav">
+        <a class="pn-prev" href="/news/site-renewal.html"><span class="pn-label">前の記事</span>コーポレートサイトをリニューアルしました</a>
+        <a class="pn-next" href="/news/recruit-restart.html"><span class="pn-label">次の記事</span>エンジニア採用を再開しました</a>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo"><img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック"></a>
+        <address>〒135-0044 東京都江東区越中島1-1-1<br>ヤマタネ深川1号館 2F</address>
+        <div class="footer-group">
+          <span class="footer-group-label">Group</span>
+          <a class="footer-group-link" href="https://www.nishihara-shokai.co.jp/" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/images/nishihara_logo.svg" alt="">
+            <span>西原商会グループ Webサイト</span>
+            <span class="fg-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+      <nav class="footer-nav">
+        <a href="/about.html">会社概要</a>
+        <a href="/service.html">事業内容</a>
+        <a href="/recruit.html">採用情報</a>
+        <a href="/news.html">お知らせ</a>
+        <a href="/contact.html" class="footer-contact">お問い合わせ</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Lans Tech Co., Ltd. All rights reserved.</p>
+      <a class="footer-privacy" href="/privacy.html">プライバシーポリシー</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var btn = document.getElementById('hamburger');
+  var nav = document.getElementById('mobile-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function() {
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+    nav.setAttribute('aria-hidden', String(!open));
+  });
+  nav.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      nav.setAttribute('aria-hidden', 'true');
+    });
+  });
+})();
+</script>
+
+<script src="/assets/js/review-mode.js"></script>
+</body>
+</html>

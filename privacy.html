@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+<title>プライバシーポリシー | 株式会社ランステック</title>
+<meta name="description" content="株式会社ランステックのプライバシーポリシーです。個人情報の収集・利用・管理に関する方針を定めています。">
+<meta property="og:title" content="プライバシーポリシー | 株式会社ランステック">
+<meta property="og:description" content="株式会社ランステックにおける個人情報の取り扱いに関する方針です。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="株式会社ランステック">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:       #E07898;
+    --pink-dark:  #C0587A;
+    --pink-light: #FBF0F4;
+    --ink:        #333333;
+    --sub:        #666666;
+    --bg:         #ffffff;
+    --bg-soft:    #f5f5f5;
+    --line:       #e0e0e0;
+    --radius:     8px;
+    --maxw:       1080px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.75; font-weight: 400; text-wrap: pretty; word-break: auto-phrase; }
+
+  /* BASE */
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+  .eyebrow { font-size: 12px; font-weight: 500; color: var(--pink); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+
+  /* SITE NAV */
+  .site-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .site-nav .wrap { display: flex; align-items: center; gap: 32px; height: 64px; }
+  .site-nav .logo { flex: 1; }
+  .site-nav .logo img { height: 32px; width: auto; display: block; }
+  .site-nav a.nav-link { color: var(--sub); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
+  .site-nav a.nav-link:hover { color: var(--ink); }
+  .site-nav a.nav-cta { background: var(--pink); color: #fff; padding: 9px 20px; border-radius: 4px; font-size: 13px; font-weight: 700; text-decoration: none; transition: background .15s; }
+  .site-nav a.nav-cta:hover { background: var(--pink-dark); }
+
+  /* HAMBURGER / MOBILE NAV */
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all .2s; }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-nav { display: none; position: fixed; top: 64px; left: 0; right: 0; background: #fff; border-bottom: 1px solid var(--line); z-index: 99; flex-direction: column; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+  .mobile-nav a { padding: 16px 24px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); font-size: 15px; font-weight: 500; display: block; transition: background .12s; }
+  .mobile-nav a:hover { background: var(--bg-soft); }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav.open { display: flex; }
+
+  /* PAGE HERO */
+  .page-hero { padding: 72px 0 56px; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .breadcrumb { font-size: 12px; color: var(--sub); margin-bottom: 20px; }
+  .breadcrumb a { color: var(--sub); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--ink); }
+  .breadcrumb span { margin: 0 6px; }
+  .page-hero h1 { font-size: 36px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; }
+  .page-hero p.sub { font-size: 15px; color: var(--sub); margin-top: 12px; line-height: 1.8; }
+
+  /* CONTENT */
+  .privacy-section { padding: 80px 0 100px; }
+  .privacy-inner { max-width: 720px; }
+  .privacy-inner .updated { font-size: 13px; color: var(--sub); margin-bottom: 24px; }
+  .privacy-lead { font-size: 14px; color: var(--sub); line-height: 1.9; margin-bottom: 48px; }
+  .privacy-block { margin-bottom: 48px; }
+  .privacy-block h2 { font-size: 18px; font-weight: 700; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .privacy-block p { font-size: 14px; color: var(--sub); line-height: 1.9; }
+  .privacy-block p + p { margin-top: 12px; }
+  .privacy-block ul { font-size: 14px; color: var(--sub); line-height: 1.9; padding-left: 20px; margin-top: 8px; }
+  .privacy-block ul li { margin-bottom: 6px; }
+  .privacy-block ol { font-size: 14px; color: var(--sub); line-height: 1.9; padding-left: 22px; margin-top: 10px; }
+  .privacy-block ol li { margin-bottom: 10px; }
+  .privacy-block ol ol { margin-top: 10px; margin-bottom: 4px; }
+  .contact-box { background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 28px; margin-top: 16px; }
+  .contact-box p { font-size: 14px; color: var(--sub); line-height: 1.9; }
+  .contact-box a { color: var(--pink); text-decoration: none; }
+  .contact-box a:hover { text-decoration: underline; }
+
+  html { scroll-behavior: smooth; }
+
+  /* FOOTER */
+  .footer { background: var(--bg-soft); border-top: 1px solid var(--line); padding: 80px 0 40px; }
+  .footer-end { display: flex; flex-direction: column; align-items: flex-end; gap: 24px; }
+  .footer-pagetop { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--sub); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+  .footer-pagetop-btn { width: 44px; height: 44px; border-radius: 10px; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; transition: background .15s, transform .15s; }
+  .footer-pagetop:hover { color: var(--ink); }
+  .footer-pagetop:hover .footer-pagetop-btn { background: var(--pink); transform: translateY(-2px); }
+  .footer-divider { border: none; border-top: 1px dashed var(--line); margin: 0 0 28px; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 48px; margin-bottom: 48px; }
+  .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+  .footer-logo img { height: 32px; width: auto; display: block; }
+  .footer-brand address { font-style: normal; font-size: 12px; color: var(--sub); line-height: 1.8; }
+  .footer-group { margin-top: 4px; }
+  .footer-group-label { display: block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sub); margin-bottom: 8px; }
+  .footer-group-link { display: inline-flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 16px; text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 500; transition: border-color .15s, box-shadow .15s; }
+  .footer-group-link:hover { border-color: var(--sub); box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+  .footer-group-link img { height: 24px; width: auto; display: block; }
+  .footer-group-link .fg-arrow { color: var(--sub); font-size: 12px; }
+  .footer-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px 24px; }
+  .footer-nav a { color: var(--sub); text-decoration: none; font-size: 13px; transition: color .15s; }
+  .footer-nav a:hover, .footer-nav a.current { color: var(--ink); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .footer-copy { font-size: 12px; color: var(--sub); }
+  .footer-privacy { font-size: 12px; color: var(--sub); text-decoration: none; transition: color .15s; }
+  .footer-privacy:hover { color: var(--ink); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .wrap { padding: 0 20px; }
+    .page-hero { padding: 48px 0 40px; }
+    .page-hero h1 { font-size: 26px; }
+    .footer-inner { flex-direction: column; gap: 28px; }
+    .footer-nav { justify-content: flex-start; gap: 14px 20px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .site-nav a.nav-link { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav" id="top">
+  <div class="wrap">
+    <div class="logo"><a href="index.html"><img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック"></a></div>
+    <a href="about.html" class="nav-link">会社概要</a>
+    <a href="service.html" class="nav-link">事業内容</a>
+    <a href="recruit.html" class="nav-link">採用情報</a>
+    <a href="news.html" class="nav-link">お知らせ</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="contact.html" class="nav-cta">お問い合わせ</a>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <a href="about.html">会社概要</a>
+  <a href="service.html">事業内容</a>
+  <a href="recruit.html">採用情報</a>
+  <a href="news.html">お知らせ</a>
+  <a href="contact.html">お問い合わせ</a>
+</nav>
+
+<div class="page-hero">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">ホーム</a><span>/</span>プライバシーポリシー</p>
+    <p class="eyebrow">PRIVACY POLICY</p>
+    <h1>プライバシーポリシー</h1>
+    <p class="sub">株式会社ランステックにおける個人情報の取り扱いに関する方針を定めています。</p>
+  </div>
+</div>
+
+<section class="privacy-section">
+  <div class="wrap">
+    <div class="privacy-inner">
+      <p class="updated">最終改定：2026年6月</p>
+
+      <p class="privacy-lead">株式会社ランステック（以下「当社」といいます。）は、当社が運営する本ウェブサイト（以下「本サイト」といいます。）におけるユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」といいます。）を定めます。</p>
+
+      <div class="privacy-block">
+        <h2>第1条（個人情報）</h2>
+        <p>「個人情報」とは、個人情報保護法にいう「個人情報」を指すものとし、生存する個人に関する情報であって、当該情報に含まれる氏名、住所、電話番号、メールアドレスその他の記述等により特定の個人を識別できる情報を指します。</p>
+      </div>
+
+      <div class="privacy-block">
+        <h2>第2条（個人情報の収集方法）</h2>
+        <p>当社は、本サイトのお問い合わせフォームや採用応募の受付などを通じて、ユーザーから氏名、会社名、メールアドレス、電話番号、お問い合わせ・ご応募の内容などの個人情報をご提供いただく場合があります。個人情報のご提供は任意ですが、必要な情報をご提供いただけない場合、お問い合わせやご応募への適切な対応ができないことがあります。</p>
+      </div>
+
+      <div class="privacy-block">
+        <h2>第3条（個人情報を収集・利用する目的）</h2>
+        <p>当社が個人情報を収集・利用する目的は、以下のとおりです。</p>
+        <ol>
+          <li>ユーザーからのお問い合わせに回答するため（本人確認を行うことを含む）</li>
+          <li>採用選考および採用に関するご連絡のため</li>
+          <li>本サイトの運営・管理、および重要なお知らせなど必要に応じたご連絡のため</li>
+          <li>当社のサービスに関するご案内（ご同意をいただいた場合）のため</li>
+          <li>上記の利用目的に付随する目的</li>
+        </ol>
+      </div>
+
+      <div class="privacy-block">
+        <h2>第4条（利用目的の変更）</h2>
+        <ol>
+          <li>当社は、利用目的が変更前と関連性を有すると合理的に認められる場合に限り、個人情報の利用目的を変更するものとします。</li>
+          <li>利用目的の変更を行った場合には、変更後の目的について、当社所定の方法により、ユーザーに通知し、または本ウェブサイト上に公表するものとします。</li>
+        </ol>
+      </div>
+
+      <div class="privacy-block">
+        <h2>第5条（個人情報の第三者提供）</h2>
+        <ol>
+          <li>当社は、次に掲げる場合を除いて、あらかじめユーザーの同意を得ることなく、第三者に個人情報を提供することはありません。ただし、個人情報保護法その他の法令で認められる場合を除きます。
+            <ol>
+              <li>人の生命、身体または財産の保護のために必要がある場合であって、本人の同意を得ることが困難であるとき</li>
+              <li>公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合であって、本人の同意を得ることが困難であるとき</li>
+              <li>国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって、本人の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがあるとき</li>
+              <li>予め次の事項を告知あるいは公表し、かつ当社が個人情報保護委員会に届出をしたとき
+                <ol>
+                  <li>利用目的に第三者への提供を含むこと</li>
+                  <li>第三者に提供されるデータの項目</li>
+                  <li>第三者への提供の手段または方法</li>
+                  <li>本人の求めに応じて個人情報の第三者への提供を停止すること</li>
+                  <li>本人の求めを受け付ける方法</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>前項の定めにかかわらず、次に掲げる場合には、当該情報の提供先は第三者に該当しないものとします。
+            <ol>
+              <li>当社が利用目的の達成に必要な範囲内において個人情報の取扱いの全部または一部を委託する場合</li>
+              <li>合併その他の事由による事業の承継に伴って個人情報が提供される場合</li>
+              <li>個人情報を特定の者との間で共同して利用する場合であって、その旨並びに共同して利用される個人情報の項目、共同して利用する者の範囲、利用する者の利用目的および当該個人情報の管理について責任を有する者の氏名または名称について、あらかじめ本人に通知し、または本人が容易に知り得る状態に置いた場合</li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+
+      <div class="privacy-block">
+        <h2>第6条（個人情報の開示）</h2>
+        <ol>
+          <li>当社は、本人から個人情報の開示を求められたときは、本人に対し、遅滞なくこれを開示します。ただし、開示することにより次のいずれかに該当する場合は、その全部または一部を開示しないこともあり、開示しない決定をした場合には、その旨を遅滞なく通知します。なお、個人情報の開示に際しては、1件あたり1,000円の手数料を申し受けます。
+            <ol>
+              <li>本人または第三者の生命、身体、財産その他の権利利益を害するおそれがある場合</li>
+              <li>当社の業務の適正な実施に著しい支障を及ぼすおそれがある場合</li>
+              <li>その他法令に違反することとなる場合</li>
+            </ol>
+          </li>
+          <li>前項の定めにかかわらず、履歴情報および特性情報などの個人情報以外の情報については、原則として開示いたしません。</li>
+        </ol>
+      </div>
+
+      <div class="privacy-block">
+        <h2>第7条（個人情報の訂正および削除）</h2>
+        <ol>
+          <li>ユーザーは、当社の保有する自己の個人情報が誤った情報である場合には、当社が定める手続きにより、当社に対して個人情報の訂正、追加または削除（以下「訂正等」といいます。）を請求することができます。</li>
+          <li>当社は、ユーザーから前項の請求を受けてその請求に応じる必要があると判断した場合には、遅滞なく、当該個人情報の訂正等を行うものとします。</li>
+          <li>当社は、前項の規定に基づき訂正等を行った場合、または訂正等を行わない旨の決定をしたときは遅滞なく、これをユーザーに通知します。</li>
+        </ol>
+      </div>
+
+      <div class="privacy-block">
+        <h2>第8条（個人情報の利用停止等）</h2>
+        <ol>
+          <li>当社は、本人から、個人情報が、利用目的の範囲を超えて取り扱われているという理由、または不正の手段により取得されたものであるという理由により、その利用の停止または消去（以下「利用停止等」といいます。）を求められた場合には、遅滞なく必要な調査を行います。</li>
+          <li>前項の調査結果に基づき、その請求に応じる必要があると判断した場合には、遅滞なく、当該個人情報の利用停止等を行います。</li>
+          <li>当社は、前項の規定に基づき利用停止等を行った場合、または利用停止等を行わない旨の決定をしたときは、遅滞なく、これをユーザーに通知します。</li>
+          <li>前2項にかかわらず、利用停止等に多額の費用を有する場合その他利用停止等を行うことが困難な場合であって、ユーザーの権利利益を保護するために必要なこれに代わるべき措置をとれる場合は、この代替策を講じるものとします。</li>
+        </ol>
+      </div>
+
+      <div class="privacy-block">
+        <h2>第9条（プライバシーポリシーの変更）</h2>
+        <ol>
+          <li>本ポリシーの内容は、法令その他本ポリシーに別段の定めのある事項を除いて、ユーザーに通知することなく、変更することができるものとします。</li>
+          <li>当社が別途定める場合を除いて、変更後のプライバシーポリシーは、本ウェブサイトに掲載したときから効力を生じるものとします。</li>
+        </ol>
+      </div>
+
+      <div class="privacy-block">
+        <h2>第10条（お問い合わせ窓口）</h2>
+        <p>本ポリシーに関するお問い合わせは、下記の窓口までお願いいたします。</p>
+        <div class="contact-box">
+          <p>
+            社名：株式会社ランステック<br>
+            住所：東京都江東区越中島1-1-1 ヤマタネ深川1号館2F<br>
+            担当部署：経営管理部<br>
+            Eメールアドレス：<a href="mailto:somu@lanstech.co.jp">somu@lanstech.co.jp</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo"><img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック"></a>
+        <address>〒135-0044 東京都江東区越中島1-1-1<br>ヤマタネ深川1号館 2F</address>
+        <div class="footer-group">
+          <span class="footer-group-label">Group</span>
+          <a class="footer-group-link" href="https://www.nishihara-shokai.co.jp/" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/images/nishihara_logo.svg" alt="">
+            <span>西原商会グループ Webサイト</span>
+            <span class="fg-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+      <div class="footer-end">
+        <a class="footer-pagetop" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+          <span>PAGE TOP</span>
+          <span class="footer-pagetop-btn" aria-hidden="true">↑</span>
+        </a>
+        <nav class="footer-nav">
+          <a href="about.html">会社概要</a>
+          <a href="service.html">事業内容</a>
+          <a href="recruit.html">採用情報</a>
+          <a href="news.html">お知らせ</a>
+          <a href="contact.html">お問い合わせ</a>
+        </nav>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Lans Tech Co., Ltd. All rights reserved.</p>
+      <a class="footer-privacy" href="privacy.html">プライバシーポリシー</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function() {
+  var btn = document.getElementById('hamburger');
+  var nav = document.getElementById('mobile-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function() {
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+    nav.setAttribute('aria-hidden', String(!open));
+  });
+  nav.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      nav.setAttribute('aria-hidden', 'true');
+    });
+  });
+})();
+</script>
+
+
+<script src="/assets/js/feedback-panel-v2.js"></script>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+<title>事業内容 | 株式会社ランステック</title>
+<meta name="description" content="株式会社ランステックの事業内容。西原商会グループの一員として、販売管理・在庫管理・受発注などグループ各社の業務システムを、企画・設計・開発から運用保守まで一貫して担います。">
+<meta property="og:title" content="事業内容 | 株式会社ランステック">
+<meta property="og:description" content="グループ各社の業務システムを、要件定義から設計・開発・運用保守まで一貫して担います。ランステックの事業内容をご紹介します。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="株式会社ランステック">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:       #E07898;
+    --pink-dark:  #C0587A;
+    --pink-light: #FBF0F4;
+    --ink:        #333333;
+    --sub:        #666666;
+    --bg:         #ffffff;
+    --bg-soft:    #f5f5f5;
+    --line:       #e0e0e0;
+    --radius:     8px;
+    --maxw:       1080px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.75; text-wrap: pretty; word-break: auto-phrase; }
+
+  /* BASE */
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+  section { padding: 88px 0; }
+  .eyebrow { font-size: 12px; font-weight: 500; color: var(--pink); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+  h2.title { font-size: 28px; font-weight: 700; margin-bottom: 16px; line-height: 1.5; }
+
+  /* SITE NAV */
+  .site-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .site-nav .wrap { display: flex; align-items: center; gap: 32px; height: 64px; }
+  .site-nav .logo { flex: 1; }
+  .site-nav .logo img { height: 32px; width: auto; display: block; }
+  .site-nav a.nav-link { color: var(--sub); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
+  .site-nav a.nav-link:hover, .site-nav a.nav-link.current { color: var(--ink); }
+  .site-nav a.nav-link.current { border-bottom: 2px solid var(--pink); padding-bottom: 2px; }
+  .site-nav a.nav-cta { background: var(--pink); color: #fff; padding: 9px 20px; border-radius: 4px; font-size: 13px; font-weight: 700; text-decoration: none; transition: background .15s; }
+  .site-nav a.nav-cta:hover { background: var(--pink-dark); }
+
+  /* HAMBURGER / MOBILE NAV */
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all .2s; }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-nav { display: none; position: fixed; top: 64px; left: 0; right: 0; background: #fff; border-bottom: 1px solid var(--line); z-index: 99; flex-direction: column; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+  .mobile-nav a { padding: 16px 24px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); font-size: 15px; font-weight: 500; display: block; transition: background .12s; }
+  .mobile-nav a:hover { background: var(--bg-soft); }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav.open { display: flex; }
+
+  /* PAGE HERO */
+  .page-hero { padding: 72px 0 56px; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .breadcrumb { font-size: 12px; color: var(--sub); margin-bottom: 20px; }
+  .breadcrumb a { color: var(--sub); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--ink); }
+  .breadcrumb span { margin: 0 6px; }
+  .page-hero h1 { font-size: 36px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; }
+  .page-hero p.sub { font-size: 15px; color: var(--sub); margin-top: 12px; line-height: 1.8; max-width: 640px; }
+
+  /* LEAD */
+  .lead-section { background: var(--bg-soft); }
+  .lead-section h2 { font-size: 24px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
+  .lead-section p { font-size: 15px; color: var(--sub); line-height: 1.9; max-width: 680px; }
+
+  /* SERVICE SECTION */
+  .service-block { background: var(--bg); }
+  .service-block.alt { background: var(--bg-soft); }
+  .service-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .service-inner.reverse { direction: rtl; }
+  .service-inner.reverse > * { direction: ltr; }
+  .service-text h2 { font-size: 24px; font-weight: 700; line-height: 1.55; margin-bottom: 8px; margin-top: 12px; }
+  .service-text p.lead { font-size: 15px; color: var(--sub); line-height: 1.9; margin-bottom: 24px; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .tag { display: inline-block; background: var(--pink-light); border: 1px solid var(--line); color: var(--ink); font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 4px; }
+  .flow-steps { display: flex; flex-direction: column; gap: 0; margin-top: 8px; }
+  .flow-step { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); align-items: flex-start; }
+  .flow-step:last-child { border-bottom: none; }
+  .step-num { font-size: 11px; font-weight: 700; color: var(--pink); letter-spacing: .08em; flex-shrink: 0; padding-top: 3px; min-width: 24px; }
+  .step-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .step-body p { font-size: 13px; color: var(--sub); line-height: 1.7; }
+
+  /* SERVICE VISUAL */
+  .service-visual { background: var(--pink-light); border: 1px solid var(--line); border-radius: var(--radius); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+  .service-visual svg { width: 64px; height: 64px; stroke: var(--pink); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
+  .service-block.alt .service-visual { background: #fff; }
+
+  /* CONTACT CTA */
+  .contact-cta { background: #fff; border-top: 1px solid var(--line); padding: 72px 0; }
+  .contact-cta .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+  .contact-cta .eyebrow { color: var(--pink); }
+  .contact-cta h2 { font-size: 26px; font-weight: 700; color: var(--ink); margin-top: 10px; margin-bottom: 10px; line-height: 1.45; }
+  .contact-cta p { font-size: 14px; color: var(--sub); line-height: 1.8; }
+  .contact-cta .btn-cta { display: inline-block; background: var(--ink); color: #fff; padding: 16px 40px; border-radius: 4px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background .15s; white-space: nowrap; flex-shrink: 0; }
+  .contact-cta .btn-cta:hover { background: #555; }
+
+  html { scroll-behavior: smooth; }
+
+  /* FOOTER */
+  .footer { background: var(--bg-soft); border-top: 1px solid var(--line); padding: 80px 0 40px; }
+  .footer-end { display: flex; flex-direction: column; align-items: flex-end; gap: 24px; }
+  .footer-pagetop { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--sub); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+  .footer-pagetop-btn { width: 44px; height: 44px; border-radius: 10px; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; transition: background .15s, transform .15s; }
+  .footer-pagetop:hover { color: var(--ink); }
+  .footer-pagetop:hover .footer-pagetop-btn { background: var(--pink); transform: translateY(-2px); }
+  .footer-divider { border: none; border-top: 1px dashed var(--line); margin: 0 0 28px; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 48px; margin-bottom: 48px; }
+  .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+  .footer-logo img { height: 32px; width: auto; display: block; }
+  .footer-brand address { font-style: normal; font-size: 12px; color: var(--sub); line-height: 1.8; }
+  .footer-group { margin-top: 4px; }
+  .footer-group-label { display: block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sub); margin-bottom: 8px; }
+  .footer-group-link { display: inline-flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 16px; text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 500; transition: border-color .15s, box-shadow .15s; }
+  .footer-group-link:hover { border-color: var(--sub); box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+  .footer-group-link img { height: 24px; width: auto; display: block; }
+  .footer-group-link .fg-arrow { color: var(--sub); font-size: 12px; }
+  .footer-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px 24px; }
+  .footer-nav a { color: var(--sub); text-decoration: none; font-size: 13px; transition: color .15s; }
+  .footer-nav a:hover, .footer-nav a.current { color: var(--ink); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .footer-copy { font-size: 12px; color: var(--sub); }
+  .footer-privacy { font-size: 12px; color: var(--sub); text-decoration: none; transition: color .15s; }
+  .footer-privacy:hover { color: var(--ink); }
+
+  /* ACHIEVEMENT */
+  .achievement { background: var(--bg-soft); padding: 0; }
+  .achievement .wrap { padding-top: 0; padding-bottom: 0; }
+  .achievement-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .achievement-item { background: var(--bg); padding: 36px 24px; text-align: center; }
+  .achievement-num { display: block; font-size: 44px; font-weight: 700; color: var(--ink); letter-spacing: -.02em; line-height: 1.1; margin-bottom: 8px; }
+  .achievement-num sup { font-size: 22px; vertical-align: super; }
+  .achievement-lbl { font-size: 13px; color: var(--sub); }
+
+  /* SECTION HEAD (共通) */
+  .section-head { margin-bottom: 48px; }
+  .section-head h2 { font-size: 28px; font-weight: 700; margin-top: 10px; margin-bottom: 14px; }
+  .section-head p { font-size: 15px; color: var(--sub); line-height: 1.85; max-width: 600px; }
+
+  /* CASES */
+  .cases-section { background: var(--bg); }
+  .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+  .case-card { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: box-shadow .2s, transform .2s; background: var(--bg); }
+  .case-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,.09); transform: translateY(-2px); }
+  .case-card-thumb { background: var(--pink-light); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; }
+  .case-card-thumb svg { width: 48px; height: 48px; stroke: var(--pink); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
+  .case-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+  .case-card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  .case-tag { display: inline-block; background: var(--pink-light); color: var(--pink-dark); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 3px; }
+  .case-status { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 3px; }
+  .status-trial { background: #fff3cd; color: #856404; }
+  .status-dev   { background: #d1ecf1; color: #0c5460; }
+  .case-card-body h3 { font-size: 15px; font-weight: 700; line-height: 1.6; margin-bottom: 8px; }
+  .case-card-body p { font-size: 13px; color: var(--sub); line-height: 1.75; margin-bottom: 14px; }
+  .case-detail { border-top: 1px solid var(--line); padding-top: 12px; margin-top: auto; }
+  .case-detail-row { display: flex; gap: 24px; }
+  .case-detail-col { flex: 1; min-width: 0; }
+  .case-detail-label { font-size: 10px; font-weight: 700; color: var(--sub); letter-spacing: .08em; margin-bottom: 6px; }
+  .case-tech-list { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tech-badge { display: inline-block; background: #f8f8f8; border: 1px solid var(--line); color: var(--ink); font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 3px; }
+  .case-team { font-size: 11px; color: var(--sub); line-height: 1.6; }
+  .case-more-link { display: block; font-size: 12px; font-weight: 700; color: var(--pink); margin-top: 14px; }
+  .cases-more { text-align: center; }
+  .btn-outline { display: inline-block; border: 1.5px solid var(--ink); color: var(--ink); padding: 12px 36px; border-radius: 4px; font-size: 13px; font-weight: 700; text-decoration: none; transition: all .15s; }
+  .btn-outline:hover { background: var(--ink); color: #fff; }
+
+  /* REPORTS */
+  .reports-section { background: var(--bg-soft); }
+  .report-list { border-top: 1px solid var(--line); margin-bottom: 40px; }
+  .report-item { display: flex; gap: 24px; align-items: flex-start; padding: 22px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; transition: opacity .15s; }
+  .report-item:hover { opacity: .7; }
+  .report-date { font-size: 13px; color: var(--sub); white-space: nowrap; flex-shrink: 0; padding-top: 3px; min-width: 90px; }
+  .report-cat { display: inline-block; border: 1px solid var(--line); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+  .cat-case { background: var(--pink-light); color: var(--pink-dark); }
+  .cat-tech { background: #eef4ff; color: #3a6fcf; }
+  .report-title { font-size: 14px; font-weight: 500; line-height: 1.65; }
+  .reports-more { text-align: center; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    section { padding: 64px 0; }
+    .wrap { padding: 0 20px; }
+    .page-hero { padding: 48px 0 40px; }
+    .page-hero h1 { font-size: 26px; }
+    .service-inner { grid-template-columns: 1fr; gap: 32px; }
+    .service-inner.reverse { direction: ltr; }
+    .footer-inner { flex-direction: column; gap: 28px; }
+    .footer-nav { justify-content: flex-start; gap: 14px 20px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .site-nav a.nav-link { display: none; }
+    .nav-hamburger { display: flex; }
+    .achievement-grid { grid-template-columns: repeat(2, 1fr); }
+    .cases-grid { grid-template-columns: 1fr; }
+    .report-item { flex-wrap: wrap; gap: 8px; }
+    .contact-cta { padding: 56px 0; }
+    .contact-cta .cta-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .contact-cta h2 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav" id="top">
+  <div class="wrap">
+    <div class="logo"><a href="index.html"><img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック"></a></div>
+    <a href="about.html" class="nav-link">会社概要</a>
+    <a href="service.html" class="nav-link current">事業内容</a>
+    <a href="recruit.html" class="nav-link">採用情報</a>
+    <a href="news.html" class="nav-link">お知らせ</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="contact.html" class="nav-cta">お問い合わせ</a>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <a href="about.html">会社概要</a>
+  <a href="service.html">事業内容</a>
+  <a href="recruit.html">採用情報</a>
+  <a href="news.html">お知らせ</a>
+  <a href="contact.html">お問い合わせ</a>
+</nav>
+
+<div class="page-hero">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">ホーム</a><span>/</span>事業内容</p>
+    <p class="eyebrow">SERVICES</p>
+    <h1>事業内容</h1>
+    <p class="sub">企画・開発・運用の3軸で、業務システムを一貫して支えます。</p>
+  </div>
+</div>
+
+<!-- LEAD -->
+<section class="lead-section">
+  <div class="wrap">
+    <p class="eyebrow">OUR APPROACH</p>
+    <h2>企画・要件定義、設計・開発、保守・運用。<br>同じ体制で一貫して担う。</h2>
+    <p>ランステックは、西原商会グループの一員として、販売管理・在庫管理・受発注などグループ各社の業務システムを、企画・要件定義から設計・開発、保守・運用まで一貫して担います。同じ体制で担うから、工程で分断されず、業務に合った形へつくり込み、改善し続けられます。</p>
+  </div>
+</section>
+
+<!-- SERVICE 1: 企画・要件定義 -->
+<section class="service-block" id="planning">
+  <div class="wrap">
+    <div class="service-inner">
+      <div class="service-text">
+        <p class="eyebrow">PLANNING & REQUIREMENTS</p>
+        <h2>企画・要件定義</h2>
+        <p class="lead">業務の課題をヒアリングし、システムで実現すべき機能と要件を整理します。現場の声を形にするため、画面イメージや業務フローを一緒に設計し、開発へつなぎます。AIを活用して議事録作成やドキュメント整理を効率化し、ヒアリングに集中できる環境を整えています。</p>
+        <div class="tag-list">
+          <span class="tag">業務ヒアリング</span>
+          <span class="tag">要件定義</span>
+          <span class="tag">業務フロー設計</span>
+          <span class="tag">画面イメージ作成</span>
+          <span class="tag">データ設計</span>
+          <span class="tag">AI活用</span>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <span class="step-num">STEP 1</span>
+            <div class="step-body">
+              <h4>現状把握・課題整理</h4>
+              <p>現場の業務を観察し、課題や改善したい点を具体的に抽出します。</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <span class="step-num">STEP 2</span>
+            <div class="step-body">
+              <h4>要件定義・画面設計</h4>
+              <p>必要な機能を整理し、画面イメージやフローを一緒に固めます。</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <span class="step-num">STEP 3</span>
+            <div class="step-body">
+              <h4>見積もり・スケジュール策定</h4>
+              <p>開発規模と納期を提示し、プロジェクトの全体像を共有します。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="service-visual">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 2: 設計・開発 -->
+<section class="service-block alt" id="development">
+  <div class="wrap">
+    <div class="service-inner reverse">
+      <div class="service-text">
+        <p class="eyebrow">DESIGN & DEVELOPMENT</p>
+        <h2>設計・開発</h2>
+        <p class="lead">要件定義で固めた内容をもとに、システムを設計・実装します。新規開発、機能追加・改修、外部API連携、リプレイスまで幅広く対応し、週次で進捗を共有しながら確実に形にします。ClaudeなどのAIツールを活用し、コード生成やレビュー支援を行うことで、開発スピードと品質を両立しています。</p>
+        <div class="tag-list">
+          <span class="tag">Webアプリケーション開発</span>
+          <span class="tag">データベース設計・構築</span>
+          <span class="tag">API連携・外部サービス連携</span>
+          <span class="tag">機能追加・改修</span>
+          <span class="tag">システムリプレイス</span>
+          <span class="tag">AI活用開発</span>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <span class="step-num">STEP 1</span>
+            <div class="step-body">
+              <h4>詳細設計</h4>
+              <p>データベース構造や画面遷移、処理フローを技術的に整理します。</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <span class="step-num">STEP 2</span>
+            <div class="step-body">
+              <h4>実装・テスト</h4>
+              <p>週次で動作確認しながら開発を進め、品質を早期に担保します。</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <span class="step-num">STEP 3</span>
+            <div class="step-body">
+              <h4>受け入れ・本番リリース</h4>
+              <p>本番環境へのリリース作業と初期稼働支援まで責任を持って担います。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="service-visual">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 11h6"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 3: 保守・運用 -->
+<section class="service-block" id="operation">
+  <div class="wrap">
+    <div class="service-inner">
+      <div class="service-text">
+        <p class="eyebrow">MAINTENANCE & OPERATION</p>
+        <h2>保守・運用</h2>
+        <p class="lead">リリース後も、システムが安定して稼働し続けることを継続的に支えます。アラート監視・障害対応・セキュリティパッチ適用を担い、月次レポートで状況を可視化し、改善を提案します。</p>
+        <div class="tag-list">
+          <span class="tag">24時間監視・アラート対応</span>
+          <span class="tag">障害一次対応</span>
+          <span class="tag">セキュリティパッチ適用</span>
+          <span class="tag">バージョンアップ</span>
+          <span class="tag">月次レポート・改善提案</span>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <span class="step-num">STEP 1</span>
+            <div class="step-body">
+              <h4>監視体制の構築</h4>
+              <p>システム構成を引き継ぎ、アラート設定とエスカレーション体制を整えます。</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <span class="step-num">STEP 2</span>
+            <div class="step-body">
+              <h4>定常監視・障害対応</h4>
+              <p>問題を早期に検知し、一次対応から原因調査・報告まで担います。</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <span class="step-num">STEP 3</span>
+            <div class="step-body">
+              <h4>月次レポート・改善提案</h4>
+              <p>稼働状況・課題を定期報告し、次のアクションを継続的に提案します。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="service-visual">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPMENT CASES -->
+<section class="cases-section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">DEVELOPMENT CASES</p>
+      <h2>開発実績</h2>
+      <p>グループ各社の業務課題を解決するため、現在開発・運用しているシステムの一部をご紹介します。</p>
+    </div>
+    <div class="cases-grid">
+      <div class="case-card" style="cursor:default;">
+        <div class="case-card-thumb" style="background:#f0faf4;">
+          <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M9 12h6M9 16h4"/></svg>
+        </div>
+        <div class="case-card-body">
+          <div class="case-card-meta">
+            <span class="case-tag">食品製造・工場</span>
+            <span class="case-status status-trial">試験運用中</span>
+          </div>
+          <h3>生産現場の日報をデジタル化し、集計・確認業務を効率化</h3>
+          <p>紙・手書きで管理していた製造日報をシステム化。入力・集計・上長確認までをひとつの画面で完結できます。</p>
+          <div class="case-detail">
+            <div class="case-detail-row">
+              <div class="case-detail-col">
+                <div class="case-detail-label">技術スタック</div>
+                <div class="case-tech-list">
+                  <span class="tech-badge">Next.js</span>
+                  <span class="tech-badge">TypeScript</span>
+                  <span class="tech-badge">PostgreSQL</span>
+                  <span class="tech-badge">AWS</span>
+                </div>
+              </div>
+              <div class="case-detail-col">
+                <div class="case-detail-label">体制</div>
+                <div class="case-team">PM×1, FE×2, BE×1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card" style="cursor:default;">
+        <div class="case-card-thumb" style="background:#f0f0ff;">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="case-card-body">
+          <div class="case-card-meta">
+            <span class="case-tag">イベント・展示会</span>
+            <span class="case-status status-trial">試験運用中</span>
+          </div>
+          <h3>展示会の来場者受付をデジタル化し、受付業務の負荷を削減</h3>
+          <p>事前登録・当日チェックイン・名刺データ連携を一元管理。スタッフの手作業を最小化し、来場者体験も向上します。</p>
+          <div class="case-detail">
+            <div class="case-detail-row">
+              <div class="case-detail-col">
+                <div class="case-detail-label">技術スタック</div>
+                <div class="case-tech-list">
+                  <span class="tech-badge">React</span>
+                  <span class="tech-badge">Node.js</span>
+                  <span class="tech-badge">MySQL</span>
+                  <span class="tech-badge">Azure</span>
+                </div>
+              </div>
+              <div class="case-detail-col">
+                <div class="case-detail-label">体制</div>
+                <div class="case-team">PM×1, フルスタック×2</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card" style="cursor:default;">
+        <div class="case-card-thumb" style="background:#fff8ed;">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="case-card-body">
+          <div class="case-card-meta">
+            <span class="case-tag">貿易・物流</span>
+            <span class="case-status status-dev">開発中</span>
+          </div>
+          <h3>貿易業務の帳票を電子化し、作成から申請までシステムで完結</h3>
+          <p>輸出入で発生する各種帳票の作成・管理・承認申請をシステム化。紙とメールで回っていたフローをデジタルに統合します。</p>
+          <div class="case-detail">
+            <div class="case-detail-row">
+              <div class="case-detail-col">
+                <div class="case-detail-label">技術スタック</div>
+                <div class="case-tech-list">
+                  <span class="tech-badge">Next.js</span>
+                  <span class="tech-badge">TypeScript</span>
+                  <span class="tech-badge">PostgreSQL</span>
+                  <span class="tech-badge">Docker</span>
+                </div>
+              </div>
+              <div class="case-detail-col">
+                <div class="case-detail-label">体制</div>
+                <div class="case-team">PM×1, FE×2, BE×2, Infra×1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo"><img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック"></a>
+        <address>〒135-0044 東京都江東区越中島1-1-1<br>ヤマタネ深川1号館 2F</address>
+        <div class="footer-group">
+          <span class="footer-group-label">Group</span>
+          <a class="footer-group-link" href="https://www.nishihara-shokai.co.jp/" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/images/nishihara_logo.svg" alt="">
+            <span>西原商会グループ Webサイト</span>
+            <span class="fg-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+      <div class="footer-end">
+        <a class="footer-pagetop" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+          <span>PAGE TOP</span>
+          <span class="footer-pagetop-btn" aria-hidden="true">↑</span>
+        </a>
+        <nav class="footer-nav">
+          <a href="about.html">会社概要</a>
+          <a href="service.html">事業内容</a>
+          <a href="recruit.html">採用情報</a>
+          <a href="news.html">お知らせ</a>
+          <a href="contact.html">お問い合わせ</a>
+        </nav>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Lans Tech Co., Ltd. All rights reserved.</p>
+      <a class="footer-privacy" href="privacy.html">プライバシーポリシー</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function() {
+  var btn = document.getElementById('hamburger');
+  var nav = document.getElementById('mobile-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function() {
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+    nav.setAttribute('aria-hidden', String(!open));
+  });
+  nav.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      nav.setAttribute('aria-hidden', 'true');
+    });
+  });
+})();
+</script>
+
+
+<script src="/assets/js/feedback-panel-v2.js"></script>
+</body>
+</html>

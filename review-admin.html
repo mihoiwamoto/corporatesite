@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>フィードバック管理 | ランステック</title>
+<script src="/assets/js/comment-thread.js"></script>
+<style>
+  :root {
+    --pink: #E07898;
+    --ink:  #333;
+    --sub:  #666;
+    --line: #e0e0e0;
+    --bg:   #f5f5f5;
+    --r:    6px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Sans', sans-serif; background: var(--bg); color: var(--ink);
+         line-height: 1.6; min-height: 100vh; }
+
+  /* ── ログイン ── */
+  .login { display: flex; flex-direction: column; align-items: center; justify-content: center;
+           min-height: 100vh; gap: 16px; padding: 24px; }
+  .login h1 { font-size: 20px; font-weight: 700; }
+  .login p  { font-size: 13px; color: var(--sub); }
+  .login input { width: 100%; max-width: 320px; border: 1.5px solid var(--line); border-radius: var(--r);
+                 padding: 11px 14px; font-size: 14px; outline: none; }
+  .login input:focus { border-color: var(--pink); }
+  .login button { width: 100%; max-width: 320px; background: var(--pink); color: #fff;
+                  border: none; border-radius: var(--r); padding: 12px; font-size: 14px;
+                  font-weight: 700; cursor: pointer; }
+  .login button:hover { background: #C0587A; }
+
+  /* ── レイアウト ── */
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  .topbar { background: #1a1a2e; color: #fff; padding: 0 24px; height: 56px;
+            display: flex; align-items: center; justify-content: space-between; }
+  .topbar h1 { font-size: 15px; font-weight: 700; }
+  .topbar-sub { font-size: 12px; color: rgba(255,255,255,.6); }
+  .topbar-right { display: flex; gap: 12px; align-items: center; }
+  #refresh-btn { background: rgba(255,255,255,.15); color: #fff; border: none; border-radius: 4px;
+                 padding: 6px 14px; font-size: 12px; cursor: pointer; }
+  #refresh-btn:hover { background: rgba(255,255,255,.25); }
+
+  main { padding: 32px 0 64px; }
+
+  /* ── 統計 ── */
+  .stats { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+  .stat-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r);
+               padding: 16px 20px; flex: 1; min-width: 120px; }
+  .stat-num  { font-size: 28px; font-weight: 700; color: var(--pink); }
+  .stat-lbl  { font-size: 12px; color: var(--sub); margin-top: 2px; }
+
+  /* ── フィルタバー ── */
+  .filter-bar { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .filter-btn { background: #fff; border: 1.5px solid var(--line); border-radius: 20px;
+                padding: 5px 14px; font-size: 12px; font-weight: 700; cursor: pointer;
+                color: var(--sub); transition: all .15s; font-family: inherit; }
+  .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .filter-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* ── セクション・カード ── */
+  .section-title { font-size: 14px; font-weight: 700; color: var(--sub);
+                   letter-spacing: .08em; text-transform: uppercase;
+                   margin-bottom: 14px; padding-bottom: 8px;
+                   border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px; }
+  .page-badge { background: var(--ink); color: #fff; font-size: 10px;
+                padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+
+  .page-group { margin-bottom: 40px; }
+
+  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--r);
+          margin-bottom: 12px; overflow: hidden; }
+  .card-head { padding: 12px 16px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .card-label { font-size: 13px; font-weight: 700; color: var(--ink); flex: 1; }
+  .card-author { font-size: 12px; color: var(--sub); }
+  .card-time   { font-size: 11px; color: #aaa; }
+  .card-body { padding: 0 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-row { }
+  .card-row-lbl { font-size: 11px; color: var(--sub); font-weight: 700;
+                  text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+  .card-row-txt { font-size: 13px; line-height: 1.65; padding: 8px 12px;
+                  border-radius: 4px; background: #fafafa; border: 1px solid var(--line);
+                  color: #999; word-break: break-all; }
+  .card-row-txt.suggestion { background: #f0faf4; border-color: #a8e0bc; color: #1a5c35; }
+  .card-foot { padding: 10px 16px; border-top: 1px solid var(--line); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+  /* ── ステータスバッジ・セレクト ── */
+  .status-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 3px; }
+  .status-todo { background: #e0e0e0; color: #666; }
+  .status-wip  { background: #d1ecf1; color: #0c5460; }
+  .status-done { background: #d4edda; color: #155724; }
+  .status-skip { background: #fde3c7; color: #7d4000; }
+
+  .status-select { border: 1px solid var(--line); border-radius: 4px; padding: 5px 8px;
+                   font-size: 12px; font-family: inherit; cursor: pointer; color: var(--ink);
+                   background: #fff; }
+  .status-select:focus { outline: none; border-color: var(--pink); }
+
+  /* ── ボタン類 ── */
+  .btn-copy { background: none; border: 1px solid var(--line); border-radius: 4px;
+              padding: 5px 12px; font-size: 12px; cursor: pointer; color: var(--sub); font-family: inherit; }
+  .btn-copy:hover { border-color: var(--ink); color: var(--ink); }
+  .btn-edit { background: none; border: 1px solid var(--line); border-radius: 4px;
+              padding: 5px 12px; font-size: 12px; cursor: pointer; color: var(--sub); font-family: inherit; }
+  .btn-edit:hover { border-color: var(--ink); color: var(--ink); }
+  .btn-del  { background: none; border: 1px solid #f5c6c6; border-radius: 4px;
+              padding: 5px 12px; font-size: 12px; cursor: pointer; color: #c0392b; margin-left: auto; font-family: inherit; }
+  .btn-del:hover { background: #fff0f0; }
+
+  /* インライン編集 */
+  .edit-ta { display: none; width: 100%; border: 1.5px solid var(--pink); border-radius: 4px;
+             padding: 8px 12px; font-size: 13px; font-family: inherit; resize: vertical;
+             min-height: 80px; line-height: 1.6; box-sizing: border-box; outline: none; margin-top: 8px; }
+  .edit-ta.active { display: block; }
+  .edit-actions { display: none; gap: 6px; margin-top: 8px; }
+  .edit-actions.active { display: flex; }
+  .btn-save { background: var(--pink); color: #fff; border: none; border-radius: 4px;
+              padding: 5px 12px; font-size: 12px; cursor: pointer; font-weight: 700; font-family: inherit; }
+  .btn-save:hover { background: #C0587A; }
+  .btn-save-cancel { background: none; border: 1px solid var(--line); border-radius: 4px;
+                     padding: 5px 12px; font-size: 12px; cursor: pointer; color: var(--sub); font-family: inherit; }
+  .btn-save-cancel:hover { border-color: #999; }
+
+  .empty { text-align: center; padding: 80px 0; color: var(--sub); font-size: 14px; }
+  .empty-icon { font-size: 40px; margin-bottom: 16px; }
+
+  .loading { text-align: center; padding: 80px 0; color: var(--sub); }
+</style>
+</head>
+<body>
+
+<!-- ログイン画面 -->
+<div class="login" id="login-view">
+  <h1>📋 フィードバック管理</h1>
+  <p>管理キーを入力してください</p>
+  <input type="password" id="key-input" placeholder="管理キー" autocomplete="off">
+  <button id="login-btn">ログイン</button>
+  <p id="login-err" style="color:#c0392b;font-size:12px;display:none;">キーが正しくありません</p>
+</div>
+
+<!-- メイン画面 -->
+<div id="main-view" style="display:none">
+  <div class="topbar">
+    <div>
+      <h1>フィードバック管理</h1>
+      <div class="topbar-sub" id="topbar-key"></div>
+    </div>
+    <div class="topbar-right">
+      <button id="refresh-btn">↻ 更新</button>
+    </div>
+  </div>
+
+  <main>
+    <div class="wrap">
+      <div class="stats" id="stats"></div>
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">すべて</button>
+        <button class="filter-btn" data-filter="未対応">未対応</button>
+        <button class="filter-btn" data-filter="対応中">対応中</button>
+        <button class="filter-btn" data-filter="対応済み">対応済み</button>
+        <button class="filter-btn" data-filter="見送り">見送り</button>
+      </div>
+      <div id="content"><div class="loading">読み込み中...</div></div>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var adminKey   = new URLSearchParams(location.search).get('key') || '';
+  var loginView  = document.getElementById('login-view');
+  var mainView   = document.getElementById('main-view');
+  var keyInput   = document.getElementById('key-input');
+  var loginBtn   = document.getElementById('login-btn');
+  var loginErr   = document.getElementById('login-err');
+  var currentFilter = 'all';
+  var allItems = [];
+
+  // URLにkeyがあればスキップ
+  if (adminKey) {
+    loginView.style.display = 'none';
+    mainView.style.display = 'block';
+    document.getElementById('topbar-key').textContent = 'key: ' + adminKey.slice(0,4) + '****';
+    loadFeedback();
+  }
+
+  loginBtn.addEventListener('click', function () {
+    adminKey = keyInput.value.trim();
+    if (!adminKey) return;
+    loginErr.style.display = 'none';
+    fetchFeedback(adminKey).then(function (items) {
+      loginView.style.display = 'none';
+      mainView.style.display = 'block';
+      document.getElementById('topbar-key').textContent = 'key: ' + adminKey.slice(0,4) + '****';
+      allItems = items;
+      render(items);
+    }).catch(function () {
+      loginErr.style.display = 'block';
+    });
+  });
+
+  keyInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') loginBtn.click();
+  });
+
+  document.getElementById('refresh-btn').addEventListener('click', loadFeedback);
+
+  // フィルタバー
+  document.getElementById('filter-bar').addEventListener('click', function (e) {
+    var btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    applyFilter();
+  });
+
+  function applyFilter() {
+    var cards = document.querySelectorAll('.card');
+    cards.forEach(function (card) {
+      var status = card.dataset.status || '未対応';
+      card.style.display = (currentFilter === 'all' || currentFilter === status) ? '' : 'none';
+    });
+    // page-group が全部非表示になったら group ごと隠す
+    document.querySelectorAll('.page-group').forEach(function (group) {
+      var visible = group.querySelectorAll('.card:not([style*="display: none"])').length;
+      group.style.display = visible ? '' : 'none';
+    });
+  }
+
+  function fetchFeedback(key) {
+    return fetch('/api/feedback?key=' + encodeURIComponent(key))
+      .then(function (res) {
+        if (!res.ok) throw new Error('unauthorized');
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data.isAdmin) throw new Error('unauthorized');
+        return data.items;
+      });
+  }
+
+  function loadFeedback() {
+    document.getElementById('content').innerHTML = '<div class="loading">読み込み中...</div>';
+    fetchFeedback(adminKey).then(function (items) {
+      allItems = items;
+      render(items);
+    }).catch(function () {
+      document.getElementById('content').innerHTML =
+        '<div class="empty"><div class="empty-icon">⚠️</div>読み込みに失敗しました</div>';
+    });
+  }
+
+  var STATUS_CLS = { '未対応': 'status-todo', '対応中': 'status-wip', '対応済み': 'status-done', '見送り': 'status-skip' };
+
+  function render(items) {
+    // 統計
+    var pages = {};
+    var unresolved = 0;
+    items.forEach(function (item) {
+      var p = item.page || 'unknown';
+      if (!pages[p]) pages[p] = [];
+      pages[p].push(item);
+      if (!item.status || item.status === '未対応') unresolved++;
+    });
+
+    var statsHtml =
+      '<div class="stat-card"><div class="stat-num">' + items.length + '</div>' +
+      '<div class="stat-lbl">件のフィードバック</div></div>' +
+      '<div class="stat-card"><div class="stat-num">' + unresolved + '</div>' +
+      '<div class="stat-lbl">件が未対応</div></div>' +
+      '<div class="stat-card"><div class="stat-num">' + Object.keys(pages).length + '</div>' +
+      '<div class="stat-lbl">ページ</div></div>';
+    document.getElementById('stats').innerHTML = statsHtml;
+
+    if (items.length === 0) {
+      document.getElementById('content').innerHTML =
+        '<div class="empty"><div class="empty-icon">📭</div>フィードバックはまだありません</div>';
+      return;
+    }
+
+    var html = '';
+    Object.keys(pages).forEach(function (page) {
+      var list = pages[page];
+      html += '<div class="page-group">';
+      html += '<div class="section-title">' +
+        '<span class="page-badge">' + escHtml(page) + '</span>' +
+        list.length + ' 件' +
+        '</div>';
+      list.forEach(function (item) {
+        var d = new Date(item.created_at);
+        var dateStr = d.getFullYear() + '/' + pad(d.getMonth()+1) + '/' + pad(d.getDate()) +
+          ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+        var stLabel = item.status || '未対応';
+        var stCls   = STATUS_CLS[stLabel] || 'status-todo';
+        html +=
+          '<div class="card" data-id="' + escAttr(item.id) + '" data-status="' + escAttr(stLabel) + '">' +
+            '<div class="card-head">' +
+              '<span class="card-label">' + escHtml(item.label) + '</span>' +
+              '<span class="card-author">' + escHtml(item.author) + '</span>' +
+              '<span class="card-time">' + dateStr + '</span>' +
+              '<span class="status-badge ' + stCls + '" data-status-badge>' + escHtml(stLabel) + '</span>' +
+            '</div>' +
+            '<div class="card-body">' +
+              (item.original ? '<div class="card-row">' +
+                '<div class="card-row-lbl">現在の文言</div>' +
+                '<div class="card-row-txt">' + escHtml(item.original) + '</div>' +
+              '</div>' : '') +
+              '<div class="card-row">' +
+                '<div class="card-row-lbl">提案テキスト</div>' +
+                '<div class="card-row-txt suggestion" data-original="' + escAttr(item.suggestion) + '">' + escHtml(item.suggestion) + '</div>' +
+                '<textarea class="edit-ta" data-edit-ta></textarea>' +
+                '<div class="edit-actions" data-edit-actions>' +
+                  '<button class="btn-save" data-action="save">保存</button>' +
+                  '<button class="btn-save-cancel" data-action="cancel-edit">キャンセル</button>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="card-foot">' +
+              '<button class="btn-copy" data-copy="' + escAttr(item.suggestion) + '">コピー</button>' +
+              '<button class="btn-edit" data-action="edit">✏️ 編集</button>' +
+              '<select class="status-select" data-action="status">' +
+                ['未対応','対応中','対応済み','見送り'].map(function (s) {
+                  return '<option value="' + s + '"' + (s === stLabel ? ' selected' : '') + '>' + s + '</option>';
+                }).join('') +
+              '</select>' +
+              '<button class="btn-del" data-action="delete">削除</button>' +
+            '</div>' +
+          '</div>';
+      });
+      html += '</div>';
+    });
+
+    document.getElementById('content').innerHTML = html;
+
+    // イベント委譲
+    document.getElementById('content').addEventListener('click', contentClickHandler);
+    document.getElementById('content').addEventListener('change', contentChangeHandler);
+  }
+
+  function contentClickHandler(e) {
+    // コピー
+    var copyBtn = e.target.closest('[data-copy]');
+    if (copyBtn) {
+      navigator.clipboard.writeText(copyBtn.dataset.copy).then(function () {
+        var orig = copyBtn.textContent;
+        copyBtn.textContent = '✓ コピー済み';
+        setTimeout(function () { copyBtn.textContent = orig; }, 1500);
+      });
+      return;
+    }
+
+    var btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    var card   = btn.closest('.card');
+    var action = btn.dataset.action;
+    var id     = card.dataset.id;
+
+    if (action === 'delete') {
+      if (!confirm('このフィードバックを削除しますか？')) return;
+      fetch('/api/feedback?key=' + encodeURIComponent(adminKey) + '&id=' + encodeURIComponent(id), {
+        method: 'DELETE',
+      }).then(function (res) {
+        if (!res.ok) throw new Error();
+        card.remove();
+        loadFeedback();
+      }).catch(function () {
+        alert('削除に失敗しました。');
+      });
+    }
+
+    if (action === 'edit') {
+      var sugg    = card.querySelector('[data-original]');
+      var ta      = card.querySelector('[data-edit-ta]');
+      var actions = card.querySelector('[data-edit-actions]');
+      var foot    = card.querySelector('.card-foot');
+      ta.value = sugg.dataset.original;
+      sugg.style.display = 'none';
+      ta.classList.add('active');
+      actions.classList.add('active');
+      foot.querySelector('.btn-edit').style.display = 'none';
+      ta.focus();
+    }
+
+    if (action === 'cancel-edit') {
+      var sugg    = card.querySelector('[data-original]');
+      var ta      = card.querySelector('[data-edit-ta]');
+      var actions = card.querySelector('[data-edit-actions]');
+      var foot    = card.querySelector('.card-foot');
+      sugg.style.display = '';
+      ta.classList.remove('active');
+      actions.classList.remove('active');
+      foot.querySelector('.btn-edit').style.display = '';
+    }
+
+    if (action === 'save') {
+      var sugg    = card.querySelector('[data-original]');
+      var ta      = card.querySelector('[data-edit-ta]');
+      var actions = card.querySelector('[data-edit-actions]');
+      var foot    = card.querySelector('.card-foot');
+      var newText = ta.value.trim();
+      if (!newText) { ta.style.borderColor = '#d32f2f'; ta.focus(); return; }
+      btn.textContent = '保存中...';
+      btn.disabled = true;
+      fetch('/api/feedback?key=' + encodeURIComponent(adminKey) + '&id=' + encodeURIComponent(id), {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ suggestion: newText }),
+      }).then(function (res) {
+        if (!res.ok) throw new Error();
+        sugg.dataset.original = newText;
+        sugg.textContent = newText;
+        foot.querySelector('[data-copy]').dataset.copy = newText;
+        sugg.style.display = '';
+        ta.classList.remove('active');
+        actions.classList.remove('active');
+        foot.querySelector('.btn-edit').style.display = '';
+      }).catch(function () {
+        alert('保存に失敗しました。');
+        btn.textContent = '保存';
+        btn.disabled = false;
+      });
+    }
+  }
+
+  function contentChangeHandler(e) {
+    var sel = e.target.closest('.status-select');
+    if (!sel) return;
+    var card      = sel.closest('.card');
+    var id        = card.dataset.id;
+    var newStatus = sel.value;
+    fetch('/api/feedback?key=' + encodeURIComponent(adminKey) + '&id=' + encodeURIComponent(id), {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: newStatus }),
+    }).then(function (res) {
+      if (!res.ok) throw new Error();
+      // バッジ更新
+      card.dataset.status = newStatus;
+      var badge = card.querySelector('[data-status-badge]');
+      badge.textContent = newStatus;
+      badge.className = 'status-badge ' + (STATUS_CLS[newStatus] || 'status-todo');
+      applyFilter();
+    }).catch(function () {
+      alert('ステータスの更新に失敗しました。');
+      sel.value = card.dataset.status;
+    });
+  }
+
+  function escHtml(s) {
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function escAttr(s) { return escHtml(s).replace(/'/g,'&#39;'); }
+  function pad(n) { return n < 10 ? '0' + n : n; }
+})();
+</script>
+</body>
+</html>
