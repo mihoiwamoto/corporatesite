@@ -1,0 +1,50 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-dev" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf5ef;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg-dev)"/>
+
+  <!-- Browser/IDE window -->
+  <rect x="120" y="100" width="560" height="400" rx="12" fill="white" stroke="#009944" stroke-width="2.5" opacity="0.95"/>
+
+  <!-- Window chrome (title bar) -->
+  <rect x="120" y="100" width="560" height="45" rx="12" fill="#009944" opacity="0.15"/>
+  <circle cx="150" cy="122" r="7" fill="#E07898" opacity="0.6"/>
+  <circle cx="175" cy="122" r="7" fill="#E07898" opacity="0.4"/>
+  <circle cx="200" cy="122" r="7" fill="#E07898" opacity="0.3"/>
+
+  <!-- Code brackets -->
+  <polyline points="220,220 260,260 220,300" fill="none" stroke="#009944" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="340,220 300,260 340,300" fill="none" stroke="#009944" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Code slash -->
+  <line x1="295" y1="210" x2="265" y2="310" stroke="#E07898" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Code lines -->
+  <line x1="400" y1="200" x2="620" y2="200" stroke="#E5E7EB" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="400" y1="230" x2="580" y2="230" stroke="#E07898" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+  <line x1="420" y1="260" x2="640" y2="260" stroke="#E5E7EB" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="420" y1="290" x2="600" y2="290" stroke="#E5E7EB" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="400" y1="320" x2="620" y2="320" stroke="#009944" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="400" y1="350" x2="560" y2="350" stroke="#E5E7EB" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="420" y1="380" x2="640" y2="380" stroke="#E5E7EB" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="420" y1="410" x2="590" y2="410" stroke="#E5E7EB" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Terminal/console at bottom -->
+  <rect x="150" y="450" width="160" height="32" rx="6" fill="white" stroke="#009944" stroke-width="2"/>
+  <text x="160" y="472" font-family="monospace" font-size="14" fill="#009944" font-weight="600">npm run build</text>
+
+  <!-- Success checkmark -->
+  <circle cx="350" cy="466" r="16" fill="white" stroke="#009944" stroke-width="2.5"/>
+  <polyline points="343,466 348,471 357,460" fill="none" stroke="#009944" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Decorative elements -->
+  <circle cx="70" cy="180" r="10" fill="#009944" opacity="0.25"/>
+  <circle cx="720" cy="350" r="14" fill="#E07898" opacity="0.25"/>
+  <circle cx="90" cy="480" r="7" fill="#009944" opacity="0.2"/>
+</svg>

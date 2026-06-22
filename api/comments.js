@@ -79,7 +79,7 @@ module.exports = async function handler(req, res) {
     const { data, error } = await supabase
       .from('feedback_comments')
       .insert({
-        feedback_id: parseInt(feedback_id, 10),
+        feedback_id: feedback_id,
         author: author.trim(),
         author_email: author_email?.trim() || null,
         body: body.trim(),

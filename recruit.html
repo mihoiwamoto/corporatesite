@@ -17,25 +17,41 @@
     --pink:       #E07898;
     --pink-dark:  #C0587A;
     --pink-light: #FBF0F4;
-    --ink:        #333333;
-    --sub:        #666666;
+    --green:      #009944;
+    --green-dark: #007a36;
+    --green-light:#eaf5ef;
+    --ink:        #1a2633;
+    --sub:        #5a6872;
     --bg:         #ffffff;
-    --bg-soft:    #f5f5f5;
-    --line:       #e0e0e0;
+    --bg-soft:    #f8f9fa;
+    --line:       #e5e7eb;
     --radius:     8px;
-    --maxw:       1080px;
+    --maxw:       1200px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
   body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.75; text-wrap: pretty; word-break: auto-phrase; }
 
   /* BASE */
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
-  section { padding: 88px 0; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
+  section { padding: 100px 0; }
   .eyebrow { font-size: 12px; font-weight: 500; color: var(--pink); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
-  h2.title { font-size: 28px; font-weight: 700; margin-bottom: 16px; line-height: 1.5; }
+  h2.title { font-size: 36px; font-weight: 700; margin-bottom: 24px; line-height: 1.5; letter-spacing: -.01em; }
   .lead-narrow { max-width: 720px; font-size: 15px; color: var(--sub); line-height: 1.9; margin-top: 4px; }
   .col-head { font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--ink); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+
+  /* BUTTONS - Usage Guide:
+     .btn-primary: Main CTAs (お問い合わせ, 募集職種を見る etc.) - Pink background
+     .btn-ghost: Secondary actions (詳しく見る etc.) - Outline style */
+  .btn { display: inline-block; padding: 18px 40px; border-radius: 9999px; font-size: 15px; font-weight: 500; text-decoration: none; letter-spacing: .02em; transition: all .2s; box-shadow: rgba(26,38,51,.1) 0px 6px 24px 0px; }
+  .btn-primary { background: var(--pink); color: #fff; border: 1px solid transparent; }
+  .btn-primary:hover { background: var(--pink-dark); box-shadow: rgba(26,38,51,.15) 0px 8px 32px 0px; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); box-shadow: none; }
+  .btn-ghost:hover { background: var(--bg-soft); }
+
+  /* CARD - Base component for consistent card styling across pages */
+  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; transition: border-color .2s, box-shadow .2s; }
+  .card:hover { border-color: var(--pink); box-shadow: rgba(224,120,152,.08) 0px 8px 24px 0px; }
 
   /* SITE NAV */
   .site-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
@@ -222,7 +238,7 @@
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
-    section { padding: 64px 0; }
+    section { padding: 72px 0; }
     .wrap { padding: 0 20px; }
     .page-hero { padding: 48px 0 40px; }
     .page-hero h1 { font-size: 26px; }
@@ -245,6 +261,34 @@
     .contact-cta { padding: 56px 0; }
     .contact-cta .cta-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
     .contact-cta h2 { font-size: 22px; }
+  }
+
+  /* Large screens (1440px+): spacious layout */
+  @media (min-width: 1440px) {
+    .wrap { max-width: 1320px; padding: 0 60px; }
+    section { padding: 120px 0; }
+    .page-hero { padding: 80px 0; }
+    .page-hero h1 { font-size: 52px; }
+    h2.title { font-size: 40px; }
+    .recruit-lead h2 { font-size: 42px; }
+    .recruit-layout { gap: 100px; }
+    .interview-card { padding: 56px; max-width: 840px; }
+    .interview-card h3 { font-size: 24px; }
+  }
+
+  /* Extra large screens (1920px+): maximum comfort */
+  @media (min-width: 1920px) {
+    .wrap { max-width: 1400px; padding: 0 80px; }
+    section { padding: 140px 0; }
+    .page-hero { padding: 100px 0; }
+    .page-hero h1 { font-size: 56px; }
+    h2.title { font-size: 44px; }
+    .recruit-lead h2 { font-size: 46px; }
+    .recruit-layout { gap: 120px; }
+    .recruit-content p { font-size: 16px; line-height: 2.2; max-width: 680px; }
+    .interview-card { padding: 64px; max-width: 900px; }
+    .interview-card h3 { font-size: 26px; }
+    .interview-card p { font-size: 16px; line-height: 2.1; max-width: 700px; }
   }
 </style>
 </head>

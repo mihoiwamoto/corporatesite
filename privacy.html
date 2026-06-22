@@ -17,21 +17,37 @@
     --pink:       #E07898;
     --pink-dark:  #C0587A;
     --pink-light: #FBF0F4;
-    --ink:        #333333;
-    --sub:        #666666;
+    --green:      #009944;
+    --green-dark: #007a36;
+    --green-light:#eaf5ef;
+    --ink:        #1a2633;
+    --sub:        #5a6872;
     --bg:         #ffffff;
-    --bg-soft:    #f5f5f5;
-    --line:       #e0e0e0;
+    --bg-soft:    #f8f9fa;
+    --line:       #e5e7eb;
     --radius:     8px;
-    --maxw:       1080px;
+    --maxw:       1200px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
   body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.75; font-weight: 400; text-wrap: pretty; word-break: auto-phrase; }
 
   /* BASE */
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
   .eyebrow { font-size: 12px; font-weight: 500; color: var(--pink); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+
+  /* BUTTONS - Usage Guide:
+     .btn-primary: Main CTAs (お問い合わせ, 募集職種を見る etc.) - Pink background
+     .btn-ghost: Secondary actions (詳しく見る etc.) - Outline style */
+  .btn { display: inline-block; padding: 18px 40px; border-radius: 9999px; font-size: 15px; font-weight: 500; text-decoration: none; letter-spacing: .02em; transition: all .2s; box-shadow: rgba(26,38,51,.1) 0px 6px 24px 0px; }
+  .btn-primary { background: var(--pink); color: #fff; border: 1px solid transparent; }
+  .btn-primary:hover { background: var(--pink-dark); box-shadow: rgba(26,38,51,.15) 0px 8px 32px 0px; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); box-shadow: none; }
+  .btn-ghost:hover { background: var(--bg-soft); }
+
+  /* CARD - Base component for consistent card styling across pages */
+  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; transition: border-color .2s, box-shadow .2s; }
+  .card:hover { border-color: var(--pink); box-shadow: rgba(224,120,152,.08) 0px 8px 24px 0px; }
 
   /* SITE NAV */
   .site-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
@@ -56,7 +72,7 @@
   .mobile-nav.open { display: flex; }
 
   /* PAGE HERO */
-  .page-hero { padding: 72px 0 56px; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .page-hero { padding: 72px 0 56px; background: linear-gradient(180deg, #ffffff 0%, var(--bg-soft) 100%); border-bottom: 1px solid var(--line); }
   .breadcrumb { font-size: 12px; color: var(--sub); margin-bottom: 20px; }
   .breadcrumb a { color: var(--sub); text-decoration: none; }
   .breadcrumb a:hover { color: var(--ink); }
@@ -65,7 +81,7 @@
   .page-hero p.sub { font-size: 15px; color: var(--sub); margin-top: 12px; line-height: 1.8; }
 
   /* CONTENT */
-  .privacy-section { padding: 80px 0 100px; }
+  .privacy-section { padding: 100px 0; }
   .privacy-inner { max-width: 720px; }
   .privacy-inner .updated { font-size: 13px; color: var(--sub); margin-bottom: 24px; }
   .privacy-lead { font-size: 14px; color: var(--sub); line-height: 1.9; margin-bottom: 48px; }
