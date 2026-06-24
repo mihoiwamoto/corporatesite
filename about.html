@@ -152,7 +152,7 @@
   .group-connector-line { width: 1px; height: 24px; background: var(--line); }
   .group-connector-label { font-size: 10px; color: var(--sub); background: #fff; padding: 2px 8px; border: 1px solid var(--line); border-radius: 10px; white-space: nowrap; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 96px; }
 
   /* FOOTER */
   .footer { background: var(--bg-soft); border-top: 1px solid var(--line); padding: 80px 0 40px; }
@@ -270,7 +270,7 @@
 </section>
 
 <!-- TOP MESSAGE -->
-<section class="pmsg">
+<section class="pmsg" id="message">
   <div class="wrap">
     <div class="pmsg-head">
       <p class="eyebrow">TOP MESSAGE</p>
@@ -293,7 +293,7 @@
 </section>
 
 <!-- VISION & VALUES -->
-<section class="vision-value">
+<section class="vision-value" id="vision">
   <div class="wrap">
     <div class="vision-block">
       <p class="eyebrow">VISION</p>
@@ -302,7 +302,7 @@
     </div>
     <hr class="vision-rule">
     <div class="value-intro">
-      <p class="eyebrow" style="margin-top: 64px;">VALUES</p>
+      <p class="eyebrow" id="values" style="margin-top: 64px; scroll-margin-top: 96px;">VALUES</p>
       <h2 class="title">大切にしていること</h2>
     </div>
     <div class="value-list">
@@ -361,7 +361,7 @@
 </section>
 
 <!-- COMPANY TABLE -->
-<section class="company">
+<section class="company" id="company">
   <div class="wrap">
     <p class="eyebrow">COMPANY INFO</p>
     <h2 class="title">会社情報</h2>
@@ -434,7 +434,7 @@
 </section>
 
 <!-- HISTORY -->
-<section class="history">
+<section class="history" id="history">
   <div class="wrap">
     <p class="eyebrow">OUR HISTORY</p>
     <h2 class="title">会社の沿革</h2>

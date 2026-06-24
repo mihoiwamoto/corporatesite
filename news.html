@@ -258,12 +258,15 @@
       applyFilter(btn.textContent.trim());
     });
   });
-  // URLハッシュ（例: news.html#社員インタビュー）で該当フィルターを初期選択
-  if (location.hash) {
+  // URLハッシュ（例: news.html#社員インタビュー）で該当フィルターを選択
+  function applyHashFilter() {
+    if (!location.hash) return;
     var target = decodeURIComponent(location.hash.slice(1));
     var matched = Array.prototype.some.call(filterBtns, function(b) { return b.textContent.trim() === target; });
     if (matched) applyFilter(target);
   }
+  applyHashFilter();
+  window.addEventListener('hashchange', applyHashFilter);
 })();
 </script>
 
