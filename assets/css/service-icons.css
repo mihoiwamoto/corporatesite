@@ -1,0 +1,91 @@
+/* service-icons.css
+ * 事業内容アイコン（細線アウトライン／ピンク・緑・白）の表示と、内容に沿った発火アニメーション。
+ *
+ * - サイズは --svc-icon-size（既定 72px、index 等で上書き可）。
+ * - 配色: 既定の線はピンク(--pink)。.c-green=緑の線 / .f-green=緑塗り / .f-white=白塗り(枠線はピンク)。
+ * - JS(assets/js/service-icons.js)が初期化時に各 .lottie-icon へ .anim-ready を付与し、
+ *   画面内で .in-view を付与。開始状態は .anim-ready 配下のみに定義するため、JS無効時は
+ *   完成状態で静止表示される（壊れない）。reduced-motion 時は JS が付与せず全アニメ無効。
+ * - Lottie JSON 配置時は .lottie-ready が付き、静止SVGは隠れて Lottie に切替。
+ */
+
+/* ---- 表示 ---- */
+.service-visual .lottie-icon { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+/* 枠（.service-visual 4:3）に対する割合で配置。正方アイコンは高さ側で収まる（meet）。
+   --svc-icon-scale で微調整可（既定 0.78 = 枠の高さの78%）。 */
+.service-visual .lottie-fallback,
+.service-visual .lottie-icon dotlottie-player { width: calc(var(--svc-icon-scale, 0.78) * 100%); height: calc(var(--svc-icon-scale, 0.78) * 100%); }
+.service-visual .lottie-icon.lottie-ready .lottie-fallback { display: none; }
+
+/* ---- 線スタイル / 配色（常時適用）---- */
+.lottie-fallback { fill: none; stroke: var(--pink); stroke-width: var(--svc-stroke, 1.0); stroke-linecap: round; stroke-linejoin: round; }
+.lottie-fallback .f-white { fill: #fff; }
+.lottie-fallback .f-green { fill: var(--green); stroke: none; }
+.lottie-fallback .c-green { stroke: var(--green); }
+.ic-plan .bubble { transform-box: fill-box; transform-origin: bottom; }
+.ic-dev .click-ring { transform-box: fill-box; transform-origin: center; opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 共通: アイコンを hover で軽く持ち上げ */
+  .service-visual .lottie-fallback { transition: transform .45s cubic-bezier(.34,1.56,.64,1); }
+  .service-visual:hover .lottie-fallback { transform: translateY(-4px); }
+
+  /* 開始状態（JSが .anim-ready を付けたときだけ隠す）*/
+  .lottie-icon.anim-ready .ic-dev .code-line { opacity: 0; }
+  .lottie-icon.anim-ready .ic-plan .bubble { opacity: 0; transform: scale(0); }
+
+  /* 企画・要件定義: 二人が会話。吹き出しが交互にポップ（ループ）*/
+  .lottie-icon.anim-ready.in-view .ic-plan .bubA { animation: svc-pop 3s ease-in-out infinite; }
+  .lottie-icon.anim-ready.in-view .ic-plan .bubB { animation: svc-pop 3s ease-in-out 1.5s infinite; }
+
+  /* 設計・開発: コード行が上から順にフェードインで出現 → マウスが移動してクリック（クリックはループ）*/
+  .lottie-icon.anim-ready.in-view .ic-dev .code-line { animation: svc-line-in .5s ease both; }
+  .lottie-icon.anim-ready.in-view .ic-dev .cl1 { animation-delay: 0s; }
+  .lottie-icon.anim-ready.in-view .ic-dev .cl2 { animation-delay: .16s; }
+  .lottie-icon.anim-ready.in-view .ic-dev .cl3 { animation-delay: .32s; }
+  .lottie-icon.in-view .ic-dev .mouse { animation: svc-cursor 3.6s ease-in-out .6s infinite; }
+  .lottie-icon.in-view .ic-dev .click-ring { animation: svc-click 3.6s ease-in-out .6s infinite; }
+
+  /* 保守・運用: 稼働監視ダッシュボード（波形を緑点が走る＋稼働ランプ点滅）*/
+  .lottie-icon.in-view .ic-ops .wave-dot { animation: svc-wave 2.4s linear infinite; }
+  .lottie-icon.in-view .ic-ops .led { animation: svc-led 1.8s ease-in-out infinite; }
+  .lottie-icon.in-view .ic-ops .led2 { animation-delay: .9s; }
+}
+
+@keyframes svc-line-in {
+  from { opacity: 0; transform: translateY(-1.4px); }   /* 上から（px=ユーザー単位）*/
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes svc-led { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+@keyframes svc-wave {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  6%   { opacity: 1; }
+  25%  { transform: translate(3.5px, 0); }
+  36%  { transform: translate(5px, -2.5px); }
+  46%  { transform: translate(6.4px, 2.3px); }
+  55%  { transform: translate(7.7px, 0); }
+  94%  { transform: translate(14px, 0); opacity: 1; }
+  100% { transform: translate(14px, 0); opacity: 0; }
+}
+@keyframes svc-pop {
+  0%   { opacity: 0; transform: scale(0); }
+  8%   { opacity: 1; transform: scale(1.1); }
+  16%  { transform: scale(1); }
+  42%  { opacity: 1; transform: scale(1); }
+  50%  { opacity: 0; transform: scale(.7); }
+  100% { opacity: 0; transform: scale(.7); }
+}
+@keyframes svc-cursor {
+  0%, 16%   { transform: translate(0, 0); }
+  32%, 48%  { transform: translate(1.6px, 3.4px); }
+  64%, 100% { transform: translate(0, 0); }
+}
+@keyframes svc-click {
+  0%, 10% { transform: scale(.3); opacity: 0; }
+  13%     { opacity: .7; }
+  24%     { transform: scale(2.3); opacity: 0; }
+  44%     { transform: scale(.3); opacity: 0; }
+  47%     { opacity: .7; }
+  58%     { transform: scale(2.3); opacity: 0; }
+  100%    { transform: scale(.3); opacity: 0; }
+}

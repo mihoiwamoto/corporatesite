@@ -1,0 +1,103 @@
+/* =========================================================================
+   全ページ共通のグレイニー地紋（ランステック ピンク × 西原商会 グリーン）
+   - 色グラデは「背面のページ背景」（z-index:-1）。セクション背景を透過させて見せる。
+   - グレイン（ざらざら）は全面に薄く重ねる（カード・文字の上にも均一に乗る）。
+   - 強度はすべて :root の変数で調整可能。
+   ========================================================================= */
+:root {
+  /* ブランドカラー（index.html の --pink / --green と同値・RGB成分） */
+  --ground-pink:  212, 99, 126;   /* #D4637E ランステック */
+  --ground-green:  26, 157, 87;   /* #1A9D57 西原商会     */
+
+  /* 色あしらいの濃さ（四隅。中央=可読エリアは透明に抜く） */
+  --ground-pink-strength:  .40;
+  --ground-green-strength: .32;
+
+  /* ざらざら（グレイン）の強さ：0 で無効。白基調なので .05〜.12 が適正 */
+  --ground-grain-opacity:  .07;
+
+  /* 名刺の表と同じ「3本線の扇」あしらい（左上＋右下／緑・チャコール・紫） */
+  --ground-line-opacity:  .68;          /* 扇ライン全体の濃さ（0〜1） */
+  --ground-line-spread:   min(74vmin, 880px); /* 角からの扇の大きさ（正方形の一辺） */
+}
+
+/* --- ページ背景（背面）：四隅にピンク/グリーンをにじませる ------------------ */
+/* 固定配置でビューポートに対して常に同じ位置に出る（スクロールしても安定）。  */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;               /* 最背面：角ライン(-1)・本文より後ろ（＝ページ背景） */
+  pointer-events: none;
+  background-color: #ffffff; /* ベースは白 */
+  background-image:
+    /* ピンク：左上 */
+    radial-gradient(70vmax 70vmax at 0% 0%,
+      rgba(var(--ground-pink), var(--ground-pink-strength)) 0%, transparent 60%),
+    /* グリーン：右下 */
+    radial-gradient(66vmax 66vmax at 100% 100%,
+      rgba(var(--ground-green), var(--ground-green-strength)) 0%, transparent 60%),
+    /* ピンク：右上の控えめなアクセント */
+    radial-gradient(48vmax 48vmax at 100% 0%,
+      rgba(var(--ground-pink), calc(var(--ground-pink-strength) * .5)) 0%, transparent 55%);
+}
+
+/* --- ざらざらのグレイン：全面に均一な質感（最前面・操作透過） ---------------- */
+/* normal ブレンド：白・色地・濃色のいずれにも均一に粒状感が乗る
+   （soft-light/overlay/multiply は純白の上では効かないため使わない）。 */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 500;              /* 本文(1-2)・ヘッダー(200)の上／内部ツール(9999)の下 */
+  pointer-events: none;
+  opacity: var(--ground-grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  background-repeat: repeat;
+}
+
+/* --- 名刺の表と同じ「3本線の扇」あしらい：左上＋右下 ------------------------- */
+/* meishi_design_omote.svg の角を彩る 緑(#289E59)・チャコール(#525252)・紫(#BA76AA)
+   の3本線を再現。SVGは左上原点の扇。左上はそのまま、右下は180度回転して点対称に。
+   固定配置でビューポート隅に常駐。z-index:-1（色ウォッシュ body::before:-2 の上・
+   本文の後ろ）。角を起点に放射状フェードさせ、線端が画面中央で途切れないようにする。 */
+html::before,
+html::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  width: var(--ground-line-spread);
+  height: var(--ground-line-spread);
+  opacity: var(--ground-line-opacity);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800' fill='none'%3E%3Cpath d='M0 176 L688 0' stroke='%23289E59' stroke-width='1.4'/%3E%3Cpath d='M0 320 L480 0' stroke='%23525252' stroke-width='1.4'/%3E%3Cpath d='M0 400 L216 0' stroke='%23BA76AA' stroke-width='1.4'/%3E%3C/svg%3E");
+  -webkit-mask-image: radial-gradient(135% 135% at 0% 0%, #000 0%, transparent 72%);
+          mask-image: radial-gradient(135% 135% at 0% 0%, #000 0%, transparent 72%);
+}
+
+/* 左上：SVGの扇（原点＝左上）をそのまま配置 */
+html::before { top: 0; left: 0; }
+
+/* 右下：180度回転で点対称に。扇もマスクも右下原点になる */
+html::after { bottom: 0; right: 0; transform: rotate(180deg); }
+
+/* --- セクションの帯背景を透過してページ背景（地紋）を見せる ------------------ */
+/* カード（.card / .service-item / .group-card / .group-visual 等）・ヘッダー・
+   フッターは各自の背景を保持。ここで透過するのは「帯」だけ。 */
+body { background: transparent !important; }
+section,
+.page-hero,
+.news-teaser {
+  background: transparent !important;
+}
+
+/* 印刷時は地紋を出さない */
+@media print {
+  body::before,
+  body::after,
+  html::before,
+  html::after { display: none; }
+}
