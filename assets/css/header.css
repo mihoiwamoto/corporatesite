@@ -1,0 +1,43 @@
+/* ===== SHARED HEADER / NAV ===== */
+.site-nav { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,.88); backdrop-filter: blur(20px) saturate(1.2); border-bottom: 1px solid rgba(0,0,0,.04); }
+.site-nav .wrap { display: flex; align-items: center; gap: 48px; height: 80px; }
+.site-nav .logo { flex: 1; }
+.site-nav .logo img { height: 30px; width: auto; display: block; }
+.site-nav a.nav-link { color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 400; transition: color .3s; position: relative; }
+.site-nav a.nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; background: var(--pink); transition: width .3s cubic-bezier(.4,0,.2,1); }
+.site-nav a.nav-link:hover { color: var(--pink); }
+.site-nav a.nav-link:hover::after { width: 100%; }
+.site-nav a.nav-link.current { color: var(--pink); }
+.site-nav a.nav-link.current::after { width: 100%; }
+.site-nav a.nav-cta { background: var(--pink); color: #fff; padding: 12px 28px; border-radius: 9999px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all .3s cubic-bezier(.4,0,.2,1); box-shadow: 0 2px 12px rgba(212,99,126,.2); }
+.site-nav a.nav-cta:hover { background: var(--pink-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(212,99,126,.3); }
+
+/* HAMBURGER */
+.nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 12px; flex-direction: column; gap: 5px; z-index: 200; position: relative; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all .3s cubic-bezier(.33,1,.68,1); }
+.nav-hamburger[aria-expanded="true"] span { background: #fff; }
+.nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* MOBILE NAV */
+.mobile-nav { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, var(--ink) 0%, #1E2D3D 100%); z-index: 150; flex-direction: column; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity .4s cubic-bezier(.33,1,.68,1), visibility .4s cubic-bezier(.33,1,.68,1); }
+.mobile-nav::before { content: ''; position: absolute; inset: 0; background: url('/assets/images/bg-lines.svg') center/cover no-repeat; opacity: 0.03; pointer-events: none; }
+.mobile-nav-inner { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 340px; padding: 0 20px; position: relative; z-index: 1; }
+.mobile-nav a { padding: 20px 28px; border-radius: 12px; text-decoration: none; color: #fff; font-size: 17px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; width: 100%; text-align: left; transition: all .3s cubic-bezier(.4,0,.2,1); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
+.mobile-nav a:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.2); transform: translateX(4px); }
+.mobile-nav a::after { content: '\2192'; font-size: 16px; opacity: 0.6; transition: all .3s cubic-bezier(.4,0,.2,1); }
+.mobile-nav a:hover::after { opacity: 1; transform: translateX(4px); }
+.mobile-nav a.nav-cta-mobile { background: var(--pink); border-color: var(--pink); margin-top: 16px; justify-content: center; }
+.mobile-nav a.nav-cta-mobile::after { display: none; }
+.mobile-nav a.nav-cta-mobile:hover { background: var(--pink-dark); border-color: var(--pink-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(224,120,152,.3); }
+.mobile-nav.open { display: flex; opacity: 1; visibility: visible; }
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .site-nav .wrap { height: 64px; }
+  .site-nav .logo img { height: 24px; }
+  .site-nav a.nav-link { display: none; }
+  .site-nav a.nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+}
