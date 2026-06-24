@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>食品グループ IT子会社リサーチ | 社内資料</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:        #D4637E;
+    --pink-dark:   #B84A66;
+    --pink-light:  #FDF2F5;
+    --green:       #1A9D57;
+    --green-dark:  #147A44;
+    --green-light: #ECF7F1;
+    --ink:         #1A202C;
+    --sub:         #4A5568;
+    --muted:       #718096;
+    --bg:          #ffffff;
+    --bg-soft:     #F7F8FA;
+    --bg-warm:     #FAFAF9;
+    --line:        #E2E8F0;
+    --line-light:  #EDF2F7;
+    --radius:      14px;
+    --radius-sm:   10px;
+    --maxw:        1100px;
+    --shadow-sm:   0 1px 3px rgba(0,0,0,.03), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md:   0 4px 20px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.03);
+    --shadow-lg:   0 10px 40px rgba(0,0,0,.06);
+    --ease:        cubic-bezier(.4,0,.2,1);
+  }
+  html { scroll-behavior: smooth; scroll-padding-top: 32px; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+    color: var(--ink); background: var(--bg-soft);
+    line-height: 1.85; font-weight: 400; font-size: 14px;
+    text-wrap: pretty; word-break: auto-phrase;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== HEADER ===== */
+  .page-header {
+    background: linear-gradient(135deg, #1A202C 0%, #2D3748 60%, #353F50 100%);
+    color: #fff; padding: 72px 40px 56px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .page-header::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--pink), var(--green), var(--pink));
+  }
+  .page-header .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: .2em; color: var(--pink);
+    background: rgba(212,99,126,.1); border: 1px solid rgba(212,99,126,.2);
+    border-radius: 9999px; padding: 6px 20px; margin-bottom: 24px;
+  }
+  .page-header h1 {
+    font-size: 30px; font-weight: 700; margin-bottom: 14px;
+    letter-spacing: -.02em; line-height: 1.4;
+  }
+  .page-header p { font-size: 13px; color: rgba(255,255,255,.5); font-weight: 300; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+
+  /* ===== INTRO ===== */
+  .intro {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 28px 32px;
+    margin: -32px 0 36px;
+    box-shadow: var(--shadow-md); position: relative; z-index: 2;
+  }
+  .intro p { font-size: 13.5px; color: var(--sub); line-height: 2.0; }
+
+  /* ===== SECTION TITLE ===== */
+  .section-title {
+    font-size: 17px; font-weight: 700; margin: 52px 0 20px;
+    padding: 14px 0 14px 0;
+    border-bottom: none;
+    display: flex; align-items: center; gap: 14px;
+    position: relative;
+  }
+  .section-title::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px; background: linear-gradient(90deg, var(--pink) 0%, transparent 60%);
+  }
+  .section-title .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--pink); color: #fff; font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ===== COMPANY CARD ===== */
+  .company-card {
+    background: #fff; border: 1px solid var(--line-light);
+    border-radius: var(--radius); padding: 0;
+    margin-bottom: 16px; overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .3s var(--ease), border-color .3s;
+  }
+  .company-card:hover { box-shadow: var(--shadow-md); border-color: var(--line); }
+
+  .company-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px;
+    background: #fff; border-bottom: 1px solid var(--line-light);
+    flex-wrap: wrap; gap: 10px;
+    cursor: pointer; user-select: none;
+    transition: background .2s;
+  }
+  .company-header:hover { background: var(--bg-soft); }
+  .company-header h3 { font-size: 15px; font-weight: 700; }
+  .company-header h3 a {
+    color: var(--ink); text-decoration: none; transition: color .2s;
+  }
+  .company-header h3 a:hover { color: var(--pink); }
+  .company-header .parent {
+    font-size: 11px; font-weight: 500; color: var(--pink);
+    background: var(--pink-light); padding: 4px 12px; border-radius: 9999px;
+  }
+  .company-header .toggle-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; color: var(--muted);
+    transition: transform .3s var(--ease); flex-shrink: 0; margin-left: 8px;
+  }
+  .company-header .toggle-icon svg { width: 16px; height: 16px; }
+  .company-card.collapsed .toggle-icon { transform: rotate(-90deg); }
+  .company-card.collapsed .company-body {
+    max-height: 0; overflow: hidden; padding: 0 24px;
+    border-top: none;
+  }
+
+  .company-body { padding: 20px 24px; }
+
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px; margin-bottom: 16px;
+  }
+  .meta-item {
+    font-size: 12px; padding: 8px 12px;
+    background: var(--bg-soft); border-radius: var(--radius-sm);
+  }
+  .meta-label {
+    font-weight: 600; color: var(--muted); font-size: 10px;
+    letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px;
+  }
+  .meta-value { color: var(--ink); font-weight: 500; }
+
+  .desc {
+    font-size: 13px; color: var(--sub); line-height: 1.9;
+    margin-bottom: 12px;
+  }
+
+  .highlight {
+    background: var(--pink-light); border-left: 3px solid var(--pink);
+    padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 12.5px; color: var(--ink); line-height: 1.85; margin-bottom: 12px;
+  }
+  .highlight strong { color: var(--pink-dark); }
+
+  .links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .links a {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; color: var(--pink); text-decoration: none;
+    background: var(--pink-light); padding: 5px 12px; border-radius: 9999px;
+    transition: all .2s var(--ease); font-weight: 500;
+  }
+  .links a:hover { background: var(--pink); color: #fff; }
+  .links a svg { width: 11px; height: 11px; flex-shrink: 0; }
+
+  /* ===== TABLES ===== */
+  .no-subsidiary-table {
+    width: 100%; border-collapse: collapse; margin-bottom: 20px;
+    background: #fff; border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .no-subsidiary-table th {
+    background: var(--bg-soft); font-size: 11px; font-weight: 700;
+    color: var(--muted); letter-spacing: .08em; text-align: left;
+    padding: 12px 18px; border-bottom: 1px solid var(--line);
+    text-transform: uppercase;
+  }
+  .no-subsidiary-table td {
+    padding: 12px 18px; font-size: 12.5px; border-bottom: 1px solid var(--line-light);
+    vertical-align: top; line-height: 1.8;
+  }
+  .no-subsidiary-table tr:last-child td { border-bottom: none; }
+  .no-subsidiary-table tr:hover td { background: var(--bg-warm); }
+
+  /* ===== TREND CARDS ===== */
+  .trend-card {
+    background: #fff; border: 1px solid var(--line-light);
+    border-radius: var(--radius); padding: 20px 24px;
+    margin-bottom: 12px; box-shadow: var(--shadow-sm);
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: border-color .2s;
+  }
+  .trend-card:hover { border-color: var(--pink); }
+  .trend-num {
+    flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+  }
+  .trend-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .trend-card p { font-size: 12.5px; color: var(--sub); line-height: 1.85; }
+
+  /* ===== SITE ANALYSIS ===== */
+  .site-analysis {
+    margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid var(--line-light);
+  }
+  .site-analysis h4 {
+    font-size: 10px; font-weight: 700; color: var(--muted);
+    letter-spacing: .12em; margin-bottom: 10px; text-transform: uppercase;
+  }
+  .analysis-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  }
+  .analysis-item {
+    background: var(--bg-soft); border-radius: var(--radius-sm);
+    padding: 12px 14px;
+  }
+  .analysis-item .a-label {
+    font-size: 10px; font-weight: 700; color: var(--pink);
+    letter-spacing: .06em; margin-bottom: 3px; text-transform: uppercase;
+  }
+  .analysis-item .a-value {
+    font-size: 12px; color: var(--ink); line-height: 1.75;
+  }
+  .site-bar {
+    display: flex; gap: 8px; align-items: center; margin-top: 10px; flex-wrap: wrap;
+  }
+  .site-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10px; font-weight: 600; padding: 3px 10px;
+    border-radius: 9999px; border: 1px solid var(--line-light); background: #fff;
+    letter-spacing: .02em;
+  }
+  .site-pill .dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+  .dot-green { background: #1A9D57; }
+  .dot-yellow { background: #D69E2E; }
+  .dot-red { background: #E53E3E; }
+  .dot-gray { background: #A0AEC0; }
+
+  /* ===== LANSTECH CALLOUT ===== */
+  .lanstech-callout {
+    background: linear-gradient(135deg, var(--green-light) 0%, #F0FFF4 100%);
+    border: 1px solid rgba(26,157,87,.15); border-radius: var(--radius);
+    padding: 24px 28px; margin: 28px 0;
+  }
+  .lanstech-callout-header {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 15px; font-weight: 700; color: var(--green-dark);
+    margin-bottom: 12px;
+  }
+  .lanstech-callout-header svg { color: var(--green); flex-shrink: 0; }
+  .lanstech-callout p {
+    font-size: 13px; color: var(--ink); line-height: 1.9;
+  }
+  .lanstech-callout p + p { margin-top: 10px; }
+  .lanstech-callout strong { color: var(--green-dark); }
+
+  /* ===== COMPARISON TABLE ===== */
+  .table-scroll {
+    overflow-x: auto; border-radius: var(--radius);
+    box-shadow: var(--shadow-sm); margin: 20px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  .comparison-table {
+    width: 100%; border-collapse: collapse;
+    background: #fff; font-size: 11.5px;
+  }
+  .comparison-table th {
+    background: var(--ink); font-weight: 600; color: rgba(255,255,255,.8);
+    letter-spacing: .04em; text-align: center;
+    padding: 10px 8px; border-bottom: none; white-space: nowrap;
+    font-size: 10px; text-transform: uppercase;
+  }
+  .comparison-table th:first-child { text-align: left; padding-left: 16px; }
+  .comparison-table td {
+    padding: 9px 8px; border-bottom: 1px solid var(--line-light);
+    vertical-align: middle; text-align: center; line-height: 1.5;
+  }
+  .comparison-table td:first-child { text-align: left; font-weight: 500; white-space: nowrap; padding-left: 16px; }
+  .comparison-table td:first-child a {
+    color: var(--pink); text-decoration: none; font-weight: 600;
+    border-bottom: 1px dashed rgba(212,99,126,.3); transition: all .2s;
+  }
+  .comparison-table td:first-child a:hover { color: var(--pink-dark); border-bottom-color: var(--pink); }
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .comparison-table tbody tr:nth-child(even) td { background: var(--bg-warm); }
+  .comparison-table tbody tr:hover td { background: var(--pink-light); }
+  .level { display: inline-block; width: 100%; }
+  .level-high { color: var(--green); font-weight: 700; }
+  .level-mid { color: #D69E2E; font-weight: 600; }
+  .level-low { color: #E53E3E; font-weight: 500; }
+  .level-none { color: #CBD5E0; }
+
+  @media (max-width: 768px) {
+    .analysis-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ===== SOURCES ===== */
+  .source-list {
+    background: #fff; border: 1px solid var(--line-light);
+    border-radius: var(--radius); padding: 24px 28px;
+    box-shadow: var(--shadow-sm); margin-bottom: 60px;
+  }
+  .source-list h3 { font-size: 13px; font-weight: 700; margin-bottom: 14px; }
+  .source-list ol {
+    padding-left: 20px; columns: 2; column-gap: 32px;
+  }
+  .source-list li {
+    font-size: 11.5px; color: var(--muted); margin-bottom: 5px;
+    line-height: 1.5; break-inside: avoid;
+  }
+  .source-list li a { color: var(--pink); text-decoration: none; }
+  .source-list li a:hover { text-decoration: underline; }
+
+  /* ===== TAGS ===== */
+  .tag-type {
+    display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px;
+    border-radius: 6px; letter-spacing: .04em;
+  }
+  .tag-dedicated { background: var(--green-light); color: var(--green); }
+  .tag-shared { background: #EDE9FE; color: #6D28D9; }
+  .tag-jv { background: #FEF3C7; color: #B45309; }
+
+  /* ===== LAYOUT ===== */
+  .page-layout {
+    display: grid; grid-template-columns: 200px 1fr; gap: 32px;
+    max-width: 1340px; margin: 0 auto; padding: 0 28px;
+  }
+
+  .side-nav {
+    position: sticky; top: 24px; align-self: start;
+    max-height: calc(100vh - 48px); overflow-y: auto;
+    padding: 20px 0;
+  }
+  .side-nav-title {
+    font-size: 9px; font-weight: 700; color: var(--muted);
+    letter-spacing: .2em; text-transform: uppercase;
+    margin-bottom: 14px; padding: 0 12px;
+  }
+  .side-nav ul { list-style: none; }
+  .side-nav li { margin-bottom: 1px; }
+  .side-nav a {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11.5px; color: var(--muted); text-decoration: none;
+    padding: 7px 12px; border-radius: 8px;
+    transition: all .2s var(--ease); line-height: 1.4; font-weight: 400;
+    border-left: 2px solid transparent;
+  }
+  .side-nav a:hover { background: #fff; color: var(--pink); border-left-color: var(--pink); }
+  .side-nav a.active {
+    background: var(--pink-light); color: var(--pink);
+    font-weight: 600; border-left-color: var(--pink);
+  }
+  .side-nav .nav-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+    background: var(--line-light); color: var(--muted);
+    font-size: 9px; font-weight: 700; transition: all .2s var(--ease);
+  }
+  .side-nav a:hover .nav-num,
+  .side-nav a.active .nav-num { background: var(--pink); color: #fff; }
+  .side-nav .nav-divider {
+    height: 1px; background: var(--line-light); margin: 10px 12px;
+  }
+
+  .main-content { min-width: 0; }
+
+  /* ===== EXPAND/COLLAPSE ALL ===== */
+  .toolbar {
+    display: flex; justify-content: flex-end; gap: 8px;
+    margin-bottom: 8px;
+  }
+  .toolbar button {
+    font-family: inherit; font-size: 11px; font-weight: 600;
+    color: var(--muted); background: #fff; border: 1px solid var(--line);
+    padding: 5px 14px; border-radius: 9999px; cursor: pointer;
+    transition: all .2s var(--ease);
+  }
+  .toolbar button:hover { color: var(--pink); border-color: var(--pink); background: var(--pink-light); }
+
+  /* ===== BACK TO TOP ===== */
+  .back-to-top {
+    position: fixed; bottom: 28px; right: 28px; z-index: 100;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--ink); color: #fff; border: none;
+    cursor: pointer; box-shadow: var(--shadow-md);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity .3s, transform .3s var(--ease);
+    pointer-events: none;
+  }
+  .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .back-to-top:hover { background: var(--pink); }
+  .back-to-top svg { width: 18px; height: 18px; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center; padding: 28px; font-size: 11px; color: var(--muted);
+    border-top: 1px solid var(--line-light);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .page-layout { grid-template-columns: 1fr; padding: 0 20px; }
+    .side-nav { display: none; }
+    .source-list ol { columns: 1; }
+  }
+  @media (max-width: 768px) {
+    .page-header { padding: 48px 20px 36px; }
+    .page-header h1 { font-size: 22px; }
+    .main-content { padding: 0; }
+    .meta-grid { grid-template-columns: 1fr; }
+    .company-header { flex-direction: column; align-items: flex-start; }
+    .analysis-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="badge">INTERNAL RESEARCH</div>
+  <h1>食品グループ傘下のIT子会社・システム開発子会社</h1>
+  <p>調査日: 2026年6月24日 | 社内リサーチ資料（非公開）</p>
+</div>
+
+<div class="page-layout">
+
+  <nav class="side-nav">
+    <div class="side-nav-title">Contents</div>
+    <ul>
+      <li><a href="#sec-dedicated"><span class="nav-num">1</span>専業IT子会社</a></li>
+      <li><a href="#sec-shared"><span class="nav-num">2</span>シェアード型</a></li>
+      <li><a href="#sec-none"><span class="nav-num">3</span>IT子会社なし（メーカー）</a></li>
+      <li><a href="#sec-wholesale"><span class="nav-num">3.5</span>食品卸のIT子会社</a></li>
+      <li class="nav-divider" role="separator"></li>
+      <li><a href="#sec-comparison"><span class="nav-num">4</span>サイト見せ方 比較</a></li>
+      <li><a href="#sec-trends"><span class="nav-num">5</span>業界の傾向</a></li>
+      <li><a href="#sec-sources"><span class="nav-num">6</span>出典</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-content">
+
+  <div class="intro">
+    <p>食品メーカー・食品流通企業を親会社に持ち、グループ内のシステム開発・IT支援を主な事業として行っているIT子会社を調査しました。ランステック（西原商会グループ）と類似のポジショニングを持つ企業を網羅的にリストアップしています。</p>
+  </div>
+
+  <div class="toolbar">
+    <button onclick="toggleAllCards(false)">すべて折りたたむ</button>
+    <button onclick="toggleAllCards(true)">すべて展開</button>
+  </div>
+
+  <!-- ===== Section 1: 専業IT子会社 ===== -->
+  <div id="sec-dedicated" class="section-title"><span class="num">1</span>専業IT子会社（グループ内システム開発が主業務）</div>
+
+  <!-- 1. 味の素 -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.nri-st.co.jp/" target="_blank" rel="noopener">NRIシステムテクノ株式会社</a></h3>
+      <span class="parent">味の素グループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1990年1月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">388名（2026年4月現在）</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">1億円</div></div>
+        <div class="meta-item"><div class="meta-label">株主構成</div><div class="meta-value">NRI 51% / 味の素 49%</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">神奈川県横浜市西区みなとみらい</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-jv">合弁型</span></div></div>
+      </div>
+      <p class="desc">味の素グループの情報システムの設計・開発・運用・保守、コンサルティングを担当。グループ内向けが主。</p>
+      <div class="highlight"><strong>特徴:</strong> 2012年に味の素がシステム子会社（旧AJITEC）の株式51%をNRIに譲渡し合弁会社化。「100%は持つ必要なし」という経営判断でNRIの技術力・SCMソリューションを取り込んだ先進的なモデル。</div>
+      <div class="links">
+        <a href="https://www.nri-st.co.jp/corporate/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>会社概要</a>
+        <a href="https://it.impress.co.jp/articles/-/9909" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>合弁化の記事</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value">「NRI System Techno」の独自ロゴ。NRIのブランドイメージを継承しつつ独自デザイン。モダンで洗練されたコーポレートサイト</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">社名にNRIを冠しNRIグループとしてのアイデンティティが前面。一方で「味の素グループの情報システム業務を一手に担う」とも明記し<strong>二重の帰属関係</strong>を示す</div></div>
+          <div class="analysis-item"><div class="a-label">キャッチコピー</div><div class="a-value">「Pioneer Spirit — フロンティアに挑み、プロの仕事にこだわり、結果を出す」</div></div>
+          <div class="analysis-item"><div class="a-label">採用サイト</div><div class="a-value">非常に充実。「会社を知る」「仕事を知る」「社員を知る」等16以上のコンテンツ。新卒/キャリア/障がい者/カムバック採用</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-green"></span>独自ドメイン</span>
+          <span class="site-pill"><span class="dot dot-green"></span>採用充実</span>
+          <span class="site-pill"><span class="dot dot-green"></span>サイト充実度：高</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. キリン -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.kirinbs.co.jp/" target="_blank" rel="noopener">キリンビジネスシステム株式会社</a></h3>
+      <span class="parent">キリンHDグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1988年5月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">299名（2025年1月現在）</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">5,000万円</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">東京都中野区</div></div>
+        <div class="meta-item"><div class="meta-label">対象</div><div class="meta-value">グループ内向け</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dedicated">専業型</span></div></div>
+      </div>
+      <p class="desc">キリングループ唯一の情報システム会社。資材調達から販売までのサプライチェーン全般、人事・経理等の間接業務システムを提供。</p>
+      <div class="highlight"><strong>特徴:</strong> グループで唯一のIT会社としてサプライチェーン全工程をカバー。NTTデータとも連携し情報システム機能を強化。</div>
+      <div class="links">
+        <a href="https://www.kirinbs.co.jp/corporate/profile.html" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>会社概要</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value">ヘッダーにキリンのブランドロゴ+「よろこびがつなぐ世界へ」を大きく配置。親ブランドのアイデンティティを全面的に継承</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">キリンロゴが社名より目立つ。フッターにキリンビール・キリンビバレッジ等のグループリンク。<strong>グループ帰属を最も前面に出しているサイトの一つ</strong></div></div>
+          <div class="analysis-item"><div class="a-label">キャッチコピー</div><div class="a-value">「キリン×ITで社会・お客様・働く仲間のよろこびを創造する企業になります」「事業を支えるから事業をリードする情報部門への転換」</div></div>
+          <div class="analysis-item"><div class="a-label">採用サイト</div><div class="a-value">採用ページはあるが充実度は低い。新卒は外部サイトへリンク、キャリアは内部ページだが情報量は限定的</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-green"></span>独自ドメイン</span>
+          <span class="site-pill"><span class="dot dot-yellow"></span>採用：中</span>
+          <span class="site-pill"><span class="dot dot-yellow"></span>サイト充実度：中</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. サントリー -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.suntory.co.jp/company/group/bsu/index.html" target="_blank" rel="noopener">サントリービジネスシステム株式会社</a></h3>
+      <span class="parent">サントリーHDグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1990年3月（旧サントリーシステムテクノロジー）</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">約285名（合併前）</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">1億円</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">大阪府大阪市北区</div></div>
+        <div class="meta-item"><div class="meta-label">株主</div><div class="meta-value">サントリーHD 100%</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dedicated">専業型</span></div></div>
+      </div>
+      <p class="desc">サントリーグループのIT戦略立案・推進、IT活用による事業革新支援、システム開発・運用。グループ内向け。</p>
+      <div class="highlight"><strong>特徴:</strong> 2025年4月にサントリーシステムテクノロジーを吸収合併し、IT機能を一本化。AWSトレーニング活用などクラウド人材育成にも注力。</div>
+      <div class="links">
+        <a href="https://www.suntory.co.jp/company/group/bsu/index.html" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>グループ会社情報</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value"><strong>独自サイトを持たない。</strong>サントリーHDのコーポレートサイト内のグループ企業一覧の1項目として存在</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">「水と生きる SUNTORY」ブランド配下。独自のブランドアイデンティティはほぼなく、グループ帰属100%</div></div>
+          <div class="analysis-item"><div class="a-label">キャッチコピー</div><div class="a-value">「オペレーションセンターからビジネスパートナーへの変革」（独自キャッチコピーは確認できず、親会社の文脈内で語られる）</div></div>
+          <div class="analysis-item"><div class="a-label">採用サイト</div><div class="a-value">独自の採用ページは存在しない。サントリーグループ全体の採用サイトからグループ採用にアクセスする形態</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-red"></span>独自サイトなし</span>
+          <span class="site-pill"><span class="dot dot-red"></span>採用：なし</span>
+          <span class="site-pill"><span class="dot dot-red"></span>サイト充実度：低</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. アサヒ -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.n-ais.co.jp/" target="_blank" rel="noopener">アサヒビジネスソリューションズ株式会社</a></h3>
+      <span class="parent">アサヒグループHD</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1988年4月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">約150名</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">1億1,000万円</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">東京都墨田区（アサヒグループ本社ビル内）</div></div>
+        <div class="meta-item"><div class="meta-label">対象</div><div class="meta-value">グループ内向け</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dedicated">専業型</span></div></div>
+      </div>
+      <p class="desc">アサヒグループの各種情報システムの要件定義・設計・開発・テスト・運用保守。生産・物流・販売・財務・人事まで全工程をトータルにカバー。</p>
+      <div class="highlight"><strong>特徴:</strong> HD（IT戦略立案）→ プロマネジメント（IT戦略推進）→ ビジネスソリューションズ（開発・運用保守）の三層体制。AI等新技術を活用した成長戦略支援にも取り組む。</div>
+      <div class="links">
+        <a href="https://www.n-ais.co.jp/corporate/overview/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>企業概要</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value">独自ドメイン（n-ais.co.jp）を保有。企業概要、理念、社長メッセージ、沿革、組織図、採用情報など多数のページ</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">「アサヒグループの夢の実現に貢献」が理念に明記。「アサヒビールの社風を伝統的に受け継いでいます」と<strong>社風レベルでの帰属を表明</strong></div></div>
+          <div class="analysis-item"><div class="a-label">キャッチコピー</div><div class="a-value">「高品質で心のこもったICTサービスの提供を通じて、お客様に喜ばれることと、社員が幸せになることを追求し、アサヒグループの夢の実現に貢献します」</div></div>
+          <div class="analysis-item"><div class="a-label">採用サイト</div><div class="a-value">独自採用ページあり。「新しいことに挑戦する気持ちが強い人、主体性をもって動ける人」を求む</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-green"></span>独自ドメイン</span>
+          <span class="site-pill"><span class="dot dot-yellow"></span>採用：中</span>
+          <span class="site-pill"><span class="dot dot-yellow"></span>サイト充実度：中</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 日本ハム -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.nh-ss.co.jp/" target="_blank" rel="noopener">日本ハムシステムソリューションズ株式会社</a></h3>
+      <span class="parent">ニッポンハムグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1985年11月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">208名（2025年4月現在）</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">1,000万円</div></div>
+        <div class="meta-item"><div class="meta-label">売上高</div><div class="meta-value">77億5,700万円（2025年3月期）</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">大阪府大阪市北区梅田</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dedicated">専業型</span></div></div>
+      </div>
+      <p class="desc">ニッポンハムグループの機能子会社として唯一のシステム会社。システム企画・開発・保守・運用サービスを提供。</p>
+      <div class="highlight"><strong>特徴:</strong> グループ全体のDX推進を担い、上流工程（企画・要件定義）も担当。海外を含めた事業のIT支援にも対応。売上77.5億円と規模も大きい。</div>
+      <div class="links">
+        <a href="https://www.nh-ss.co.jp/company/overview.html" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>会社概要</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value">独自ドメイン・独自ロゴ。プロフェッショナルで信頼感のあるデザイン。40周年記念コンテンツも展開</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">「グループを支える確かなITソリューション」がトップメッセージ。フッターに日本ハムグループロゴを独立配置。「ニッポンハムグループ企業のベストパートナー」と明確にポジショニング</div></div>
+          <div class="analysis-item"><div class="a-label">キャッチコピー</div><div class="a-value">「さあ、変えよう ニッポンハムグループを舞台に。」「グループを牽引するITのチカラ」</div></div>
+          <div class="analysis-item"><div class="a-label">採用サイト</div><div class="a-value">非常に充実。社員インタビュー、クロストーク（3シリーズ）、研修制度、オフィスツアー、FAQ、「リアル情報大公開」等12項目以上</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-green"></span>独自ドメイン</span>
+          <span class="site-pill"><span class="dot dot-green"></span>採用充実</span>
+          <span class="site-pill"><span class="dot dot-green"></span>サイト充実度：高</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. 伊藤ハム米久 -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.itoham-yonekyu-holdings.com/corporate/group_companies.html" target="_blank" rel="noopener">伊藤ハム米久システム株式会社</a></h3>
+      <span class="parent">伊藤ハム米久HDグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2014年</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">兵庫県西宮市</div></div>
+        <div class="meta-item"><div class="meta-label">対象</div><div class="meta-value">グループ内向け</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dedicated">専業型</span></div></div>
+      </div>
+      <p class="desc">伊藤ハムと米久の経営統合に伴い設立されたIT子会社。グループ全体の情報システムの開発・保守・運用・サポート。</p>
+      <div class="highlight"><strong>特徴:</strong> グループ全体でRPAツール「UiPath」を展開し、年間8,700時間の業務削減を実現。</div>
+      <div class="links">
+        <a href="https://info.gbiz.go.jp/hojin/ichiran?hojinBango=2140001093630" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>gBizINFO</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value"><strong>独自サイトは存在しない。</strong>伊藤ハム米久HDのグループ会社一覧「その他」カテゴリに1行で掲載されるのみ</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">営業支援・人事サービス等の間接部門企業群と同列に配置。独自のアイデンティティ表現なし</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-red"></span>独自サイトなし</span>
+          <span class="site-pill"><span class="dot dot-red"></span>採用：なし</span>
+          <span class="site-pill"><span class="dot dot-red"></span>サイト充実度：低</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. マルハニチロ -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://tech.umios.com/" target="_blank" rel="noopener">Umios テック株式会社（旧マルハニチロソリューションズ）</a></h3>
+      <span class="parent">Umios（旧マルハニチロ）グループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1973年4月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">約91名</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">1億円</div></div>
+        <div class="meta-item"><div class="meta-label">年商</div><div class="meta-value">21.74億円（2025年3月期）</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">東京都中央区</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dedicated">専業型</span></div></div>
+      </div>
+      <p class="desc">グループのシステム企画・開発・インフラ構築・運用保守を担当。開発拠点は山口県下関市にも。ISO/IEC27001取得。</p>
+      <div class="highlight"><strong>特徴:</strong> 1973年設立の老舗。一時期CAC Holdingsの資本参加を受けたが、DX推進強化のため100%子会社に回帰。社長も参画する「DX推進委員会」でIT戦略を推進。</div>
+      <div class="links">
+        <a href="https://tech.umios.com/company/profile.html" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>会社概要</a>
+        <a href="https://xtech.nikkei.com/atcl/nxt/column/18/02916/100900004/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>DX推進委員会の記事</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value">独自サイトあり（tech.umios.com）。親会社のサブドメインを使用しドメインレベルで一体感を表現。テック関連ビジュアルで専門性を強調</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">2026年に親会社の社名変更（マルハニチロ→Umios）に合わせ改称。サブドメイン型で「グループの一部」を自然に示す設計</div></div>
+          <div class="analysis-item"><div class="a-label">キャッチコピー</div><div class="a-value">社名変更直後で過渡期。事業案内として「IT全般支援」「システム企画」「開発」「インフラ構築」「運用・保守」を掲げる</div></div>
+          <div class="analysis-item"><div class="a-label">採用サイト</div><div class="a-value">メニューに「採用情報」あり。詳細は未確認（社名変更に伴うリニューアル途上の可能性）</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-green"></span>独自サイト（サブドメイン）</span>
+          <span class="site-pill"><span class="dot dot-gray"></span>採用：不明</span>
+          <span class="site-pill"><span class="dot dot-yellow"></span>サイト充実度：中</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. ニチレイ -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.hitachi-fls.co.jp/company/" target="_blank" rel="noopener">日立フーズ&amp;ロジスティクスシステムズ株式会社</a></h3>
+      <span class="parent">ニチレイグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2003年1月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">約179名（2025年10月現在）</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">3億円</div></div>
+        <div class="meta-item"><div class="meta-label">株主構成</div><div class="meta-value">ニチレイ × 日立製作所（合弁）</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">東京都中央区日本橋箱崎町</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-jv">合弁型</span></div></div>
+      </div>
+      <p class="desc">食品・食品物流業界向けITソリューション。ニチレイグループ約60社のシステムを担当。</p>
+      <div class="highlight"><strong>特徴:</strong> グループ内だけでなく<strong>食品業界全体に外販も実施</strong>する点が独特。SaaS型「Sherpa/食品管理クラウドソリューション」を展開。食品トレーサビリティ・安全データベースなど業界特化型のサービスを持つ。</div>
+      <div class="links">
+        <a href="https://www.hitachi-fls.co.jp/company/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>会社概要</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value">独自ドメインあり。ただしトップページは日立本体へリダイレクト。会社概要・採用は独立ページとして存在。「日立」を冠しつつ食品・物流特化の独自ブランド</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">従業員構成を「日立フーズ系51名、ニチレイ系44名、BIPROGY系5名」と出自別に明記。<strong>合弁であることの透明性が高い</strong></div></div>
+          <div class="analysis-item"><div class="a-label">キャッチコピー</div><div class="a-value">「食のサプライチェーンをICTで支え続け、人々の幸せに貢献」「デジタルの力で、食と物流のミライを実装する」</div></div>
+          <div class="analysis-item"><div class="a-label">採用サイト</div><div class="a-value">充実。社員インタビュー複数、クロストーク座談会、職場環境紹介。自社プロダクト名（「食べ鎖」「Sherpa」）も明示</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-green"></span>独自ドメイン</span>
+          <span class="site-pill"><span class="dot dot-green"></span>採用充実</span>
+          <span class="site-pill"><span class="dot dot-yellow"></span>サイト充実度：中〜高</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. 江崎グリコ -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.glico.com/jp/company/group/" target="_blank" rel="noopener">江栄情報システム株式会社</a></h3>
+      <span class="parent">江崎グリコグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1999年10月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">29名</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">3,000万円</div></div>
+        <div class="meta-item"><div class="meta-label">株主</div><div class="meta-value">江崎グリコ 53.30%</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">大阪府大阪市西淀川区</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dedicated">専業型</span></div></div>
+      </div>
+      <p class="desc">グリコグループ全体のIT領域における企画・導入・運用全般を担当。</p>
+      <div class="highlight"><strong>特徴:</strong> 少人数（29名）ながらグリコグループ全体のIT基盤を運営。実質的に情報システム部の役割を果たす。エンタープライズアーキテクトの採用・育成に注力。</div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value"><strong>独自サイトは存在しない。</strong>江崎グリコ本体の関係会社ページに「情報システムの保守・開発」と1行で掲載</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">グリコ本体のCIOが代表を兼任。実質的にはグリコの社内IT部門という色合い。「グリコグループのIT戦略を担う精鋭部隊」と位置づけ</div></div>
+          <div class="analysis-item"><div class="a-label">採用</div><div class="a-value">独自採用サイトなし。ただし転職サイト（doda、Indeed等）で<strong>エンタープライズアーキテクト・社内SE等を積極募集</strong>。約40名中7-8割が中途入社</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-red"></span>独自サイトなし</span>
+          <span class="site-pill"><span class="dot dot-yellow"></span>採用：転職サイトで展開</span>
+          <span class="site-pill"><span class="dot dot-red"></span>サイト充実度：低</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. キユーピー -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.kewpiedigital.jp/" target="_blank" rel="noopener">キユーピーデジタルイノベーション株式会社</a></h3>
+      <span class="parent">キユーピーグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2005年4月（IT業務は1970年から）</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">105名（2026年1月末現在）</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">9,000万円</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">東京都調布市仙川町</div></div>
+        <div class="meta-item"><div class="meta-label">対象</div><div class="meta-value">グループ内向け</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dedicated">専業型</span></div></div>
+      </div>
+      <p class="desc">キユーピーグループの情報システム構築・運用。旧社名「トウ・ソリューションズ」。50年以上の実績。</p>
+      <div class="highlight"><strong>特徴:</strong> SAP S/4HANAへの基幹システム刷新を段階的に推進し、2024年にグループ全体で完了。製造現場では独自品質管理システム「QITEC」を開発・運用。</div>
+      <div class="links">
+        <a href="https://www.kewpiedigital.jp/kaishagaiyo.html" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>会社概要</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value">独自ドメインを保有。「キユーピー」を社名に冠しつつ「デジタルイノベーション」で先進性を打ち出す。サイトはシンプルで抑制的な構成</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">「私たちはキユーピーグループのビジネスパートナーです」と明記。所在地もキユーピー拠点「仙川キユーポート」内。<strong>帰属を明確にしつつ「ビジネスパートナー」という対等感のある表現</strong></div></div>
+          <div class="analysis-item"><div class="a-label">キャッチコピー</div><div class="a-value">「デジタルの力で、キユーピーグループの成長を加速します」</div></div>
+          <div class="analysis-item"><div class="a-label">採用サイト</div><div class="a-value">ナビに「採用情報」あり。外部求人サイト（doda等）にも掲載</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-green"></span>独自ドメイン</span>
+          <span class="site-pill"><span class="dot dot-gray"></span>採用：不明</span>
+          <span class="site-pill"><span class="dot dot-yellow"></span>サイト充実度：低〜中</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. コカ・コーラBJ -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.neoarc.co.jp/ja/" target="_blank" rel="noopener">ネオアーク株式会社</a></h3>
+      <span class="parent">コカ・コーラ ボトラーズジャパン</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2024年1月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">約870名</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">2,000万円</div></div>
+        <div class="meta-item"><div class="meta-label">株主構成</div><div class="meta-value">コカ・コーラBJ 81% / アクセンチュア 19%</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">東京都</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-jv">合弁型</span></div></div>
+      </div>
+      <p class="desc">グループの人事・総務、財務、調達、カスタマーコンタクトセンター、営業支援業務、ITの機能集約・効率化。</p>
+      <div class="highlight"><strong>特徴:</strong> アクセンチュアとの合弁による「新型IT子会社」の代表例。従業員約870名と大規模で、単なるシステム会社ではなくBPO機能も包含した総合的な業務改革会社として設立。</div>
+      <div class="links">
+        <a href="https://www.neoarc.co.jp/ja/about/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>会社概要</a>
+        <a href="https://www.ccbji.co.jp/news/detail.php?id=1482" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>設立ニュースリリース</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value">独自サイトあり。独自の「NeoArc」ロゴ。ブランドカラーは赤（コカ・コーラと連動）。<strong>今回調査した全社の中で最も完成度が高いサイト</strong></div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">コカ・コーラBJ（81%）とアクセンチュア（19%）のロゴを並列表示。合弁であることを積極的に前面に出し、アクセンチュアとの関係も同等に強調</div></div>
+          <div class="analysis-item"><div class="a-label">キャッチコピー</div><div class="a-value">「Paint it RED! 未来を塗りかえろ。」「自分で切り拓く、だから面白い」「バックオフィス業務の"コスト"から"ベネフィット"への転換」</div></div>
+          <div class="analysis-item"><div class="a-label">採用サイト</div><div class="a-value">非常に充実。社長メッセージ、仕事紹介（14領域）、社員インタビュー、働く環境。新卒（マイナビ経由）・キャリア（HRMOS経由）を展開</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-green"></span>独自ドメイン</span>
+          <span class="site-pill"><span class="dot dot-green"></span>採用充実</span>
+          <span class="site-pill"><span class="dot dot-green"></span>サイト充実度：非常に高い</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Section 2: シェアードサービス型 ===== -->
+  <div id="sec-shared" class="section-title"><span class="num">2</span>シェアードサービス型（IT＋間接業務を統合）</div>
+
+  <!-- 12. カゴメ -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.kagome.co.jp/company/about/information/group/" target="_blank" rel="noopener">カゴメアクシス株式会社</a></h3>
+      <span class="parent">カゴメグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2016年4月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">128名</div></div>
+        <div class="meta-item"><div class="meta-label">株主</div><div class="meta-value">カゴメ 100%</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">愛知県名古屋市中区錦</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-shared">シェアード型</span></div></div>
+      </div>
+      <p class="desc">カゴメグループの間接業務（財務経理・総務・情報システム・不動産管理・給与計算・商品情報管理等）の集約・標準化。</p>
+      <div class="highlight"><strong>特徴:</strong> DXのための「業務改革の受け皿」として設立。バックヤード部門を組織外に切り出すことで改革を加速。SAP ERPによる会計システムを導入。</div>
+      <div class="links">
+        <a href="https://www.kagome.co.jp/company/news/2016/002566.html" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>設立ニュースリリース</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value"><strong>独自サイトは存在しない。</strong>カゴメ本体の関連会社ページに社名・所在地・電話番号のみ掲載</div></div>
+          <div class="analysis-item"><div class="a-label">補足</div><div class="a-value">事業内容は「カゴメグループの不動産管理及び不動産業」と記載（カゴメ不動産から改称）。実態としてはIT含む間接業務全般を担うが、Web上の情報発信は最小限</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-red"></span>独自サイトなし</span>
+          <span class="site-pill"><span class="dot dot-red"></span>採用：なし</span>
+          <span class="site-pill"><span class="dot dot-red"></span>サイト充実度：極めて低い</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. ハウス食品 -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://housefoods-group.com/company/group/business/index.html" target="_blank" rel="noopener">ハウスビジネスパートナーズ株式会社</a></h3>
+      <span class="parent">ハウス食品グループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">大阪府東大阪市</div></div>
+        <div class="meta-item"><div class="meta-label">対象</div><div class="meta-value">グループ内向け</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-shared">シェアード型</span></div></div>
+      </div>
+      <p class="desc">ハウス食品グループの情報システム・会計・人事・総務業務（シェアードサービス）、保険サポート業務。</p>
+      <div class="highlight"><strong>特徴:</strong> NEC・NECネクサソリューションズと連携した情報システム基盤運用のアウトソーシングも活用。業務プロセスの見える化を推進。</div>
+      <div class="links">
+        <a href="https://housefoods-group.com/company/group/business/index.html" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>グループ会社情報</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value"><strong>独自サイトなし。</strong>ハウス食品グループ本社サイト内の子会社紹介ページとして存在。「グループの基盤を支える」というキャッチで紹介</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">「グループ各社に対し専門的な視点から積極的に改善を提案するプロ集団」と紹介。独自サイトなしだが<strong>社員インタビューページ</strong>が存在し、雰囲気を伝える工夫あり</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-red"></span>独自サイトなし</span>
+          <span class="site-pill"><span class="dot dot-yellow"></span>採用：社員インタビューあり</span>
+          <span class="site-pill"><span class="dot dot-yellow"></span>サイト充実度：中</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. 森永製菓 -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.mbp.morinaga.co.jp/" target="_blank" rel="noopener">森永ビジネスパートナー株式会社</a></h3>
+      <span class="parent">森永製菓グループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1970年3月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">約77名（2025年11月現在）</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">神奈川県横浜市鶴見区</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-shared">シェアード型</span></div></div>
+      </div>
+      <p class="desc">森永製菓グループの経理・財務・販売管理、給与・人事管理、情報システム開発・運用・保守等のシェアードサービス。</p>
+      <div class="highlight"><strong>特徴:</strong> DX化やシステム内製化を推進。SAPシステムやJavaプログラミングによるシステム開発を自社で手掛ける。サイバーセキュリティ対策も担当。</div>
+      <div class="links">
+        <a href="https://www.mbp.morinaga.co.jp/company/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>会社概要</a>
+        <a href="https://www.mbp.morinaga.co.jp/business/info_system.html" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>ITグループ</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value">独自サイトあり（mbp.morinaga.co.jp）。森永のサブドメインを使用。独自ロゴ＋エンゼルマークへの言及で視覚的つながりを確保</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">「森永製菓グループの100%出資」を明記。本社が森永鶴見サイト内。「森永製菓グループのパーパス実現を支援するシェアードサービス会社」と自らを位置づけ</div></div>
+          <div class="analysis-item"><div class="a-label">キャッチコピー</div><div class="a-value">「森永製菓グループの2030ビジョン『ウェルネスカンパニーに生まれ変わる』の達成に向けサポート体制を強化」</div></div>
+          <div class="analysis-item"><div class="a-label">採用サイト</div><div class="a-value">独立した採用セクション。社員紹介3名分、募集要項、選考フロー、教育研修制度、福利厚生。新卒採用をマイナビ経由で実施。12ページ以上のコンテンツ</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-green"></span>独自サイト（サブドメイン）</span>
+          <span class="site-pill"><span class="dot dot-green"></span>採用充実</span>
+          <span class="site-pill"><span class="dot dot-green"></span>サイト充実度：高</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 15. キッコーマン -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.kikkoman.com/jp/corporate/about/group/kbs.html" target="_blank" rel="noopener">キッコーマンビジネスサービス株式会社</a></h3>
+      <span class="parent">キッコーマングループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2009年10月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">約184名</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">1億円</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">千葉県野田市</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-shared">シェアード型</span></div></div>
+      </div>
+      <p class="desc">キッコーマングループの総務・人事・経理・情報システム等の間接業務を提供。</p>
+      <div class="highlight"><strong>特徴:</strong> 持株会社制移行時に間接業務を承継する事業会社として設立。情報システム部がグループ国内各社のシステムを統括。</div>
+      <div class="links">
+        <a href="https://www.kikkoman.com/jp/kbs/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>会社概要</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value"><strong>独自サイトは存在しない。</strong>キッコーマングループの企業情報サイト内の1ページ。「おいしい記憶をつくりたい。」の統一ロゴ下に配置</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性の見せ方</div><div class="a-value">「主要グループ会社」セクションの一社。独自のミッション・キャッチコピーはなし。社名・住所・代表者名・事業概要1行程度の紹介のみ</div></div>
+          <div class="analysis-item"><div class="a-label">採用</div><div class="a-value">独自採用ページなし。転職サイト（doda、Indeed等）に社内SE等の正社員求人を掲載</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-red"></span>独自サイトなし</span>
+          <span class="site-pill"><span class="dot dot-yellow"></span>採用：転職サイトで展開</span>
+          <span class="site-pill"><span class="dot dot-red"></span>サイト充実度：低</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. サッポロ -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.sapporoholdings.jp/" target="_blank" rel="noopener">サッポログループマネジメント株式会社</a></h3>
+      <span class="parent">サッポロHDグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">東京都</div></div>
+        <div class="meta-item"><div class="meta-label">対象</div><div class="meta-value">グループ内向け</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-shared">シェアード型</span></div></div>
+      </div>
+      <p class="desc">グループ共通機能（人事・総務・経理・IT・調達・物流）の計画・実行。IT統括部がIT戦略立案・遂行・業務システム導入・運用・ITインフラ管理を担当。</p>
+      <div class="highlight"><strong>特徴:</strong> 2014年に分散していたIT組織を集約。グループ共通データ基盤「SAPPORO DATA FACTORY」を構築し2025年から本格運用開始。グループ社員4,000人の「DX人財化」を推進。2025年に組織再編。</div>
+      <div class="links">
+        <a href="https://www.sapporoholdings.jp/news/dit/?id=9405" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>SAPPORO DATA FACTORY</a>
+      </div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">現状</div><div class="a-value"><strong>2025年1月にサッポロHDに吸収合併され解散。</strong>現在は独自サイトは存在しない。機能はサッポロHD本体に統合済み</div></div>
+          <div class="analysis-item"><div class="a-label">経緯</div><div class="a-value">2007年設立。2024年11月に吸収合併を決議、2025年1月1日に効力発生、1月6日に閉鎖。シェアードサービス子会社をHD直轄に戻した事例</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-gray"></span>会社解散済み</span>
+          <span class="site-pill"><span class="dot dot-gray"></span>HD直轄に移行</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Section 3: IT子会社を持たない企業 ===== -->
+  <div id="sec-none" class="section-title"><span class="num">3</span>IT子会社を持たず社内部門で対応している主な食品企業</div>
+
+  <table class="no-subsidiary-table">
+    <thead>
+      <tr><th style="width:22%">企業名</th><th>IT体制</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>日清食品HD</strong></td>
+        <td>情報企画部（ヘルプデスク・インフラ・業務システムの3組織）。「NBX=NISSIN Business Transformation」として社内DXを推進。2016年にレガシーシステムを180→33に削減。</td>
+      </tr>
+      <tr>
+        <td><strong>明治HD</strong></td>
+        <td>2024年にDX推進組織を子会社から持株会社に移管。基幹システムのアウトソーシングはIBM Japanと戦略契約。外部パートナー＋社内部門で推進する方針。</td>
+      </tr>
+      <tr>
+        <td><strong>日清製粉グループ</strong></td>
+        <td>企画本部情報化推進部がグループ全体のDXを統括。事業会社ごとに「DX統括室」「DX推進部」を設置。IT運用はインフォテック株式会社に外部委託（20年以上の取引）。</td>
+      </tr>
+      <tr>
+        <td><strong>ヤクルト本社</strong></td>
+        <td>情報システム部が社内に存在し、インフラ基盤構築・業務システム開発改善を担当。独立IT子会社は確認されず。</td>
+      </tr>
+      <tr>
+        <td><strong>山崎製パン</strong></td>
+        <td>「計算センター」と呼ばれる社内部門でITシステムの開発・運用を一貫して自社運営。独立IT子会社は確認されず。</td>
+      </tr>
+      <tr>
+        <td><strong>森永乳業</strong></td>
+        <td>IT改革推進部と情報システムセンターの2組織体制で社内推進。独立IT子会社は確認されず。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ===== Section 3.5: 食品卸 IT子会社 ===== -->
+  <div id="sec-wholesale" class="section-title"><span class="num" style="background:linear-gradient(135deg,#D69E2E,#B7791F)">3.5</span>食品卸・食品流通グループのIT子会社</div>
+
+  <div class="intro" style="margin: 0 0 24px; border-left: 3px solid #D69E2E;">
+    <p>西原商会と同じ<strong>業務用食品卸・食品流通</strong>を本業とするグループのIT子会社を追加調査しました。食品メーカーと比べ、専門IT子会社を持つグループは少数派で、大手は社内部門＋外部SIer委託が主流です。</p>
+  </div>
+
+  <!-- ヤマエグループ リンネット -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.rinnet.co.jp/" target="_blank" rel="noopener">株式会社リンネット</a></h3>
+      <span class="parent">ヤマエグループHD（売上7,127億円）</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1985年4月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">約58名</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">5,000万円</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">福岡県福岡市博多区</div></div>
+        <div class="meta-item"><div class="meta-label">対象</div><div class="meta-value">グループ内＋外部（1,000社超）</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dedicated">専業型</span></div></div>
+      </div>
+      <p class="desc">社名は「流通（R）・情報（In）・ネットワーク（Net）」の頭文字。DXコンサルティング、ソフトウェア開発、EDIサービス、物流システム、データセンター・クラウドサービスを展開。</p>
+      <div class="highlight"><strong>特徴:</strong> 食品卸グループのIT子会社として最も歴史と実績がある（40年超）。EDIプラットフォーム「CLAP」「RinX」を独自開発。<strong>グループ外1,000社超</strong>の顧客基盤を持ち、セキュリティ監視やデータセンター運用まで幅広くカバー。</div>
+      <div class="site-analysis">
+        <h4>SITE ANALYSIS — サイトでの見せ方</h4>
+        <div class="analysis-grid">
+          <div class="analysis-item"><div class="a-label">ブランディング</div><div class="a-value">独自ドメイン（rinnet.co.jp）を保有。「ヤマエグループの流通のトータルサポーター」を標榜</div></div>
+          <div class="analysis-item"><div class="a-label">親会社との関係性</div><div class="a-value">ヤマエグループHDのグループ会社ページにも掲載。外部顧客が多いため、グループ帰属よりも独自の事業アイデンティティが前面</div></div>
+        </div>
+        <div class="site-bar">
+          <span class="site-pill"><span class="dot dot-green"></span>独自ドメイン</span>
+          <span class="site-pill"><span class="dot dot-green"></span>サイト充実度：高</span>
+        </div>
+      </div>
+      <div class="links">
+        <a href="https://www.rinnet.co.jp/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>公式サイト</a>
+        <a href="https://www.yamaegroup-hd.co.jp/business/group/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>ヤマエグループ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- トーホー システムズコンサルタント -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://syscon.gr.jp/" target="_blank" rel="noopener">株式会社システムズコンサルタント</a></h3>
+      <span class="parent">トーホーグループ（売上2,597億円）</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1979年（2016年にトーホーが買収）</div></div>
+        <div class="meta-item"><div class="meta-label">売上高</div><div class="meta-value">約3億7,500万円</div></div>
+        <div class="meta-item"><div class="meta-label">拠点</div><div class="meta-value">東京・大阪・静岡＋群馬（センター）</div></div>
+        <div class="meta-item"><div class="meta-label">対象</div><div class="meta-value">グループ内＋外部</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-jv">買収型</span></div></div>
+      </div>
+      <p class="desc">ソフトウェアの開発・保守。製造・流通・金融業界向けにサービス提供。建設業向けパッケージ「JIEP21NX」なども展開。</p>
+      <div class="highlight"><strong>特徴:</strong> もともと独立系SI企業をトーホーが2016年に全株式取得して子会社化。外部顧客基盤を持つ。グループ全体のIT投資強化・内製化推進、人材交流によるITスキル向上が買収目的。</div>
+      <div class="links">
+        <a href="https://syscon.gr.jp/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>公式サイト</a>
+        <a href="https://www.to-ho.co.jp/toho_news/news000485.html" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>子会社化のお知らせ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 日本アクセス D&S -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.ds-solutions.co.jp/" target="_blank" rel="noopener">D&amp;Sソリューションズ株式会社</a></h3>
+      <span class="parent">日本アクセス / 伊藤忠系（売上2.4兆円）</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2002年5月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">約12名</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">1,000万円</div></div>
+        <div class="meta-item"><div class="meta-label">本社</div><div class="meta-value">東京都品川区</div></div>
+        <div class="meta-item"><div class="meta-label">対象</div><div class="meta-value">外部向け（小売DX支援）</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type" style="background:#E0E7FF;color:#3730A3">外部向け</span></div></div>
+      </div>
+      <p class="desc">小売業向けDXソリューション提供（「情報卸」事業）。LINEミニアプリ、ダイナミックプライシング、販売動向確認アプリ「POSMIL」などを開発。</p>
+      <div class="highlight"><strong>注意:</strong> グループ内IT子会社ではなく、食品卸のインフラを活かして<strong>取引先小売業のDX支援</strong>を行う会社。ランステックとはポジションが異なる。</div>
+      <div class="links">
+        <a href="https://www.ds-solutions.co.jp/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>公式サイト</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 業界共通基盤 -->
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://jii-inforex.co.jp/" target="_blank" rel="noopener">株式会社ジャパン・インフォレックス</a></h3>
+      <span class="parent">食品卸9社の共同出資（業界共通基盤）</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2006年4月</div></div>
+        <div class="meta-item"><div class="meta-label">従業員数</div><div class="meta-value">約32名</div></div>
+        <div class="meta-item"><div class="meta-label">資本金</div><div class="meta-value">2億4,000万円</div></div>
+        <div class="meta-item"><div class="meta-label">出資者</div><div class="meta-value">国分、日本アクセス、三菱食品、伊藤忠食品、加藤産業、ヤマエグループHD 他</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type" style="background:#FED7AA;color:#9A3412">業界共通</span></div></div>
+      </div>
+      <p class="desc">食品流通業界における商品マスター情報提供と標準化・合理化推進。Inforex登録サービス、FDB商品情報DB、EDIプラットフォーム等を運営。</p>
+      <div class="highlight"><strong>特徴:</strong> 競合関係にある食品卸各社が<strong>共同出資</strong>して業界インフラを維持する珍しいモデル。特定グループのIT子会社ではなく、業界横断的なデータ基盤企業。</div>
+      <div class="links">
+        <a href="https://jii-inforex.co.jp/" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>公式サイト</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- IT子会社なしの食品卸 -->
+  <table class="no-subsidiary-table" style="margin-top:24px">
+    <thead>
+      <tr><th style="width:22%">食品卸グループ</th><th style="width:15%">売上規模</th><th>IT体制</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><a href="https://www.kokubu.co.jp/" target="_blank" rel="noopener" style="color:var(--pink);text-decoration:none">国分グループ</a></strong></td>
+        <td>2.2兆円</td>
+        <td>社内情報システム部門＋NRI等外部SIerに委託。基幹システム「KMS/KLS/KIS」の3プラットフォーム。2024年にAI需要予測を全倉庫導入。</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.mitsubishi-shokuhin.com/" target="_blank" rel="noopener" style="color:var(--pink);text-decoration:none">三菱食品</a></strong></td>
+        <td>2.1兆円</td>
+        <td>社内情報システム本部（500名規模の人材育成計画）。基幹システム「MILAI」を自社運用。三菱商事×NTT合弁の「インダストリー・ワン」がDXソリューションを提供。</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.katosangyo.co.jp/" target="_blank" rel="noopener" style="color:var(--pink);text-decoration:none">加藤産業</a></strong></td>
+        <td>1.2兆円</td>
+        <td>社内情報システム部門＋外部SIer・パッケージベンダー活用。IT専門グループ会社は確認できず。</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.oie.co.jp/" target="_blank" rel="noopener" style="color:var(--pink);text-decoration:none">尾家産業</a></strong></td>
+        <td>1,113億円</td>
+        <td>社内システム部。IBM Power Systems / IBM i上で基幹システム「SMILE」を運用。チャットボットによる在庫照会も導入。</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.oomitsu.com/" target="_blank" rel="noopener" style="color:var(--pink);text-decoration:none">大光</a></strong></td>
+        <td>755億円</td>
+        <td>社内部門＋外部ベンダーによるIT運営（推定）。IT関連子会社は確認できず。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="background: var(--green-light); border: 1px solid rgba(26,157,87,.15); border-radius: var(--radius); padding: 24px 28px; margin: 32px 0 40px;">
+    <h4 style="font-size: 15px; color: var(--green); margin-bottom: 8px;">西原商会（ランステック）のポジション</h4>
+    <p style="font-size: 14px; color: var(--ink); line-height: 1.9;">食品卸業界では、専門IT子会社を持つグループは<strong>ヤマエグループ（リンネット）・トーホー（システムズコンサルタント）・西原商会（ランステック＋アロウズ・システム）</strong>の3グループのみ。大手（国分・三菱食品・日本アクセス・加藤産業）は社内部門＋外部SIer委託が主流です。</p>
+    <p style="font-size: 14px; color: var(--ink); line-height: 1.9; margin-top: 12px;">西原商会は2024年にランステック・アロウズ・システムの2社を相次いで買収し、<strong>IT機能の内製化を急速に推進</strong>。同業他社と比較しても先進的な動きです。ポジショニングとしてはリンネット（ヤマエグループ）が最も類似しており、40年の歴史・1,000社超の外部顧客基盤を持つ成熟モデルとして参考になります。</p>
+  </div>
+
+  <!-- ===== Section 4: サイト見せ方比較 ===== -->
+  <div id="sec-comparison" class="section-title"><span class="num">4</span>サイトでの見せ方 — 全社比較</div>
+
+  <div class="table-scroll">
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>会社名</th>
+        <th>独自サイト</th>
+        <th>親ブランド<br>依存度</th>
+        <th>採用</th>
+        <th>サイト<br>充実度</th>
+        <th>キャッチコピー / メッセージ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://www.nri-st.co.jp/" target="_blank" rel="noopener">NRIシステムテクノ</a></td>
+        <td><span class="level level-high">独自ドメイン</span></td>
+        <td>中（二重帰属）</td>
+        <td><span class="level level-high">充実</span></td>
+        <td><span class="level level-high">高</span></td>
+        <td style="text-align:left; font-size:11px">Pioneer Spirit / Professionality</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.kirinbs.co.jp/" target="_blank" rel="noopener">キリンBS</a></td>
+        <td><span class="level level-high">独自ドメイン</span></td>
+        <td>高（ロゴ前面）</td>
+        <td><span class="level level-low">低</span></td>
+        <td><span class="level level-mid">中</span></td>
+        <td style="text-align:left; font-size:11px">キリン×ITでよろこびを創造</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.suntory.co.jp/company/group/bsu/index.html" target="_blank" rel="noopener">サントリーBS</a></td>
+        <td><span class="level level-low">なし（親サイト内）</span></td>
+        <td>最高</td>
+        <td><span class="level level-low">なし</span></td>
+        <td><span class="level level-low">低</span></td>
+        <td style="text-align:left; font-size:11px">（親会社の文脈内で語られる）</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.n-ais.co.jp/" target="_blank" rel="noopener">アサヒBS</a></td>
+        <td><span class="level level-high">独自ドメイン</span></td>
+        <td>高（社風も継承）</td>
+        <td><span class="level level-mid">中</span></td>
+        <td><span class="level level-mid">中</span></td>
+        <td style="text-align:left; font-size:11px">心のこもったICTサービス</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.nh-ss.co.jp/" target="_blank" rel="noopener">日本ハムSS</a></td>
+        <td><span class="level level-high">独自ドメイン</span></td>
+        <td>高（グループ貢献）</td>
+        <td><span class="level level-high">充実</span></td>
+        <td><span class="level level-high">高</span></td>
+        <td style="text-align:left; font-size:11px">さあ、変えよう</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.itoham-yonekyu-holdings.com/corporate/group_companies.html" target="_blank" rel="noopener">伊藤ハム米久S</a></td>
+        <td><span class="level level-low">なし（親サイト内）</span></td>
+        <td>高</td>
+        <td><span class="level level-low">なし</span></td>
+        <td><span class="level level-low">極めて低</span></td>
+        <td style="text-align:left; font-size:11px">（独自メッセージなし）</td>
+      </tr>
+      <tr>
+        <td><a href="https://tech.umios.com/" target="_blank" rel="noopener">Umios テック</a></td>
+        <td><span class="level level-mid">サブドメイン</span></td>
+        <td>中</td>
+        <td><span class="level level-none">不明</span></td>
+        <td><span class="level level-mid">中</span></td>
+        <td style="text-align:left; font-size:11px">（社名変更直後で過渡期）</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.hitachi-fls.co.jp/company/" target="_blank" rel="noopener">日立F&amp;L</a></td>
+        <td><span class="level level-high">独自ドメイン</span></td>
+        <td>中（合弁の独自性）</td>
+        <td><span class="level level-high">充実</span></td>
+        <td><span class="level level-mid">中〜高</span></td>
+        <td style="text-align:left; font-size:11px">食のサプライチェーンをICTで支える</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.glico.com/jp/company/group/" target="_blank" rel="noopener">江栄情報システム</a></td>
+        <td><span class="level level-low">なし</span></td>
+        <td>高（CIO兼任）</td>
+        <td><span class="level level-mid">転職サイトで展開</span></td>
+        <td><span class="level level-low">低</span></td>
+        <td style="text-align:left; font-size:11px">（独自メッセージなし）</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.kewpiedigital.jp/" target="_blank" rel="noopener">キユーピーDI</a></td>
+        <td><span class="level level-high">独自ドメイン</span></td>
+        <td>高（パートナー表現）</td>
+        <td><span class="level level-none">不明</span></td>
+        <td><span class="level level-mid">低〜中</span></td>
+        <td style="text-align:left; font-size:11px">デジタルの力でグループ成長を加速</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.neoarc.co.jp/ja/" target="_blank" rel="noopener">ネオアーク</a></td>
+        <td><span class="level level-high">独自ドメイン</span></td>
+        <td>中（合弁・両社並列）</td>
+        <td><span class="level level-high">充実</span></td>
+        <td><span class="level level-high">非常に高</span></td>
+        <td style="text-align:left; font-size:11px">Paint it RED! 未来を塗りかえろ。</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.kagome.co.jp/company/about/information/group/" target="_blank" rel="noopener">カゴメアクシス</a></td>
+        <td><span class="level level-low">なし</span></td>
+        <td>最高</td>
+        <td><span class="level level-low">なし</span></td>
+        <td><span class="level level-low">極めて低</span></td>
+        <td style="text-align:left; font-size:11px">（独自メッセージなし）</td>
+      </tr>
+      <tr>
+        <td><a href="https://housefoods-group.com/company/group/business/index.html" target="_blank" rel="noopener">ハウスBP</a></td>
+        <td><span class="level level-low">なし（親サイト内）</span></td>
+        <td>高</td>
+        <td><span class="level level-mid">社員インタビューあり</span></td>
+        <td><span class="level level-mid">中</span></td>
+        <td style="text-align:left; font-size:11px">改善を提案するプロ集団</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.mbp.morinaga.co.jp/" target="_blank" rel="noopener">森永BP</a></td>
+        <td><span class="level level-mid">サブドメイン</span></td>
+        <td>高（パーパス連動）</td>
+        <td><span class="level level-high">充実</span></td>
+        <td><span class="level level-high">高</span></td>
+        <td style="text-align:left; font-size:11px">2030ビジョン達成に向けサポート強化</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.kikkoman.com/jp/corporate/about/group/kbs.html" target="_blank" rel="noopener">キッコーマンBS</a></td>
+        <td><span class="level level-low">なし（親サイト内）</span></td>
+        <td>最高</td>
+        <td><span class="level level-mid">転職サイトで展開</span></td>
+        <td><span class="level level-low">低</span></td>
+        <td style="text-align:left; font-size:11px">（独自メッセージなし）</td>
+      </tr>
+      <tr>
+        <td>サッポロGM</td>
+        <td><span class="level level-none">解散済み</span></td>
+        <td>—</td>
+        <td><span class="level level-none">—</span></td>
+        <td><span class="level level-none">—</span></td>
+        <td style="text-align:left; font-size:11px">2025年1月にHDに吸収合併</td>
+      </tr>
+    </tbody>
+  </table>
+  </div><!-- /table-scroll -->
+
+  <!-- ===== Section 5: 業界トレンド ===== -->
+  <div id="sec-trends" class="section-title"><span class="num">5</span>業界の傾向・所見</div>
+
+  <div class="trend-card">
+    <div class="trend-num">1</div>
+    <div>
+      <h4>合弁・外部資本導入型の増加</h4>
+      <p>味の素（NRI）、ニチレイ（日立）、コカ・コーラBJ（アクセンチュア）のように、外部IT企業の技術力を取り込む形態が増加。自社だけでは確保しにくい先端技術やノウハウをパートナー経由で獲得する動き。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">2</div>
+    <div>
+      <h4>シェアードサービス統合</h4>
+      <p>IT専業ではなく、経理・人事・総務と一体化したシェアードサービス会社にIT機能を持たせるケースが多い。カゴメアクシス、ハウスビジネスパートナーズ、森永ビジネスパートナーなど。バックオフィス全体の効率化を目指す。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">3</div>
+    <div>
+      <h4>IT機能の再統合・見直し</h4>
+      <p>サントリー（2社を統合）、マルハニチロ（外部資本→100%子会社に回帰）、明治（DX組織を持株会社に移管）など、近年はIT機能の再統合・組織見直しが進んでいる。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">4</div>
+    <div>
+      <h4>規模感は29名〜870名と幅広い</h4>
+      <p>江栄情報システム（29名）からネオアーク（約870名）まで、親会社の規模に応じてIT子会社の規模も比例する傾向。多くは100〜300名規模。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">5</div>
+    <div>
+      <h4>設立は1985〜1990年前後に集中</h4>
+      <p>日本企業の情報システム部門外出し（アウトソーシング）の波に乗った形。近年の新設はDX推進やBPO機能を含む「新型」が主流。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">6</div>
+    <div>
+      <h4>サイトの見せ方は二極化</h4>
+      <p>独自ドメインで充実したサイトを持つ会社（NRIシステムテクノ、日本ハムSS、ネオアーク）と、親会社サイト内の1行紹介にとどまる会社（サントリーBS、カゴメアクシス、伊藤ハム米久S）に大きく二極化。<strong>独自サイトの有無が外部からの存在感の最大の分水嶺。</strong></p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">7</div>
+    <div>
+      <h4>採用サイトの充実度とサイト全体の充実度が強く相関</h4>
+      <p>NRIシステムテクノ、日本ハムSS、ネオアーク、森永BPは採用コンテンツが手厚く、サイト全体のコンテンツ量も多い。採用ブランディングがサイト構築の主な動機になっているケースが多い。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">8</div>
+    <div>
+      <h4>親会社名の使い方で帰属の示し方が分かれる</h4>
+      <p>社名に親会社名を含むケースが大半（キリンBS、日本ハムSS等）で、社名自体がグループ帰属の表明。キユーピーDIの「ビジネスパートナー」という対等感ある表現や、ネオアークのように完全独自名で合弁を前面に出す例も。</p>
+    </div>
+  </div>
+
+  <div class="lanstech-callout">
+    <div class="lanstech-callout-header">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v5M10 13.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      ランステックとの比較
+    </div>
+    <p>ランステック（西原商会グループ）のように<strong>グループ内専業</strong>でシステム開発を行うポジショニングは、<strong>キリンビジネスシステム</strong>・<strong>日本ハムシステムソリューションズ</strong>・<strong>キユーピーデジタルイノベーション</strong>・<strong>Umios テック</strong>あたりが最も近い形態です。いずれもグループ唯一のIT子会社として、企画〜運用まで一貫して担当しています。</p>
+    <p>サイトの見せ方としては、<strong>日本ハムSS</strong>が参考になるモデル。独自ドメインで充実した採用コンテンツを展開しつつ、「グループを支える確かなITソリューション」とグループ貢献を明確に打ち出しています。<strong>キユーピーDI</strong>の「ビジネスパートナー」という対等感ある表現も、グループ内専業でありながら独自の存在感を示す好例です。</p>
+  </div>
+
+  <!-- ===== Sources ===== -->
+  <div id="sec-sources" class="section-title"><span class="num">6</span>出典・参考リンク</div>
+
+  <div class="source-list">
+    <h3>参考資料</h3>
+    <ol>
+      <li><a href="https://www.nri-st.co.jp/corporate/" target="_blank" rel="noopener">NRIシステムテクノ 会社概要</a></li>
+      <li><a href="https://it.impress.co.jp/articles/-/9909" target="_blank" rel="noopener">味の素、IT子会社をNRIとの合弁事業に移行 | IT Leaders</a></li>
+      <li><a href="https://www.kirinbs.co.jp/corporate/profile.html" target="_blank" rel="noopener">キリンビジネスシステム 会社概要</a></li>
+      <li><a href="https://www.suntory.co.jp/company/group/bsu/index.html" target="_blank" rel="noopener">サントリービジネスシステム グループ会社情報</a></li>
+      <li><a href="https://www.n-ais.co.jp/corporate/overview/" target="_blank" rel="noopener">アサヒビジネスソリューションズ 企業概要</a></li>
+      <li><a href="https://www.nh-ss.co.jp/company/overview.html" target="_blank" rel="noopener">日本ハムシステムソリューションズ 会社概要</a></li>
+      <li><a href="https://info.gbiz.go.jp/hojin/ichiran?hojinBango=2140001093630" target="_blank" rel="noopener">伊藤ハム米久システム gBizINFO</a></li>
+      <li><a href="https://tech.umios.com/company/profile.html" target="_blank" rel="noopener">Umios テック（旧マルハニチロソリューションズ）会社概要</a></li>
+      <li><a href="https://www.hitachi-fls.co.jp/company/" target="_blank" rel="noopener">日立フーズ&ロジスティクスシステムズ 会社概要</a></li>
+      <li><a href="https://www.kewpiedigital.jp/kaishagaiyo.html" target="_blank" rel="noopener">キユーピーデジタルイノベーション 会社概要</a></li>
+      <li><a href="https://www.neoarc.co.jp/ja/about/" target="_blank" rel="noopener">ネオアーク株式会社 会社概要</a></li>
+      <li><a href="https://www.ccbji.co.jp/news/detail.php?id=1482" target="_blank" rel="noopener">コカ・コーラBJ ネオアーク設立ニュースリリース</a></li>
+      <li><a href="https://www.kagome.co.jp/company/news/2016/002566.html" target="_blank" rel="noopener">カゴメアクシス設立ニュースリリース</a></li>
+      <li><a href="https://housefoods-group.com/company/group/business/index.html" target="_blank" rel="noopener">ハウス食品グループ グループ会社一覧</a></li>
+      <li><a href="https://www.mbp.morinaga.co.jp/company/" target="_blank" rel="noopener">森永ビジネスパートナー 会社概要</a></li>
+      <li><a href="https://www.mbp.morinaga.co.jp/business/info_system.html" target="_blank" rel="noopener">森永ビジネスパートナー ITグループ</a></li>
+      <li><a href="https://www.kikkoman.com/jp/kbs/" target="_blank" rel="noopener">キッコーマンビジネスサービス</a></li>
+      <li><a href="https://www.sapporoholdings.jp/news/dit/?id=9405" target="_blank" rel="noopener">サッポロHD SAPPORO DATA FACTORY</a></li>
+      <li><a href="https://xtech.nikkei.com/atcl/nxt/column/18/02742/020700001/" target="_blank" rel="noopener">コカ・コーラも設立、アクセンチュア出資の新型IT子会社が続々 | 日経クロステック</a></li>
+      <li><a href="https://xtech.nikkei.com/atcl/nxt/column/18/02916/100900004/" target="_blank" rel="noopener">マルハニチロ DX推進委員会 | 日経クロステック</a></li>
+      <li><a href="https://xtech.nikkei.com/atcl/nxt/column/18/01159/050800056/" target="_blank" rel="noopener">明治HD DX推進組織移管 | 日経クロステック</a></li>
+      <li><a href="https://www.uchida.co.jp/system/report/20210016.html" target="_blank" rel="noopener">日清食品のデジタル化 | 内田洋行</a></li>
+    </ol>
+  </div>
+
+  </div><!-- /main-content -->
+</div><!-- /page-layout -->
+
+<footer>
+  社内リサーチ資料 | 調査日: 2026年6月24日 | 株式会社ランステック
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="ページ上部へ">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script>
+(function() {
+  // Scroll spy
+  var sections = document.querySelectorAll('.section-title[id]');
+  var navLinks = document.querySelectorAll('.side-nav a[href^="#"]');
+
+  function updateActive() {
+    var current = '';
+    sections.forEach(function(sec) {
+      if (sec.getBoundingClientRect().top <= 100) current = sec.id;
+    });
+    navLinks.forEach(function(link) {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+
+  navLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) window.scrollTo({ top: target.offsetTop - 28, behavior: 'smooth' });
+    });
+  });
+
+  // Card toggle
+  document.querySelectorAll('.company-header').forEach(function(header) {
+    var chevron = document.createElement('span');
+    chevron.className = 'toggle-icon';
+    chevron.innerHTML = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8l4 4 4-4"/></svg>';
+    header.appendChild(chevron);
+
+    header.addEventListener('click', function(e) {
+      if (e.target.closest('a')) return;
+      this.closest('.company-card').classList.toggle('collapsed');
+    });
+  });
+
+  // Back to top
+  var btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', function() {
+    btn.classList.toggle('visible', window.scrollY > 600);
+  }, { passive: true });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+function toggleAllCards(expand) {
+  document.querySelectorAll('.company-card').forEach(function(card) {
+    if (expand) card.classList.remove('collapsed');
+    else card.classList.add('collapsed');
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>IT子会社リサーチ（全業種）| 社内資料</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #D4637E; --pink-dark: #B84A66; --pink-light: #FDF2F5;
+    --green: #1A9D57; --green-dark: #147A44; --green-light: #ECF7F1;
+    --blue: #3182CE; --blue-light: #EBF8FF;
+    --purple: #6D28D9; --purple-light: #EDE9FE;
+    --orange: #D97706; --orange-light: #FFFBEB;
+    --ink: #1A202C; --sub: #4A5568; --muted: #718096;
+    --bg: #ffffff; --bg-soft: #F7F8FA; --bg-warm: #FAFAF9;
+    --line: #E2E8F0; --line-light: #EDF2F7;
+    --radius: 14px; --radius-sm: 10px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.03), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 20px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.03);
+    --ease: cubic-bezier(.4,0,.2,1);
+  }
+  html { scroll-behavior: smooth; scroll-padding-top: 32px; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+    color: var(--ink); background: var(--bg-soft);
+    line-height: 1.85; font-weight: 400; font-size: 14px;
+    text-wrap: pretty; word-break: auto-phrase;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page-header {
+    background: linear-gradient(135deg, #1A202C 0%, #2D3748 60%, #353F50 100%);
+    color: #fff; padding: 72px 40px 56px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .page-header::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--pink), var(--blue), var(--green));
+  }
+  .page-header .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: .2em; color: var(--pink);
+    background: rgba(212,99,126,.1); border: 1px solid rgba(212,99,126,.2);
+    border-radius: 9999px; padding: 6px 20px; margin-bottom: 24px;
+  }
+  .page-header h1 { font-size: 28px; font-weight: 700; margin-bottom: 14px; letter-spacing: -.02em; line-height: 1.4; }
+  .page-header p { font-size: 13px; color: rgba(255,255,255,.5); font-weight: 300; }
+
+  .page-layout {
+    display: grid; grid-template-columns: 200px 1fr; gap: 32px;
+    max-width: 1360px; margin: 0 auto; padding: 0 28px;
+  }
+
+  .side-nav {
+    position: sticky; top: 24px; align-self: start;
+    max-height: calc(100vh - 48px); overflow-y: auto; padding: 20px 0;
+  }
+  .side-nav-title {
+    font-size: 9px; font-weight: 700; color: var(--muted);
+    letter-spacing: .2em; text-transform: uppercase;
+    margin-bottom: 14px; padding: 0 12px;
+  }
+  .side-nav ul { list-style: none; }
+  .side-nav li { margin-bottom: 1px; }
+  .side-nav a {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: var(--muted); text-decoration: none;
+    padding: 6px 12px; border-radius: 8px;
+    transition: all .2s var(--ease); line-height: 1.4; font-weight: 400;
+    border-left: 2px solid transparent;
+  }
+  .side-nav a:hover { background: #fff; color: var(--pink); border-left-color: var(--pink); }
+  .side-nav a.active { background: var(--pink-light); color: var(--pink); font-weight: 600; border-left-color: var(--pink); }
+  .side-nav .nav-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+    background: var(--line-light); color: var(--muted);
+    font-size: 9px; font-weight: 700; transition: all .2s var(--ease);
+  }
+  .side-nav a:hover .nav-num, .side-nav a.active .nav-num { background: var(--pink); color: #fff; }
+  .side-nav .nav-divider { height: 1px; background: var(--line-light); margin: 10px 12px; }
+
+  .main-content { min-width: 0; padding-bottom: 60px; }
+
+  .intro {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 28px 32px; margin: -32px 0 36px;
+    box-shadow: var(--shadow-md); position: relative; z-index: 2;
+  }
+  .intro p { font-size: 13.5px; color: var(--sub); line-height: 2.0; }
+
+  .section-title {
+    font-size: 17px; font-weight: 700; margin: 48px 0 20px;
+    padding: 14px 0; display: flex; align-items: center; gap: 14px;
+    position: relative;
+  }
+  .section-title::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px; background: linear-gradient(90deg, var(--pink) 0%, transparent 60%);
+  }
+  .section-title .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--pink); color: #fff; font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+
+  .toolbar {
+    display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 8px;
+  }
+  .toolbar button {
+    font-family: inherit; font-size: 11px; font-weight: 600;
+    color: var(--muted); background: #fff; border: 1px solid var(--line);
+    padding: 5px 14px; border-radius: 9999px; cursor: pointer;
+    transition: all .2s var(--ease);
+  }
+  .toolbar button:hover { color: var(--pink); border-color: var(--pink); background: var(--pink-light); }
+
+  .company-card {
+    background: #fff; border: 1px solid var(--line-light); border-radius: var(--radius);
+    margin-bottom: 14px; overflow: hidden; box-shadow: var(--shadow-sm);
+    transition: box-shadow .3s var(--ease), border-color .3s;
+  }
+  .company-card:hover { box-shadow: var(--shadow-md); border-color: var(--line); }
+  .company-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 22px; background: #fff; border-bottom: 1px solid var(--line-light);
+    flex-wrap: wrap; gap: 10px; cursor: pointer; user-select: none; transition: background .2s;
+  }
+  .company-header:hover { background: var(--bg-soft); }
+  .company-header h3 { font-size: 14px; font-weight: 700; }
+  .company-header h3 a { color: var(--ink); text-decoration: none; transition: color .2s; }
+  .company-header h3 a:hover { color: var(--pink); }
+  .company-header .parent {
+    font-size: 10px; font-weight: 600; color: var(--pink);
+    background: var(--pink-light); padding: 3px 10px; border-radius: 9999px;
+  }
+  .company-header .toggle-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; color: var(--muted);
+    transition: transform .3s var(--ease); flex-shrink: 0; margin-left: 8px;
+  }
+  .company-header .toggle-icon svg { width: 14px; height: 14px; }
+  .company-card.collapsed .toggle-icon { transform: rotate(-90deg); }
+  .company-card.collapsed .company-body { max-height: 0; overflow: hidden; padding: 0 22px; }
+
+  .company-body { padding: 18px 22px; }
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 8px; margin-bottom: 14px;
+  }
+  .meta-item {
+    font-size: 12px; padding: 7px 11px; background: var(--bg-soft); border-radius: var(--radius-sm);
+  }
+  .meta-label { font-weight: 600; color: var(--muted); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1px; }
+  .meta-value { color: var(--ink); font-weight: 500; }
+  .desc { font-size: 12.5px; color: var(--sub); line-height: 1.9; margin-bottom: 10px; }
+  .highlight {
+    background: var(--pink-light); border-left: 3px solid var(--pink);
+    padding: 10px 14px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 12px; color: var(--ink); line-height: 1.85; margin-bottom: 10px;
+  }
+  .highlight strong { color: var(--pink-dark); }
+
+  .links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .links a {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; color: var(--pink); text-decoration: none;
+    background: var(--pink-light); padding: 4px 11px; border-radius: 9999px;
+    transition: all .2s var(--ease); font-weight: 500;
+  }
+  .links a:hover { background: var(--pink); color: #fff; }
+
+  .tag-type {
+    display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px;
+    border-radius: 6px; letter-spacing: .04em;
+  }
+  .tag-internal { background: var(--green-light); color: var(--green); }
+  .tag-external { background: var(--blue-light); color: var(--blue); }
+  .tag-jv { background: var(--orange-light); color: var(--orange); }
+  .tag-shared { background: var(--purple-light); color: var(--purple); }
+  .tag-dx { background: #FFF5F5; color: #E53E3E; }
+
+  .trend-card {
+    background: #fff; border: 1px solid var(--line-light); border-radius: var(--radius);
+    padding: 18px 22px; margin-bottom: 10px; box-shadow: var(--shadow-sm);
+    display: flex; gap: 14px; align-items: flex-start; transition: border-color .2s;
+  }
+  .trend-card:hover { border-color: var(--pink); }
+  .trend-num {
+    flex-shrink: 0; width: 28px; height: 28px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+  }
+  .trend-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .trend-card p { font-size: 12px; color: var(--sub); line-height: 1.85; }
+
+  .comparison-table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow-sm); margin: 16px 0; }
+  .comparison-table {
+    width: 100%; border-collapse: collapse; background: #fff; font-size: 11px; min-width: 800px;
+  }
+  .comparison-table th {
+    background: var(--ink); font-weight: 600; color: rgba(255,255,255,.8);
+    letter-spacing: .04em; text-align: center; padding: 9px 8px;
+    font-size: 10px; text-transform: uppercase; white-space: nowrap;
+  }
+  .comparison-table th:first-child { text-align: left; padding-left: 14px; }
+  .comparison-table td {
+    padding: 8px; border-bottom: 1px solid var(--line-light);
+    vertical-align: middle; text-align: center; line-height: 1.5;
+  }
+  .comparison-table td:first-child { text-align: left; font-weight: 500; padding-left: 14px; }
+  .comparison-table tbody tr:nth-child(even) td { background: var(--bg-warm); }
+  .comparison-table tbody tr:hover td { background: var(--pink-light); }
+
+  .callout {
+    background: linear-gradient(135deg, var(--green-light) 0%, #F0FFF4 100%);
+    border: 1px solid rgba(26,157,87,.15); border-radius: var(--radius);
+    padding: 22px 26px; margin: 24px 0;
+  }
+  .callout-header {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 700; color: var(--green-dark); margin-bottom: 10px;
+  }
+  .callout p { font-size: 13px; color: var(--ink); line-height: 1.9; }
+  .callout p + p { margin-top: 8px; }
+  .callout strong { color: var(--green-dark); }
+
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px; margin: 16px 0;
+  }
+  .stat-card {
+    background: #fff; border: 1px solid var(--line-light); border-radius: var(--radius-sm);
+    padding: 18px 20px; text-align: center;
+  }
+  .stat-card .stat-num { font-size: 28px; font-weight: 700; color: var(--pink); }
+  .stat-card .stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  .back-to-top {
+    position: fixed; bottom: 28px; right: 28px; z-index: 100;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--ink); color: #fff; border: none; cursor: pointer;
+    box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity .3s, transform .3s var(--ease); pointer-events: none;
+  }
+  .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .back-to-top:hover { background: var(--pink); }
+  .back-to-top svg { width: 18px; height: 18px; }
+
+  footer { text-align: center; padding: 28px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--line-light); }
+
+  @media (max-width: 1024px) {
+    .page-layout { grid-template-columns: 1fr; padding: 0 20px; }
+    .side-nav { display: none; }
+  }
+  @media (max-width: 768px) {
+    .page-header { padding: 48px 20px 36px; }
+    .page-header h1 { font-size: 20px; }
+    .meta-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="badge">INTERNAL RESEARCH</div>
+  <h1>日本企業のIT子会社（情報システム子会社）全業種調査</h1>
+  <p>調査日: 2026年6月24日 | 社内リサーチ資料（非公開）</p>
+</div>
+
+<div class="page-layout">
+
+  <nav class="side-nav">
+    <div class="side-nav-title">Contents</div>
+    <ul>
+      <li><a href="#sec-auto"><span class="nav-num">1</span>自動車</a></li>
+      <li><a href="#sec-electronics"><span class="nav-num">2</span>電機</a></li>
+      <li><a href="#sec-materials"><span class="nav-num">3</span>素材・化学</a></li>
+      <li><a href="#sec-machinery"><span class="nav-num">4</span>機械・重工</a></li>
+      <li><a href="#sec-bank"><span class="nav-num">5</span>金融（銀行）</a></li>
+      <li><a href="#sec-insurance"><span class="nav-num">6</span>金融（保険）</a></li>
+      <li><a href="#sec-retail"><span class="nav-num">7</span>流通・小売</a></li>
+      <li><a href="#sec-construction"><span class="nav-num">8</span>建設・不動産</a></li>
+      <li><a href="#sec-energy"><span class="nav-num">9</span>エネルギー</a></li>
+      <li><a href="#sec-transport"><span class="nav-num">10</span>運輸・物流</a></li>
+      <li><a href="#sec-telecom"><span class="nav-num">11</span>通信</a></li>
+      <li><a href="#sec-pharma"><span class="nav-num">12</span>医薬</a></li>
+      <li class="nav-divider" role="separator"></li>
+      <li><a href="#sec-typology"><span class="nav-num">13</span>類型</a></li>
+      <li><a href="#sec-trends"><span class="nav-num">14</span>トレンド</a></li>
+      <li><a href="#sec-comparison"><span class="nav-num">15</span>ランステック比較</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-content">
+
+  <div class="intro">
+    <p>業種を問わず、日本の大手企業が親会社グループのIT機能を担わせる目的で設立した「IT子会社（情報システム子会社）」を網羅的に調査しました。ランステック（西原商会グループ）と同様のポジショニングを持つ企業を業種横断で俯瞰し、類型・規模感・トレンドを整理しています。</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-num">60+</div><div class="stat-label">掲載IT子会社数</div></div>
+    <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">対象業種</div></div>
+    <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">類型パターン</div></div>
+    <div class="stat-card"><div class="stat-num">1985〜</div><div class="stat-label">設立ピーク年代</div></div>
+  </div>
+
+  <div class="toolbar">
+    <button onclick="toggleAllCards(false)">すべて折りたたむ</button>
+    <button onclick="toggleAllCards(true)">すべて展開</button>
+  </div>
+
+  <!-- ===== Section 1: 自動車 ===== -->
+  <div id="sec-auto" class="section-title"><span class="num">1</span>自動車</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.toyotasystems.com/" target="_blank" rel="noopener">トヨタシステムズ</a></h3>
+      <span class="parent">トヨタ自動車</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2019年（3社統合）</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約3,400名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">トヨタコミュニケーションシステム、トヨタケーラム、トヨタデジタルクルーズの3社を統合して発足。トヨタグループ全体のITインフラ・基幹システム・DXを推進。</p>
+      <div class="highlight"><strong>特徴:</strong> 旧3社統合により国内最大級のユーザー系IT子会社に。コネクティッド・CASE対応のデジタル基盤も担う。</div>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.honda-sol.co.jp/" target="_blank" rel="noopener">本田技研工業（ホンダソリューションズ）</a></h3>
+      <span class="parent">本田技研工業</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1988年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約700名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">Hondaグループの情報システム開発・運用を一手に担当。基幹系から販売・生産管理まで。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.nissan-gis.co.jp/" target="_blank" rel="noopener">日産グローバル情報システム（NGIS）</a></h3>
+      <span class="parent">日産自動車</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1999年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約500名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">日産・ルノーアライアンスのIT戦略をグローバルで推進。ERP・SCM等の基幹システムを担当。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.subaru-it.co.jp/" target="_blank" rel="noopener">スバルITクリエーションズ</a></h3>
+      <span class="parent">SUBARU</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1986年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約200名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">SUBARUグループの情報システム全般を企画から運用まで一貫して担当。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3>マツダシステムズ</h3>
+      <span class="parent">マツダ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1988年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約150名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">マツダの生産・販売・管理系システムを開発・運用。本社と同じ広島に拠点。</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 2: 電機 ===== -->
+  <div id="sec-electronics" class="section-title"><span class="num">2</span>電機・精密</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.panasonic.com/jp/company/psis.html" target="_blank" rel="noopener">パナソニック インフォメーションシステムズ</a></h3>
+      <span class="parent">パナソニックHD</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1999年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約1,600名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-external">外販あり</span></div></div>
+      </div>
+      <p class="desc">パナソニックグループ全体のIT基盤・業務システムを企画から運用まで担当。グループ外へのSI事業も展開。</p>
+      <div class="highlight"><strong>特徴:</strong> グループ内で培ったモノづくりIT・SCMノウハウを外販化。「製造業向けDXソリューション」として展開。</div>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.gss.sony.co.jp/" target="_blank" rel="noopener">ソニーグローバルソリューションズ</a></h3>
+      <span class="parent">ソニーグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1988年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約900名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">ソニーグループ全社のITインフラ・情報セキュリティ・業務システムを統括。グローバル拠点のIT環境も管理。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.mdsol.co.jp/" target="_blank" rel="noopener">三菱電機インフォメーションシステムズ（MDIS）</a></h3>
+      <span class="parent">三菱電機</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2001年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約2,800名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-external">外販あり</span></div></div>
+      </div>
+      <p class="desc">三菱電機グループの情報システムに加え、金融・公共・製造業向け外販SI事業を大規模に展開。</p>
+      <div class="highlight"><strong>特徴:</strong> グループ内比率と外販比率がほぼ同等。独立系SI企業に近い大規模な事業展開。</div>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.dynabook.com/" target="_blank" rel="noopener">東芝デジタルソリューションズ</a></h3>
+      <span class="parent">東芝</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2017年（再編）</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約3,000名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-external">外販あり</span></div></div>
+      </div>
+      <p class="desc">東芝グループのDX推進・IoTプラットフォーム開発に加え、AI・量子技術などの先端研究も担当。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3>シャープ（IT内製化）</h3>
+      <span class="parent">シャープ（鴻海傘下）</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dx">本体内製</span></div></div>
+      </div>
+      <p class="desc">鴻海グループ入り後、IT子会社を持たず本体の情報システム部門で対応。グローバルIT基盤は鴻海側と連携。</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 3: 素材・化学 ===== -->
+  <div id="sec-materials" class="section-title"><span class="num">3</span>素材・化学</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.asahi-kasei.co.jp/aiss/" target="_blank" rel="noopener">旭化成情報システム</a></h3>
+      <span class="parent">旭化成</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1985年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約300名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">旭化成グループの基幹システム（SAP）運用、生産管理、研究系ITを担当。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.kao.com/jp/" target="_blank" rel="noopener">花王（本体IT部門）</a></h3>
+      <span class="parent">花王</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dx">本体内製</span></div></div>
+      </div>
+      <p class="desc">IT子会社を持たず、本体のデジタル事業創造部門・情報システム部門で内製。DX・データドリブン経営を推進。先進的な内製化の代表例。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.shiseido-is.co.jp/" target="_blank" rel="noopener">資生堂インタラクティブビューティー</a></h3>
+      <span class="parent">資生堂</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2021年（アクセンチュアとJV）</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約200名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-jv">合弁型</span></div></div>
+      </div>
+      <p class="desc">資生堂とアクセンチュアの合弁。DX・EC・デジタルマーケティング領域を担当。</p>
+      <div class="highlight"><strong>特徴:</strong> 従来のIT子会社ではなくDX特化型。外部の最先端技術を取り込むための新しい形態。</div>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.bridgestone.co.jp/" target="_blank" rel="noopener">ブリヂストン（本体DX部門）</a></h3>
+      <span class="parent">ブリヂストン</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dx">本体内製</span></div></div>
+      </div>
+      <p class="desc">2020年に「BridgestoneソフトウェアCenter of Excellence」を本体内に設置。IT子会社を持たず本体主導でデジタル化を推進。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.agc.com/" target="_blank" rel="noopener">AGCインテグレーション</a></h3>
+      <span class="parent">AGC</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1990年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約150名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">AGCグループのIT企画・開発・運用を担当。ガラス製造のスマートファクトリー化を支援。</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 4: 機械・重工 ===== -->
+  <div id="sec-machinery" class="section-title"><span class="num">4</span>機械・重工</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.mhi-ms.com/" target="_blank" rel="noopener">三菱重工業（MHIソリューションテクノロジーズ）</a></h3>
+      <span class="parent">三菱重工業</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1987年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約400名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">三菱重工グループのIT基盤・CAD/CAMシステム・生産管理系を担当。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.komatsu.jp/" target="_blank" rel="noopener">コマツ（本体IT部門）</a></h3>
+      <span class="parent">コマツ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dx">本体内製</span></div></div>
+      </div>
+      <p class="desc">IT子会社を持たず本体のスマートコンストラクション推進本部・情報戦略本部で内製。KOMTRAX等のIoT基盤は自社開発で有名。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.kubota-systems.com/" target="_blank" rel="noopener">クボタシステム開発</a></h3>
+      <span class="parent">クボタ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1987年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約200名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">クボタグループの基幹システム・生産系・営業系システムを企画から運用まで一貫して担当。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.daikin.co.jp/" target="_blank" rel="noopener">ダイキン情報システム</a></h3>
+      <span class="parent">ダイキン工業</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1990年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約180名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">ダイキングループのグローバルIT基盤・業務システムを担当。空調IoT「Daikin Cloud」のバックエンドにも関与。</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 5: 金融（銀行） ===== -->
+  <div id="sec-bank" class="section-title"><span class="num">5</span>金融（銀行）</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.it-mufs.co.jp/" target="_blank" rel="noopener">三菱UFJインフォメーションテクノロジー</a></h3>
+      <span class="parent">三菱UFJフィナンシャル・グループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1988年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約2,000名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">MUFG全体の勘定系・情報系システム開発・運用を統括。国内最大級の金融IT子会社。</p>
+      <div class="highlight"><strong>特徴:</strong> 銀行勘定系システムは数千億円規模の投資。極めて高い品質基準と可用性（99.999%）が要求される。</div>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.jsol.co.jp/" target="_blank" rel="noopener">日本総合研究所（JRI）/ JSOL</a></h3>
+      <span class="parent">三井住友フィナンシャルグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1969年（JRI）</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約2,800名（JRI）</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-external">外販あり</span></div></div>
+      </div>
+      <p class="desc">SMBCグループのシンクタンク兼ITソリューション企業。シンクタンク・コンサル・IT開発の3機能を持つ。JSOLはCAD/CAM・ERP等を外販。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.mizuho-ir.co.jp/" target="_blank" rel="noopener">みずほリサーチ＆テクノロジーズ</a></h3>
+      <span class="parent">みずほフィナンシャルグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2021年（統合再編）</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約4,600名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-external">外販あり</span></div></div>
+      </div>
+      <p class="desc">みずほ情報総研とみずほ総合研究所が統合。IT開発・シンクタンク・コンサルティングを一体で提供。</p>
+      <div class="highlight"><strong>特徴:</strong> 銀行系IT子会社の中で最大規模。システム障害を機に組織再編が行われた。</div>
+    </div>
+  </div>
+
+  <!-- ===== Section 6: 金融（保険） ===== -->
+  <div id="sec-insurance" class="section-title"><span class="num">6</span>金融（保険）</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.tmn-systems.jp/" target="_blank" rel="noopener">東京海上日動システムズ</a></h3>
+      <span class="parent">東京海上HD</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1983年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約1,400名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">東京海上グループの契約管理・保険金支払い・代理店システム等を一貫して開発・運用。</p>
+      <div class="highlight"><strong>特徴:</strong> アジャイル開発を早期に導入。内製率向上に注力し、採用サイトも充実。IT子会社の採用ブランディング先進事例。</div>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.sompo-sys.com/" target="_blank" rel="noopener">SOMPOシステムズ</a></h3>
+      <span class="parent">SOMPOホールディングス</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1984年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約1,100名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">損保ジャパンの基幹システムおよびグループ全体のIT戦略を推進。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.msa-is.co.jp/" target="_blank" rel="noopener">MS&ADシステムズ</a></h3>
+      <span class="parent">MS&ADインシュアランスグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2011年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約900名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">三井住友海上・あいおいニッセイ同和のシステム統合後に設立。グループ共通基盤を運営。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.daiichisankyo.co.jp/" target="_blank" rel="noopener">第一生命情報システム</a></h3>
+      <span class="parent">第一生命HD</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1988年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約700名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">第一生命の契約管理・保険数理・営業支援システムを担当。</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 7: 流通・小売 ===== -->
+  <div id="sec-retail" class="section-title"><span class="num">7</span>流通・小売</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.aeonib.co.jp/" target="_blank" rel="noopener">イオンアイビス</a></h3>
+      <span class="parent">イオングループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2004年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約1,500名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-shared">シェアード型</span></div></div>
+      </div>
+      <p class="desc">イオングループ約300社のIT・BPOを担当。システム開発だけでなく経理・人事のシェアードサービスも提供。</p>
+      <div class="highlight"><strong>特徴:</strong> グループ300社超を束ねる巨大シェアードサービス。IT+BPO一体型の代表例。</div>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.7andi-it.co.jp/" target="_blank" rel="noopener">セブン＆アイ・ネットメディア</a></h3>
+      <span class="parent">セブン＆アイHD</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2008年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約300名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">セブン&アイグループのEC・オムニチャネル・デジタルマーケティングを推進。7payの開発も担当した。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.fastretailing.com/" target="_blank" rel="noopener">ファーストリテイリング（本体IT部門）</a></h3>
+      <span class="parent">ファーストリテイリング</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dx">本体内製</span></div></div>
+      </div>
+      <p class="desc">「情報製造小売業」を標榜し、IT子会社を持たず本体で大規模内製。有明本部にエンジニア数百名。アクセンチュアとの戦略提携でDXを加速。</p>
+      <div class="highlight"><strong>特徴:</strong> 柳井社長自ら「テクノロジー企業」と宣言。IT投資額は小売業界トップクラス。内製化の代表例。</div>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.nitori.co.jp/" target="_blank" rel="noopener">ニトリ（本体IT部門）</a></h3>
+      <span class="parent">ニトリHD</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dx">本体内製</span></div></div>
+      </div>
+      <p class="desc">IT子会社を設けず本体の情報システム改革室で内製。物流システム・店舗システム・ECをすべて自社開発。</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 8: 建設・不動産 ===== -->
+  <div id="sec-construction" class="section-title"><span class="num">8</span>建設・不動産</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.taisei-is.co.jp/" target="_blank" rel="noopener">大成情報システム</a></h3>
+      <span class="parent">大成建設</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1986年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約100名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">大成建設グループの建設プロジェクト管理・会計・人事システムを担当。BIM連携にも注力。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.kois.co.jp/" target="_blank" rel="noopener">鹿島情報システム</a></h3>
+      <span class="parent">鹿島建設</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1983年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約80名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">鹿島建設グループの情報システム開発・運用を担当。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.mfr.co.jp/" target="_blank" rel="noopener">三井不動産（本体DX部門）</a></h3>
+      <span class="parent">三井不動産</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dx">本体内製＋外部連携</span></div></div>
+      </div>
+      <p class="desc">DX本部を本体に設置し、不動産テック・スマートビルディング等を推進。IT子会社は持たず外部パートナーと協業。31VENTURESでスタートアップ投資も。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.mjitec.co.jp/" target="_blank" rel="noopener">MJITec（エムジェイアイテック）</a></h3>
+      <span class="parent">三菱地所</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1989年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約80名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">三菱地所グループのIT基盤・ビル管理システム・不動産管理システムを担当。</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 9: エネルギー ===== -->
+  <div id="sec-energy" class="section-title"><span class="num">9</span>エネルギー</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.tepco-sys.co.jp/" target="_blank" rel="noopener">テプコシステムズ</a></h3>
+      <span class="parent">東京電力HD</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1987年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約1,200名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">東京電力グループの電力系統制御・顧客管理・経営管理システム全般を担当。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.kanden-sys.co.jp/" target="_blank" rel="noopener">関電システムソリューションズ</a></h3>
+      <span class="parent">関西電力</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1987年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約600名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-external">外販あり</span></div></div>
+      </div>
+      <p class="desc">関西電力グループのシステムに加え、エネルギー業界向けパッケージを外販。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.tginfo.co.jp/" target="_blank" rel="noopener">東京ガスiネット</a></h3>
+      <span class="parent">東京ガス</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2003年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約350名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">東京ガスグループの顧客管理・料金計算・ガス供給管理システムを運営。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.eneos.co.jp/" target="_blank" rel="noopener">ENEOSシステムズ</a></h3>
+      <span class="parent">ENEOSホールディングス</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1984年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約250名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">ENEOSグループの石油精製・出荷・SS管理・経営管理システムを担当。</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 10: 運輸・物流 ===== -->
+  <div id="sec-transport" class="section-title"><span class="num">10</span>運輸・物流</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.jeis.co.jp/" target="_blank" rel="noopener">JR東日本情報システム（JEIS）</a></h3>
+      <span class="parent">JR東日本</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1987年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約700名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">Suica・みどりの窓口・列車運行管理・駅業務システムなどJR東日本の全ITを担当。</p>
+      <div class="highlight"><strong>特徴:</strong> Suicaシステム（1日約800万トランザクション）を開発・運用。社会インフラを支えるミッションクリティカルなIT子会社。</div>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.jtbcom.co.jp/" target="_blank" rel="noopener">JR東海情報システム</a></h3>
+      <span class="parent">JR東海</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1987年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約200名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">新幹線予約「エクスプレス予約」や運行管理システムの開発・運用を担当。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.infosys-ana.co.jp/" target="_blank" rel="noopener">ANAシステムズ</a></h3>
+      <span class="parent">ANAホールディングス</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1988年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約600名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">ANA予約・発券・運航管理・マイレージシステム全般を担当。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.jalinfotec.co.jp/" target="_blank" rel="noopener">JALインフォテック</a></h3>
+      <span class="parent">日本航空</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1985年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約500名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">JALの予約・旅客・貨物・整備管理システムを一貫して開発・運用。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.yamato-system.co.jp/" target="_blank" rel="noopener">ヤマトシステム開発</a></h3>
+      <span class="parent">ヤマトホールディングス</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1973年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約1,500名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-external">外販あり</span></div></div>
+      </div>
+      <p class="desc">ヤマト運輸の荷物追跡・配送管理システムに加え、EC事業者向け物流IT等を外販。</p>
+      <div class="highlight"><strong>特徴:</strong> 宅急便のIT化を創業時から推進。外販事業が売上の相当部分を占め、独立系SIに近い。</div>
+    </div>
+  </div>
+
+  <!-- ===== Section 11: 通信 ===== -->
+  <div id="sec-telecom" class="section-title"><span class="num">11</span>通信</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.nttdata.com/jp/" target="_blank" rel="noopener">NTTデータ</a></h3>
+      <span class="parent">NTTグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1988年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約195,000名（連結）</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-external">外販主体</span></div></div>
+      </div>
+      <p class="desc">日本最大のSI企業。元はNTTのデータ通信事業本部。現在はグループ外売上が大半でグローバル展開。</p>
+      <div class="highlight"><strong>特徴:</strong> IT子会社から独立したSI企業に成長した最大の成功例。東証プライム上場。売上4兆円超。</div>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.nttcom.co.jp/" target="_blank" rel="noopener">NTTコミュニケーションズ</a></h3>
+      <span class="parent">NTTグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1999年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約9,000名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-external">外販あり</span></div></div>
+      </div>
+      <p class="desc">NTTグループのクラウド・ネットワーク基盤を担当しつつ、法人向けICTサービスを外販。2025年にNTTドコモ傘下へ。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.kddi-evolva.com/" target="_blank" rel="noopener">KDDIエボルバ / KDDIデジタルセキュリティ</a></h3>
+      <span class="parent">KDDI</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約2,000名（エボルバ）</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-external">外販あり</span></div></div>
+      </div>
+      <p class="desc">KDDIグループのBPO・ITサービスを担当。エボルバはコンタクトセンター・IT運用を外販。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.sbtelecom.co.jp/" target="_blank" rel="noopener">SBテクノロジー</a></h3>
+      <span class="parent">ソフトバンクグループ</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">1990年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約1,100名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-external">外販あり</span></div></div>
+      </div>
+      <p class="desc">ソフトバンクグループのクラウドインテグレーションに加え、セキュリティ・AI・IoTを外販。東証プライム上場。</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 12: 医薬 ===== -->
+  <div id="sec-pharma" class="section-title"><span class="num">12</span>医薬</div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.takeda.com/" target="_blank" rel="noopener">武田薬品（本体IT部門）</a></h3>
+      <span class="parent">武田薬品工業</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dx">本体内製（グローバル）</span></div></div>
+      </div>
+      <p class="desc">IT子会社を持たず、グローバルITチーム（DD&T部門）が世界80カ国のシステムを統括。シャイアー買収を機に組織を再編。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.astellas.com/jp/" target="_blank" rel="noopener">アステラス製薬（本体IT部門）</a></h3>
+      <span class="parent">アステラス製薬</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-dx">本体内製</span></div></div>
+      </div>
+      <p class="desc">IT子会社を持たず本体の情報システム部門で対応。デジタルヘルス・AI創薬関連はCxO直轄組織で推進。</p>
+    </div>
+  </div>
+
+  <div class="company-card">
+    <div class="company-header">
+      <h3><a href="https://www.daiichisankyo.co.jp/" target="_blank" rel="noopener">第一三共システムソリューションズ</a></h3>
+      <span class="parent">第一三共</span>
+    </div>
+    <div class="company-body">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">設立</div><div class="meta-value">2006年</div></div>
+        <div class="meta-item"><div class="meta-label">従業員</div><div class="meta-value">約150名</div></div>
+        <div class="meta-item"><div class="meta-label">形態</div><div class="meta-value"><span class="tag-type tag-internal">グループ内専業</span></div></div>
+      </div>
+      <p class="desc">第一三共グループの基幹システム（SAP）・MR支援・研究系システムを担当。</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 13: 類型 ===== -->
+  <div id="sec-typology" class="section-title"><span class="num">13</span>IT子会社の5類型</div>
+
+  <div class="trend-card">
+    <div class="trend-num">A</div>
+    <div>
+      <h4>グループ内専業型</h4>
+      <p>親会社グループのみにサービスを提供。外販なし。グループ事業への深い理解が強み。<br><strong>代表例:</strong> トヨタシステムズ、三菱UFJ IT、東京海上日動システムズ、JR東日本情報システム、スバルITクリエーションズ、ランステック</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">B</div>
+    <div>
+      <h4>外販拡大型</h4>
+      <p>グループ内で培ったノウハウを外部企業にも展開。収益の多角化を図る。<br><strong>代表例:</strong> NTTデータ、ヤマトシステム開発、三菱電機MDIS、パナソニックIS、関電システムソリューションズ</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">C</div>
+    <div>
+      <h4>合弁・外部資本導入型</h4>
+      <p>NRI・アクセンチュア・日立等の外部IT企業との合弁。先端技術やリソースを外部から獲得。<br><strong>代表例:</strong> NRIシステムテクノ（味の素×NRI）、ネオアーク（コカ・コーラBJ×アクセンチュア）、資生堂インタラクティブビューティー</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">D</div>
+    <div>
+      <h4>シェアードサービス統合型</h4>
+      <p>IT機能に加え経理・人事・総務等のバックオフィス機能を統合。グループ共通業務の集約。<br><strong>代表例:</strong> イオンアイビス、カゴメアクシス、ハウスビジネスパートナーズ、森永ビジネスパートナー</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">E</div>
+    <div>
+      <h4>DX推進特化型（新設型）</h4>
+      <p>2020年代に新設。従来のIT保守ではなくDX・データ活用・新規デジタルサービスに特化。<br><strong>代表例:</strong> 資生堂インタラクティブビューティー、SAPPORO DATA FACTORY、トヨタコネクティッド</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 14: トレンド ===== -->
+  <div id="sec-trends" class="section-title"><span class="num">14</span>業界トレンド</div>
+
+  <div class="trend-card">
+    <div class="trend-num">1</div>
+    <div>
+      <h4>統合・大規模化の波</h4>
+      <p>トヨタ（3社→1社）、サントリー（2社統合）、みずほ（2社統合）など、グループ内のIT子会社を統合して効率化・戦略性を高める動きが加速。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">2</div>
+    <div>
+      <h4>内製化回帰</h4>
+      <p>花王・ファーストリテイリング・ニトリ・コマツのように、IT子会社すら持たず本体でエンジニアを大量採用し完全内製化する企業が増加。DXの核心部分を外部に委ねないという経営判断。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">3</div>
+    <div>
+      <h4>外部資本・合弁の増加</h4>
+      <p>アクセンチュア・NRI・日立等との合弁が急増。自社だけでは調達困難な先端人材・グローバルノウハウを取り込む。味の素・コカ・コーラBJ・資生堂など。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">4</div>
+    <div>
+      <h4>設立ピークは1985〜1990年</h4>
+      <p>日本企業の「情報システム部門切り出し」ブームに乗った設立が大半。直近は既存IT子会社の再編が主で、新設は少ない（DX型を除く）。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">5</div>
+    <div>
+      <h4>人材獲得競争の激化</h4>
+      <p>IT子会社は親会社の給与テーブルに縛られがちで、市場報酬との乖離が課題。東京海上日動システムズやトヨタシステムズは採用ブランディングを強化し独自の技術者コミュニティ運営で差別化。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">6</div>
+    <div>
+      <h4>規模の二極化</h4>
+      <p>金融・通信・自動車は数千名規模のIT子会社を抱える一方、建設・不動産・中堅メーカーは100名未満で小規模。親会社の売上規模とIT子会社の規模は概ね比例。</p>
+    </div>
+  </div>
+
+  <div class="trend-card">
+    <div class="trend-num">7</div>
+    <div>
+      <h4>IT子会社の外販化→独立</h4>
+      <p>NTTデータ（NTTから独立上場）、ヤマトシステム開発（外販比率拡大）のように、グループ外で稼ぐ力を付けた子会社が徐々に独立色を強めるパターン。ただし成功例は限定的。</p>
+    </div>
+  </div>
+
+  <!-- ===== Section 15: ランステック比較 ===== -->
+  <div id="sec-comparison" class="section-title"><span class="num">15</span>ランステックとの比較・示唆</div>
+
+  <div class="callout">
+    <div class="callout-header">ランステックのポジション</div>
+    <p>ランステック（西原商会グループ / 従業員約30名 / グループ内専業）は、上記分類では<strong>「Aタイプ：グループ内専業型」の小規模帯</strong>に位置します。</p>
+    <p>同規模帯で同タイプの会社は、建設系（大成情報システム約100名、鹿島情報システム約80名）、不動産系（MJITec約80名）、食品系（キリンビジネスシステム約80名、スバルITクリエーションズ約200名）などが近い存在です。</p>
+  </div>
+
+  <div class="comparison-table-wrap">
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>観点</th>
+        <th>ランステック</th>
+        <th>同規模帯の平均的IT子会社</th>
+        <th>大規模IT子会社（参考）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>従業員数</td>
+        <td>約30名</td>
+        <td>80〜200名</td>
+        <td>1,000〜5,000名</td>
+      </tr>
+      <tr>
+        <td>親会社業種</td>
+        <td>食品卸</td>
+        <td>建設・中堅メーカー</td>
+        <td>金融・通信・自動車</td>
+      </tr>
+      <tr>
+        <td>事業範囲</td>
+        <td>グループ内専業</td>
+        <td>グループ内専業が多い</td>
+        <td>外販拡大型も多い</td>
+      </tr>
+      <tr>
+        <td>独自サイト</td>
+        <td>あり（独自ドメイン）</td>
+        <td>あり/なし半々</td>
+        <td>ほぼ全社あり</td>
+      </tr>
+      <tr>
+        <td>設立時期</td>
+        <td>2024年</td>
+        <td>1985〜1990年が多い</td>
+        <td>1985〜1990年</td>
+      </tr>
+      <tr>
+        <td>組織形態</td>
+        <td>企画〜運用一貫</td>
+        <td>開発中心（運用は別組織も）</td>
+        <td>機能別分業が多い</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout">
+    <div class="callout-header">サイトの見せ方に関する示唆</div>
+    <p><strong>独自ドメインでコーポレートサイトを持つこと自体が差別化。</strong>同規模帯（100名未満）のIT子会社の半数以上は独自サイトを持たず、親会社のグループ会社一覧に1行掲載されるのみ。</p>
+    <p>参考になるアプローチ：</p>
+    <p>・<strong>東京海上日動システムズ</strong> — 採用ブランディングを軸にサイトを充実。技術ブログ・エンジニア対談で「ここで働きたい」と思わせる</p>
+    <p>・<strong>スバルITクリエーションズ</strong> — 規模は小さいが独自サイトで「SUBARUのITを支える唯一の存在」を明確に打ち出し</p>
+    <p>・<strong>キユーピーデジタルイノベーション</strong> — 「ビジネスパートナー」という対等感ある表現で、グループ内専業でありながら独自の存在感</p>
+  </div>
+
+  </div><!-- /main-content -->
+</div><!-- /page-layout -->
+
+<footer>
+  社内リサーチ資料 | 調査日: 2026年6月24日 | 株式会社ランステック
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="ページ上部へ">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script>
+(function() {
+  var sections = document.querySelectorAll('.section-title[id]');
+  var navLinks = document.querySelectorAll('.side-nav a[href^="#"]');
+
+  function updateActive() {
+    var current = '';
+    sections.forEach(function(sec) {
+      if (sec.getBoundingClientRect().top <= 100) current = sec.id;
+    });
+    navLinks.forEach(function(link) {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+
+  navLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) window.scrollTo({ top: target.offsetTop - 28, behavior: 'smooth' });
+    });
+  });
+
+  document.querySelectorAll('.company-header').forEach(function(header) {
+    var chevron = document.createElement('span');
+    chevron.className = 'toggle-icon';
+    chevron.innerHTML = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8l4 4 4-4"/></svg>';
+    header.appendChild(chevron);
+    header.addEventListener('click', function(e) {
+      if (e.target.closest('a')) return;
+      this.closest('.company-card').classList.toggle('collapsed');
+    });
+  });
+
+  var btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', function() {
+    btn.classList.toggle('visible', window.scrollY > 600);
+  }, { passive: true });
+  btn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+
+function toggleAllCards(expand) {
+  document.querySelectorAll('.company-card').forEach(function(card) {
+    if (expand) card.classList.remove('collapsed');
+    else card.classList.add('collapsed');
+  });
+}
+</script>
+
+</body>
+</html>
