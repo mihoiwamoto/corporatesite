@@ -1,8 +1,22 @@
 /* ===== SHARED HEADER / NAV ===== */
-.site-nav { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,.88); backdrop-filter: blur(20px) saturate(1.2); border-bottom: 1px solid rgba(0,0,0,.04); }
-.site-nav .wrap { display: flex; align-items: center; gap: 48px; height: 80px; }
+/* フローティング・ピル型ヘッダー（上部固定・横長角丸・ガラス調） */
+.site-nav { position: fixed; top: 14px; left: 0; right: 0; z-index: 200; pointer-events: none; }
+.site-nav .wrap {
+  pointer-events: auto;
+  display: flex; align-items: center; gap: 40px;
+  width: calc(100% - 32px); max-width: 1080px; height: 58px;
+  margin: 0 auto; padding: 0 12px 0 26px;
+  background: rgba(255,255,255,.88);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 9999px;
+  box-shadow: 0 8px 30px rgba(20,28,36,.10), 0 2px 8px rgba(20,28,36,.05);
+}
+/* フローティング分、内部ページ上部に余白を確保（index の .fv は重ねたいので対象外） */
+body .page-hero { padding-top: 104px; }
 .site-nav .logo { flex: 1; }
-.site-nav .logo img { height: 30px; width: auto; display: block; }
+.site-nav .logo img { height: 26px; width: auto; display: block; }
 .site-nav a.nav-link { color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 400; transition: color .3s; position: relative; }
 .site-nav a.nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; background: var(--pink); transition: width .3s cubic-bezier(.4,0,.2,1); }
 .site-nav a.nav-link:hover { color: var(--pink); }
@@ -15,7 +29,7 @@
 /* HAMBURGER */
 .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 12px; flex-direction: column; gap: 5px; z-index: 200; position: relative; }
 .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all .3s cubic-bezier(.33,1,.68,1); }
-.nav-hamburger[aria-expanded="true"] span { background: #fff; }
+.nav-hamburger[aria-expanded="true"] span { background: var(--ink); }
 .nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -35,9 +49,11 @@
 
 /* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
-  .site-nav .wrap { height: 64px; }
-  .site-nav .logo img { height: 24px; }
+  .site-nav { top: 10px; }
+  .site-nav .wrap { height: 52px; width: calc(100% - 24px); padding: 0 8px 0 20px; gap: 0; }
+  .site-nav .logo img { height: 22px; }
   .site-nav a.nav-link { display: none; }
   .site-nav a.nav-cta { display: none; }
   .nav-hamburger { display: flex; }
+  body .page-hero { padding-top: 84px; }
 }

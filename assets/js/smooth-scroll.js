@@ -42,7 +42,15 @@
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
     if (!a) return;
     var href = a.getAttribute('href');
-    if (!href || href.charAt(0) !== '#' || href.length < 2) return;
+    if (!href || href.charAt(0) !== '#') return;
+    // ページ最上部へ（#top ヘッダーは position:fixed のため要素指定だと正しく算出できない）
+    if (href === '#top' || href === '#') {
+      e.preventDefault();
+      e.stopPropagation();
+      lenis.scrollTo(0, { duration: 2.2 }); // 最上部へはゆっくりめに
+      return;
+    }
+    if (href.length < 2) return;
     var target;
     try { target = document.querySelector(href); } catch (err) { return; }
     if (!target) return;
