@@ -1,4 +1,15 @@
 (function () {
+  // サイト共通の背景アニメ（FloatingLines）を全ページで起動する。
+  // three は CDN(ESM) をフルURLで直importするため、モジュールscriptを動的注入すれば足りる
+  // （importmap 不要）。本体は assets/js/floating-lines.js。
+  if (!document.querySelector('script[data-floating-lines]')) {
+    var flScript = document.createElement('script');
+    flScript.type = 'module';
+    flScript.src = '/assets/js/floating-lines.js?v=3';
+    flScript.setAttribute('data-floating-lines', '');
+    document.head.appendChild(flScript);
+  }
+
   var NAV_ITEMS = [
     { href: '/about.html',   label: '会社概要', key: 'about' },
     { href: '/service.html',  label: '事業内容', key: 'service' },

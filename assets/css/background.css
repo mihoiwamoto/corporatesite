@@ -10,16 +10,25 @@
   --ground-green:  26, 157, 87;   /* #1A9D57 西原商会     */
 
   /* 色あしらいの濃さ（四隅。中央=可読エリアは透明に抜く） */
-  --ground-pink-strength:  .40;
-  --ground-green-strength: .32;
+  /* FloatingLines アニメ背景と併用するため、競合しないよう静的ウォッシュは控えめに */
+  --ground-pink-strength:  .28;
+  --ground-green-strength: .22;
 
   /* ざらざら（グレイン）の強さ：0 で無効。白基調なので .05〜.12 が適正 */
   --ground-grain-opacity:  .07;
 
-  /* 名刺の表と同じ「3本線の扇」あしらい（左上＋右下／緑・チャコール・紫） */
-  --ground-line-opacity:  .68;          /* 扇ライン全体の濃さ（0〜1） */
-  --ground-line-spread:   min(74vmin, 880px); /* 角からの扇の大きさ（正方形の一辺） */
 }
+
+/* --- FloatingLines（WebGL）アニメ背景：白ベースの上・本文の下 ----------------- */
+/* assets/js/floating-lines.js が <div.floating-lines-bg> を生成。                */
+/* 白地にブランドカラー（ピンク/グリーン）のラインを薄く流す。three は CDN(ESM)。 */
+.floating-lines-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;               /* 白ベース(body::before:-3)の前／角ライン(-1)・本文の後ろ */
+  pointer-events: none;
+}
+.floating-lines-bg canvas { display: block; width: 100%; height: 100%; }
 
 /* --- ページ背景（背面）：四隅にピンク/グリーンをにじませる ------------------ */
 /* 固定配置でビューポートに対して常に同じ位置に出る（スクロールしても安定）。  */
@@ -27,7 +36,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -2;               /* 最背面：角ライン(-1)・本文より後ろ（＝ページ背景） */
+  z-index: -3;               /* 最背面：アニメ背景(-2)・角ライン(-1)・本文より後ろ */
   pointer-events: none;
   background-color: #ffffff; /* ベースは白 */
   background-image:
@@ -57,32 +66,7 @@ body::after {
   background-repeat: repeat;
 }
 
-/* --- 名刺の表と同じ「3本線の扇」あしらい：左上＋右下 ------------------------- */
-/* meishi_design_omote.svg の角を彩る 緑(#289E59)・チャコール(#525252)・紫(#BA76AA)
-   の3本線を再現。SVGは左上原点の扇。左上はそのまま、右下は180度回転して点対称に。
-   固定配置でビューポート隅に常駐。z-index:-1（色ウォッシュ body::before:-2 の上・
-   本文の後ろ）。角を起点に放射状フェードさせ、線端が画面中央で途切れないようにする。 */
-html::before,
-html::after {
-  content: "";
-  position: fixed;
-  z-index: -1;
-  pointer-events: none;
-  width: var(--ground-line-spread);
-  height: var(--ground-line-spread);
-  opacity: var(--ground-line-opacity);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800' fill='none'%3E%3Cpath d='M0 176 L688 0' stroke='%23289E59' stroke-width='1.4'/%3E%3Cpath d='M0 320 L480 0' stroke='%23525252' stroke-width='1.4'/%3E%3Cpath d='M0 400 L216 0' stroke='%23BA76AA' stroke-width='1.4'/%3E%3C/svg%3E");
-  -webkit-mask-image: radial-gradient(135% 135% at 0% 0%, #000 0%, transparent 72%);
-          mask-image: radial-gradient(135% 135% at 0% 0%, #000 0%, transparent 72%);
-}
-
-/* 左上：SVGの扇（原点＝左上）をそのまま配置 */
-html::before { top: 0; left: 0; }
-
-/* 右下：180度回転で点対称に。扇もマスクも右下原点になる */
-html::after { bottom: 0; right: 0; transform: rotate(180deg); }
+/* 角の「3本線の扇」あしらい（左上＋右下）は削除（全ページ非表示） */
 
 /* --- セクションの帯背景を透過してページ背景（地紋）を見せる ------------------ */
 /* カード（.card / .service-item / .group-card / .group-visual 等）・ヘッダー・
@@ -94,10 +78,14 @@ section,
   background: transparent !important;
 }
 
+/* --- A11y: eyebrow（小さいピンク大文字ラベル）を AA 確保のため濃いピンクに ----- */
+/* 各ページのインライン .eyebrow{color:var(--pink)} を全ページ横断で上書き。       */
+/* 読込順（link→inline）の差を吸収するため !important。大きいピンク装飾は対象外。  */
+.eyebrow { color: var(--pink-dark, #B84A66) !important; }
+
 /* 印刷時は地紋を出さない */
 @media print {
   body::before,
   body::after,
-  html::before,
-  html::after { display: none; }
+  .floating-lines-bg { display: none; }
 }
