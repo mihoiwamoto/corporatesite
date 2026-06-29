@@ -105,8 +105,10 @@
     '  </div>\n' +
     '</header>\n' +
     '<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">\n' +
+    '  <div class="mobile-nav-scroll">\n' +
     menuOverlayHTML +
-    '\n</nav>';
+    '  </div>\n' +
+    '</nav>';
 
   var placeholder = document.getElementById('site-header');
   if (placeholder) {

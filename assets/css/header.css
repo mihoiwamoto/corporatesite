@@ -77,29 +77,35 @@ body .page-hero { padding-top: 114px; }
   pointer-events: auto;
 }
 
-/* MENU PANEL */
+/* MENU PANEL — nav-row全幅。右上にピンクボタンが収まる凹みノッチを mask-image で表現 */
 .mobile-nav {
   position: fixed; top: 14px;
   left: 50%;
-  width: calc(100% - 32px); max-width: 1360px;
-  height: auto; max-height: 55vh;
-  z-index: 150; overflow-y: auto;
-  /* 右上：ハンバーガーボタン(r=44px)の凹みを radial-gradient で描く */
-  background: radial-gradient(
-    circle at calc(100% - 34px) 34px,
-    transparent 44px,
-    #fff 44.5px
-  );
-  border-radius: 34px 0 20px 20px;
-  box-shadow: 0 24px 64px rgba(20,28,36,.10), 0 4px 16px rgba(20,28,36,.06);
-  clip-path: inset(0 0 100% 0 round 34px 0 20px 20px);
-  visibility: hidden; pointer-events: none;
   transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 1360px;
+  height: auto;
+  z-index: 150;
+  background: #fff;
+  border-radius: 34px;
+  /* box-shadow は clip-path でクリップされるため filter: drop-shadow で代替 */
+  filter: drop-shadow(0 20px 48px rgba(20,28,36,.12)) drop-shadow(0 2px 8px rgba(20,28,36,.08));
+  clip-path: inset(0 0 100% 0 round 34px);
+  /* 右上にピンクボタン(r=34px)が収まる凹みノッチ。overflow-y はスクロール内側に分離 */
+  mask-image: radial-gradient(circle at calc(100% - 34px) 34px, transparent 38px, #000 38.5px);
+  -webkit-mask-image: radial-gradient(circle at calc(100% - 34px) 34px, transparent 38px, #000 38.5px);
+  visibility: hidden; pointer-events: none;
   transition: clip-path .4s cubic-bezier(.33,1,.68,1), visibility .4s;
 }
 .mobile-nav.open {
-  clip-path: inset(0 0 0% 0 round 34px 0 20px 20px);
+  clip-path: inset(0 0 0% 0 round 34px);
   visibility: visible; pointer-events: auto;
+}
+
+/* スクロールラッパー — overflow-y をここに分離することで mask-image を有効にする */
+.mobile-nav-scroll {
+  overflow-y: auto;
+  max-height: 55vh;
 }
 
 .menu-overlay-body {
@@ -188,12 +194,15 @@ body .page-hero { padding-top: 114px; }
   .nav-standalone-btn { width: 52px; height: 52px; }
   body .page-hero { padding-top: 90px; }
   .mobile-nav {
-    top: 10px; max-height: 80vh; width: calc(100% - 20px);
-    background: radial-gradient(circle at calc(100% - 26px) 26px, transparent 36px, #fff 36.5px);
-    border-radius: 26px 0 16px 16px;
-    clip-path: inset(0 0 100% 0 round 26px 0 16px 16px);
+    top: 10px;
+    width: calc(100% - 20px);
+    border-radius: 26px;
+    clip-path: inset(0 0 100% 0 round 26px);
+    mask-image: radial-gradient(circle at calc(100% - 26px) 26px, transparent 29px, #000 29.5px);
+    -webkit-mask-image: radial-gradient(circle at calc(100% - 26px) 26px, transparent 29px, #000 29.5px);
   }
-  .mobile-nav.open { clip-path: inset(0 0 0% 0 round 26px 0 16px 16px); }
+  .mobile-nav.open { clip-path: inset(0 0 0% 0 round 26px); }
+  .mobile-nav-scroll { max-height: 80vh; }
   .menu-logo-row { height: 52px; padding: 0 20px; }
   .menu-overlay-body { padding: 68px 24px 28px; }
   .menu-nav-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; margin-bottom: 24px; }
