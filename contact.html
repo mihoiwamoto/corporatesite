@@ -25,7 +25,7 @@
     --green-dark:  #147A44;
     --green-light: #ECF7F1;
     --red:         #E53935;
-    --ink:         #141C24;
+    --ink:         #243040;
     --sub:         #4A5568;
     --bg:          #ffffff;
     --bg-soft:     #F7F8FA;
@@ -139,6 +139,11 @@
     .footer-inner { flex-direction: column; gap: 28px; }
     .footer-nav { justify-content: flex-start; gap: 14px 20px; }
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+    /* iOSの自動ズームを防ぐためフォントサイズを16px以上に設定 */
+    .field select,
+    .field input[type="text"],
+    .field input[type="email"],
+    .field textarea { font-size: 16px; }
   }
 </style>
 </head>

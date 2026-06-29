@@ -24,7 +24,7 @@
     --green:       #1A9D57;
     --green-dark:  #147A44;
     --green-light: #ECF7F1;
-    --ink:         #141C24;
+    --ink:         #243040;
     --sub:         #4A5568;
     --bg:          #ffffff;
     --bg-soft:     #F7F8FA;
@@ -244,6 +244,12 @@
     .contact-cta { padding: 56px 0; }
     .contact-cta .cta-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
     .contact-cta h2 { font-size: 22px; }
+  }
+
+  /* Small phones (480px-) */
+  @media (max-width: 480px) {
+    .num-grid { grid-template-columns: 1fr; }
+    .why-card { padding: 22px 20px; }
   }
 
   /* Large screens (1440px+): spacious layout */

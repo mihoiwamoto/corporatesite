@@ -3,18 +3,17 @@
 <head>
 <!--
   ===========================================================================
-  お知らせ詳細ページ（社員インタビュー・デモ）
-  ※ 掲載している氏名・経歴・コメントはすべてレイアウト確認用の仮サンプルです。
+  社員インタビュー：長谷川
   本番ではWordPressテーマの single.php に相当します。
   ===========================================================================
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-<title>社員インタビュー：分業せず、最後まで関わる開発がしたくて | お知らせ | 株式会社ランステック</title>
-<meta name="description" content="株式会社ランステックの社員インタビュー（サンプル）。グループの業務システムを自社内で開発するエンジニアに、入社の理由や仕事のやりがいを聞きました。">
-<meta property="og:title" content="社員インタビュー：分業せず、最後まで関わる開発がしたくて | 株式会社ランステック">
-<meta property="og:description" content="グループの業務システムを自社内で開発するエンジニアのインタビュー（サンプル）。">
+<title>未経験から20年。開発の面白さは、今も変わらない | お知らせ | 株式会社ランステック</title>
+<meta name="description" content="家電量販店の販売員からエンジニアへ転身し、20年以上キャリアを積んだランステックのシステムエンジニア・長谷川へのインタビュー。入社のきっかけ、業務の変化、これからのチャレンジを聞きました。">
+<meta property="og:title" content="未経験から20年。開発の面白さは、今も変わらない | 株式会社ランステック">
+<meta property="og:description" content="家電量販店の販売員からエンジニアへ転身し、20年以上キャリアを積んだシステムエンジニアのインタビュー。">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="株式会社ランステック">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,10 +27,7 @@
     --pink-dark:   #B84A66;
     --pink-light:  #FDF2F5;
     --pink-gradient: #F9E4EC;
-    --green:       #1A9D57;
-    --green-dark:  #147A44;
-    --green-light: #ECF7F1;
-    --ink:         #141C24;
+    --ink:         #243040;
     --sub:         #4A5568;
     --bg:          #ffffff;
     --bg-soft:     #F7F8FA;
@@ -41,15 +37,12 @@
     --shadow-sm:   0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
     --shadow-md:   0 4px 16px rgba(0,0,0,.05), 0 2px 6px rgba(0,0,0,.04);
     --shadow-lg:   0 12px 40px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
-    --shadow-xl:   0 20px 60px rgba(0,0,0,.08), 0 8px 20px rgba(0,0,0,.04);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
   body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.75; text-wrap: pretty; word-break: auto-phrase; }
 
-  /* BASE */
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
-  .eyebrow { font-size: 12px; font-weight: 500; color: var(--pink); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
 
   /* PAGE HERO */
   .page-hero { padding: 64px 0 40px; background: var(--bg); border-bottom: 1px solid var(--line); }
@@ -57,8 +50,6 @@
   .breadcrumb a { color: var(--sub); text-decoration: none; }
   .breadcrumb a:hover { color: var(--ink); }
   .breadcrumb span { margin: 0 6px; }
-
-  /* ARTICLE HEAD */
   .article-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
   .article-date { font-size: 13px; color: var(--sub); font-weight: 300; letter-spacing: .03em; }
   .article-cat { display: inline-block; background: var(--pink-light); border: 1px solid var(--line); color: var(--pink); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; }
@@ -72,25 +63,137 @@
   .article-body .lead { font-size: 16px; color: var(--sub); line-height: 2; }
   .article-body a { color: var(--pink); text-decoration: underline; text-underline-offset: 3px; }
   .article-body a:hover { color: var(--pink-dark); }
-  .article-body strong { font-weight: 700; }
   .article-note { background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 24px; font-size: 15px; color: var(--sub); line-height: 1.9; }
-  .article-note.demo { background: #fff8e6; border-color: #f0dca8; color: #8a6d1f; }
 
-  /* INTERVIEW: プロフィール */
-  .iv-profile { display: flex; align-items: center; gap: 18px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 24px; }
-  .iv-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--pink-light); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 700; color: var(--pink-dark); flex-shrink: 0; }
-  .iv-profile-name { font-size: 18px; font-weight: 700; }
-  .iv-profile-name .iv-en { font-size: 12px; font-weight: 500; color: var(--sub); margin-left: 8px; letter-spacing: .04em; }
-  .iv-profile-role { font-size: 13px; color: var(--sub); margin-top: 5px; line-height: 1.6; }
+  /* INTERVIEW: プロフィールカード */
+  .iv-hero {
+    display: flex;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--pink-light);
+    border: 1px solid rgba(212,99,126,.15);
+    margin: 32px 0 48px;
+    box-shadow: var(--shadow-md);
+  }
+  .iv-hero-photo {
+    flex: 0 0 210px;
+    background: var(--pink-light);
+    overflow: hidden;
+    position: relative;
+  }
+  .iv-hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .iv-hero-info {
+    flex: 1;
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+  .iv-hero-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 12px;
+  }
+  .iv-hero-name {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .iv-hero-role {
+    font-size: 13px;
+    color: var(--sub);
+    margin-top: 8px;
+    line-height: 1.8;
+  }
+  .iv-hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .iv-hero-tag {
+    font-size: 11px;
+    padding: 4px 12px;
+    border: 1px solid rgba(212,99,126,.3);
+    border-radius: 100px;
+    color: var(--pink-dark);
+    letter-spacing: .04em;
+  }
+
+  /* INTERVIEW: チャプター見出し */
+  .iv-chapter {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 60px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .iv-chapter-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    color: var(--pink);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .iv-chapter-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--sub);
+  }
 
   /* INTERVIEW: Q&A */
-  .iv-block { margin-top: 44px; }
-  .iv-q { display: flex; gap: 12px; align-items: baseline; font-size: 18px; font-weight: 700; line-height: 1.6; }
-  .iv-q .iv-mark { color: var(--pink); font-size: 18px; font-weight: 700; flex-shrink: 0; min-width: 20px; }
+  .iv-block { margin-top: 40px; }
+  .iv-block:first-of-type { margin-top: 0; }
+  .iv-q {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .iv-q .iv-mark { color: var(--pink); font-size: 17px; font-weight: 700; flex-shrink: 0; min-width: 22px; }
   .iv-a { display: flex; gap: 12px; margin-top: 14px; }
-  .iv-a .iv-mark { color: #c9c9c9; font-size: 18px; font-weight: 700; flex-shrink: 0; min-width: 20px; }
-  .iv-a p { font-size: 15px; line-height: 2; color: var(--ink); }
-  .iv-a p + p { margin-top: 14px; }
+  .iv-a .iv-mark { color: #bbbfc8; font-size: 17px; font-weight: 700; flex-shrink: 0; min-width: 22px; }
+  .iv-a-body p { font-size: 15px; line-height: 2.05; color: var(--ink); }
+  .iv-a-body p + p { margin-top: 14px; }
+
+  /* INTERVIEW: プルクォート */
+  .iv-pull {
+    margin: 48px 0;
+    padding: 28px 32px 28px 28px;
+    background: var(--pink-light);
+    border-left: 4px solid var(--pink);
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .iv-pull p {
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    line-height: 1.85 !important;
+    color: var(--ink) !important;
+    letter-spacing: -.01em;
+  }
+  .iv-pull-source {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: var(--sub) !important;
+    margin-top: 10px !important;
+  }
 
   /* ARTICLE FOOT */
   .article-foot { max-width: 800px; margin-top: 64px; }
@@ -102,39 +205,23 @@
   .post-nav .pn-label { display: block; font-size: 11px; color: var(--pink); font-weight: 700; margin-bottom: 4px; }
   .post-nav .pn-next { text-align: right; margin-left: auto; }
 
-  /* FOOTER */
-  .footer { background: var(--bg-soft); border-top: 1px solid var(--line); padding: 48px 0 28px; }
-  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 32px; }
-  .footer-brand { display: flex; flex-direction: column; gap: 16px; }
-  .footer-logo img { height: 28px; width: auto; display: block; }
-  .footer-brand address { font-style: normal; font-size: 12px; color: var(--sub); line-height: 1.8; }
-  .footer-group { margin-top: 4px; }
-  .footer-group-label { display: block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sub); margin-bottom: 8px; }
-  .footer-group-link { display: inline-flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 16px; text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 500; transition: border-color .15s, box-shadow .15s; }
-  .footer-group-link:hover { border-color: var(--sub); box-shadow: 0 2px 10px rgba(0,0,0,.06); }
-  .footer-group-link img { height: 18px; width: auto; display: block; }
-  .footer-group-link .fg-arrow { color: var(--sub); font-size: 12px; }
-  .footer-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px 24px; }
-  .footer-nav a { color: var(--sub); text-decoration: none; font-size: 13px; transition: color .15s; }
-  .footer-nav a:hover, .footer-nav a.current { color: var(--ink); }
-  .footer-nav a.footer-contact { border: 1px solid var(--ink); border-radius: 4px; padding: 9px 22px; color: var(--ink); font-weight: 700; transition: background .15s, color .15s; }
-  .footer-nav a.footer-contact:hover { background: var(--ink); color: #fff; }
-  .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid var(--line); padding-top: 22px; }
-  .footer-copy { font-size: 12px; color: var(--sub); }
-  .footer-privacy { font-size: 12px; color: var(--sub); text-decoration: none; transition: color .15s; }
-  .footer-privacy:hover { color: var(--ink); }
-
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .wrap { padding: 0 20px; }
-    .page-hero { padding: 40px 0 32px; }
-    .article-title { font-size: 23px; }
-    .article-section { padding: 40px 0 72px; }
-    .iv-q { font-size: 16px; }
-    .iv-profile { flex-direction: row; }
-    .footer-inner { flex-direction: column; gap: 28px; }
-    .footer-nav { justify-content: flex-start; gap: 14px 20px; }
-    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .page-hero { padding: 40px 0 28px; }
+    .article-title { font-size: 22px; }
+    .article-section { padding: 36px 0 72px; }
+    .iv-hero { flex-direction: column; }
+    .iv-hero-photo { flex: 0 0 220px; width: 100%; }
+    .iv-hero-photo img { height: 220px; object-position: center 15%; }
+    .iv-hero-info { padding: 24px 24px 28px; }
+    .iv-hero-name { font-size: 22px; }
+    .iv-q { font-size: 15px; }
+    .iv-chapter { margin-top: 48px; }
+    .iv-pull p { font-size: 15px !important; }
+    .post-nav { flex-direction: column; gap: 20px; }
+    .post-nav a { max-width: 100%; }
+    .post-nav .pn-next { text-align: left; margin-left: 0; }
   }
 </style>
 </head>
@@ -142,99 +229,175 @@
 
 <div id="site-header"></div>
 
-<!-- 記事ヘッダー -->
 <div class="page-hero">
   <div class="wrap">
     <p class="breadcrumb"><a href="/">ホーム</a><span>/</span><a href="/news.html">お知らせ</a><span>/</span>社員インタビュー</p>
     <div class="article-meta">
-      <span class="article-date">2026.06.16</span>
+      <span class="article-date">2026.07.01</span>
       <span class="article-cat">社員インタビュー</span>
     </div>
-    <h1 class="article-title">分業せず、最後まで関わる開発がしたくて</h1>
+    <h1 class="article-title">未経験から20年。開発の面白さは、今も変わらない</h1>
   </div>
 </div>
 
-<!-- 記事本文 -->
 <section class="article-section">
   <div class="wrap">
     <article class="article-body">
 
-      <div class="article-note demo">
-        ※ このページは社員インタビュー記事のレイアウト確認用<strong>デモ</strong>です。氏名・経歴・コメントはすべて仮のサンプル内容です。
-      </div>
+      <p class="lead">家電量販店の販売員からエンジニアへ——プログラミング未経験でIT業界に飛び込み、20年以上が経ちました。グループ統合を経てランステックに合流したシステムエンジニアの長谷川さんに、入社のきっかけや業務の変化、これからのチャレンジについて聞きました。</p>
 
-      <p class="lead">グループの業務システムを、自社内で企画から運用まで担うランステック。中途入社のエンジニアに、入社のきっかけや日々の仕事、これからについて聞きました。</p>
-
-      <div class="iv-profile">
-        <div class="iv-avatar" aria-hidden="true">山</div>
-        <div>
-          <div class="iv-profile-name">山田 太郎<span class="iv-en">Taro Yamada</span></div>
-          <div class="iv-profile-role">システムエンジニア／2024年 中途入社<br>グループ向け業務システムの設計・開発・運用を担当</div>
+      <!-- プロフィールカード -->
+      <div class="iv-hero">
+        <div class="iv-hero-photo">
+          <img src="/assets/images/interview-photo.png" alt="長谷川さんの写真" width="420" height="480">
+        </div>
+        <div class="iv-hero-info">
+          <p class="iv-hero-eyebrow">Member Interview</p>
+          <p class="iv-hero-name">長谷川</p>
+          <p class="iv-hero-role">システムエンジニア<br>グループ向け業務システムの開発・保守を担当</p>
+          <div class="iv-hero-tags">
+            <span class="iv-hero-tag">Laravel / PHP</span>
+            <span class="iv-hero-tag">中途入社</span>
+            <span class="iv-hero-tag">グループ統合</span>
+          </div>
         </div>
       </div>
 
+      <!-- Chapter 01 -->
+      <div class="iv-chapter">
+        <span class="iv-chapter-num">Chapter 01</span>
+        <span class="iv-chapter-label">家電販売員から、エンジニアへ</span>
+      </div>
+
       <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>これまでの経歴と、ランステックに入社した理由を教えてください。</p>
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>エンジニアになったきっかけを教えてください。</p>
         <div class="iv-a">
           <span class="iv-mark" aria-hidden="true">A.</span>
-          <div>
-            <p>前職では受託開発の会社で、いろいろな業界のシステムを担当していました。やりがいはありましたが、納品したら離れてしまうことが多く、「つくったものがその後どう使われているのか」を見届けにくいのが、ずっと心残りでした。</p>
-            <p>ランステックはグループの業務システムを自社内で開発していて、企画から運用まで同じチームで一貫して担当します。途中で分業せず、最後まで自分の手で関われるところに惹かれて入社を決めました。</p>
+          <div class="iv-a-body">
+            <p>もともとは家電量販店の販売員として働いていました。当時、同じ現場で友人と一緒に働いていたんですが、その友人がアロウズ・システムという会社の社員で。自分が「そろそろ辞めようかな」と思っていたタイミングで「うちに来ないか」と声をかけてもらったのがきっかけです。</p>
+            <p>プログラミングは当時まったく経験がなくて、入社してから覚えました。家電量販店も4か月くらいしかいなかったんですが——辞めると言ったら同時に入った4人のうち3人が「じゃあ自分も」って言い出して（笑）。みんなで一緒に辞めてきてしまって、なんか自分のせいみたいな雰囲気になってしまいました。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 02 -->
+      <div class="iv-chapter">
+        <span class="iv-chapter-num">Chapter 02</span>
+        <span class="iv-chapter-label">ランステックへの合流</span>
+      </div>
+
+      <div class="iv-block">
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>ランステックに入ったのはどういう経緯ですか？</p>
+        <div class="iv-a">
+          <span class="iv-mark" aria-hidden="true">A.</span>
+          <div class="iv-a-body">
+            <p>アロウズ・システムが西原商会グループに入って、その後ランステックもグループに参画して、アロウズはランステックに統合されたという流れです。なので「転職した」という実感はあまりなくて、気がついたらランステックにいた、という感じですね。</p>
+            <p>アロウズには20年以上いたので、統合前後で一緒に働いていた仲間が少しずつ離れていったのは正直寂しかったです。ただ、自分の気持ちよりも会社の流れに乗って移ってきた形なので、そこは受け入れています。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 03 -->
+      <div class="iv-chapter">
+        <span class="iv-chapter-num">Chapter 03</span>
+        <span class="iv-chapter-label">業務の変化と技術的なチャレンジ</span>
+      </div>
+
+      <div class="iv-block">
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>入社前後で業務内容は変わりましたか？</p>
+        <div class="iv-a">
+          <span class="iv-mark" aria-hidden="true">A.</span>
+          <div class="iv-a-body">
+            <p>かなり変わりました。前は上流・設計がメインで、開発はほとんどやらなかったんです。担当が一人でしたし、カスタマイズよりも既存ツールを使いこなす仕事が多くて、実装は人に任せる形でした。</p>
+            <p>ランステックに入ってからはLaravelを使ったシステム開発がメインになりました。PHPは入社前は触ったことがなかったんですが、今は開発が楽しくて。設計からデータベース設計まで全部やるようになったので、経験をちゃんと積んでいけているなとは思います。</p>
           </div>
         </div>
       </div>
 
       <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>普段はどんな仕事をしていますか。</p>
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>最近、印象に残っている技術的なチャレンジはありますか？</p>
         <div class="iv-a">
           <span class="iv-mark" aria-hidden="true">A.</span>
-          <div>
-            <p>販売管理や受発注まわりの業務システムを、要件定義から設計・開発・運用保守まで一貫して担当しています。実際に使う現場の人と近い距離で、「ここが使いにくい」「この作業を減らしたい」といった声を聞きながら改善していけるのが、この仕事ならではだと思います。</p>
+          <div class="iv-a-body">
+            <p>Web Pushの実装は知識がまったくないところから始めました。通知をどうやって届けるのかも知らない状態でしたが、調べながら進めたら実装できて、それは良かったなと思います。カメラの自動検知も今回初めて担当しました。技術選定は先輩と一緒に調べて「これでいけそう」となってから実装する、という流れです。</p>
+            <p>ユニットテストはAIを活用して自動化を進めていて、カバレッジが自動で取れるようになりました。効率はだいぶ上がりましたね。ただ見た目の確認は必ず自分の目でやる必要があるので、そこだけは手を抜けません。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- プルクォート -->
+      <div class="iv-pull">
+        <p>「AIを活用して、開発が一人でどこまでできるか——その実感が持てたことが、入社してから一番の収穫かもしれません。」</p>
+        <p class="iv-pull-source">長谷川 / システムエンジニア</p>
+      </div>
+
+      <!-- Chapter 04 -->
+      <div class="iv-chapter">
+        <span class="iv-chapter-num">Chapter 04</span>
+        <span class="iv-chapter-label">働き方とチームの雰囲気</span>
+      </div>
+
+      <div class="iv-block">
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>普段の働き方を教えてください。</p>
+        <div class="iv-a">
+          <span class="iv-mark" aria-hidden="true">A.</span>
+          <div class="iv-a-body">
+            <p>朝は6時20分ごろに起きます。家族で一番早くて、4人分の朝食の準備をしてから出発します。7時40分に家を出て、8時15分ごろには会社に着いていますね。退社は18時ごろで、家には19時前後に着く感じです。</p>
+            <p>出社はほぼ週5日です。自宅に仕事専用の環境がないので、出社したほうが気持ち的にも楽なんです。特に在宅派というわけでもないので、そのまま来ている感じです。</p>
           </div>
         </div>
       </div>
 
       <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>仕事のやりがいや、難しさはどんなところですか。</p>
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>チームのコミュニケーションはどんな感じですか？</p>
         <div class="iv-a">
           <span class="iv-mark" aria-hidden="true">A.</span>
-          <div>
-            <p>自分が直した画面が現場の作業時間を短くできたときは、素直にうれしいです。一方で、長く使われるシステムだからこそ、その場しのぎではなく将来も保守しやすい形でつくる必要があって、そこは難しさでもあり面白さでもあります。</p>
+          <div class="iv-a-body">
+            <p>Slackがメインですが、近くにいる人とは直接話すことも多いです。隣の方が質問に来てくれることもあるので、自然とやりとりは多くなりますね。</p>
+            <p>タスク管理ツールは……正直あまりうまく使えていなくて（笑）。登録はしているんですが、しっかり活用できているかというと微妙です。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 05 -->
+      <div class="iv-chapter">
+        <span class="iv-chapter-num">Chapter 05</span>
+        <span class="iv-chapter-label">入社後の成長と、これからのこと</span>
+      </div>
+
+      <div class="iv-block">
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>入社してから一番成長を感じた経験は何ですか？</p>
+        <div class="iv-a">
+          <span class="iv-mark" aria-hidden="true">A.</span>
+          <div class="iv-a-body">
+            <p>デザイナーと一緒にプロジェクトを進める経験ができたことですね。これまではデザインがある程度決まった状態で実装するパターンが多くて、デザイナーと協働したことがなかったんです。フロントエンドとバックエンドをそれぞれ別に作業して、一つのプロジェクトに統合していく進め方は初めてで、良い経験になりました。</p>
+            <p>開発でも、AIを活用してどこまでできるかの実感が持てたのは収穫でした。一人でも対応できる幅が広がってきている気がします。</p>
           </div>
         </div>
       </div>
 
       <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>チームや働き方の雰囲気はどうですか。</p>
+        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>今後チャレンジしたいことはありますか？</p>
         <div class="iv-a">
           <span class="iv-mark" aria-hidden="true">A.</span>
-          <div>
-            <p>いろいろな会社から集まったメンバーが多く、やり方も得意分野もさまざまです。「自分のやり方に揃えてもらう」のではなく、互いのやり方に理由があると認め合いながら進める雰囲気があります。客先常駐がなく、腰を据えて開発に向き合えるのも働きやすさにつながっていると感じます。</p>
+          <div class="iv-a-body">
+            <p>モバイルアプリの開発に挑戦してみたいですね。iOSやAndroidのアプリは今まで作ったことがないので、ぜひやってみたいです。AIを使えば今なら作れそうな気がしていて——Webのバックエンドもフロントエンドもできてきたので、アプリまで広げられたらおもしろいなと思っています。</p>
           </div>
         </div>
       </div>
 
-      <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>これから応募を考えている方へ、メッセージをお願いします。</p>
-        <div class="iv-a">
-          <span class="iv-mark" aria-hidden="true">A.</span>
-          <div>
-            <p>派手さよりも、企画から運用まで一気通貫で関わる仕事に魅力を感じる方には、合う環境だと思います。経験の幅は問いません。気になることがあれば、まずは気軽に話を聞きに来てもらえたらうれしいです。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-note" style="margin-top:44px;">
+      <!-- 採用 CTA -->
+      <div class="article-note" style="margin-top:52px;">
         採用に関するご質問・ご応募は、<a href="/contact.html?type=recruit">お問い合わせフォーム</a>（種別「採用への応募・ご質問」）よりお気軽にどうぞ。
       </div>
+
     </article>
 
-    <!-- 記事フッター -->
     <div class="article-foot">
       <a href="/news.html" class="back-to-list">‹ お知らせ一覧へ戻る</a>
       <nav class="post-nav">
-        <a class="pn-prev" href="/news/site-renewal.html"><span class="pn-label">前の記事</span>コーポレートサイトをリニューアルしました</a>
-        <a class="pn-next" href="/news/recruit-restart.html"><span class="pn-label">次の記事</span>エンジニア採用を再開しました</a>
+        <a class="pn-prev" href="/news/recruit-restart.html"><span class="pn-label">前の記事</span>エンジニア採用を再開しました</a>
+        <span></span>
       </nav>
     </div>
   </div>
@@ -244,7 +407,6 @@
 
 <script src="/assets/js/header.js"></script>
 <script src="/assets/js/footer.js"></script>
-
 <script src="/assets/js/review-mode.js"></script>
 </body>
 </html>

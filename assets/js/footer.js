@@ -4,7 +4,7 @@
     '  <div class="wrap">\n' +
     '    <div class="footer-top">\n' +
     '      <div class="footer-brand">\n' +
-    '        <a href="/" class="footer-logo"><img src="/assets/images/lanstech_logo_white.svg" alt="株式会社ランステック"></a>\n' +
+    '        <a href="/" class="footer-logo"><img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック"></a>\n' +
     '        <address>〒135-0044 東京都江東区越中島1-1-1 ヤマタネ深川1号館 2F</address>\n' +
     '        <div class="footer-group">\n' +
     '          <span class="footer-group-label">Group</span>\n' +

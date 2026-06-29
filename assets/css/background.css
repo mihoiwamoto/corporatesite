@@ -68,20 +68,54 @@ body::after {
 
 /* 角の「3本線の扇」あしらい（左上＋右下）は削除（全ページ非表示） */
 
-/* --- セクションの帯背景を透過してページ背景（地紋）を見せる ------------------ */
-/* カード（.card / .service-item / .group-card / .group-visual 等）・ヘッダー・
-   フッターは各自の背景を保持。ここで透過するのは「帯」だけ。 */
+/* --- セクション帯：4パターンの処理でリズムをつくる -------------------------- */
+/* 単調な全幅フロストをやめ、セクションの性格で処理を使い分ける:               */
+/* [透明] アニメそのまま  [カード] wrap幅のみガラス化  [淡帯] 全幅で薄色  [画像] */
+
 body { background: transparent !important; }
-section,
-.page-hero,
-.news-teaser {
-  background: transparent !important;
+
+/* [基本] 全セクション透明 — アニメをそのまま見せる */
+section { background: transparent !important; }
+.page-hero { background: rgba(255,255,255,0.82) !important; }
+.news-teaser { background: rgba(255,255,255,0.88) !important; }
+
+/* [淡い全幅帯] GROUP — 全幅に微グリーンを引いて視覚アンカーを置く */
+/* SERVICES/INTERVIEW は各カードが自前で白背景を持つので透明のまま  */
+.group { background: rgba(237,248,242,0.40) !important; }
+
+/* [コンテンツカード] RECRUIT — コンテンツ幅だけをガラスカード化 */
+/* section の padding(120px)が外側余白、.wrap がカード本体として浮く   */
+.recruit > .wrap {
+  background: rgba(255,255,255,0.84);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.95);
+  box-shadow: 0 4px 40px rgba(0,0,0,0.07), 0 1px 6px rgba(0,0,0,0.03);
+  padding: 52px 56px;
+}
+
+@media (max-width: 768px) {
+  .recruit > .wrap {
+    border-radius: 16px;
+    padding: 36px 24px;
+  }
 }
 
 /* --- A11y: eyebrow（小さいピンク大文字ラベル）を AA 確保のため濃いピンクに ----- */
 /* 各ページのインライン .eyebrow{color:var(--pink)} を全ページ横断で上書き。       */
-/* 読込順（link→inline）の差を吸収するため !important。大きいピンク装飾は対象外。  */
-.eyebrow { color: var(--pink-dark, #B84A66) !important; }
+/* ピル型背景でセクション冒頭を視覚的に明示しつつ、アニメ背景でも読みやすくする。  */
+.eyebrow {
+  color: var(--pink-dark, #B84A66) !important;
+  display: inline-block !important;
+  background: rgba(255,255,255,0.90) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+  padding: 4px 14px !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(184,74,102,0.20) !important;
+  font-size: 12px !important; /* 11px → 12px：小さすぎず */
+}
 
 /* 印刷時は地紋を出さない */
 @media print {

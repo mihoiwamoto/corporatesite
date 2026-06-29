@@ -37,12 +37,12 @@ const DEFAULTS = {
   bendRadius: 5.0,
   bendStrength: -0.5,
   mouseDamping: 0.05,
-  parallax: true,
+  parallax: false,
   parallaxStrength: 0.2,
   // ブランドカラー：ピンク↔グリーン（白地で暗く見えないよう明るめ・グレーは使わない）
-  linesGradient: ['#E07898', '#1FAE64', '#E07898'],
+  linesGradient: ['#FF5599', '#00DD77', '#FF5599'],
   opacity: 0.4, // 線の濃さ（0=見えない 〜 1=濃い）。multiply合成での色の乗り具合。
-  lighten: 0.2 // ベース色の白寄せ量（大きいほど淡い色）
+  lighten: 0.45 // ベース色の白寄せ量（大きいほど淡い色）
 };
 
 const cfg = Object.assign({}, DEFAULTS, (typeof window !== 'undefined' && window.FLOATING_LINES_CONFIG) || {});
@@ -132,6 +132,20 @@ vec3 getLineColor(float t, vec3 baseColor) {
   return gradientColor * 0.5;
 }
 
+vec3 rgb2hsv(vec3 c) {
+  vec4 K = vec4(0.0, -1.0/3.0, 2.0/3.0, -1.0);
+  vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+  vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+  float d = q.x - min(q.w, q.y);
+  return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + 1e-10)), d / (q.x + 1e-10), q.x);
+}
+
+vec3 hsv2rgb(vec3 c) {
+  vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
+  vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+  return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+
 float wave(vec2 uv, float offset, vec2 screenUv, vec2 mouseUv, bool shouldBend) {
   float time = iTime * animationSpeed;
   float x_offset   = offset;
@@ -207,7 +221,14 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
   vec3 cA = lineGradientCount > 0 ? lineGradient[0] : vec3(0.88, 0.39, 0.49);
   vec3 cB = lineGradientCount > 1 ? lineGradient[1] : vec3(0.10, 0.62, 0.34);
   float g = clamp(0.5 + 0.45 * (baseUv.x - baseUv.y), 0.0, 1.0);
-  vec3 hue = mix(cA, cB, g);
+  g = g < 0.5 ? 2.0 * g * g : 1.0 - 2.0 * (1.0 - g) * (1.0 - g); // S字カーブ：ピンク・緑エリアを広げ中間を圧縮
+  // HSV色空間で色相補間（暖色経由：ピンク→オレンジ→黄→グリーン）
+  vec3 hsvA = rgb2hsv(cA);
+  vec3 hsvB = rgb2hsv(cB);
+  float dh = hsvB.x - hsvA.x;
+  if (dh < -0.5) dh += 1.0;
+  if (dh >  0.5) dh -= 1.0;
+  vec3 hue = hsv2rgb(vec3(fract(hsvA.x + dh * g), mix(hsvA.y, hsvB.y, g), mix(hsvA.z, hsvB.z, g)));
   hue = mix(hue, vec3(1.0), uLighten); // ベース色をやや白寄せして淡いパステルに
 
   fragColor = vec4(hue, m); // rgb=クリーンな色, a=線の強さ（main で白地に合成）
