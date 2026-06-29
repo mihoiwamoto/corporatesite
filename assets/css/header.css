@@ -1,5 +1,9 @@
 /* ===== SHARED HEADER / NAV ===== */
 /* フローティング・ピル型ヘッダー + SmartHR風トップパネルメニュー */
+
+/* スクロールバー領域を常時確保し、overflow切替時のレイアウトシフト（ボタン位置ずれ）を防ぐ */
+html { scrollbar-gutter: stable; }
+
 .site-nav { position: fixed; top: 14px; left: 0; right: 0; z-index: 200; pointer-events: none; }
 
 .nav-row {

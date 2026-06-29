@@ -130,7 +130,7 @@
     backdrop.classList.add('open');
     btn.setAttribute('aria-expanded', 'true');
     nav.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
     if (wrap) wrap.classList.add('nav-hidden');
   }
 
@@ -139,7 +139,7 @@
     backdrop.classList.remove('open');
     btn.setAttribute('aria-expanded', 'false');
     nav.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
     if (wrap) wrap.classList.remove('nav-hidden');
   }
 
