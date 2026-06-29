@@ -154,3 +154,50 @@
     a.addEventListener('click', closeMenu);
   });
 })();
+
+// ── ページ遷移ディゾルブ（全ブラウザ共通・JS 制御）──────────────────────────
+// html::before にグラデ背景があるため opacity:0 でも真っ白にならない
+(function () {
+  var D = 600; // CSS transition(.6s) と揃える
+  var b = document.body;
+
+  function show() {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { b.classList.add('pgt-visible'); });
+    });
+  }
+
+  // reduced-motion: 即時表示・遷移なし
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    b.classList.add('pgt-visible');
+    return;
+  }
+
+  // ページ入場：フェードイン
+  show();
+
+  // bfcache（ブラウザの戻る/進む）
+  window.addEventListener('pageshow', function (e) { if (e.persisted) show(); });
+
+  // クリック瞬時にフェードアウト開始 → D ms 後に遷移（即座に視覚フィードバック）
+  document.addEventListener('click', function (e) {
+    if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href) return;
+    if (href.indexOf('mailto:') === 0 ||
+        href.indexOf('tel:') === 0 ||
+        href.indexOf('javascript:') === 0 ||
+        a.getAttribute('target') === '_blank') return;
+    var url;
+    try { url = new URL(href, location.href); } catch (ex) { return; }
+    if (url.hostname !== location.hostname) return;
+    if (url.pathname === location.pathname && url.hash) return;
+    if (url.href === location.href) return;
+    e.preventDefault();
+    b.classList.remove('pgt-visible');
+    var dest = url.href;
+    setTimeout(function () { window.location.assign(dest); }, D);
+  }, true);
+})();

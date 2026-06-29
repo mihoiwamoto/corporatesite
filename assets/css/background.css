@@ -31,8 +31,10 @@
 .floating-lines-bg canvas { display: block; width: 100%; height: 100%; }
 
 /* --- ページ背景（背面）：四隅にピンク/グリーンをにじませる ------------------ */
-/* 固定配置でビューポートに対して常に同じ位置に出る（スクロールしても安定）。  */
-body::before {
+/* html::before に置いた理由：body { opacity: 0 } でも消えないようにするため。  */
+/* body::before は body の opacity 合成グループに含まれ、opacity:0 で消える。   */
+/* html::before は body の外側にあるため常に表示される → 真っ白にならない。    */
+html::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -72,11 +74,49 @@ body::after {
 /* 単調な全幅フロストをやめ、セクションの性格で処理を使い分ける:               */
 /* [透明] アニメそのまま  [カード] wrap幅のみガラス化  [淡帯] 全幅で薄色  [画像] */
 
-body { background: transparent !important; }
+body {
+  background: transparent !important;
+  font-size: 18px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* ページ遷移ディゾルブ：JS が pgt-visible を付与するまで不可視 */
+  opacity: 0;
+  transition: opacity .6s cubic-bezier(.4, 0, .2, 1);
+}
+body.pgt-visible { opacity: 1; }
 
 /* [基本] 全セクション透明 — アニメをそのまま見せる */
 section { background: transparent !important; }
-.page-hero { background: rgba(255,255,255,0.82) !important; }
+.page-hero { background: rgba(255,255,255,0.92) !important; -webkit-backdrop-filter: blur(24px) saturate(1.6) !important; backdrop-filter: blur(24px) saturate(1.6) !important; border-bottom: none !important; overflow: hidden; }
+
+/* ===== PAGE HERO: 英日二段タイポグラフィ型 =====
+   eyebrow を大型・透過テキストとして配置し、
+   h1 が手前に重なることで奥行きと格調を演出する。
+   .page-hero .eyebrow（詳細度 0,2,0）が各ページの
+   .eyebrow（0,1,0）を上書きするため !important 不要。
+*/
+.page-hero .eyebrow {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: clamp(48px, 7.5vw, 84px) !important;
+  font-weight: 800 !important;
+  color: rgba(212, 99, 126, 0.10) !important;
+  letter-spacing: 0.06em !important;
+  line-height: 1 !important;
+  margin-bottom: -22px !important;
+  text-transform: uppercase !important;
+  display: block !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .page-hero .eyebrow { font-size: clamp(32px, 10vw, 52px) !important; margin-bottom: -14px !important; }
+}
 .news-teaser { background: rgba(255,255,255,0.88) !important; }
 
 /* [淡い全幅帯] GROUP — 全幅に微グリーンを引いて視覚アンカーを置く */

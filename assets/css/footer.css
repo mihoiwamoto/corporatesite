@@ -1,5 +1,5 @@
 /* ===== SHARED FOOTER ===== */
-.footer { background: rgba(255,255,255,0.38); -webkit-backdrop-filter: blur(64px) saturate(2.0); backdrop-filter: blur(64px) saturate(2.0); border-top: 1px solid rgba(255,255,255,0.55); color: var(--ink); padding: 88px 0 40px; position: relative; isolation: isolate; }
+.footer { background: radial-gradient(ellipse 80% 130% at 10% 0%, rgba(212,99,126,.10) 0%, transparent 65%), radial-gradient(ellipse 70% 100% at 92% 110%, rgba(26,157,87,.08) 0%, transparent 65%), rgba(255,255,255,0.78); -webkit-backdrop-filter: blur(48px) saturate(1.8); backdrop-filter: blur(48px) saturate(1.8); border-top: 1px solid rgba(255,255,255,0.60); color: var(--ink); padding: 88px 0 40px; position: relative; isolation: isolate; }
 .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 64px; }
 
 /* BRAND */

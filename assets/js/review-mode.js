@@ -334,7 +334,7 @@
   var ICON_SPEC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></svg>';
   var specFab = document.createElement('a');
   specFab.className = 'rv-fab-spec';
-  specFab.href = '/screens.html';
+  specFab.href = '/_internal/screens.html';
   specFab.innerHTML = ICON_SPEC;
   specFab.setAttribute('aria-label', '画面構成ドキュメント');
   specFab.setAttribute('title', '画面構成ドキュメント');

@@ -16,12 +16,17 @@
 .service-visual .lottie-icon.lottie-ready .lottie-fallback { display: none; }
 
 /* ---- 線スタイル / 配色（常時適用）---- */
-.lottie-fallback { fill: none; stroke: var(--pink); stroke-width: var(--svc-stroke, 1.0); stroke-linecap: round; stroke-linejoin: round; }
+.lottie-fallback { fill: none; stroke: var(--pink); stroke-width: var(--svc-stroke, 0.65); stroke-linecap: round; stroke-linejoin: round; }
 .lottie-fallback .f-white { fill: #fff; }
 .lottie-fallback .f-green { fill: var(--green); stroke: none; }
+.lottie-fallback .f-amber { fill: rgba(230,152,10,.9); stroke: none; }
 .lottie-fallback .c-green { stroke: var(--green); }
 .ic-plan .bubble { transform-box: fill-box; transform-origin: bottom; }
 .ic-dev .click-ring { transform-box: fill-box; transform-origin: center; opacity: 0; }
+.ic-ops .wave-dot { transform-box: view-box; }
+.lottie-fallback .kbd-line { stroke: rgba(36,48,64,.16); }
+.ic-dev .key-a1, .ic-dev .key-a3 { fill: var(--pink); stroke: none; }
+.ic-dev .key-a2 { fill: var(--green); stroke: none; }
 
 
 @media (prefers-reduced-motion: no-preference) {
@@ -42,13 +47,16 @@
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
   }
+  .lottie-icon.anim-ready .ic-dev .key-a { opacity: 0; }
   /* ic-plan: 吹き出しを下方にオフセットして非表示 */
   .lottie-icon.anim-ready .ic-plan .bubble { opacity: 0; transform: scale(0) translateY(3px); }
+  /* ic-plan: チェックマークを非表示（描画アニメ開始前） */
+  .lottie-icon.anim-ready .ic-plan .chk-mark { stroke-dasharray: 1; stroke-dashoffset: 1; }
 
-  /* ic-ops: 波形パスを非表示（初回スクロールで描画） */
+  /* ic-ops: 波形パスを非表示（初回スクロールで描画、pathLength="1" 前提） */
   .lottie-icon.anim-ready .ic-ops .wave {
-    stroke-dasharray: 22;
-    stroke-dashoffset: 22;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
   }
 
   /* ==========================================
@@ -60,6 +68,10 @@
   .lottie-icon.anim-ready.in-view .ic-plan .bubB {
     animation: svc-pop 3.2s cubic-bezier(.34,1.56,.64,1) 1.6s infinite;
   }
+  /* チェックが会話に合わせて順番に描かれる（描き終わったら保持） */
+  .lottie-icon.anim-ready.in-view .ic-plan .chk-1 { animation: chk-draw .38s ease-out .5s both; }
+  .lottie-icon.anim-ready.in-view .ic-plan .chk-2 { animation: chk-draw .38s ease-out 2.2s both; }
+  .lottie-icon.anim-ready.in-view .ic-plan .chk-3 { animation: chk-draw .38s ease-out 3.8s both; }
 
   /* ==========================================
      設計・開発 — コード行が順次描かれ、カーソルが移動してクリック
@@ -70,7 +82,11 @@
   .lottie-icon.anim-ready.in-view .ic-dev .cl1 { animation-delay: 0s; }
   .lottie-icon.anim-ready.in-view .ic-dev .cl2 { animation-delay: .38s; }
   .lottie-icon.anim-ready.in-view .ic-dev .cl3 { animation-delay: .72s; }
-  .lottie-icon.in-view .ic-dev .mouse  { animation: svc-cursor 4s cubic-bezier(.4, 0, .2, 1) 1.2s infinite; }
+  /* キーフラッシュ: コード行描画と同タイミング */
+  .lottie-icon.anim-ready.in-view .ic-dev .key-a1 { animation: key-tap .65s ease-out 0s both; }
+  .lottie-icon.anim-ready.in-view .ic-dev .key-a2 { animation: key-tap .65s ease-out .38s both; }
+  .lottie-icon.anim-ready.in-view .ic-dev .key-a3 { animation: key-tap .65s ease-out .72s both; }
+  .lottie-icon.in-view .ic-dev .mouse  { animation: dev-cursor 4s cubic-bezier(.4, 0, .2, 1) 1.2s infinite; }
   .lottie-icon.in-view .ic-dev .click-ring { animation: svc-click 4s ease-in-out 1.2s infinite; }
 
   /* ==========================================
@@ -79,14 +95,28 @@
   .lottie-icon.anim-ready.in-view .ic-ops .wave {
     animation: svc-wave-draw 1s cubic-bezier(.4, 0, .2, 1) .2s both;
   }
-  .lottie-icon.in-view .ic-ops .wave-dot { animation: svc-wave 2.4s linear 1.3s infinite; }
+  .lottie-icon.in-view .ic-ops .wave-dot { animation: ops-wave 2.4s linear 1.3s infinite; }
   .lottie-icon.in-view .ic-ops .led  { animation: svc-led 1.8s ease-in-out 1.4s infinite; }
-  .lottie-icon.in-view .ic-ops .led2 { animation: svc-led 1.8s ease-in-out 2.3s infinite; }
+  .lottie-icon.in-view .ic-ops .led2 { animation: svc-led-amber 1.8s ease-in-out 2.3s infinite; }
 }
 
 /* ======================
    keyframes
 ====================== */
+
+/* キータップ: 点灯してわずかに残る */
+@keyframes key-tap {
+  0%   { opacity: 0; }
+  12%  { opacity: 0.85; }
+  50%  { opacity: 0.18; }
+  100% { opacity: 0.12; }
+}
+
+/* チェックマークを描く（pathLength="1" 前提） */
+@keyframes chk-draw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
 
 /* コード行を左→右へ描く（pathLength="1" 前提） */
 @keyframes svc-line-draw {
@@ -94,9 +124,9 @@
   to   { stroke-dashoffset: 0; }
 }
 
-/* 波形パスを描き出す（初回のみ） */
+/* 波形パスを描き出す（初回のみ、pathLength="1" 前提） */
 @keyframes svc-wave-draw {
-  from { stroke-dashoffset: 22; }
+  from { stroke-dashoffset: 1; }
   to   { stroke-dashoffset: 0; }
 }
 
@@ -108,6 +138,13 @@
   28%, 44%  { opacity: 1;   transform: scale(1)    translateY(0); }
   55%       { opacity: 0;   transform: scale(.72)  translateY(2px); }
   100%      { opacity: 0;   transform: scale(.72)  translateY(2px); }
+}
+
+/* iMac画面内のカーソル移動（小さい画面に合わせて控えめな移動量） */
+@keyframes dev-cursor {
+  0%,  14%  { transform: translate(0, 0); }
+  28%, 48%  { transform: translate(1.5px, 2px); }
+  62%, 100% { transform: translate(0, 0); }
 }
 
 /* カーソル移動（2回の往復、オーバーシュート気味） */
@@ -131,7 +168,19 @@
   100%     { transform: scale(.3); opacity: 0; }
 }
 
-/* 緑ドットが波形路線を走る */
+/* 緑ドットが滑らか波形を走る（パーセント単位でスケール対応: x=3→25, viewBox 28×26） */
+@keyframes ops-wave {
+  0%   { transform: translate(0, 0);                  opacity: 0; }
+  5%   { opacity: 1; }
+  14%  { transform: translate(10.7%, 0); }
+  28%  { transform: translate(23.2%, -9.6%); }
+  43%  { transform: translate(35.7%, 11.5%); }
+  51%  { transform: translate(42.9%, 0); }
+  94%  { transform: translate(78.6%, 0);               opacity: 1; }
+  100% { transform: translate(78.6%, 0);               opacity: 0; }
+}
+
+/* 緑ドットが波形路線を走る（旧・未使用） */
 @keyframes svc-wave {
   0%   { transform: translate(0, 0);     opacity: 0; }
   6%   { opacity: 1; }
@@ -148,3 +197,10 @@
   0%, 100% { opacity: 1;   filter: drop-shadow(0 0 1.5px var(--green)); }
   50%      { opacity: .18; filter: none; }
 }
+
+/* アンバーLED 明滅（警告ステータス色） */
+@keyframes svc-led-amber {
+  0%, 100% { opacity: 1;   filter: drop-shadow(0 0 1.5px rgba(230,152,10,.9)); }
+  50%      { opacity: .18; filter: none; }
+}
+

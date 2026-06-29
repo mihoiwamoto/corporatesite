@@ -15,173 +15,7 @@
 <link rel="stylesheet" href="/assets/css/header.css">
 <link rel="stylesheet" href="/assets/css/footer.css">
 <link rel="stylesheet" href="/assets/css/background.css">
-<style>
-  :root {
-    --pink:        #D4637E;
-    --pink-dark:   #B84A66;
-    --pink-light:  #FDF2F5;
-    --pink-gradient: #F9E4EC;
-    --green:       #1A9D57;
-    --green-dark:  #147A44;
-    --green-light: #ECF7F1;
-    --ink:         #243040;
-    --sub:         #4A5568;
-    --bg:          #ffffff;
-    --bg-soft:     #F7F8FA;
-    --line:        #E8ECF0;
-    --radius:      12px;
-    --maxw:        1200px;
-    --shadow-sm:   0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
-    --shadow-md:   0 4px 16px rgba(0,0,0,.05), 0 2px 6px rgba(0,0,0,.04);
-    --shadow-lg:   0 12px 40px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
-    --shadow-xl:   0 20px 60px rgba(0,0,0,.08), 0 8px 20px rgba(0,0,0,.04);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
-  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.8; font-weight: 400; text-wrap: pretty; word-break: auto-phrase; }
-
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
-  section { padding: 120px 0; }
-  .eyebrow { font-size: 11px; font-weight: 700; color: var(--pink-dark); letter-spacing: .25em; text-transform: uppercase; margin-bottom: 16px; display: block; }
-  h2.title { font-size: clamp(28px, 3.5vw, 38px); font-weight: 700; line-height: 1.5; letter-spacing: -.02em; margin-bottom: 0; }
-
-  .btn { display: inline-block; padding: 18px 40px; border-radius: 9999px; font-size: 15px; font-weight: 500; text-decoration: none; letter-spacing: .02em; transition: all .2s; box-shadow: rgba(26,38,51,.1) 0px 6px 24px 0px; }
-  .btn-primary { background: var(--pink); color: #fff; border: 1px solid transparent; }
-  .btn-primary:hover { background: var(--pink-dark); }
-  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); box-shadow: none; }
-  .btn-ghost:hover { background: var(--bg-soft); }
-
-  /* PAGE HERO */
-  .page-hero { padding: 88px 0 64px; }
-  .page-hero .breadcrumb { font-size: 12px; color: var(--sub); margin-bottom: 20px; }
-  .page-hero .breadcrumb a { color: var(--sub); text-decoration: none; }
-  .page-hero .breadcrumb a:hover { color: var(--ink); }
-  .page-hero .breadcrumb span { margin: 0 6px; }
-  .page-hero h1 { font-size: 36px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; }
-  .page-hero p.sub { font-size: 16px; color: var(--sub); margin-top: 12px; line-height: 1.8; }
-
-  /* ── ABOUT INTRO ── */
-  .about-intro { background: #fff; }
-  .about-intro-grid { display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: center; margin-top: 48px; }
-  .about-intro-heading { font-size: clamp(22px, 2.8vw, 32px); font-weight: 700; line-height: 1.65; letter-spacing: -.02em; margin-bottom: 28px; }
-  .about-intro-body p { font-size: 15px; color: var(--sub); line-height: 1.95; }
-  .about-intro-body p + p { margin-top: 18px; }
-  .about-photo { border-radius: 16px; overflow: hidden; }
-  .about-photo img { width: 100%; height: 420px; object-fit: cover; display: block; }
-
-
-  /* ── PRESIDENT MESSAGE (editorial) ── */
-  .pmsg { background: var(--bg-soft); }
-  .pmsg-head { margin-bottom: 52px; }
-  .pmsg-editorial { max-width: 740px; margin: 0 auto; }
-  .pmsg-mark { font-family: Georgia, serif; font-size: 100px; line-height: .75; color: var(--pink); opacity: .18; display: block; user-select: none; margin-bottom: 4px; }
-  .pmsg-headline { font-size: clamp(18px, 2.2vw, 24px); font-weight: 700; line-height: 1.75; margin-bottom: 36px; letter-spacing: -.01em; color: var(--ink); }
-  .pmsg-body p { font-size: 15px; color: var(--sub); line-height: 2.1; }
-  .pmsg-body p + p { margin-top: 24px; }
-  .pmsg-sign { display: flex; align-items: baseline; justify-content: flex-end; gap: 16px; margin-top: 52px; padding-top: 28px; border-top: 1px solid rgba(0,0,0,.08); }
-  .pmsg-sign-title { font-size: 12px; color: var(--sub); letter-spacing: .04em; }
-  .pmsg-sign-name { font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: .05em; }
-
-  /* ── VISION & VALUES ── */
-  .vision-value { background: #fff; }
-  .vision-statement { text-align: center; max-width: 720px; margin: 0 auto 56px; }
-  .vision-heading { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; line-height: 1.7; letter-spacing: -.02em; margin-bottom: 20px; }
-  .vision-accent { color: var(--pink); }
-  .vision-desc { font-size: 15px; color: var(--sub); line-height: 1.95; }
-  .vision-rule { width: 48px; height: 2px; background: var(--pink); border: none; margin: 56px auto 0; }
-  .value-intro { text-align: center; margin: 56px 0 40px; }
-
-  /* VALUE CARDS (2-col grid) */
-  .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .value-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 36px 32px; background: #fff; transition: border-color .25s, box-shadow .25s, transform .2s; }
-  .value-card:hover { border-color: var(--pink); box-shadow: 0 8px 28px rgba(212,99,126,.08); transform: translateY(-2px); }
-  .value-card-num { font-family: 'Outfit', sans-serif; font-size: 52px; font-weight: 800; color: var(--pink); opacity: .12; line-height: 1; margin-bottom: 20px; }
-  .value-card-ja { font-size: 19px; font-weight: 700; color: var(--pink-dark); margin-bottom: 4px; }
-  .value-card-en { font-size: 11px; color: var(--sub); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
-  .value-card-desc { font-size: 14px; color: var(--sub); line-height: 1.85; }
-  .value-card-desc p + p { margin-top: 8px; }
-  /* 5th value spans full width with horizontal layout */
-  .value-card.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 220px 1fr; gap: 52px; align-items: start; }
-  .value-card.wide .value-card-num { margin-bottom: 12px; }
-
-  /* ── COMPANY INFO ── */
-  .company { background: var(--bg-soft); }
-  .company-table { width: 100%; border-collapse: collapse; margin-top: 40px; font-size: 14px; }
-  .company-table tr { border-bottom: 1px solid #fff; }
-  .company-table th { width: 22%; padding: 20px 20px 20px 0; font-weight: 500; color: var(--sub); vertical-align: top; text-align: left; font-size: 13px; }
-  .company-table td { padding: 20px 0; color: var(--ink); line-height: 1.7; }
-  .officer { display: flex; gap: 32px; align-items: baseline; }
-  .officer-title { color: var(--sub); min-width: 200px; font-size: 14px; }
-  .map-embed { margin-top: 16px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
-  .map-embed iframe { display: block; width: 100%; height: 360px; border: 0; }
-
-  /* ── HISTORY ── */
-  .history { background: #fff; }
-  .history-lead { font-size: 15px; color: var(--sub); line-height: 1.85; margin-top: 16px; margin-bottom: 52px; max-width: 640px; }
-  .timeline { position: relative; padding-left: 140px; }
-  .timeline::before { content: ''; position: absolute; left: 108px; top: 8px; bottom: 8px; width: 1px; background: var(--line); }
-  .timeline-item { position: relative; margin-bottom: 20px; }
-  .timeline-item:last-child { margin-bottom: 0; }
-  .timeline-date { position: absolute; left: -140px; top: 20px; font-size: 13px; font-weight: 800; color: var(--sub); letter-spacing: .04em; width: 88px; text-align: right; font-family: 'Outfit', sans-serif; }
-  .timeline-dot { position: absolute; left: -33px; top: 24px; width: 10px; height: 10px; border-radius: 50%; background: var(--pink); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--line); }
-  .timeline-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 28px; }
-  .timeline-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-  .timeline-card p { font-size: 14px; color: var(--sub); line-height: 1.75; }
-
-  /* ── GROUP ── */
-  .group { background: var(--bg-soft); }
-  .group-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; margin-top: 48px; }
-  .group-desc h3 { font-size: 20px; font-weight: 700; margin-bottom: 18px; line-height: 1.65; }
-  .group-desc p { font-size: 15px; color: var(--sub); line-height: 1.95; }
-  .group-desc p + p { margin-top: 16px; }
-  .group-diagram { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
-  .group-diagram img { width: 100%; height: auto; display: block; }
-
-  html { scroll-behavior: smooth; scroll-padding-top: 96px; }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    section { padding: 72px 0; }
-    .wrap { padding: 0 20px; }
-    .page-hero { padding: 48px 0 40px; }
-    .page-hero h1 { font-size: 26px; }
-
-    .about-intro-grid { grid-template-columns: 1fr; gap: 32px; }
-    .about-photo img { height: 240px; }
-
-    .value-grid { grid-template-columns: 1fr; }
-    .value-card.wide { grid-column: auto; grid-template-columns: 1fr; gap: 16px; }
-    .value-card-num { font-size: 40px; }
-
-    .company-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .company-table th { width: 36%; font-size: 13px; }
-    .company-table td { font-size: 13px; }
-
-    .timeline { padding-left: 24px; }
-    .timeline::before { left: 0; }
-    .timeline-date { position: static; text-align: left; margin-bottom: 4px; font-size: 12px; }
-    .timeline-dot { left: -29px; }
-
-    .group-layout { grid-template-columns: 1fr; gap: 40px; }
-  }
-
-  @media (min-width: 1440px) {
-    .wrap { max-width: 1320px; padding: 0 60px; }
-    section { padding: 120px 0; }
-    .page-hero { padding: 100px 0; }
-    .page-hero h1 { font-size: 52px; }
-    h2.title { font-size: 42px; }
-    .about-intro-grid { grid-template-columns: 1fr 480px; gap: 100px; }
-  }
-
-  @media (min-width: 1920px) {
-    .wrap { max-width: 1400px; padding: 0 80px; }
-    section { padding: 140px 0; }
-    .page-hero { padding: 120px 0; }
-    .page-hero h1 { font-size: 56px; }
-    h2.title { font-size: 46px; }
-  }
-</style>
+<link rel="stylesheet" href="/assets/css/about.css">
 </head>
 <body>
 
@@ -323,6 +157,10 @@
         <td>2019年11月（2月期決算）</td>
       </tr>
       <tr>
+        <th>所在地</th>
+        <td>〒135-0044　東京都江東区越中島１丁目１−１<br>ヤマタネ深川1号館 2F</td>
+      </tr>
+      <tr>
         <th>資本金</th>
         <td>4,400万円</td>
       </tr>
@@ -362,22 +200,30 @@
         <th>適格請求書<br>発行事業者登録番号</th>
         <td>T3011401022190</td>
       </tr>
-      <tr>
-        <th style="vertical-align: top; padding-top: 24px;">所在地</th>
-        <td style="padding-top: 24px;">
-          〒135-0044　東京都江東区越中島１丁目１−１<br>ヤマタネ深川1号館 2F
-          <div class="map-embed">
-            <iframe
-              src="https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B1%9F%E6%9D%B1%E5%8C%BA%E8%B6%8A%E4%B8%AD%E5%B3%B61%E4%B8%81%E7%9B%AE1-1+%E3%83%A4%E3%83%9E%E3%82%BF%E3%83%8D%E6%B7%B1%E5%B7%9D1%E5%8F%B7%E9%A4%A8&output=embed&hl=ja&z=17"
-              allowfullscreen
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="株式会社ランステック 所在地">
-            </iframe>
-          </div>
-        </td>
-      </tr>
     </table>
+    <div class="map-access">
+      <div class="map-access-info">
+        <p class="map-access-addr">
+          <strong>Access</strong>
+          〒135-0044<br>東京都江東区越中島１丁目１−１<br>ヤマタネ深川1号館 2F
+        </p>
+        <a href="https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B1%9F%E6%9D%B1%E5%8C%BA%E8%B6%8A%E4%B8%AD%E5%B3%B61%E4%B8%81%E7%9B%AE1-1+%E3%83%A4%E3%83%9E%E3%82%BF%E3%83%8D%E6%B7%B1%E5%B7%9D1%E5%8F%B7%E9%A4%A8" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 16px 10px 24px; font-size: 13px; display: inline-flex; align-items: center;">
+          Google map
+          <span class="map-btn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </div>
+      <div class="map-access-map">
+        <iframe
+          src="https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B1%9F%E6%9D%B1%E5%8C%BA%E8%B6%8A%E4%B8%AD%E5%B3%B61%E4%B8%81%E7%9B%AE1-1+%E3%83%A4%E3%83%9E%E3%82%BF%E3%83%8D%E6%B7%B1%E5%B7%9D1%E5%8F%B7%E9%A4%A8&output=embed&hl=ja&z=17"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="株式会社ランステック 所在地">
+        </iframe>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -1,0 +1,132 @@
+/* === OPENING ANIMATION ======================================================= */
+
+#opening-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: all;
+}
+
+/* ── 背景レイヤー（先に消える） ──────────────────────────────────────────── */
+.opening-bg {
+  position: absolute;
+  inset: 0;
+  background-color: #ffffff;
+  background-image:
+    radial-gradient(70vmax 70vmax at 0% 0%,    rgba(212,99,126,.28) 0%, transparent 60%),
+    radial-gradient(66vmax 66vmax at 100% 100%, rgba(26,157,87,.22)  0%, transparent 60%),
+    radial-gradient(48vmax 48vmax at 100% 0%,   rgba(212,99,126,.14) 0%, transparent 55%);
+  transition: opacity .55s cubic-bezier(.4,0,.2,1);
+}
+
+/* グレインテクスチャ（background.css の body::after と同じ） */
+.opening-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  background-repeat: repeat;
+}
+
+/* ── コンテンツレイヤー（背景より0.2s遅れて消える） ──────────────────────── */
+.opening-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  transition: opacity .5s cubic-bezier(.4,0,.2,1) .2s;
+}
+
+/* ── ディゾルブ ────────────────────────────────────────────────────────────── */
+#opening-overlay.dissolve .opening-bg      { opacity: 0; }
+#opening-overlay.dissolve .opening-content { opacity: 0; }
+#opening-overlay.dissolve                  { pointer-events: none; }
+
+/* ── ロゴ：スケール＋フェードイン ──────────────────────────────────────── */
+.opening-logo-img {
+  width: clamp(140px, 22vw, 220px);
+  height: auto;
+  display: block;
+  opacity: 0;
+  transform: translateY(6px) scale(.94);
+  transition:
+    opacity  .65s cubic-bezier(.4,0,.2,1),
+    transform .65s cubic-bezier(.34,1.56,.64,1);  /* spring easing で着地感 */
+}
+
+.opening-logo-img.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ── ローディングバー ────────────────────────────────────────────────────── */
+.opening-bar-wrap {
+  width: clamp(140px, 22vw, 220px);
+  height: 3px;
+  background: rgba(36,48,64,.1);
+  border-radius: 9999px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .4s ease .25s;
+}
+
+.opening-bar-wrap.in {
+  opacity: 1;
+}
+
+.opening-bar-fill {
+  position: relative;
+  height: 100%;
+  width: 0%;
+  /* ピンク → 濃ピンクのグラデーションで質感アップ */
+  background: linear-gradient(90deg, #D4637E 0%, #B84A66 100%);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.opening-bar-fill.run {
+  animation: op-progress 2.4s cubic-bezier(.4, 0, .55, 1) forwards;
+}
+
+/* shimmer：バーの先端を走る白い光点 */
+.opening-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent   0%,
+    rgba(255,255,255,.6) 50%,
+    transparent  100%
+  );
+  transform: translateX(-100%);
+}
+
+.opening-bar-fill.run::after {
+  animation: op-shimmer 1.1s ease-in-out infinite;
+  animation-delay: .5s;
+}
+
+@keyframes op-progress {
+  0%   { width: 0%; }
+  75%  { width: 90%; }
+  100% { width: 100%; }
+}
+
+@keyframes op-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(250%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #opening-overlay { display: none !important; }
+}
