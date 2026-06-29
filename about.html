@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="株式会社ランステック">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/header.css">
 <link rel="stylesheet" href="/assets/css/footer.css">
 <link rel="stylesheet" href="/assets/css/background.css">
@@ -38,30 +38,21 @@
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
-  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.75; font-weight: 400; text-wrap: pretty; word-break: auto-phrase; }
+  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.8; font-weight: 400; text-wrap: pretty; word-break: auto-phrase; }
 
-  /* BASE */
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
-  section { padding: 100px 0; }
-  section.soft { background: linear-gradient(180deg, var(--bg-soft) 0%, #ffffff 100%); }
-  .eyebrow { font-size: 12px; font-weight: 500; color: var(--pink); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
-  h2.title { font-size: 36px; font-weight: 700; margin-bottom: 24px; line-height: 1.5; letter-spacing: -.01em; }
+  section { padding: 120px 0; }
+  .eyebrow { font-size: 11px; font-weight: 700; color: var(--pink-dark); letter-spacing: .25em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+  h2.title { font-size: clamp(28px, 3.5vw, 38px); font-weight: 700; line-height: 1.5; letter-spacing: -.02em; margin-bottom: 0; }
 
-  /* BUTTONS - Usage Guide:
-     .btn-primary: Main CTAs (お問い合わせ, 募集職種を見る etc.) - Pink background
-     .btn-ghost: Secondary actions (詳しく見る etc.) - Outline style */
   .btn { display: inline-block; padding: 18px 40px; border-radius: 9999px; font-size: 15px; font-weight: 500; text-decoration: none; letter-spacing: .02em; transition: all .2s; box-shadow: rgba(26,38,51,.1) 0px 6px 24px 0px; }
   .btn-primary { background: var(--pink); color: #fff; border: 1px solid transparent; }
-  .btn-primary:hover { background: var(--pink-dark); box-shadow: rgba(26,38,51,.15) 0px 8px 32px 0px; }
+  .btn-primary:hover { background: var(--pink-dark); }
   .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); box-shadow: none; }
   .btn-ghost:hover { background: var(--bg-soft); }
 
-  /* CARD - Base component for consistent card styling across pages */
-  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; transition: border-color .2s, box-shadow .2s; }
-  .card:hover { border-color: var(--pink); box-shadow: rgba(224,120,152,.08) 0px 8px 24px 0px; }
-
   /* PAGE HERO */
-  .page-hero { padding: 72px 0 56px; background: linear-gradient(180deg, #ffffff 0%, var(--green-light) 100%); border-bottom: 1px solid var(--line); }
+  .page-hero { padding: 88px 0 64px; }
   .page-hero .breadcrumb { font-size: 12px; color: var(--sub); margin-bottom: 20px; }
   .page-hero .breadcrumb a { color: var(--sub); text-decoration: none; }
   .page-hero .breadcrumb a:hover { color: var(--ink); }
@@ -69,126 +60,84 @@
   .page-hero h1 { font-size: 36px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; }
   .page-hero p.sub { font-size: 16px; color: var(--sub); margin-top: 12px; line-height: 1.8; }
 
-  /* COMPANY TABLE */
+  /* ── ABOUT INTRO ── */
+  .about-intro { background: #fff; }
+  .about-intro-grid { display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: center; margin-top: 48px; }
+  .about-intro-heading { font-size: clamp(22px, 2.8vw, 32px); font-weight: 700; line-height: 1.65; letter-spacing: -.02em; margin-bottom: 28px; }
+  .about-intro-body p { font-size: 15px; color: var(--sub); line-height: 1.95; }
+  .about-intro-body p + p { margin-top: 18px; }
+  .about-photo { border-radius: 16px; overflow: hidden; }
+  .about-photo img { width: 100%; height: 420px; object-fit: cover; display: block; }
+
+
+  /* ── PRESIDENT MESSAGE (editorial) ── */
+  .pmsg { background: var(--bg-soft); }
+  .pmsg-head { margin-bottom: 52px; }
+  .pmsg-editorial { max-width: 740px; margin: 0 auto; }
+  .pmsg-mark { font-family: Georgia, serif; font-size: 100px; line-height: .75; color: var(--pink); opacity: .18; display: block; user-select: none; margin-bottom: 4px; }
+  .pmsg-headline { font-size: clamp(18px, 2.2vw, 24px); font-weight: 700; line-height: 1.75; margin-bottom: 36px; letter-spacing: -.01em; color: var(--ink); }
+  .pmsg-body p { font-size: 15px; color: var(--sub); line-height: 2.1; }
+  .pmsg-body p + p { margin-top: 24px; }
+  .pmsg-sign { display: flex; align-items: baseline; justify-content: flex-end; gap: 16px; margin-top: 52px; padding-top: 28px; border-top: 1px solid rgba(0,0,0,.08); }
+  .pmsg-sign-title { font-size: 12px; color: var(--sub); letter-spacing: .04em; }
+  .pmsg-sign-name { font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: .05em; }
+
+  /* ── VISION & VALUES ── */
+  .vision-value { background: #fff; }
+  .vision-statement { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+  .vision-heading { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; line-height: 1.7; letter-spacing: -.02em; margin-bottom: 20px; }
+  .vision-accent { color: var(--pink); }
+  .vision-desc { font-size: 15px; color: var(--sub); line-height: 1.95; }
+  .vision-rule { width: 48px; height: 2px; background: var(--pink); border: none; margin: 56px auto 0; }
+  .value-intro { text-align: center; margin: 56px 0 40px; }
+
+  /* VALUE CARDS (2-col grid) */
+  .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .value-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 36px 32px; background: #fff; transition: border-color .25s, box-shadow .25s, transform .2s; }
+  .value-card:hover { border-color: var(--pink); box-shadow: 0 8px 28px rgba(212,99,126,.08); transform: translateY(-2px); }
+  .value-card-num { font-family: 'Outfit', sans-serif; font-size: 52px; font-weight: 800; color: var(--pink); opacity: .12; line-height: 1; margin-bottom: 20px; }
+  .value-card-ja { font-size: 19px; font-weight: 700; color: var(--pink-dark); margin-bottom: 4px; }
+  .value-card-en { font-size: 11px; color: var(--sub); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
+  .value-card-desc { font-size: 14px; color: var(--sub); line-height: 1.85; }
+  .value-card-desc p + p { margin-top: 8px; }
+  /* 5th value spans full width with horizontal layout */
+  .value-card.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 220px 1fr; gap: 52px; align-items: start; }
+  .value-card.wide .value-card-num { margin-bottom: 12px; }
+
+  /* ── COMPANY INFO ── */
   .company { background: var(--bg-soft); }
   .company-table { width: 100%; border-collapse: collapse; margin-top: 40px; font-size: 14px; }
-  .company-table tr { border-bottom: 1px solid var(--line); }
-  .company-table th { width: 24%; padding: 20px 20px 20px 0; font-weight: 500; color: var(--sub); vertical-align: top; text-align: left; }
+  .company-table tr { border-bottom: 1px solid #fff; }
+  .company-table th { width: 22%; padding: 20px 20px 20px 0; font-weight: 500; color: var(--sub); vertical-align: top; text-align: left; font-size: 13px; }
   .company-table td { padding: 20px 0; color: var(--ink); line-height: 1.7; }
   .officer { display: flex; gap: 32px; align-items: baseline; }
   .officer-title { color: var(--sub); min-width: 200px; font-size: 14px; }
   .map-embed { margin-top: 16px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
   .map-embed iframe { display: block; width: 100%; height: 360px; border: 0; }
 
-  /* MISSION */
-  .mission { background: var(--bg-soft); }
-  .mission-inner { max-width: 680px; }
-  .mission h2 { font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 24px; }
-  .mission p { font-size: 16px; color: var(--sub); line-height: 1.9; }
-  .mission p + p { margin-top: 16px; }
-
-  /* TOP MESSAGE */
-  .pmsg { background: var(--bg); }
-  .pmsg-head { text-align: center; margin-bottom: 8px; }
-  .pmsg-card { max-width: 820px; margin: 44px auto 0; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 44px 52px 40px; }
-  .pmsg-quote { font-family: Georgia, 'Times New Roman', serif; font-size: 56px; line-height: .8; color: var(--pink); opacity: .3; margin-bottom: 12px; }
-  .pmsg-headline { font-size: 21px; font-weight: 700; line-height: 1.7; color: var(--ink); margin-bottom: 24px; letter-spacing: -.01em; }
-  .pmsg-text p { font-size: 16px; color: var(--sub); line-height: 1.9; }
-  .pmsg-text p + p { margin-top: 20px; }
-  .pmsg-sign { display: flex; align-items: baseline; justify-content: flex-end; gap: 14px; margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--line); }
-  .pmsg-sign-title { font-size: 13px; color: var(--sub); }
-  .pmsg-sign-name { font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: .04em; }
-
-  @media (max-width: 768px) {
-    .pmsg-card { padding: 36px 24px 32px; }
-    .pmsg-headline { font-size: 19px; }
-  }
-
-  /* VISION & VALUES */
-  .vision-value { background: #fff; }
-  .vision-block { text-align: center; max-width: 720px; margin: 0 auto 64px; }
-  .vision-heading { font-size: clamp(22px, 3vw, 34px); font-weight: 700; line-height: 1.65; margin-bottom: 20px; letter-spacing: -.02em; }
-  .vision-accent { color: var(--pink); }
-  .vision-desc { font-size: 15px; color: var(--sub); line-height: 1.9; }
-  .vision-rule { width: 48px; height: 2px; background: var(--pink); border: none; margin: 64px auto 0; }
-  .value-intro { text-align: center; margin: 64px 0 40px; }
-  .value-list { }
-  .value-item { display: grid; grid-template-columns: 200px 1fr; gap: 48px; align-items: start; padding: 32px 0; border-bottom: 1px solid var(--line); }
-  .value-item:first-child { border-top: 1px solid var(--line); }
-  .value-item-ja { font-size: 18px; font-weight: 700; color: var(--pink); margin-bottom: 4px; }
-  .value-item-en { font-size: 12px; color: var(--sub); }
-  .value-item-desc { font-size: 15px; color: var(--ink); line-height: 1.85; }
-  .value-item-desc p + p { margin-top: 8px; }
-
-  /* HISTORY */
+  /* ── HISTORY ── */
   .history { background: #fff; }
-  .history-lead { font-size: 15px; color: var(--sub); line-height: 1.85; margin-top: 16px; margin-bottom: 48px; max-width: 680px; }
+  .history-lead { font-size: 15px; color: var(--sub); line-height: 1.85; margin-top: 16px; margin-bottom: 52px; max-width: 640px; }
   .timeline { position: relative; padding-left: 140px; }
   .timeline::before { content: ''; position: absolute; left: 108px; top: 8px; bottom: 8px; width: 1px; background: var(--line); }
   .timeline-item { position: relative; margin-bottom: 20px; }
   .timeline-item:last-child { margin-bottom: 0; }
-  .timeline-date { position: absolute; left: -140px; top: 18px; font-size: 13px; font-weight: 500; color: var(--sub); letter-spacing: .04em; width: 88px; text-align: right; }
-  .timeline-dot { position: absolute; left: -33px; top: 22px; width: 10px; height: 10px; border-radius: 50%; background: var(--pink); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--line); }
-  .timeline-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 24px; }
+  .timeline-date { position: absolute; left: -140px; top: 20px; font-size: 13px; font-weight: 800; color: var(--sub); letter-spacing: .04em; width: 88px; text-align: right; font-family: 'Outfit', sans-serif; }
+  .timeline-dot { position: absolute; left: -33px; top: 24px; width: 10px; height: 10px; border-radius: 50%; background: var(--pink); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--line); }
+  .timeline-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 28px; }
   .timeline-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-  .timeline-card p { font-size: 14px; color: var(--sub); line-height: 1.7; }
+  .timeline-card p { font-size: 14px; color: var(--sub); line-height: 1.75; }
 
-  /* GROUP */
+  /* ── GROUP ── */
   .group { background: var(--bg-soft); }
-  .group-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 48px; }
-  .group-desc h3 { font-size: 18px; font-weight: 700; margin-bottom: 16px; line-height: 1.6; }
-  .group-desc p { font-size: 15px; color: var(--sub); line-height: 1.9; }
-  .group-chart { display: flex; flex-direction: column; align-items: center; gap: 0; }
-  .group-card { width: 100%; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 24px; background: var(--bg-soft); }
-  .group-card.parent { background: var(--green-light); border-color: var(--green); }
-  .group-card-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; color: var(--sub); text-transform: uppercase; margin-bottom: 6px; }
-  .group-card.parent .group-card-label { color: var(--green-dark); }
-  .group-card-name { font-size: 16px; font-weight: 700; }
-  .group-card-logo { height: 26px; margin: 2px 0 8px; }
-  .group-card-logo img { height: 100%; width: auto; display: block; }
-  .group-card-sub { font-size: 12px; color: var(--sub); margin-top: 4px; }
-  .group-card.self { border-color: var(--pink); background: #fff; }
-  .group-card.self .group-card-label { color: var(--pink); }
-  .group-connector { display: flex; flex-direction: column; align-items: center; padding: 4px 0; gap: 0; }
-  .group-connector-line { width: 1px; height: 24px; background: var(--line); }
-  .group-connector-label { font-size: 10px; color: var(--sub); background: #fff; padding: 2px 8px; border: 1px solid var(--line); border-radius: 10px; white-space: nowrap; }
+  .group-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; margin-top: 48px; }
+  .group-desc h3 { font-size: 20px; font-weight: 700; margin-bottom: 18px; line-height: 1.65; }
+  .group-desc p { font-size: 15px; color: var(--sub); line-height: 1.95; }
+  .group-desc p + p { margin-top: 16px; }
+  .group-diagram { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
+  .group-diagram img { width: 100%; height: auto; display: block; }
 
   html { scroll-behavior: smooth; scroll-padding-top: 96px; }
-
-  /* FOOTER */
-  .footer { background: var(--bg-soft); border-top: 1px solid var(--line); padding: 80px 0 40px; }
-  .footer-end { display: flex; flex-direction: column; align-items: flex-end; gap: 24px; }
-  .footer-pagetop { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--sub); font-size: 11px; font-weight: 700; letter-spacing: .12em; }
-  .footer-pagetop-btn { width: 44px; height: 44px; border-radius: 10px; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; transition: background .15s, transform .15s; }
-  .footer-pagetop:hover { color: var(--ink); }
-  .footer-pagetop:hover .footer-pagetop-btn { background: var(--pink); transform: translateY(-2px); }
-  .footer-divider { border: none; border-top: 1px dashed var(--line); margin: 0 0 28px; }
-  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 48px; margin-bottom: 48px; }
-  .footer-brand { display: flex; flex-direction: column; gap: 16px; }
-  .footer-logo img { height: 32px; width: auto; display: block; }
-  .footer-brand address { font-style: normal; font-size: 12px; color: var(--sub); line-height: 1.8; }
-  .footer-group { margin-top: 4px; }
-  .footer-group-label { display: block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sub); margin-bottom: 8px; }
-  .footer-group-link { display: inline-flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 16px; text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 500; transition: border-color .15s, box-shadow .15s; }
-  .footer-group-link:hover { border-color: var(--sub); box-shadow: 0 2px 10px rgba(0,0,0,.06); }
-  .footer-group-link img { height: 24px; width: auto; display: block; }
-  .footer-group-link .fg-arrow { color: var(--sub); font-size: 12px; }
-  .footer-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px 24px; }
-  .footer-nav a { color: var(--sub); text-decoration: none; font-size: 13px; transition: color .15s; }
-  .footer-nav a:hover, .footer-nav a.current { color: var(--ink); }
-  .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-  .footer-copy { font-size: 12px; color: var(--sub); }
-  .footer-privacy { font-size: 12px; color: var(--sub); text-decoration: none; transition: color .15s; }
-  .footer-privacy:hover { color: var(--ink); }
-
-  /* CONTACT CTA */
-  .contact-cta { background: #fff; border-top: 1px solid var(--line); padding: 72px 0; }
-  .contact-cta .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
-  .contact-cta .eyebrow { color: var(--pink); }
-  .contact-cta h2 { font-size: 26px; font-weight: 700; color: var(--ink); margin-top: 10px; margin-bottom: 10px; line-height: 1.45; }
-  .contact-cta p { font-size: 15px; color: var(--sub); line-height: 1.8; }
-  .contact-cta .btn-cta { display: inline-block; background: var(--ink); color: #fff; padding: 16px 40px; border-radius: 4px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background .15s; white-space: nowrap; flex-shrink: 0; }
-  .contact-cta .btn-cta:hover { background: #555; }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
@@ -196,47 +145,41 @@
     .wrap { padding: 0 20px; }
     .page-hero { padding: 48px 0 40px; }
     .page-hero h1 { font-size: 26px; }
+
+    .about-intro-grid { grid-template-columns: 1fr; gap: 32px; }
+    .about-photo img { height: 240px; }
+
+    .value-grid { grid-template-columns: 1fr; }
+    .value-card.wide { grid-column: auto; grid-template-columns: 1fr; gap: 16px; }
+    .value-card-num { font-size: 40px; }
+
     .company-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .company-table th { width: 36%; font-size: 13px; }
     .company-table td { font-size: 13px; }
+
     .timeline { padding-left: 24px; }
     .timeline::before { left: 0; }
     .timeline-date { position: static; text-align: left; margin-bottom: 4px; font-size: 12px; }
     .timeline-dot { left: -29px; }
-    .value-item { grid-template-columns: 1fr; gap: 12px; }
-    .value-item-en { margin-bottom: 8px; }
+
     .group-layout { grid-template-columns: 1fr; gap: 40px; }
-    .footer-inner { flex-direction: column; gap: 28px; }
-    .footer-nav { justify-content: flex-start; gap: 14px 20px; }
-    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
   }
 
-  /* Large screens (1440px+): spacious layout */
   @media (min-width: 1440px) {
     .wrap { max-width: 1320px; padding: 0 60px; }
     section { padding: 120px 0; }
-    .page-hero { padding: 80px 0; }
+    .page-hero { padding: 100px 0; }
     .page-hero h1 { font-size: 52px; }
-    h2.title { font-size: 40px; }
-    .about-layout { gap: 100px; }
-    .about-heading h2 { font-size: 38px; }
-    .group-inner { gap: 120px; }
-    .group-text h3 { font-size: 28px; }
+    h2.title { font-size: 42px; }
+    .about-intro-grid { grid-template-columns: 1fr 480px; gap: 100px; }
   }
 
-  /* Extra large screens (1920px+): maximum comfort */
   @media (min-width: 1920px) {
     .wrap { max-width: 1400px; padding: 0 80px; }
     section { padding: 140px 0; }
-    .page-hero { padding: 100px 0; }
+    .page-hero { padding: 120px 0; }
     .page-hero h1 { font-size: 56px; }
-    h2.title { font-size: 44px; }
-    .about-layout { gap: 120px; }
-    .about-heading h2 { font-size: 42px; }
-    .about-content p { font-size: 16px; line-height: 2.2; max-width: 680px; }
-    .group-inner { gap: 140px; }
-    .group-text h3 { font-size: 30px; }
-    .group-text p { font-size: 16px; line-height: 2.2; max-width: 640px; }
+    h2.title { font-size: 46px; }
   }
 </style>
 </head>
@@ -258,14 +201,21 @@
   </div>
 </div>
 
-<!-- MISSION -->
-<section class="mission">
+<!-- ABOUT INTRO -->
+<section class="about-intro">
   <div class="wrap">
-    <div class="mission-inner">
-      <p class="eyebrow">ABOUT US</p>
-      <h2>システムの企画・開発から<br>運用・保守まで、ワンストップで。</h2>
-      <p>私たちランステックは、システムの企画・開発から運用・保守までをワンストップで担うIT企業です。2019年の設立から、2023年に株式会社ランステックとして始動。合併・グループ参画を経て体制を拡大し、現在は西原商会グループの一員として、グループ各社の事業を支える業務システムを担っています。</p>
-      <p>企画から運用まで、同じチームが一気通貫で担当します。工程ごとに分業しないからこそ、業務に本当に合う形を見極め、ぶれずにつくれる——それが私たちの強みです。</p>
+    <div class="about-intro-grid">
+      <div>
+        <span class="eyebrow">ABOUT US</span>
+        <h2 class="about-intro-heading">システムの企画・開発から<br>運用・保守まで、ワンストップで。</h2>
+        <div class="about-intro-body">
+          <p>私たちランステックは、システムの企画・開発から運用・保守までをワンストップで担うIT企業です。2019年の設立から、2023年に株式会社ランステックとして始動。合併・グループ参画を経て体制を拡大し、現在は西原商会グループの一員として、グループ各社の事業を支える業務システムを担っています。</p>
+          <p>企画から運用まで、同じチームが一気通貫で担当します。工程ごとに分業しないからこそ、業務に本当に合う形を見極め、ぶれずにつくれる——それが私たちの強みです。</p>
+        </div>
+      </div>
+      <div class="about-photo">
+        <img src="/assets/images/about-photo.jpg" alt="ランステックのオフィス">
+      </div>
     </div>
   </div>
 </section>
@@ -274,13 +224,13 @@
 <section class="pmsg" id="message">
   <div class="wrap">
     <div class="pmsg-head">
-      <p class="eyebrow">TOP MESSAGE</p>
+      <span class="eyebrow">TOP MESSAGE</span>
       <h2 class="title">社長メッセージ</h2>
     </div>
-    <div class="pmsg-card">
-      <div class="pmsg-quote" aria-hidden="true">“</div>
+    <div class="pmsg-editorial">
+      <span class="pmsg-mark" aria-hidden="true">"</span>
       <p class="pmsg-headline">違う場所から来た私たちが、同じ机に着くまで。</p>
-      <div class="pmsg-text">
+      <div class="pmsg-body">
         <p>ランステックは、もともと別々の会社で働いていた人たちの集まりです。2019年に生まれ、2023年に株式会社ランステックとして動き出し、そこへ文化も歴史も異なる複数のSES企業と受託開発の会社が合流しました。歩いてきた道も仕事の作法も違う。最初から滑らかに混ざり合えたわけではありません。</p>
         <p>それでも一緒にやれているのは、誰かの正しさに揃えたからではなく、互いのやり方に理由があると認め合えたからだと思っています。2024年11月、私たちは食品流通を核とする西原商会グループに加わりました。これは外へ売り込むための看板ではなく、グループの事業を内側から支える役割を引き受けるという選択です。だから私たちは、つくる人と動かす人を分けません。企画から運用まで地続きで関わり続けることに、この仕事の手応えがあると私は考えています。</p>
         <p>ここから先、人はさらに増え、背景はもっと多様になります。私の役割は、違いを均すことではなく、違うままで安心して力を出せる場所を整えること。あなたがここで過ごす時間が納得のいくものであるように。その一点を、私はこれからも見続けます。</p>
@@ -296,63 +246,60 @@
 <!-- VISION & VALUES -->
 <section class="vision-value" id="vision">
   <div class="wrap">
-    <div class="vision-block">
-      <p class="eyebrow">VISION</p>
+    <div class="vision-statement">
+      <span class="eyebrow">VISION</span>
       <h2 class="vision-heading"><span class="vision-accent">「嬉しい」で力を創り出す、</span><br>未来を築く組織へ</h2>
       <p class="vision-desc">社員一人ひとりが仕事を通じて喜びを感じながら成長し、その成長が組織全体の成長につながる環境を構築。「人財の力」「組織力」「技術力」を最大化し、挑戦と支え合いを通じて新たな価値の創造と未来への可能性を広げる企業を目指します。</p>
     </div>
     <hr class="vision-rule">
     <div class="value-intro">
-      <p class="eyebrow" id="values" style="margin-top: 64px; scroll-margin-top: 96px;">VALUES</p>
+      <span class="eyebrow" id="values" style="margin-top: 56px; scroll-margin-top: 96px;">VALUES</span>
       <h2 class="title">大切にしていること</h2>
     </div>
-    <div class="value-list">
-      <div class="value-item">
-        <div>
-          <div class="value-item-ja">共感と尊重</div>
-          <div class="value-item-en">empathy and respect</div>
-        </div>
-        <div class="value-item-desc">
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-card-num">01</div>
+        <div class="value-card-ja">共感と尊重</div>
+        <div class="value-card-en">empathy and respect</div>
+        <div class="value-card-desc">
           <p>「嬉しい」を常に考え、異なる視点を取り入れることを重んじる。</p>
           <p>仲間の成功や挑戦を称賛し、共に「嬉しい」を分かち合う文化を育む。</p>
         </div>
       </div>
-      <div class="value-item">
-        <div>
-          <div class="value-item-ja">挑戦と成長</div>
-          <div class="value-item-en">Challenge and growth</div>
-        </div>
-        <div class="value-item-desc">
+      <div class="value-card">
+        <div class="value-card-num">02</div>
+        <div class="value-card-ja">挑戦と成長</div>
+        <div class="value-card-en">Challenge and growth</div>
+        <div class="value-card-desc">
           <p>常に成長意欲を持ち、新しい知識や技術の習得に「嬉しい」を見出す姿勢を大切にする。</p>
           <p>失敗も成長の一部と捉え、自分やチームのスキルを伸ばすために積極的に挑戦し、改善を重ねる。</p>
         </div>
       </div>
-      <div class="value-item">
-        <div>
-          <div class="value-item-ja">協力と共創</div>
-          <div class="value-item-en">cooperation and co-creation</div>
-        </div>
-        <div class="value-item-desc">
+      <div class="value-card">
+        <div class="value-card-num">03</div>
+        <div class="value-card-ja">協力と共創</div>
+        <div class="value-card-en">cooperation and co-creation</div>
+        <div class="value-card-desc">
           <p>各メンバーのスキルや強みを活かして、チーム全体で目標達成に向けて協力し合うことを重視する。</p>
           <p>透明性を大切にした意見交換や情報共有を行い、共に成長できる環境を作る。</p>
         </div>
       </div>
-      <div class="value-item">
-        <div>
-          <div class="value-item-ja">責任と誇り</div>
-          <div class="value-item-en">responsibility and pride</div>
-        </div>
-        <div class="value-item-desc">
+      <div class="value-card">
+        <div class="value-card-num">04</div>
+        <div class="value-card-ja">責任と誇り</div>
+        <div class="value-card-en">responsibility and pride</div>
+        <div class="value-card-desc">
           <p>自己の仕事や役割に責任を持ち、周りに良い影響を与えられるような行動を心がける。</p>
           <p>自らの仕事がチームや顧客に価値を与えていることに誇りを持ち、ポジティブな姿勢で取り組む。</p>
         </div>
       </div>
-      <div class="value-item">
+      <div class="value-card wide">
         <div>
-          <div class="value-item-ja">価値の創造</div>
-          <div class="value-item-en">value creation</div>
+          <div class="value-card-num">05</div>
+          <div class="value-card-ja">価値の創造</div>
+          <div class="value-card-en">value creation</div>
         </div>
-        <div class="value-item-desc">
+        <div class="value-card-desc">
           <p>顧客が求める以上の価値を提供し、喜びと信頼を築く。</p>
           <p>現状に満足せず、未来に向けた新たな可能性や価値を創出するためにチャレンジを続ける。</p>
         </div>
@@ -364,7 +311,7 @@
 <!-- COMPANY TABLE -->
 <section class="company" id="company">
   <div class="wrap">
-    <p class="eyebrow">COMPANY INFO</p>
+    <span class="eyebrow">COMPANY INFO</span>
     <h2 class="title">会社情報</h2>
     <table class="company-table">
       <tr>
@@ -437,7 +384,7 @@
 <!-- HISTORY -->
 <section class="history" id="history">
   <div class="wrap">
-    <p class="eyebrow">OUR HISTORY</p>
+    <span class="eyebrow">OUR HISTORY</span>
     <h2 class="title">会社の沿革</h2>
     <p class="history-lead">文化の異なる複数のSES企業と受託開発企業が、年を追うごとに一つに。いま西原商会グループの強いカルチャーを軸に、まとまろうとしています。</p>
     <div class="timeline">
@@ -480,42 +427,28 @@
 <!-- GROUP -->
 <section class="group">
   <div class="wrap">
-    <p class="eyebrow" style="color:var(--green);">GROUP</p>
+    <span class="eyebrow" style="color:var(--green);">GROUP</span>
     <h2 class="title">西原商会グループの一員として</h2>
     <div class="group-layout">
       <div class="group-desc">
         <h3>商社の安定基盤と、<br>ITの専門性を掛け合わせる。</h3>
         <p>ランステックは2024年11月より、西原商会グループの一員です。食品流通を核とした商社グループの安定した経営基盤と強いカルチャーを背景に、IT事業を展開しています。</p>
-        <p style="margin-top:14px;">グループとの連携により、食品流通業界をはじめとするさまざまな分野で、システム開発から業務改善まで一貫したサポートを提供します。</p>
+        <p>グループとの連携により、食品流通業界をはじめとするさまざまな分野で、システム開発から業務改善まで一貫したサポートを提供します。</p>
       </div>
-      <div class="group-chart">
-        <div class="group-card parent">
-          <div class="group-card-label">Parent Group</div>
-          <div class="group-card-logo"><img src="/assets/images/nishihara_logo.svg" alt="西原商会グループ"></div>
-          <div class="group-card-sub">食品流通を核とした総合商社グループ</div>
-        </div>
-        <div class="group-connector">
-          <div class="group-connector-line"></div>
-          <div class="group-connector-label">グループ会社</div>
-          <div class="group-connector-line"></div>
-        </div>
-        <div class="group-card self">
-          <div class="group-card-label">Our Company</div>
-          <div class="group-card-name">株式会社ランステック</div>
-          <div class="group-card-sub">ITソリューション事業</div>
-        </div>
+      <div class="group-diagram">
+        <img src="/assets/images/group-diagram.png" alt="西原商会グループ図">
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- FOOTER -->
 <div id="site-footer"></div>
-
 
 <script src="/assets/js/header.js"></script>
 <script src="/assets/js/footer.js"></script>
+<script src="/assets/js/lenis.min.js"></script>
+<script src="/assets/js/smooth-scroll.js"></script>
 
 <script src="/assets/js/feedback-panel-v2.js"></script>
 </body>
