@@ -36,11 +36,6 @@
 
   var menuOverlayHTML =
     '<div class="menu-overlay-body">\n' +
-    '  <div class="menu-logo-row">\n' +
-    '    <a href="/" class="menu-logo-link">\n' +
-    '      <img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック" class="menu-logo-img">\n' +
-    '    </a>\n' +
-    '  </div>\n' +
     '  <div class="menu-nav-grid">\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">Company</p>\n' +

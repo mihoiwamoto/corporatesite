@@ -42,11 +42,14 @@ body .page-hero { padding-top: 114px; }
 .site-nav a.nav-cta { background: var(--ink); color: #fff; padding: 14px 30px; border-radius: 9999px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all .3s cubic-bezier(.4,0,.2,1); box-shadow: 0 2px 12px rgba(36,48,64,.15); flex-shrink: 0; }
 .site-nav a.nav-cta:hover { background: #1a2433; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(36,48,64,.25); }
 
-/* メニュー展開時：ピル全体を非表示（ロゴはパネル内に表示） */
+/* メニュー展開時：ナビリンク・CTAのみフェード。ロゴはピル内に常駐して動かさない */
 .site-nav .wrap.nav-hidden {
+  pointer-events: none;
+}
+.site-nav .wrap.nav-hidden a.nav-link,
+.site-nav .wrap.nav-hidden a.nav-cta {
   opacity: 0;
   pointer-events: none;
-  transform: scale(0.97);
 }
 
 /* STANDALONE MENU BUTTON */
@@ -116,22 +119,9 @@ body .page-hero { padding-top: 114px; }
   position: relative;
   width: 100%;
   max-width: 1360px; margin: 0 auto;
-  padding: 84px 48px 36px;
+  padding: 28px 48px 36px;
   box-sizing: border-box;
 }
-
-/* ロゴ — メニュー展開時のみ表示、ピルと同位置にアブソリュートで固定 */
-.menu-logo-row {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 68px;
-  display: none;
-  align-items: center;
-  padding: 0 28px;
-  box-sizing: border-box;
-}
-.mobile-nav.open .menu-logo-row { display: flex; }
-.menu-logo-img { height: 26px; width: auto; display: block; }
 
 /* NAV GRID */
 .menu-nav-grid {
@@ -207,8 +197,7 @@ body .page-hero { padding-top: 114px; }
   }
   .mobile-nav.open { clip-path: inset(0 0 0% 0 round 26px); }
   .mobile-nav-scroll { max-height: 80vh; }
-  .menu-logo-row { height: 52px; padding: 0 20px; }
-  .menu-overlay-body { padding: 68px 24px 28px; }
+  .menu-overlay-body { padding: 24px 24px 28px; }
   .menu-nav-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; margin-bottom: 24px; }
   .menu-group-row { flex-wrap: wrap; }
 }
