@@ -99,6 +99,9 @@
     '    </button>\n' +
     '  </div>\n' +
     '</header>\n' +
+    '<div class="menu-logo-fixed" id="menu-logo-fixed" aria-hidden="true">\n' +
+    '  <a href="/" tabindex="-1"><img src="/assets/images/lanstech_logo_yoko.svg" alt="株式会社ランステック"></a>\n' +
+    '</div>\n' +
     '<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">\n' +
     '  <div class="mobile-nav-scroll">\n' +
     menuOverlayHTML +
@@ -115,6 +118,7 @@
   if (!btn || !nav) return;
 
   var wrap = document.querySelector('.site-nav .wrap');
+  var logoFixed = document.getElementById('menu-logo-fixed');
 
   var backdrop = document.createElement('div');
   backdrop.className = 'menu-backdrop';
@@ -127,6 +131,7 @@
     nav.setAttribute('aria-hidden', 'false');
     document.documentElement.style.overflow = 'hidden';
     if (wrap) wrap.classList.add('nav-hidden');
+    if (logoFixed) logoFixed.classList.add('visible');
   }
 
   function closeMenu() {
@@ -136,6 +141,7 @@
     nav.setAttribute('aria-hidden', 'true');
     document.documentElement.style.overflow = '';
     if (wrap) wrap.classList.remove('nav-hidden');
+    if (logoFixed) logoFixed.classList.remove('visible');
   }
 
   btn.addEventListener('click', function () {

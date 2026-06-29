@@ -42,15 +42,34 @@ body .page-hero { padding-top: 114px; }
 .site-nav a.nav-cta { background: var(--ink); color: #fff; padding: 14px 30px; border-radius: 9999px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all .3s cubic-bezier(.4,0,.2,1); box-shadow: 0 2px 12px rgba(36,48,64,.15); flex-shrink: 0; }
 .site-nav a.nav-cta:hover { background: #1a2433; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(36,48,64,.25); }
 
-/* メニュー展開時：ナビリンク・CTAのみフェード。ロゴはピル内に常駐して動かさない */
+/* メニュー展開時：ピルをフェードアウト。ロゴは position:fixed の専用要素でクロスフェード */
 .site-nav .wrap.nav-hidden {
-  pointer-events: none;
-}
-.site-nav .wrap.nav-hidden a.nav-link,
-.site-nav .wrap.nav-hidden a.nav-cta {
   opacity: 0;
   pointer-events: none;
+  transform: scale(0.97);
 }
+
+/* 固定ロゴ：ピルと完全同座標に配置し、メニュー開閉時にクロスフェード */
+.menu-logo-fixed {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 1360px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  /* ピルの border:1px + padding-left:28px に合わせて 29px */
+  padding-left: 29px;
+  box-sizing: border-box;
+  z-index: 201;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s cubic-bezier(.33,1,.68,1);
+}
+.menu-logo-fixed.visible { opacity: 1; }
+.menu-logo-fixed img { height: 26px; width: auto; display: block; }
 
 /* STANDALONE MENU BUTTON */
 .nav-standalone-btn {
@@ -119,7 +138,7 @@ body .page-hero { padding-top: 114px; }
   position: relative;
   width: 100%;
   max-width: 1360px; margin: 0 auto;
-  padding: 28px 48px 36px;
+  padding: 80px 48px 36px;
   box-sizing: border-box;
 }
 
@@ -197,7 +216,8 @@ body .page-hero { padding-top: 114px; }
   }
   .mobile-nav.open { clip-path: inset(0 0 0% 0 round 26px); }
   .mobile-nav-scroll { max-height: 80vh; }
-  .menu-overlay-body { padding: 24px 24px 28px; }
+  .menu-logo-fixed { top: 10px; width: calc(100% - 20px); height: 52px; padding-left: 21px; }
+  .menu-overlay-body { padding: 64px 24px 28px; }
   .menu-nav-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; margin-bottom: 24px; }
   .menu-group-row { flex-wrap: wrap; }
 }
