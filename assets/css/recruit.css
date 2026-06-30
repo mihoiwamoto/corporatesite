@@ -47,13 +47,24 @@
   .breadcrumb span { margin: 0 6px; }
   .page-hero h1 { font-size: 36px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; }
   .page-hero p.sub { font-size: 16px; color: var(--sub); margin-top: 16px; line-height: 1.85; max-width: 640px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+  .hero-actions .btn { padding: 15px 32px; font-size: 14px; }
+
+  /* JOB SUMMARY (quick facts) */
+  .job-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 32px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .job-summary-item { background: #fff; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .job-summary-k { font-size: 11px; font-weight: 700; color: var(--pink-dark); letter-spacing: .08em; }
+  .job-summary-v { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+  .job-summary-link { margin-top: 14px; font-size: 13px; }
+  .job-summary-link a { color: var(--ink); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; transition: color .2s, border-color .2s; }
+  .job-summary-link a:hover { color: var(--pink); border-bottom-color: var(--pink); }
 
   /* MESSAGE */
   .message-section { background: var(--bg); }
-  .message-inner { max-width: 720px; }
-  .message-inner h2 { font-size: 24px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; margin-top: 12px; }
-  .message-inner p { font-size: 16px; color: var(--sub); line-height: 1.9; }
-  .message-inner p + p { margin-top: 16px; }
+  .message-inner { max-width: 880px; }
+  .message-inner h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 700; line-height: 1.5; letter-spacing: -.02em; margin-bottom: 28px; }
+  .message-inner p { font-size: 17px; color: var(--sub); line-height: 1.95; }
+  .message-inner p + p { margin-top: 20px; }
 
   /* WHY LANSTECH */
   .why-section { background: var(--bg-soft); }
@@ -179,7 +190,11 @@
     .wrap { padding: 0 20px; }
     .page-hero { padding: 48px 0 40px; }
     .page-hero h1 { font-size: 26px; }
+    .message-inner h2 { line-height: 1.55; }
+    .message-inner p { font-size: 16px; }
     .why-grid { grid-template-columns: 1fr; }
+    .hero-actions .btn { flex: 1 1 auto; text-align: center; }
+    .job-summary { grid-template-columns: 1fr 1fr; }
     .work-cols { grid-template-columns: 1fr; gap: 32px; }
     .who-grid { grid-template-columns: 1fr; gap: 28px; }
     .mind-list { grid-template-columns: 1fr; }
@@ -201,6 +216,8 @@
   @media (max-width: 480px) {
     .num-grid { grid-template-columns: 1fr; }
     .why-card { padding: 22px 20px; }
+    .job-summary { grid-template-columns: 1fr; }
+    .hero-actions .btn { flex-basis: 100%; }
   }
 
   @media (min-width: 1440px) {
@@ -209,6 +226,7 @@
     .page-hero { padding: 100px 0; }
     .page-hero h1 { font-size: 52px; }
     h2.title { font-size: 40px; }
+    .message-inner { max-width: 960px; }
     .recruit-lead h2 { font-size: 42px; }
     .recruit-layout { gap: 100px; }
     .interview-card { padding: 56px; max-width: 840px; }

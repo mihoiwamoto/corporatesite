@@ -28,6 +28,10 @@
     <p class="eyebrow">RECRUIT</p>
     <h1>採用情報</h1>
     <p class="sub">西原商会グループの一員として、グループの事業をシステムで支えるチームです。安定した基盤のもとで、長く腰を据えて働ける仲間を募集しています。</p>
+    <div class="hero-actions">
+      <a href="contact.html?type=recruit" class="btn btn-primary">応募・お問い合わせ</a>
+      <a href="#requirements" class="btn btn-ghost">募集要項を見る</a>
+    </div>
   </div>
 </div>
 
@@ -108,6 +112,13 @@
     <p class="eyebrow">SYSTEM ENGINEER</p>
     <h2 class="title">システムエンジニアの仕事</h2>
     <p class="lead-narrow">ここからは「システムエンジニア（Web系）」職の募集内容です。販売管理・在庫管理・受発注など、グループ各社が日々使う業務システムを、企画から運用まで自分たちの手でつくります。</p>
+    <div class="job-summary">
+      <div class="job-summary-item"><span class="job-summary-k">雇用形態</span><span class="job-summary-v">正社員</span></div>
+      <div class="job-summary-item"><span class="job-summary-k">給与</span><span class="job-summary-v">年収 400万〜500万円</span></div>
+      <div class="job-summary-item"><span class="job-summary-k">勤務地</span><span class="job-summary-v">本社（東京・江東区）<br>客先常駐なし</span></div>
+      <div class="job-summary-item"><span class="job-summary-k">契約</span><span class="job-summary-v">期間の定めなし<br>（試用3ヶ月）</span></div>
+    </div>
+    <p class="job-summary-link"><a href="#requirements">詳しい募集要項を見る →</a></p>
     <div class="work-cols">
       <div>
         <h3 class="col-head">担当する仕事</h3>
@@ -447,7 +458,7 @@
 <script>
 (function() {
   var bar = document.getElementById('apply-bar');
-  var apply = document.querySelector('.recruit-apply');
+  var apply = document.querySelector('.contact-cta');
   if (bar && apply && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {

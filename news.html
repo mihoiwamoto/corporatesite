@@ -26,16 +26,17 @@
     <p class="breadcrumb"><a href="index.html">ホーム</a><span>/</span>お知らせ</p>
     <p class="eyebrow">NEWS</p>
     <h1>お知らせ</h1>
+    <p class="sub">会社からのお知らせや社員インタビュー、グループ各社を支える開発の実績・事例など、ランステックの最新情報をお届けします。</p>
   </div>
 </div>
 
 <section class="news-section">
   <div class="wrap">
     <div class="news-filter">
-      <button class="filter-btn active">すべて</button>
-      <button class="filter-btn">お知らせ</button>
-      <button class="filter-btn">社員インタビュー</button>
-      <button class="filter-btn">実績・事例</button>
+      <button type="button" class="filter-btn active" aria-pressed="true">すべて</button>
+      <button type="button" class="filter-btn" aria-pressed="false">お知らせ</button>
+      <button type="button" class="filter-btn" aria-pressed="false">社員インタビュー</button>
+      <button type="button" class="filter-btn" aria-pressed="false">実績・事例</button>
     </div>
     <div class="news-list">
       <a href="/news/member-interview.html" class="news-item">
@@ -60,14 +61,14 @@
         </div>
         <span class="news-arrow" aria-hidden="true"></span>
       </a>
-      <a href="/news/nishihara-group.html" class="news-item">
+      <a href="/news/sample.html" class="news-item">
         <div class="news-meta">
-          <span class="news-date">2024.11.20</span>
+          <span class="news-date">2025.08.20</span>
           <span class="news-cat">お知らせ</span>
         </div>
         <div class="news-body">
-          <h3>西原商会グループ参画のお知らせ</h3>
-          <p>このたび株式会社西原商会グループに参画いたしました。グループ各社との連携を深め、グループの事業を支える業務システムの開発・運用に一層取り組んでまいります。</p>
+          <h3>お知らせ見出し</h3>
+          <p>お知らせ本文の概要テキストが入ります。2〜3行程度。</p>
         </div>
         <span class="news-arrow" aria-hidden="true"></span>
       </a>
@@ -93,18 +94,19 @@
         </div>
         <span class="news-arrow" aria-hidden="true"></span>
       </a>
-      <a href="/news/sample.html" class="news-item">
+      <a href="/news/nishihara-group.html" class="news-item">
         <div class="news-meta">
-          <span class="news-date">2025.08.20</span>
+          <span class="news-date">2024.11.20</span>
           <span class="news-cat">お知らせ</span>
         </div>
         <div class="news-body">
-          <h3>お知らせ見出し</h3>
-          <p>お知らせ本文の概要テキストが入ります。2〜3行程度。</p>
+          <h3>西原商会グループ参画のお知らせ</h3>
+          <p>このたび株式会社西原商会グループに参画いたしました。グループ各社との連携を深め、グループの事業を支える業務システムの開発・運用に一層取り組んでまいります。</p>
         </div>
         <span class="news-arrow" aria-hidden="true"></span>
       </a>
     </div>
+    <p class="news-empty" hidden>該当する記事はありません。</p>
   </div>
 </section>
 
@@ -120,14 +122,21 @@
   // カテゴリフィルター
   var filterBtns = document.querySelectorAll('.filter-btn');
   var newsItems = document.querySelectorAll('.news-item');
+  var emptyEl = document.querySelector('.news-empty');
   function applyFilter(cat) {
     filterBtns.forEach(function(b) {
-      b.classList.toggle('active', b.textContent.trim() === cat);
+      var on = b.textContent.trim() === cat;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
+    var visible = 0;
     newsItems.forEach(function(item) {
       var itemCat = item.querySelector('.news-cat').textContent.trim();
-      item.style.display = (cat === 'すべて' || cat === itemCat) ? '' : 'none';
+      var show = (cat === 'すべて' || cat === itemCat);
+      item.style.display = show ? '' : 'none';
+      if (show) visible++;
     });
+    if (emptyEl) emptyEl.hidden = visible !== 0;
   }
   filterBtns.forEach(function(btn) {
     btn.addEventListener('click', function() {

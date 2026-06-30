@@ -16,6 +16,10 @@ html { scrollbar-gutter: stable; }
 .site-nav .wrap {
   pointer-events: auto;
   display: flex; align-items: center; gap: 40px;
+  /* ヘッダーのピルはページ個別CSSの .wrap { max-width } を継承させない。
+     継承するとページごとに余白（メニューアイコンとの間隔）がずれるため、
+     常に nav-row 基準の幅で揃える。 */
+  max-width: none;
   flex: 1; height: 68px;
   padding: 0 16px 0 28px;
   background: rgba(255,255,255,.88);
@@ -27,7 +31,7 @@ html { scrollbar-gutter: stable; }
   transition: opacity .3s cubic-bezier(.33,1,.68,1), transform .3s cubic-bezier(.33,1,.68,1);
 }
 
-body .page-hero { padding-top: 114px; }
+body .page-hero { padding-top: 100px; }
 
 .site-nav .logo { flex: 1; }
 .site-nav .logo img { height: 26px; width: auto; display: block; }
@@ -208,7 +212,7 @@ body .page-hero { padding-top: 114px; }
   .site-nav a.nav-link { display: none; }
   .site-nav a.nav-cta { display: none; }
   .nav-standalone-btn { width: 52px; height: 52px; }
-  body .page-hero { padding-top: 90px; }
+  body .page-hero { padding-top: 80px; }
   .mobile-nav {
     top: 10px;
     width: calc(100% - 20px);

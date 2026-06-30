@@ -88,7 +88,20 @@ body.pgt-visible { opacity: 1; }
 
 /* [基本] 全セクション透明 — アニメをそのまま見せる */
 section { background: transparent !important; }
-.page-hero { background: rgba(255,255,255,0.92) !important; -webkit-backdrop-filter: blur(24px) saturate(1.6) !important; backdrop-filter: blur(24px) saturate(1.6) !important; border-bottom: none !important; overflow: hidden; }
+.page-hero {
+  /* 背景なし：すりガラスを撤去し、背景アニメをそのまま見せる */
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  border-bottom: none !important;
+  /* 高さをコンパクトに：下余白を全ページ・全幅で統一短縮（上余白は header.css が管理） */
+  padding-bottom: 36px !important;
+  overflow: hidden;
+}
+
+/* タイトル直後の最初のセクションだけ上余白を詰める（タイトルとの間隔短縮）。
+   各ページCSSの section { padding:120px 0 } を上書き。後続セクション間は据え置き。 */
+.page-hero + section { padding-top: 40px !important; }
 
 /* ===== PAGE HERO: 英日二段タイポグラフィ型 =====
    eyebrow を大型・透過テキストとして配置し、
@@ -116,6 +129,8 @@ section { background: transparent !important; }
 
 @media (max-width: 768px) {
   .page-hero .eyebrow { font-size: clamp(32px, 10vw, 52px) !important; margin-bottom: -14px !important; }
+  .page-hero { padding-bottom: 28px !important; }
+  .page-hero + section { padding-top: 24px !important; }
 }
 .news-teaser { background: rgba(255,255,255,0.88) !important; }
 

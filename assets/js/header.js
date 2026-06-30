@@ -24,7 +24,7 @@
 
   var NAV_ITEMS = [
     { href: '/about.html',   label: '私たちについて', key: 'about' },
-    { href: '/service.html',  label: '私たちの事業', key: 'service' },
+    { href: '/service.html',  label: '事業内容', key: 'service' },
     { href: '/recruit.html',  label: '採用情報', key: 'recruit' },
     { href: '/news.html',     label: 'お知らせ', key: 'news' }
   ];
@@ -60,7 +60,7 @@
     '    </div>\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">Business</p>\n' +
-    '      <a href="/service.html" class="menu-page-link">私たちの事業</a>\n' +
+    '      <a href="/service.html" class="menu-page-link">事業内容</a>\n' +
     '      <a href="/service.html#planning" class="menu-section-link">企画・要件定義</a>\n' +
     '      <a href="/service.html#development" class="menu-section-link">設計・開発</a>\n' +
     '      <a href="/service.html#operation" class="menu-section-link">保守・運用</a>\n' +
