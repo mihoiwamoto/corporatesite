@@ -107,6 +107,10 @@
   .map-access-addr strong { display: block; font-size: 12px; font-weight: 700; color: var(--pink-dark); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
   .map-access-map { position: relative; min-height: 440px; }
   .map-access-map iframe { display: block; width: 100%; height: 100%; min-height: 440px; border: 0; }
+  /* タブレット中間帯：1fr/60% だと情報側が窮屈なので均等2列に */
+  @media (min-width: 769px) and (max-width: 1080px) {
+    .map-access { grid-template-columns: 1fr 1fr; }
+  }
   @media (max-width: 768px) {
     .map-access { grid-template-columns: 1fr; }
     .map-access-info { padding: 28px 24px; }

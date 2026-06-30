@@ -89,6 +89,12 @@
 
   html { scroll-behavior: smooth; }
 
+  /* タブレット中間帯：360pxサイドバー併存だとフォームが狭すぎるため縦積みに
+     （901px以上はフォーム約400px確保できるので2カラム維持） */
+  @media (min-width: 769px) and (max-width: 900px) {
+    .form-layout { grid-template-columns: 1fr; gap: 40px; }
+  }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .wrap { padding: 0 20px; }

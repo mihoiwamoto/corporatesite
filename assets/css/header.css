@@ -198,10 +198,20 @@ body .page-hero { padding-top: 100px; }
   color: #243040; font-size: 13px; font-weight: 500;
   transition: all .3s cubic-bezier(.4,0,.2,1);
 }
-.menu-group-link:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,.08); border-color: #D4637E; }
+.menu-group-link:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,.08); }
 .menu-group-logo { height: 18px; width: auto; display: block; }
 .menu-group-arrow { font-size: 13px; color: #4A5568; transition: transform .2s; }
 .menu-group-link:hover .menu-group-arrow { transform: translate(2px,-2px); }
+
+/* タブレット幅（〜960px）ではインラインのナビ＋CTAがピル内に収まりきらないため、
+   ハンバーガーメニューのみ表示する（ロゴ＋ボタンの構成に切り替え）。
+   ピル自体のサイズは769px以上ではデスクトップ寸法を維持する。 */
+@media (max-width: 960px) {
+  .site-nav a.nav-link { display: none; }
+  .site-nav a.nav-cta { display: none; }
+  /* 展開メニューのカラムを5→3列に（タブレット幅で窮屈になるのを防ぐ） */
+  .menu-nav-grid { grid-template-columns: repeat(3, 1fr); }
+}
 
 /* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
@@ -209,8 +219,6 @@ body .page-hero { padding-top: 100px; }
   .nav-row { width: calc(100% - 20px); gap: 8px; }
   .site-nav .wrap { height: 52px; padding: 0 16px 0 20px; gap: 0; }
   .site-nav .logo img { height: 22px; }
-  .site-nav a.nav-link { display: none; }
-  .site-nav a.nav-cta { display: none; }
   .nav-standalone-btn { width: 52px; height: 52px; }
   body .page-hero { padding-top: 80px; }
   .mobile-nav {

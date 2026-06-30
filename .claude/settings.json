@@ -12,7 +12,8 @@
       "Bash(curl -s \"https://x-garden.co.jp/company/\")",
       "Bash(curl -s \"https://x-garden.co.jp/css/app.css\")",
       "Bash(curl -s \"https://x-garden.co.jp/js/main.bundle.js\")",
-      "Bash(curl -s \"https://x-garden.co.jp/js/interaction_app.js\")"
+      "Bash(curl -s \"https://x-garden.co.jp/js/interaction_app.js\")",
+      "Bash(git commit *)"
     ]
   }
 }

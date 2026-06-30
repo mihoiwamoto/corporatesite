@@ -140,8 +140,65 @@
   .cases-section { background: var(--bg); }
   .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
   .case-card { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; color: inherit; display: flex; flex-direction: column; background: var(--bg); }
-  .case-card-thumb { background: var(--pink-light); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; }
-  .case-card-thumb svg { width: 48px; height: 48px; stroke: var(--pink); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
+  .case-card-thumb { aspect-ratio: 16/9; padding: 14px 16px; display: flex; align-items: center; justify-content: center; background: var(--case-tint, var(--pink-light)); overflow: hidden; }
+
+  /* device scene (stylized, no real screenshot) */
+  .case-scene { width: 100%; display: flex; align-items: flex-end; justify-content: center; gap: 14px; }
+  .case-scene--solo { gap: 0; }
+
+  .scr-bar { display: flex; align-items: center; gap: 4px; padding: 5px 7px; border-bottom: 1px solid var(--line); }
+  .scr-bar i { width: 5px; height: 5px; border-radius: 50%; background: #E2E6EC; }
+  .scr-body { padding: 12px; }
+
+  /* desktop monitor */
+  .dev-pc { width: 60%; max-width: 176px; }
+  .case-scene--solo .dev-pc { width: 86%; max-width: 248px; }
+  .dev-pc-screen { background: #fff; border: 1px solid rgba(36,48,64,.10); border-radius: 7px; box-shadow: 0 8px 18px rgba(36,48,64,.10); overflow: hidden; }
+  .dev-pc-stand { width: 38px; height: 6px; border-radius: 0 0 4px 4px; background: #DDE2E9; margin: 0 auto; }
+  .dev-pc-stand::before { content: ''; display: block; width: 12px; height: 4px; background: #E6EAF0; margin: 0 auto; }
+
+  /* desktop content: dashboard */
+  .scr-dash { display: flex; gap: 7px; }
+  .scr-dash-side { display: flex; flex-direction: column; gap: 5px; width: 22px; flex-shrink: 0; }
+  .scr-dash-side span { height: 4px; border-radius: 2px; background: #EEF1F5; }
+  .scr-dash-side span:first-child { background: var(--case-accent, var(--pink)); opacity: .85; }
+  .scr-dash-main { flex: 1; display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+  .scr-chart { display: flex; align-items: flex-end; gap: 5px; height: 52px; }
+  .scr-chart span { flex: 1; border-radius: 2px 2px 0 0; background: var(--case-accent, var(--pink)); opacity: .34; }
+  .scr-chart span:nth-child(even) { opacity: .6; }
+  .scr-rows { display: flex; flex-direction: column; gap: 7px; }
+  .scr-rows span { height: 4px; border-radius: 2px; background: #EEF1F5; }
+  .scr-rows span:nth-child(1) { width: 92%; }
+  .scr-rows span:nth-child(2) { width: 70%; }
+
+  /* desktop content: list (来場管理) */
+  .scr-list { display: flex; flex-direction: column; gap: 11px; }
+  .scr-list-row { display: flex; align-items: center; gap: 8px; }
+  .scr-list-row i { width: 13px; height: 13px; border-radius: 50%; background: var(--case-tint, #eee); border: 1.5px solid var(--case-accent, var(--pink)); flex-shrink: 0; }
+  .scr-list-row b { display: block; height: 4px; border-radius: 2px; background: #EEF1F5; flex: 1; }
+  .scr-list-row b.s { max-width: 42%; }
+
+  /* desktop content: spreadsheet (帳票) */
+  .scr-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+  .scr-grid span { height: 13px; border-radius: 2px; background: #F1F3F7; }
+  .scr-grid span.h { background: var(--case-accent, var(--pink)); opacity: .5; }
+  .scr-grid span.t { background: var(--case-accent, var(--pink)); opacity: .26; }
+
+  /* tablet (iPad) */
+  .dev-tablet { width: 82px; flex-shrink: 0; background: #fff; border: 1px solid rgba(36,48,64,.12); border-radius: 10px; padding: 11px 9px; box-shadow: 0 8px 18px rgba(36,48,64,.12); }
+  .tab-screen { display: flex; flex-direction: column; gap: 11px; }
+  .tab-chk { display: flex; align-items: center; gap: 7px; }
+  .tab-chk i { width: 12px; height: 12px; border-radius: 3px; background: var(--case-accent, var(--pink)); flex-shrink: 0; position: relative; }
+  .tab-chk i::after { content: ''; position: absolute; left: 3.5px; top: 2px; width: 3.5px; height: 6px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(40deg); }
+  .tab-chk b { display: block; height: 4px; border-radius: 2px; background: #EEF1F5; flex: 1; }
+
+  /* phone (受付) */
+  .dev-phone { width: 56px; flex-shrink: 0; background: #fff; border: 1px solid rgba(36,48,64,.12); border-radius: 13px; padding: 11px 6px 13px; box-shadow: 0 8px 18px rgba(36,48,64,.12); }
+  .ph-screen { display: flex; flex-direction: column; align-items: center; gap: 9px; }
+  .ph-head { width: 62%; height: 4px; border-radius: 2px; background: #EEF1F5; }
+  .ph-scan { width: 38px; height: 38px; border-radius: 7px; border: 1.5px dashed var(--case-accent, var(--pink)); position: relative; }
+  .ph-scan::after { content: ''; position: absolute; left: 6px; right: 6px; top: 50%; height: 1.5px; background: var(--case-accent, var(--pink)); opacity: .75; }
+  .ph-btn { width: 76%; height: 9px; border-radius: 4px; background: var(--case-accent, var(--pink)); opacity: .9; margin-top: 2px; }
   .case-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
   .case-card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
   .case-tag { display: inline-block; background: var(--pink-light); color: var(--pink-dark); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 9999px; }
@@ -157,6 +214,17 @@
   .case-tech-list { display: flex; flex-wrap: wrap; gap: 4px; }
   .tech-badge { display: inline-block; background: #f8f8f8; border: 1px solid var(--line); color: var(--ink); font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 9999px; }
   .case-team { font-size: 11px; color: var(--sub); line-height: 1.6; }
+  .case-story { margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .case-story-row { display: grid; grid-template-columns: 36px 1fr; gap: 10px; align-items: start; }
+  .case-story-row dt { font-size: 10px; font-weight: 700; letter-spacing: .04em; color: #fff; background: var(--sub); border-radius: 4px; padding: 3px 0; text-align: center; }
+  .case-story-row.is-effect dt { background: var(--case-accent, var(--pink)); }
+  .case-story-row dd { font-size: 13.5px; color: var(--sub); line-height: 1.7; }
+  /* タブレット中間帯：多列を2列に間引いて窮屈さを解消 */
+  @media (min-width: 769px) and (max-width: 1080px) {
+    .cases-grid { grid-template-columns: repeat(2, 1fr); }
+    .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .service-inner { gap: 44px; }
+  }
   .case-more-link { display: block; font-size: 12px; font-weight: 700; color: var(--pink); margin-top: 14px; }
   .cases-more { text-align: center; }
   .btn-outline { display: inline-block; border: 1.5px solid var(--line); color: var(--ink); padding: 12px 36px; border-radius: 9999px; font-size: 13px; font-weight: 700; text-decoration: none; transition: all .35s cubic-bezier(.4,0,.2,1); }
