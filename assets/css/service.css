@@ -138,6 +138,7 @@
 
   /* CASES */
   .cases-section { background: var(--bg); }
+  .cases-section .section-head p { max-width: none; }
   .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
   .case-card { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; color: inherit; display: flex; flex-direction: column; background: var(--bg); }
   .case-card-thumb { aspect-ratio: 16/9; padding: 14px 16px; display: flex; align-items: center; justify-content: center; background: var(--case-tint, var(--pink-light)); overflow: hidden; }

@@ -17,6 +17,10 @@
   /* ざらざら（グレイン）の強さ：0 で無効。白基調なので .05〜.12 が適正 */
   --ground-grain-opacity:  .07;
 
+  /* 背景アニメ(FloatingLines)のブラー量。FV以外の全セクションに適用。
+     値を上げるほど背景が強くぼける（0px で無効）。 */
+  --bg-blur: 14px;
+
 }
 
 /* --- FloatingLines（WebGL）アニメ背景：白ベースの上・本文の下 ----------------- */
@@ -88,11 +92,19 @@ body.pgt-visible { opacity: 1; }
 
 /* [基本] 全セクション透明 — アニメをそのまま見せる */
 section { background: transparent !important; }
+
+/* [背景ブラー] FV以外の全セクションで、背後の背景アニメをぼかす。
+   backdrop-filter は「背後」だけをぼかすため、セクション内のテキスト・カードは鮮明なまま。
+   FV(.fv＝TOPのヒーロー)はぼかさず crisp に見せる。強度は --bg-blur で調整。 */
+section:not(.fv) {
+  -webkit-backdrop-filter: blur(var(--bg-blur));
+  backdrop-filter: blur(var(--bg-blur));
+}
 .page-hero {
-  /* 背景なし：すりガラスを撤去し、背景アニメをそのまま見せる */
+  /* 白パネルは無し（透明）のまま、背後の背景アニメだけをぼかす（FV以外の方針に合わせる） */
   background: transparent !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
+  -webkit-backdrop-filter: blur(var(--bg-blur)) !important;
+  backdrop-filter: blur(var(--bg-blur)) !important;
   border-bottom: none !important;
   /* 高さをコンパクトに：下余白を全ページ・全幅で統一短縮（上余白は header.css が管理） */
   padding-bottom: 36px !important;

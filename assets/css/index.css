@@ -55,11 +55,32 @@
   .fv .wrap { position: relative; z-index: 2; }
   .fv-inner { max-width: 1040px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; }
   .fv h1 { font-family: 'Outfit', 'Noto Sans JP', sans-serif; font-size: clamp(2.5rem, 7.2vw, 6rem); font-weight: 700; line-height: 1.26; letter-spacing: -.025em; margin-bottom: 32px; color: var(--ink); white-space: nowrap; word-break: normal; text-wrap: nowrap; }
-  .fv p.sub { font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif; font-size: clamp(1.0625rem, 0.9rem + 0.6vw, 1.375rem); color: var(--sub); line-height: 1.9; font-weight: 400; letter-spacing: .04em; max-width: 640px; margin: 4px auto 0; }
+  .fv p.sub { font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif; font-size: clamp(1.0625rem, 0.9rem + 0.6vw, 1.375rem); color: var(--sub); line-height: 1.9; font-weight: 500; letter-spacing: .04em; max-width: 640px; margin: 4px auto 0; }
   .fv h1.fv-typed { display: inline-block; position: relative; }
   .fv-typed__ghost { visibility: hidden; white-space: nowrap; }
   .fv-typed__live { position: absolute; left: 0; top: 0; width: max-content; text-align: left; white-space: nowrap; }
   .fv-hl { color: var(--pink); }
+  /* FV shiny text（React Bits ShinyText 相当：ink地に pink の光が流れる） */
+  .fv-typed__live .text-type__content {
+    background-image: linear-gradient(120deg, var(--ink) 0%, var(--ink) 35%, var(--pink) 50%, var(--ink) 65%, var(--ink) 100%);
+    background-size: 200% auto;
+    background-position: 150% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: fv-shine 5.5s linear infinite;
+  }
+  /* "Joy" は常にピンクで固定（シャインに溶け込ませない） */
+  .fv-typed__live .fv-hl { -webkit-text-fill-color: var(--pink); color: var(--pink); }
+  @keyframes fv-shine {
+    0% { background-position: 150% center; }
+    90%, 100% { background-position: -50% center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fv-typed__live .text-type__content { animation: none; background: none; -webkit-text-fill-color: var(--ink); color: var(--ink); }
+    .fv-typed__live .fv-hl { -webkit-text-fill-color: var(--pink); color: var(--pink); }
+  }
   .fv-scroll { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; z-index: 2; }
   .fv-scroll-label { font-size: 10px; font-weight: 600; letter-spacing: .25em; color: var(--sub); }
   .fv-scroll-line { width: 1px; height: 56px; background: var(--line); position: relative; overflow: hidden; }
@@ -86,7 +107,19 @@
   .news-teaser-more:hover { color: var(--pink-dark); transform: translateX(2px); }
 
   /* ABOUT */
-  .about { display: block; padding: 100px 0 0; overflow: hidden; }
+  /* ===== セクション別背景（giftee風・上品）=====
+     FV以外は不透明ベース＋ブランド色の大きなぼかし円で色トーンを切替。
+     背景アニメ(FloatingLines)はFVのみ表示（各セクションが覆う）。
+     よって共通の backdrop-filter ブラーはTOPでは無効化する。 */
+  section:not(.fv) { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+
+  .about {
+    display: block; padding: 100px 0 0; overflow: hidden; border-radius: 40px;
+    background:
+      radial-gradient(52vmax 52vmax at 88% -8%, rgba(212,99,126,.10) 0%, transparent 58%),
+      radial-gradient(40vmax 40vmax at -6% 38%, rgba(212,99,126,.055) 0%, transparent 56%),
+      #ffffff !important;
+  }
   .about > .wrap { padding: 0 40px 72px; }
   .about .sec-heading { margin-bottom: 32px; }
   .about-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 36px 64px; align-items: start; margin-top: 0; }
@@ -104,7 +137,11 @@
   .exterior-band:hover img { transform: scale(1.03); }
 
   /* SERVICES */
-  .services { background: radial-gradient(circle, rgba(212,99,126,.11) 1px, transparent 1px) 0 0 / 28px 28px, radial-gradient(circle at 86% 10%, rgba(212,99,126,.10) 0%, transparent 40%), rgba(249,228,236,.22) !important; overflow-x: clip; }
+  .services {
+    /* 背景アニメ(FloatingLines)を見せるセクション：パネルを敷かず透明にする */
+    background: transparent !important;
+    overflow-x: clip;
+  }
   .services-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
   .service-item { display: flex; flex-direction: column; align-items: stretch; background: rgba(255,255,255,.82); border: 1px solid var(--line); border-radius: 20px; padding: 0; overflow: hidden; transition: all .4s cubic-bezier(.4,0,.2,1); box-shadow: var(--shadow-sm); }
   .service-item:hover { box-shadow: var(--shadow-lg); border-color: transparent; transform: translateY(-4px); }
@@ -142,7 +179,13 @@
   .btn-detail:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
 
   /* GROUP */
-  .group { background: radial-gradient(circle, rgba(26,157,87,.09) 1px, transparent 1px) 0 0 / 28px 28px, radial-gradient(circle at 12% 16%, rgba(26,157,87,.10) 0%, transparent 38%), rgba(236,247,241,.30) !important; overflow-x: clip; }
+  .group {
+    background:
+      radial-gradient(circle, rgba(26,157,87,.09) 1px, transparent 1px) 0 0 / 28px 28px,
+      radial-gradient(50vmax 50vmax at 8% 16%, rgba(26,157,87,.12) 0%, transparent 52%),
+      #F1F9F4 !important;
+    overflow-x: clip;
+  }
   .group-inner { display: flex; flex-direction: row; gap: 56px; align-items: center; margin-top: 80px; }
   .group-text { flex: 1 1 0; min-width: 0; }
   .group-text h3 { font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 32px; line-height: 1.7; }
@@ -156,7 +199,11 @@
   .group-diagram img { width: 100%; height: auto; display: block; border-radius: 20px; }
 
   /* RECRUIT */
-  .recruit { background: linear-gradient(180deg, var(--bg-soft) 0%, #ffffff 100%); padding: 100px 0; }
+  .recruit {
+    /* 背景アニメ(FloatingLines)を見せるセクション：採用カードがアニメ上に浮く */
+    background: transparent !important;
+    padding: 100px 0;
+  }
   .recruit-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
   .recruit-lead .sec-label { margin-bottom: 16px; }
   .recruit-lead h2 { font-size: 42px; font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.45; margin-top: 0; letter-spacing: -.02em; }
@@ -176,7 +223,11 @@
   .job-card-footer { display: flex; justify-content: flex-end; }
 
   /* INTERVIEW */
-  .interview { background: #fff; padding: 100px 0 160px; overflow-x: clip; }
+  .interview {
+    /* 背景は一旦なし（透明＝背景アニメが透ける） */
+    background: transparent !important;
+    padding: 100px 0 160px; overflow-x: clip;
+  }
   .interview-card { position: relative; background: var(--pink-light); border: none; border-radius: 24px; overflow: visible; margin-top: 40px; min-height: 440px; box-shadow: none; }
   .interview-photo { position: absolute; bottom: 0; left: 0; width: 34%; }
   .interview-photo img { width: 100%; height: auto; display: block; }
