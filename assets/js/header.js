@@ -10,8 +10,20 @@
     document.head.appendChild(flScript);
   }
 
+  // カーソル追従ドット（cursor.js）も全ページ共通で起動する。
+  // 個別ページに <script src=".../cursor.js"> があっても cursor.js 側で
+  // 二重初期化を防ぐため、ここでは重複注入だけ避ける。
+  if (!document.querySelector('script[data-cursor]') &&
+      !document.querySelector('script[src*="cursor.js"]')) {
+    var curScript = document.createElement('script');
+    curScript.src = '/assets/js/cursor.js';
+    curScript.defer = true;
+    curScript.setAttribute('data-cursor', '');
+    document.head.appendChild(curScript);
+  }
+
   var NAV_ITEMS = [
-    { href: '/about.html',   label: '会社について', key: 'about' },
+    { href: '/about.html',   label: '私たちについて', key: 'about' },
     { href: '/service.html',  label: '私たちの事業', key: 'service' },
     { href: '/recruit.html',  label: '採用情報', key: 'recruit' },
     { href: '/news.html',     label: 'お知らせ', key: 'news' }
@@ -39,7 +51,7 @@
     '  <div class="menu-nav-grid">\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">Company</p>\n' +
-    '      <a href="/about.html" class="menu-page-link">会社について</a>\n' +
+    '      <a href="/about.html" class="menu-page-link">私たちについて</a>\n' +
     '      <a href="/about.html#message" class="menu-section-link">社長メッセージ</a>\n' +
     '      <a href="/about.html#vision" class="menu-section-link">ビジョン</a>\n' +
     '      <a href="/about.html#values" class="menu-section-link">バリュー</a>\n' +
@@ -119,6 +131,7 @@
 
   var wrap = document.querySelector('.site-nav .wrap');
   var logoFixed = document.getElementById('menu-logo-fixed');
+  var logoFixedLink = logoFixed ? logoFixed.querySelector('a') : null;
 
   var backdrop = document.createElement('div');
   backdrop.className = 'menu-backdrop';
@@ -132,6 +145,8 @@
     document.documentElement.style.overflow = 'hidden';
     if (wrap) wrap.classList.add('nav-hidden');
     if (logoFixed) logoFixed.classList.add('visible');
+    if (logoFixed) logoFixed.setAttribute('aria-hidden', 'false');
+    if (logoFixedLink) logoFixedLink.removeAttribute('tabindex');
   }
 
   function closeMenu() {
@@ -142,6 +157,8 @@
     document.documentElement.style.overflow = '';
     if (wrap) wrap.classList.remove('nav-hidden');
     if (logoFixed) logoFixed.classList.remove('visible');
+    if (logoFixed) logoFixed.setAttribute('aria-hidden', 'true');
+    if (logoFixedLink) logoFixedLink.setAttribute('tabindex', '-1');
   }
 
   btn.addEventListener('click', function () {

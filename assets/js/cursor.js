@@ -9,6 +9,7 @@
  * - WordPress 移行時もこのファイルを enqueue すれば動く（要素はJSが自動生成）。
  */
 (function () {
+  if (document.getElementById('cursorBox')) return; // 二重初期化を防止
   var mqFine = window.matchMedia && window.matchMedia('(pointer: fine)');
   var mqReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
   if (!mqFine || !mqFine.matches) return;        // マウス環境のみ

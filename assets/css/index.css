@@ -94,6 +94,7 @@
   .about-content { max-width: 560px; }
   .about-content p { font-size: 18px; color: var(--sub); line-height: 2.1; font-weight: 400; margin-bottom: 28px; }
   .about-content p:last-of-type { margin-bottom: 0; }
+  .about-btn { margin-top: 40px; }
   .about-photo { height: clamp(280px, 36vw, 500px); margin-top: 56px; margin-bottom: 80px; margin-left: clamp(180px, 24vw, 380px); border-radius: clamp(32px, 5vw, 72px) 0 0 clamp(32px, 5vw, 72px); overflow: hidden; }
   .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block; }
 
@@ -255,6 +256,7 @@
     .about-heading h2 { font-size: 26px; line-height: 1.65; }
     .about-content { max-width: 100%; }
     .about-content p { font-size: 16px; margin-bottom: 20px; }
+    .about-btn { margin-top: 28px; }
     .about-photo { height: clamp(200px, 52vw, 300px); margin-left: clamp(32px, 6vw, 64px); }
 
     .services-list { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }

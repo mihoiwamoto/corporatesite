@@ -69,6 +69,9 @@ body .page-hero { padding-top: 114px; }
   transition: opacity .3s cubic-bezier(.33,1,.68,1);
 }
 .menu-logo-fixed.visible { opacity: 1; }
+/* メニュー表示中はロゴ（TOPページへのリンク）だけクリック可能にする */
+.menu-logo-fixed.visible a { pointer-events: auto; }
+.menu-logo-fixed a { display: inline-flex; }
 .menu-logo-fixed img { height: 26px; width: auto; display: block; }
 
 /* STANDALONE MENU BUTTON */
