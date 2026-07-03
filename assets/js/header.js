@@ -25,7 +25,6 @@
   var NAV_ITEMS = [
     { href: '/about.html',   label: '私たちについて', key: 'about' },
     { href: '/service.html',  label: '事業内容', key: 'service' },
-    { href: '/recruit.html',  label: '採用情報', key: 'recruit' },
     { href: '/news.html',     label: 'お知らせ', key: 'news' }
   ];
 
@@ -68,14 +67,6 @@
     '      <a href="/service.html#works" class="menu-section-link">開発実績</a>\n' +
     '    </div>\n' +
     '    <div class="menu-col">\n' +
-    '      <p class="menu-col-title">Recruit</p>\n' +
-    '      <a href="/recruit.html" class="menu-page-link">採用情報</a>\n' +
-    '      <a href="/recruit.html#jobs" class="menu-section-link">募集職種</a>\n' +
-    '      <a href="/recruit.html#data" class="menu-section-link">数字で見る</a>\n' +
-    '      <a href="/recruit.html#workstyle" class="menu-section-link">働き方について</a>\n' +
-    '      <a href="/recruit.html#requirements" class="menu-section-link">募集要項</a>\n' +
-    '    </div>\n' +
-    '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">News</p>\n' +
     '      <a href="/news.html" class="menu-page-link">お知らせ</a>\n' +
     '      <a href="/news.html#実績・事例" class="menu-section-link">実績・事例</a>\n' +
@@ -101,15 +92,6 @@
     '        <span class="menu-link-text">\n' +
     '          <span class="menu-link-ja">事業内容</span>\n' +
     '          <span class="menu-link-en">Business</span>\n' +
-    '        </span>\n' +
-    '        <span class="menu-link-arrow">›</span>\n' +
-    '      </a>\n' +
-    '    </div>\n' +
-    '    <div class="menu-col">\n' +
-    '      <a href="/recruit.html" class="menu-page-link-simple">\n' +
-    '        <span class="menu-link-text">\n' +
-    '          <span class="menu-link-ja">採用情報</span>\n' +
-    '          <span class="menu-link-en">Recruit</span>\n' +
     '        </span>\n' +
     '        <span class="menu-link-arrow">›</span>\n' +
     '      </a>\n' +

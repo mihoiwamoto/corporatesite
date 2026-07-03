@@ -194,9 +194,25 @@ if (sessionStorage.getItem('op-done') ||
                   0%, 100% { transform: translateY(0) rotate(0deg); }
                   50% { transform: translateY(-10px) rotate(1deg); }
                 }
-                @keyframes check-draw {
-                  0% { stroke-dashoffset: 100; }
-                  100% { stroke-dashoffset: 0; }
+                @keyframes check-draw-1 {
+                  0%, 10% { stroke-dashoffset: 100; }
+                  20%, 90% { stroke-dashoffset: 0; }
+                  100% { stroke-dashoffset: 100; }
+                }
+                @keyframes check-draw-2 {
+                  0%, 30% { stroke-dashoffset: 100; }
+                  40%, 90% { stroke-dashoffset: 0; }
+                  100% { stroke-dashoffset: 100; }
+                }
+                @keyframes check-draw-3 {
+                  0%, 50% { stroke-dashoffset: 100; }
+                  60%, 90% { stroke-dashoffset: 0; }
+                  100% { stroke-dashoffset: 100; }
+                }
+                @keyframes check-draw-4 {
+                  0%, 70% { stroke-dashoffset: 100; }
+                  80%, 90% { stroke-dashoffset: 0; }
+                  100% { stroke-dashoffset: 100; }
                 }
                 @keyframes shine {
                   0%, 100% { opacity: 0; }
@@ -216,7 +232,6 @@ if (sessionStorage.getItem('op-done') ||
                 .check-mark {
                   stroke-dasharray: 100;
                   stroke-dashoffset: 100;
-                  animation: check-draw 2s ease-in-out 0.5s infinite;
                 }
                 .shine-effect { animation: shine 3s ease-in-out infinite; }
                 .bubble-1 { animation: bubble-appear-1 6s ease-in-out infinite; transform-origin: right center; }
@@ -246,44 +261,42 @@ if (sessionStorage.getItem('op-done') ||
             <g class="doc-group" filter="url(#soft-shadow)" transform="rotate(-8 170 240)">
               <rect x="50" y="80" width="240" height="320" rx="8" fill="url(#doc-gradient)" stroke="none"/>
               <rect x="130" y="50" width="80" height="35" rx="8" fill="#D4637E" stroke="none"/>
-              <rect x="140" y="60" width="60" height="20" rx="10" fill="white" stroke="none"/>
+              <rect x="140" y="60" width="60" height="12" rx="6" fill="white" stroke="none"/>
               <rect x="75" y="110" width="190" height="8" rx="4" fill="#808080" opacity="0.2"/>
               <g>
                 <circle cx="85" cy="160" r="16" fill="white" stroke="#D4637E" stroke-width="2"/>
-                <polyline points="77,160 83,166 93,154" class="check-mark" stroke="#D4637E" stroke-width="6" fill="none"/>
+                <polyline points="77,160 83,166 93,154" class="check-mark" stroke="#D4637E" stroke-width="6" fill="none" style="animation: check-draw-1 8s ease-in-out infinite;"/>
                 <line x1="120" y1="160" x2="265" y2="160" stroke="#D0D0D0" stroke-width="5" stroke-linecap="round"/>
               </g>
               <g>
                 <circle cx="85" cy="220" r="16" fill="white" stroke="#D4637E" stroke-width="2"/>
-                <polyline points="77,220 83,226 93,214" class="check-mark" stroke="#D4637E" stroke-width="6" fill="none" style="animation-delay: 0.7s;"/>
+                <polyline points="77,220 83,226 93,214" class="check-mark" stroke="#D4637E" stroke-width="6" fill="none" style="animation: check-draw-2 8s ease-in-out infinite;"/>
                 <line x1="120" y1="220" x2="265" y2="220" stroke="#D0D0D0" stroke-width="5" stroke-linecap="round"/>
               </g>
               <g>
                 <circle cx="85" cy="280" r="16" fill="white" stroke="#D4637E" stroke-width="2"/>
-                <polyline points="77,280 83,286 93,274" class="check-mark" stroke="#D4637E" stroke-width="6" fill="none" style="animation-delay: 1.4s;"/>
+                <polyline points="77,280 83,286 93,274" class="check-mark" stroke="#D4637E" stroke-width="6" fill="none" style="animation: check-draw-3 8s ease-in-out infinite;"/>
                 <line x1="120" y1="280" x2="265" y2="280" stroke="#D0D0D0" stroke-width="5" stroke-linecap="round"/>
               </g>
               <g>
                 <circle cx="85" cy="340" r="16" fill="white" stroke="#D4637E" stroke-width="2"/>
-                <polyline points="77,340 83,346 93,334" class="check-mark" stroke="#D4637E" stroke-width="6" fill="none" style="animation-delay: 2.1s;"/>
+                <polyline points="77,340 83,346 93,334" class="check-mark" stroke="#D4637E" stroke-width="6" fill="none" style="animation: check-draw-4 8s ease-in-out infinite;"/>
                 <line x1="120" y1="340" x2="265" y2="340" stroke="#D0D0D0" stroke-width="5" stroke-linecap="round"/>
               </g>
               <rect x="50" y="80" width="240" height="320" rx="8" fill="url(#shine-gradient)" class="shine-effect" style="pointer-events: none;"/>
             </g>
             <!-- 対話する人物（ボードの右側、向き合って対話） -->
             <!-- 右側の人（グレー）：頭から左に吹き出し -->
-            <g transform="translate(500, 200)">
+            <g transform="translate(500, 140)">
               <circle cx="0" cy="0" r="30" fill="#808080"/>
               <path d="M -22,26 Q -35,32 -35,65 L -35,90 Q -35,102 -25,102 L 25,102 Q 35,102 35,90 L 35,65 Q 35,32 22,26 Z" fill="#B8B8B8"/>
               <!-- 吹き出し（頭から左側に） -->
               <g class="bubble-1">
-                <!-- 吹き出し本体 -->
-                <path d="M -165,-25 L -55,-25 Q -45,-25 -45,-15 L -45,15 Q -45,25 -55,25 L -165,25 Q -175,25 -175,15 L -175,-15 Q -175,-25 -165,-25 Z" fill="#ffffff" stroke="#525252" stroke-width="2.5"/>
-                <!-- 三角形（しっぽ） -->
-                <path d="M -45,8 L -30,0 L -45,-8" fill="#ffffff" stroke="#525252" stroke-width="2.5" stroke-linejoin="round"/>
-                <line x1="-150" y1="-10" x2="-65" y2="-10" stroke="#525252" stroke-width="3" stroke-linecap="round"/>
-                <line x1="-150" y1="3" x2="-85" y2="3" stroke="#525252" stroke-width="3" stroke-linecap="round"/>
-                <line x1="-150" y1="15" x2="-105" y2="15" stroke="#525252" stroke-width="3" stroke-linecap="round"/>
+                <!-- 吹き出し本体と三角形を一つのパスで -->
+                <path d="M -165,-35 L -55,-35 Q -45,-35 -45,-25 L -45,-10 L -30,0 L -45,10 L -45,25 Q -45,35 -55,35 L -165,35 Q -175,35 -175,25 L -175,-25 Q -175,-35 -165,-35 Z" fill="white" stroke="#B0B0B0" stroke-width="2.5" stroke-linejoin="round"/>
+                <line x1="-150" y1="-18" x2="-65" y2="-18" stroke="#B0B0B0" stroke-width="3" stroke-linecap="round"/>
+                <line x1="-150" y1="0" x2="-85" y2="0" stroke="#B0B0B0" stroke-width="3" stroke-linecap="round"/>
+                <line x1="-150" y1="18" x2="-105" y2="18" stroke="#B0B0B0" stroke-width="3" stroke-linecap="round"/>
               </g>
             </g>
 
@@ -293,13 +306,11 @@ if (sessionStorage.getItem('op-done') ||
               <path d="M -22,26 Q -35,32 -35,65 L -35,90 Q -35,102 -25,102 L 25,102 Q 35,102 35,90 L 35,65 Q 35,32 22,26 Z" fill="#A8E6C5"/>
               <!-- 吹き出し（頭から右側に） -->
               <g class="bubble-2">
-                <!-- 吹き出し本体 -->
-                <path d="M 55,-25 L 165,-25 Q 175,-25 175,-15 L 175,15 Q 175,25 165,25 L 55,25 Q 45,25 45,15 L 45,-15 Q 45,-25 55,-25 Z" fill="#ffffff" stroke="#525252" stroke-width="2.5"/>
-                <!-- 三角形（しっぽ） -->
-                <path d="M 45,8 L 30,0 L 45,-8" fill="#ffffff" stroke="#525252" stroke-width="2.5" stroke-linejoin="round"/>
-                <line x1="65" y1="-10" x2="150" y2="-10" stroke="#525252" stroke-width="3" stroke-linecap="round"/>
-                <line x1="65" y1="3" x2="130" y2="3" stroke="#525252" stroke-width="3" stroke-linecap="round"/>
-                <line x1="65" y1="15" x2="145" y2="15" stroke="#525252" stroke-width="3" stroke-linecap="round"/>
+                <!-- 吹き出し本体と三角形を一つのパスで -->
+                <path d="M 55,-35 L 165,-35 Q 175,-35 175,-25 L 175,25 Q 175,35 165,35 L 55,35 Q 45,35 45,25 L 45,10 L 30,0 L 45,-10 L 45,-25 Q 45,-35 55,-35 Z" fill="white" stroke="#B0B0B0" stroke-width="2.5" stroke-linejoin="round"/>
+                <line x1="65" y1="-18" x2="150" y2="-18" stroke="#B0B0B0" stroke-width="3" stroke-linecap="round"/>
+                <line x1="65" y1="0" x2="130" y2="0" stroke="#B0B0B0" stroke-width="3" stroke-linecap="round"/>
+                <line x1="65" y1="18" x2="145" y2="18" stroke="#B0B0B0" stroke-width="3" stroke-linecap="round"/>
               </g>
             </g>
           </svg>
@@ -318,10 +329,10 @@ if (sessionStorage.getItem('op-done') ||
           <svg viewBox="40 60 560 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
             <defs>
               <filter id="key-shadow">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-                <feOffset dx="0" dy="2" result="offsetblur"/>
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                <feOffset dx="0" dy="3" result="offsetblur"/>
                 <feComponentTransfer>
-                  <feFuncA type="linear" slope="0.4"/>
+                  <feFuncA type="linear" slope="0.5"/>
                 </feComponentTransfer>
                 <feMerge>
                   <feMergeNode/>
@@ -331,7 +342,9 @@ if (sessionStorage.getItem('op-done') ||
               <style>
                 .dev-stroke { fill: none; stroke: #848484; stroke-linecap: round; stroke-linejoin: round; }
                 .dev-fill { fill: #848484; }
-                .code-text { fill: #848484; font-family: 'Courier New', monospace; font-size: 18px; font-weight: 600; }
+                .code-text { font-family: 'Courier New', monospace; font-size: 18px; font-weight: 600; }
+                .code-green { fill: #7FB069; }
+                .code-pink { fill: #D4637E; }
                 @keyframes typing-line1 { 0% { width: 0; } 21.35% { width: 189px; } 94% { width: 189px; } 100% { width: 0; } }
                 @keyframes typing-line2 { 0%, 21.36% { width: 0; } 55.06% { width: 301px; } 94% { width: 301px; } 100% { width: 0; } }
                 @keyframes typing-line3 { 0%, 55.07% { width: 0; } 80.90% { width: 229px; } 94% { width: 229px; } 100% { width: 0; } }
@@ -348,17 +361,17 @@ if (sessionStorage.getItem('op-done') ||
                   94% { transform: translate(163px, 98px); opacity: 1; }
                   94.1%, 100% { transform: translate(0, 8px); opacity: 0; }
                 }
-                @keyframes key-glow {
-                  0%, 90% { fill: #E8E8E8; filter: brightness(1); }
-                  95% { fill: #ffffff; filter: brightness(1.8) drop-shadow(0 0 8px rgba(255,255,255,0.8)); }
-                  100% { fill: #E8E8E8; filter: brightness(1); }
+                @keyframes key-press {
+                  0%, 90% { filter: url(#key-shadow); transform: translateY(0); }
+                  95% { filter: none; transform: translateY(3px); }
+                  100% { filter: url(#key-shadow); transform: translateY(0); }
                 }
                 .line1-mask { animation: typing-line1 12s steps(19) infinite; }
                 .line2-mask { animation: typing-line2 12s steps(30) infinite; }
                 .line3-mask { animation: typing-line3 12s steps(23) infinite; }
                 .line4-mask { animation: typing-line4 12s steps(17) infinite; }
                 .cursor { animation: cursor-follow 12s steps(100) infinite, cursor-blink 0.75s step-end infinite; }
-                .key rect:last-child { animation: key-glow 5s ease-in-out infinite; }
+                .key rect { animation: key-press 5s ease-in-out infinite; }
                 .key:nth-child(1) rect:last-child { animation-delay: 0.3s; }
                 .key:nth-child(2) rect:last-child { animation-delay: 1.8s; }
                 .key:nth-child(3) rect:last-child { animation-delay: 0.7s; }
@@ -389,19 +402,19 @@ if (sessionStorage.getItem('op-done') ||
               <clipPath id="line4-clip"><rect x="145" y="333" width="0" height="20" class="line4-mask"/></clipPath>
             </defs>
             <rect x="110" y="190" width="420" height="260" rx="12" class="dev-stroke" stroke-width="8"/>
-            <rect x="125" y="205" width="390" height="230" rx="8" fill="#FFF" opacity="0.95"/>
+            <rect x="118" y="198" width="404" height="244" rx="6" fill="#FFF" opacity="0.95"/>
             <!-- Window header bar -->
-            <rect x="114" y="194" width="412" height="30" fill="#E8E8E8" opacity="0.95"/>
-            <path d="M 114 202 Q 114 194 122 194 L 518 194 Q 526 194 526 202 L 526 224 L 114 224 Z" fill="#E8E8E8" opacity="0.95"/>
+            <rect x="118" y="198" width="404" height="30" fill="#E8E8E8" opacity="0.95"/>
+            <path d="M 118 206 Q 118 198 126 198 L 514 198 Q 522 198 522 206 L 522 228 L 118 228 Z" fill="#E8E8E8" opacity="0.95"/>
             <!-- Window control buttons -->
             <circle cx="130" cy="209" r="5" fill="#D4637E"/>
             <circle cx="145" cy="209" r="5" fill="#808080"/>
             <circle cx="160" cy="209" r="5" fill="#7FB069"/>
             <g class="code-text">
-              <text x="145" y="258" clip-path="url(#line1-clip)">function deploy() {</text>
-              <text x="145" y="288" clip-path="url(#line2-clip)">  const result = await build();</text>
-              <text x="145" y="318" clip-path="url(#line3-clip)">  console.log('success');</text>
-              <text x="145" y="348" clip-path="url(#line4-clip)">  return result;</text>
+              <text x="145" y="258" clip-path="url(#line1-clip)" class="code-green">function deploy() {</text>
+              <text x="145" y="288" clip-path="url(#line2-clip)" class="code-pink">  const result = await build();</text>
+              <text x="145" y="318" clip-path="url(#line3-clip)" class="code-green">  console.log('success');</text>
+              <text x="145" y="348" clip-path="url(#line4-clip)" class="code-pink">  return result;</text>
             </g>
             <g class="cursor"><rect x="145" y="238" width="3.5" height="18" class="dev-fill cursor-line"/></g>
             <!-- PC stand -->
@@ -470,50 +483,67 @@ if (sessionStorage.getItem('op-done') ||
                 .code-line-7 { animation: codeFadeIn 0.5s ease-in 1.8s forwards; opacity: 0; }
                 @keyframes gearRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
                 .gear-spin { animation: gearRotate 4s linear infinite; transform-origin: center center; transform-box: fill-box; }
+                @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+                .status-blink-1 { animation: blink 2s ease-in-out infinite; }
+                .status-blink-2 { animation: blink 2s ease-in-out 1s infinite; }
               </style>
             </defs>
             <g transform="translate(400, 310) scale(1.3) translate(-400, -250)">
               <g transform="translate(130, 90)">
+                <!-- PCの脚とベース（画面の後ろに配置） -->
+                <rect x="110" y="160" width="40" height="70" fill="#808080"/>
+                <rect x="90" y="230" width="80" height="12" rx="6" fill="#808080"/>
+
+                <!-- 画面本体 -->
                 <rect x="0" y="0" width="260" height="180" rx="6" fill="#F5F5F5" stroke="#525252" stroke-width="8"/>
                 <rect x="10" y="10" width="240" height="160" fill="white"/>
-                <text x="20" y="35" font-family="'Courier New', monospace" font-size="11" fill="var(--pink)" font-weight="600" class="code-line-1">function deploy() {</text>
-                <text x="25" y="55" font-family="'Courier New', monospace" font-size="11" fill="var(--pink)" font-weight="600" class="code-line-2">const result =</text>
-                <text x="30" y="75" font-family="'Courier New', monospace" font-size="11" fill="var(--pink)" font-weight="600" class="code-line-3">await build();</text>
-                <text x="25" y="95" font-family="'Courier New', monospace" font-size="11" fill="var(--pink)" font-weight="600" class="code-line-4">console.log(</text>
-                <text x="30" y="115" font-family="'Courier New', monospace" font-size="11" fill="var(--pink)" font-weight="600" class="code-line-5">'success');</text>
-                <text x="25" y="135" font-family="'Courier New', monospace" font-size="11" fill="var(--pink)" font-weight="600" class="code-line-6">return result;</text>
-                <text x="20" y="155" font-family="'Courier New', monospace" font-size="11" fill="var(--pink)" font-weight="600" class="code-line-7">}</text>
-                <rect x="52" y="146" width="2" height="12" fill="var(--pink)" class="typing-cursor"/>
-                <rect x="110" y="180" width="40" height="50" fill="#525252"/>
-                <rect x="90" y="230" width="80" height="12" rx="6" fill="#525252"/>
+                <!-- Window header bar -->
+                <rect x="4" y="4" width="252" height="18" fill="#E8E8E8" opacity="0.95"/>
+                <path d="M 4 8 Q 4 4 8 4 L 252 4 Q 256 4 256 8 L 256 22 L 4 22 Z" fill="#E8E8E8" opacity="0.95"/>
+                <!-- Window control buttons -->
+                <circle cx="14" cy="13" r="3.5" fill="#D4637E"/>
+                <circle cx="24" cy="13" r="3.5" fill="#808080"/>
+                <circle cx="34" cy="13" r="3.5" fill="#7FB069"/>
+                <text x="20" y="45" font-family="'Courier New', monospace" font-size="11" fill="#7FB069" font-weight="600" class="code-line-1">function deploy() {</text>
+                <text x="25" y="65" font-family="'Courier New', monospace" font-size="11" fill="#D4637E" font-weight="600" class="code-line-2">const result =</text>
+                <text x="30" y="85" font-family="'Courier New', monospace" font-size="11" fill="#7FB069" font-weight="600" class="code-line-3">await build();</text>
+                <text x="25" y="105" font-family="'Courier New', monospace" font-size="11" fill="#D4637E" font-weight="600" class="code-line-4">console.log(</text>
+                <text x="30" y="125" font-family="'Courier New', monospace" font-size="11" fill="#7FB069" font-weight="600" class="code-line-5">'success');</text>
+                <text x="25" y="145" font-family="'Courier New', monospace" font-size="11" fill="#D4637E" font-weight="600" class="code-line-6">return result;</text>
+                <text x="20" y="165" font-family="'Courier New', monospace" font-size="11" fill="#7FB069" font-weight="600" class="code-line-7">}</text>
+                <rect x="52" y="156" width="2" height="12" fill="var(--pink)" class="typing-cursor"/>
               </g>
               <g transform="translate(410, 90)">
+                <!-- PCの脚とベース（画面の後ろに配置） -->
+                <rect x="110" y="160" width="40" height="70" fill="#808080"/>
+                <rect x="90" y="230" width="80" height="12" rx="6" fill="#808080"/>
+
+                <!-- 画面本体 -->
                 <rect x="0" y="0" width="260" height="180" rx="6" fill="#F5F5F5" stroke="#525252" stroke-width="8"/>
-                <rect x="10" y="10" width="240" height="160" fill="white"/>
+                <rect x="4" y="4" width="252" height="172" rx="3" fill="#E8F5E9"/>
+                <!-- Window header bar -->
+                <rect x="4" y="4" width="252" height="18" fill="#E8E8E8" opacity="0.95"/>
+                <path d="M 4 8 Q 4 4 8 4 L 252 4 Q 256 4 256 8 L 256 22 L 4 22 Z" fill="#E8E8E8" opacity="0.95"/>
+                <!-- Window control buttons -->
+                <circle cx="14" cy="13" r="3.5" fill="#D4637E"/>
+                <circle cx="24" cy="13" r="3.5" fill="#808080"/>
+                <circle cx="34" cy="13" r="3.5" fill="#7FB069"/>
                 <!-- モニタリングチャート -->
-                <g transform="translate(15, 30)">
-                  <!-- チャートライン（波形） -->
-                  <polyline points="10,50 60,20 110,38 160,10 210,50" fill="none" stroke="#D4637E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- チャートライン（波形） -->
+                <path d="M 15,75 L 45,75 C 65,75 75,45 95,45 C 115,45 125,95 145,95 C 165,95 175,65 185,65 L 230,65" fill="none" stroke="#1A9D57" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
 
-                  <!-- アニメーションする丸 -->
-                  <circle r="11" fill="#7FB069">
-                    <animateMotion dur="3s" repeatCount="indefinite" path="M 10,50 L 60,20 L 110,38 L 160,10 L 210,50"/>
-                  </circle>
+                <!-- アニメーションする丸 -->
+                <circle r="6" fill="#1A9D57">
+                  <animateMotion dur="3s" repeatCount="indefinite" path="M 15,75 L 45,75 C 65,75 75,45 95,45 C 115,45 125,95 145,95 C 165,95 175,65 185,65 L 230,65"/>
+                </circle>
 
-                  <!-- リストアイテム1 -->
-                  <circle cx="15" cy="95" r="11" fill="#7FB069"/>
-                  <rect x="40" y="92" width="175" height="6" rx="3" fill="#D4637E"/>
+                <!-- リストアイテム1 -->
+                <circle cx="25" cy="122.5" r="11" fill="#7FB069" class="status-blink-1"/>
+                <rect x="50" y="119.5" width="185" height="6" rx="3" fill="#CCCCCC"/>
 
-                  <!-- リストアイテム2 -->
-                  <circle cx="15" cy="125" r="11" fill="#7FB069"/>
-                  <rect x="40" y="122" width="175" height="6" rx="3" fill="#D4637E"/>
-                </g>
-                <rect x="110" y="180" width="40" height="50" fill="#525252"/>
-                <rect x="90" y="230" width="80" height="12" rx="6" fill="#525252"/>
-              </g>
-              <g transform="translate(400, 280)">
-                <circle cx="0" cy="0" r="40" fill="#808080"/>
-                <path d="M -20,35 Q -60,45 -60,90 L -60,120 Q -60,135 -45,135 L 45,135 Q 60,135 60,120 L 60,90 Q 60,45 20,35 Z" fill="#808080"/>
+                <!-- リストアイテム2 -->
+                <circle cx="25" cy="147.5" r="11" fill="#FF9933" class="status-blink-2"/>
+                <rect x="50" y="144.5" width="185" height="6" rx="3" fill="#CCCCCC"/>
               </g>
             </g>
           </svg>
@@ -557,36 +587,6 @@ if (sessionStorage.getItem('op-done') ||
   </div>
 </section>
 
-<!-- RECRUIT -->
-<section class="recruit line-deco-left" id="recruit">
-  <div class="wrap">
-    <div class="recruit-layout">
-      <div class="recruit-lead reveal">
-        <p class="sec-label">採用情報</p>
-        <h2>一緒に、つくりませんか。</h2>
-        <p>安定した経営基盤のもと、企画から運用まで一貫して携われる環境があります。領域を限定せず、幅広く挑戦したい方を歓迎します。</p>
-        <a href="recruit.html" class="btn btn-primary">
-          View More
-          <span class="recruit-btn-primary-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </a>
-      </div>
-      <div class="recruit-jobs">
-        <div class="job-card">
-          <span class="job-badge">正社員</span>
-          <h3>システムエンジニア（Web系）</h3>
-          <p>業務システム・Webアプリケーションの企画・要件定義から設計・開発、保守・運用まで一気通貫で関われます。</p>
-          <div class="job-card-footer">
-            <a href="recruit.html" class="icon-link" aria-label="募集詳細を見る">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- INTERVIEW -->
 <section class="interview">
@@ -629,6 +629,20 @@ if (sessionStorage.getItem('op-done') ||
     <img src="/assets/images/office04.png" alt="オフィスに掲げられたランステックのロゴ" loading="lazy" decoding="async">
   </div>
 </section>
+
+<!-- INTERVIEW BADGE -->
+<a href="interview/hasegawa.html" class="interview-badge" aria-label="社員インタビュー公開中">
+  <div class="interview-badge-text">
+    <div class="interview-badge-label">INTERVIEW</div>
+    <div class="interview-badge-title">社員インタビュー公開中</div>
+  </div>
+  <div class="interview-badge-action">
+    <span>View More</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  </div>
+</a>
 
 <!-- FOOTER -->
 <div id="site-footer"></div>

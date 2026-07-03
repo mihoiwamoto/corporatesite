@@ -245,7 +245,7 @@ body .page-hero { padding-top: 100px; }
   align-items: center;
   justify-content: space-between;
   text-decoration: none;
-  padding: 14px 0;
+  padding: 3px 0;
   text-align: left;
   transition: all .2s;
   border-radius: 12px;
@@ -278,6 +278,9 @@ body .page-hero { padding-top: 100px; }
 }
 .menu-page-link-simple:hover .menu-link-arrow {
   transform: translateX(4px);
+}
+.menu-nav-mobile .menu-col:first-child .menu-page-link-simple {
+  margin-top: 16px;
 }
 
 /* タブレット幅（〜960px）ではインラインのナビ＋CTAがピル内に収まりきらないため、

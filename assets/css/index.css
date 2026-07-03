@@ -143,8 +143,9 @@
     overflow-x: clip;
   }
   .services-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
-  .service-item { display: flex; flex-direction: column; align-items: stretch; background: rgba(255,255,255,.82); border: 1px solid var(--line); border-radius: 20px; padding: 0; overflow: hidden; transition: all .4s cubic-bezier(.4,0,.2,1); box-shadow: var(--shadow-sm); }
-  .service-item:hover { box-shadow: var(--shadow-lg); border-color: transparent; transform: translateY(-4px); }
+  .service-item { display: flex; flex-direction: column; align-items: stretch; background:
+    linear-gradient(135deg, rgba(253,242,245,0.6) 0%, rgba(255,255,255,0.82) 100%); border: none; border-radius: 20px; padding: 0; overflow: hidden; transition: all .4s cubic-bezier(.4,0,.2,1); box-shadow: var(--shadow-sm); }
+  .service-item:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
   .service-content { display: flex; flex-direction: column; padding: 24px 28px 32px; flex: 1; }
   .service-label { display: none; }
   .service-item h3 { display: inline-block; align-self: flex-start; font-size: 15px; font-weight: 700; padding: 6px 16px; border-radius: 9999px; background: var(--pink-light); color: var(--pink-dark); border: 1px solid var(--pink-gradient); letter-spacing: .08em; margin-bottom: 16px; line-height: 1.5; }
@@ -540,4 +541,122 @@
     margin-top: 20px;
     margin-bottom: 32px;
     border-radius: 2px;
+  }
+
+  /* INTERVIEW BADGE */
+  .interview-badge {
+    position: fixed;
+    bottom: 60px;
+    right: 32px;
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+    text-decoration: none;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.08);
+    transition: all .35s cubic-bezier(.4,0,.2,1);
+    width: 200px;
+  }
+
+  /* フィードバックFABボタンの位置調整 */
+  .fbp-fab {
+    bottom: 195px !important;
+  }
+  .interview-badge:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,.16), 0 4px 12px rgba(0,0,0,.12);
+    border-color: var(--pink);
+  }
+  .interview-badge-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .interview-badge-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--pink-dark);
+    letter-spacing: .12em;
+  }
+  .interview-badge-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: .02em;
+    line-height: 1.4;
+  }
+  .interview-badge-action {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--pink);
+    padding: 8px 16px;
+    border-radius: 9999px;
+    letter-spacing: .04em;
+    transition: all .3s cubic-bezier(.4,0,.2,1);
+    margin-top: 2px;
+    box-shadow: 0 2px 8px rgba(212,99,126,.2);
+  }
+  .interview-badge-action svg {
+    width: 14px;
+    height: 14px;
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+  }
+  .interview-badge:hover .interview-badge-action {
+    background: var(--pink-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(212,99,126,.3);
+  }
+  .interview-badge:hover .interview-badge-action svg {
+    transform: translateX(3px);
+  }
+  @media (max-width: 768px) {
+    .interview-badge {
+      bottom: 60px;
+      right: 20px;
+      width: 170px;
+      padding: 10px;
+      gap: 8px;
+    }
+    .interview-badge-title {
+      font-size: 12px;
+    }
+    .interview-badge-action {
+      font-size: 11px;
+      padding: 7px 14px;
+    }
+    .fbp-fab {
+      bottom: 180px !important;
+    }
+  }
+  @media (max-width: 480px) {
+    .interview-badge {
+      bottom: 60px;
+      width: 160px;
+      padding: 10px;
+      gap: 6px;
+    }
+    .interview-badge-label {
+      font-size: 9px;
+    }
+    .interview-badge-title {
+      font-size: 11px;
+    }
+    .interview-badge-action {
+      font-size: 10px;
+      padding: 6px 12px;
+    }
+    .fbp-fab {
+      bottom: 170px !important;
+    }
   }
