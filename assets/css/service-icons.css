@@ -21,7 +21,9 @@
 .lottie-fallback .f-green { fill: var(--green); stroke: none; }
 .lottie-fallback .f-amber { fill: rgba(230,152,10,.9); stroke: none; }
 .lottie-fallback .c-green { stroke: var(--green); }
-.ic-plan .bubble { transform-box: fill-box; transform-origin: bottom; }
+.ic-plan .plan-doc { transform-box: fill-box; transform-origin: center; }
+.ic-plan .plan-shine { opacity: 0; }
+.ic-plan .bubble { transform-box: fill-box; transform-origin: left center; }
 .ic-dev .click-ring { transform-box: fill-box; transform-origin: center; opacity: 0; }
 .ic-ops .wave-dot { transform-box: view-box; }
 .lottie-fallback .kbd-line { stroke: rgba(36,48,64,.16); }
@@ -48,10 +50,10 @@
     stroke-dashoffset: 1;
   }
   .lottie-icon.anim-ready .ic-dev .key-a { opacity: 0; }
-  /* ic-plan: 吹き出しを下方にオフセットして非表示 */
-  .lottie-icon.anim-ready .ic-plan .bubble { opacity: 0; transform: scale(0) translateY(3px); }
   /* ic-plan: チェックマークを非表示（描画アニメ開始前） */
   .lottie-icon.anim-ready .ic-plan .chk-mark { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  /* ic-plan: 吹き出しを非表示（会話ポップ開始前） */
+  .lottie-icon.anim-ready .ic-plan .bubble { opacity: 0; transform: scale(0); }
 
   /* ic-ops: 波形パスを非表示（初回スクロールで描画、pathLength="1" 前提） */
   .lottie-icon.anim-ready .ic-ops .wave {
@@ -60,18 +62,18 @@
   }
 
   /* ==========================================
-     企画・要件定義 — 吹き出しが下から浮き上がり交互ポップ（ループ）
+     企画・要件定義 — ボード右で人が会話（吹き出しが交互ポップ）、会話に連れて4つのチェックが入る
   ========================================== */
-  .lottie-icon.anim-ready.in-view .ic-plan .bubA {
-    animation: svc-pop 3.2s cubic-bezier(.34,1.56,.64,1) infinite;
-  }
-  .lottie-icon.anim-ready.in-view .ic-plan .bubB {
-    animation: svc-pop 3.2s cubic-bezier(.34,1.56,.64,1) 1.6s infinite;
-  }
-  /* チェックが会話に合わせて順番に描かれる（描き終わったら保持） */
-  .lottie-icon.anim-ready.in-view .ic-plan .chk-1 { animation: chk-draw .38s ease-out .5s both; }
-  .lottie-icon.anim-ready.in-view .ic-plan .chk-2 { animation: chk-draw .38s ease-out 2.2s both; }
-  .lottie-icon.anim-ready.in-view .ic-plan .chk-3 { animation: chk-draw .38s ease-out 3.8s both; }
+  .lottie-icon.in-view .ic-plan .plan-doc { animation: plan-float 4s ease-in-out infinite; }
+  .lottie-icon.in-view .ic-plan .plan-shine { animation: plan-shine 3s ease-in-out infinite; }
+  /* 会話：2人の吹き出しが交互にポップ（ループ） */
+  .lottie-icon.anim-ready.in-view .ic-plan .bubA { animation: svc-pop 3.4s cubic-bezier(.34,1.56,.64,1) .3s infinite; }
+  .lottie-icon.anim-ready.in-view .ic-plan .bubB { animation: svc-pop 3.4s cubic-bezier(.34,1.56,.64,1) 1.7s infinite; }
+  /* 会話に連れてチェックが入る（A発話→2件 / B発話→2件、描き終わったら保持） */
+  .lottie-icon.anim-ready.in-view .ic-plan .chk-1 { animation: chk-draw .45s ease-out .6s both; }
+  .lottie-icon.anim-ready.in-view .ic-plan .chk-2 { animation: chk-draw .45s ease-out 1.1s both; }
+  .lottie-icon.anim-ready.in-view .ic-plan .chk-3 { animation: chk-draw .45s ease-out 2.0s both; }
+  .lottie-icon.anim-ready.in-view .ic-plan .chk-4 { animation: chk-draw .45s ease-out 2.5s both; }
 
   /* ==========================================
      設計・開発 — コード行が順次描かれ、カーソルが移動してクリック
@@ -116,6 +118,18 @@
 @keyframes chk-draw {
   from { stroke-dashoffset: 1; }
   to   { stroke-dashoffset: 0; }
+}
+
+/* クリップボードがふわふわ浮遊（上下＋わずかな回転、4s無限ループ） */
+@keyframes plan-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-12px) rotate(1deg); }
+}
+
+/* 用紙の光沢が点滅（透明→15%→透明、3s無限ループ） */
+@keyframes plan-shine {
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 0.15; }
 }
 
 /* コード行を左→右へ描く（pathLength="1" 前提） */

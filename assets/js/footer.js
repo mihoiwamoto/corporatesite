@@ -41,7 +41,6 @@
     '        <div class="footer-col">\n' +
     '          <p class="footer-col-title">News</p>\n' +
     '          <a href="/news.html#お知らせ">お知らせ</a>\n' +
-    '          <a href="/news.html#社員インタビュー">社員インタビュー</a>\n' +
     '          <a href="/news.html#実績・事例">実績・事例</a>\n' +
     '        </div>\n' +
     '        <div class="footer-col">\n' +

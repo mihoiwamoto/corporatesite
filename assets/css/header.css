@@ -71,6 +71,10 @@ body .page-hero { padding-top: 100px; }
   pointer-events: none;
   opacity: 0;
   transition: opacity .3s cubic-bezier(.33,1,.68,1);
+  background: #fff;
+  border-radius: 34px;
+  mask-image: radial-gradient(circle at calc(100% - 34px) 34px, transparent 38px, #000 38.5px);
+  -webkit-mask-image: radial-gradient(circle at calc(100% - 34px) 34px, transparent 38px, #000 38.5px);
 }
 .menu-logo-fixed.visible { opacity: 1; }
 /* メニュー表示中はロゴ（TOPページへのリンク）だけクリック可能にする */
@@ -87,7 +91,6 @@ body .page-hero { padding-top: 100px; }
   border: none; cursor: pointer;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 5px;
-  box-shadow: 0 8px 30px rgba(212,99,126,.25), 0 2px 8px rgba(212,99,126,.12);
   transition: all .3s cubic-bezier(.4,0,.2,1);
 }
 .nav-standalone-btn span {
@@ -95,7 +98,7 @@ body .page-hero { padding-top: 100px; }
   background: #fff; border-radius: 2px;
   transition: all .3s cubic-bezier(.33,1,.68,1);
 }
-.nav-standalone-btn:hover { background: var(--pink-dark); transform: scale(1.06); box-shadow: 0 12px 36px rgba(212,99,126,.35); }
+.nav-standalone-btn:hover { background: var(--pink-dark); transform: scale(1.06); }
 .nav-standalone-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-standalone-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-standalone-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -112,41 +115,72 @@ body .page-hero { padding-top: 100px; }
 
 /* MENU PANEL — nav-row全幅。右上にピンクボタンが収まる凹みノッチを mask-image で表現 */
 .mobile-nav {
-  position: fixed; top: 14px;
+  position: fixed;
+  top: 14px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);
   max-width: 1360px;
-  height: auto;
+  height: 480px;
+  max-height: calc(100vh - 100px);
   z-index: 150;
   background: #fff;
   border-radius: 34px;
-  /* box-shadow は clip-path でクリップされるため filter: drop-shadow で代替 */
   filter: drop-shadow(0 20px 48px rgba(20,28,36,.12)) drop-shadow(0 2px 8px rgba(20,28,36,.08));
   clip-path: inset(0 0 100% 0 round 34px);
-  /* 右上にピンクボタン(r=34px)が収まる凹みノッチ。overflow-y はスクロール内側に分離 */
   mask-image: radial-gradient(circle at calc(100% - 34px) 34px, transparent 38px, #000 38.5px);
   -webkit-mask-image: radial-gradient(circle at calc(100% - 34px) 34px, transparent 38px, #000 38.5px);
-  visibility: hidden; pointer-events: none;
+  visibility: hidden;
+  pointer-events: none;
   transition: clip-path .4s cubic-bezier(.33,1,.68,1), visibility .4s;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 .mobile-nav.open {
   clip-path: inset(0 0 0% 0 round 34px);
-  visibility: visible; pointer-events: auto;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* スクロールラッパー — overflow-y をここに分離することで mask-image を有効にする */
 .mobile-nav-scroll {
-  overflow-y: auto;
-  max-height: 55vh;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 100%;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  position: relative;
+}
+
+/* スクロールバーのスタイル */
+.mobile-nav-scroll::-webkit-scrollbar {
+  width: 12px;
+}
+.mobile-nav-scroll::-webkit-scrollbar-track {
+  background: rgba(212, 99, 126, 0.1);
+  border-radius: 6px;
+  margin: 10px 0;
+}
+.mobile-nav-scroll::-webkit-scrollbar-thumb {
+  background: rgba(212, 99, 126, 0.6);
+  border-radius: 6px;
+  border: 3px solid #fff;
+}
+.mobile-nav-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 99, 126, 0.8);
 }
 
 .menu-overlay-body {
   position: relative;
   width: 100%;
-  max-width: 1360px; margin: 0 auto;
-  padding: 80px 48px 36px;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 80px 48px 60px;
   box-sizing: border-box;
+  min-height: 600px;
 }
 
 /* NAV GRID */
@@ -182,26 +216,69 @@ body .page-hero { padding-top: 100px; }
 
 /* GROUP ROW */
 .menu-group-row {
-  display: flex; flex-direction: row; align-items: center; gap: 16px;
+  display: flex; flex-direction: row; align-items: center; gap: 12px;
   padding-top: 20px; padding-bottom: 4px;
   border-top: 1px solid #E8ECF0;
 }
 .menu-group-label {
-  font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
   color: #4A5568;
 }
 .menu-group-link {
-  display: inline-flex; align-items: center; gap: 10px;
+  display: inline-flex; align-items: center; gap: 8px;
   background: #F7F8FA; border-radius: 9999px;
   border: 1px solid #E8ECF0;
-  padding: 10px 20px; text-decoration: none;
-  color: #243040; font-size: 13px; font-weight: 500;
+  padding: 8px 16px; text-decoration: none;
+  color: #243040; font-size: 12px; font-weight: 500;
   transition: all .3s cubic-bezier(.4,0,.2,1);
 }
 .menu-group-link:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,.08); }
-.menu-group-logo { height: 18px; width: auto; display: block; }
-.menu-group-arrow { font-size: 13px; color: #4A5568; transition: transform .2s; }
+.menu-group-logo { height: 16px; width: auto; display: block; }
+.menu-group-arrow { font-size: 12px; color: #4A5568; transition: transform .2s; }
 .menu-group-link:hover .menu-group-arrow { transform: translate(2px,-2px); }
+
+/* モバイル用シンプルメニュー（見出しのみ）のスタイル */
+.menu-nav-mobile { display: none; }
+.menu-page-link-simple {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  padding: 14px 0;
+  text-align: left;
+  transition: all .2s;
+  border-radius: 12px;
+}
+.menu-link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.menu-link-ja {
+  font-size: 15px;
+  font-weight: 600;
+  color: #243040;
+  transition: color .2s;
+}
+.menu-link-en {
+  font-size: 11px;
+  font-weight: 400;
+  color: #D4637E;
+  text-transform: uppercase;
+  transition: color .2s;
+}
+.menu-link-arrow {
+  font-size: 32px;
+  color: #D4637E;
+  transition: transform .2s;
+}
+.menu-page-link-simple:hover .menu-link-ja {
+  color: #D4637E;
+}
+.menu-page-link-simple:hover .menu-link-arrow {
+  transform: translateX(4px);
+}
 
 /* タブレット幅（〜960px）ではインラインのナビ＋CTAがピル内に収まりきらないため、
    ハンバーガーメニューのみ表示する（ロゴ＋ボタンの構成に切り替え）。
@@ -209,8 +286,9 @@ body .page-hero { padding-top: 100px; }
 @media (max-width: 960px) {
   .site-nav a.nav-link { display: none; }
   .site-nav a.nav-cta { display: none; }
-  /* 展開メニューのカラムを5→3列に（タブレット幅で窮屈になるのを防ぐ） */
-  .menu-nav-grid { grid-template-columns: repeat(3, 1fr); }
+  /* タブレット・スマホでは詳細メニューを非表示、シンプルメニューを表示 */
+  .menu-nav-desktop { display: none; }
+  .menu-nav-mobile { display: grid; grid-template-columns: 1fr; gap: 0; }
 }
 
 /* MOBILE RESPONSIVE */
@@ -224,19 +302,28 @@ body .page-hero { padding-top: 100px; }
   .mobile-nav {
     top: 10px;
     width: calc(100% - 20px);
+    height: auto;
+    max-height: calc(100vh - 80px);
     border-radius: 26px;
     clip-path: inset(0 0 100% 0 round 26px);
     mask-image: radial-gradient(circle at calc(100% - 26px) 26px, transparent 29px, #000 29.5px);
     -webkit-mask-image: radial-gradient(circle at calc(100% - 26px) 26px, transparent 29px, #000 29.5px);
   }
   .mobile-nav.open { clip-path: inset(0 0 0% 0 round 26px); }
-  .mobile-nav-scroll { max-height: 80vh; }
-  .menu-logo-fixed { top: 10px; width: calc(100% - 20px); height: 52px; padding-left: 21px; }
-  .menu-overlay-body { padding: 64px 24px 28px; }
-  .menu-nav-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; margin-bottom: 24px; }
-  .menu-group-row { flex-wrap: wrap; }
+  .menu-logo-fixed {
+    top: 10px;
+    width: calc(100% - 20px);
+    height: 52px;
+    padding-left: 21px;
+    border-radius: 26px;
+    mask-image: radial-gradient(circle at calc(100% - 26px) 26px, transparent 29px, #000 29.5px);
+    -webkit-mask-image: radial-gradient(circle at calc(100% - 26px) 26px, transparent 29px, #000 29.5px);
+  }
+  .menu-overlay-body { padding: 50px 32px 40px; min-height: auto; }
+  .menu-group-row { flex-wrap: wrap; padding-top: 16px; }
+  .menu-nav-mobile { gap: 0; margin-bottom: 20px; }
 }
 @media (max-width: 480px) {
-  .menu-nav-grid { grid-template-columns: 1fr; gap: 24px; }
-  .menu-overlay-body { padding: 80px 20px 24px; }
+  .menu-overlay-body { padding: 50px 28px 32px; }
+  .menu-group-row { padding-top: 12px; }
 }

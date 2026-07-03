@@ -34,6 +34,7 @@
   if (path.match(/\/about\.html/))          currentKey = 'about';
   else if (path.match(/\/service\.html/))   currentKey = 'service';
   else if (path.match(/\/recruit\.html/))   currentKey = 'recruit';
+  else if (path.match(/\/interview(\.html|\/)/)) currentKey = 'interview';
   else if (path.match(/\/news(\.html|\/)/)) currentKey = 'news';
   else if (path.match(/\/contact\.html/))   currentKey = 'contact';
 
@@ -48,7 +49,7 @@
 
   var menuOverlayHTML =
     '<div class="menu-overlay-body">\n' +
-    '  <div class="menu-nav-grid">\n' +
+    '  <div class="menu-nav-grid menu-nav-desktop">\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">Company</p>\n' +
     '      <a href="/about.html" class="menu-page-link">私たちについて</a>\n' +
@@ -77,13 +78,59 @@
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">News</p>\n' +
     '      <a href="/news.html" class="menu-page-link">お知らせ</a>\n' +
-    '      <a href="/news.html#社員インタビュー" class="menu-section-link">社員インタビュー</a>\n' +
     '      <a href="/news.html#実績・事例" class="menu-section-link">実績・事例</a>\n' +
     '    </div>\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">Contact</p>\n' +
     '      <a href="/contact.html" class="menu-page-link">お問い合わせ</a>\n' +
     '      <a href="/privacy.html" class="menu-section-link">プライバシーポリシー</a>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '  <div class="menu-nav-grid menu-nav-mobile">\n' +
+    '    <div class="menu-col">\n' +
+    '      <a href="/about.html" class="menu-page-link-simple">\n' +
+    '        <span class="menu-link-text">\n' +
+    '          <span class="menu-link-ja">私たちについて</span>\n' +
+    '          <span class="menu-link-en">Company</span>\n' +
+    '        </span>\n' +
+    '        <span class="menu-link-arrow">›</span>\n' +
+    '      </a>\n' +
+    '    </div>\n' +
+    '    <div class="menu-col">\n' +
+    '      <a href="/service.html" class="menu-page-link-simple">\n' +
+    '        <span class="menu-link-text">\n' +
+    '          <span class="menu-link-ja">事業内容</span>\n' +
+    '          <span class="menu-link-en">Business</span>\n' +
+    '        </span>\n' +
+    '        <span class="menu-link-arrow">›</span>\n' +
+    '      </a>\n' +
+    '    </div>\n' +
+    '    <div class="menu-col">\n' +
+    '      <a href="/recruit.html" class="menu-page-link-simple">\n' +
+    '        <span class="menu-link-text">\n' +
+    '          <span class="menu-link-ja">採用情報</span>\n' +
+    '          <span class="menu-link-en">Recruit</span>\n' +
+    '        </span>\n' +
+    '        <span class="menu-link-arrow">›</span>\n' +
+    '      </a>\n' +
+    '    </div>\n' +
+    '    <div class="menu-col">\n' +
+    '      <a href="/news.html" class="menu-page-link-simple">\n' +
+    '        <span class="menu-link-text">\n' +
+    '          <span class="menu-link-ja">お知らせ</span>\n' +
+    '          <span class="menu-link-en">News</span>\n' +
+    '        </span>\n' +
+    '        <span class="menu-link-arrow">›</span>\n' +
+    '      </a>\n' +
+    '    </div>\n' +
+    '    <div class="menu-col">\n' +
+    '      <a href="/contact.html" class="menu-page-link-simple">\n' +
+    '        <span class="menu-link-text">\n' +
+    '          <span class="menu-link-ja">お問い合わせ</span>\n' +
+    '          <span class="menu-link-en">Contact</span>\n' +
+    '        </span>\n' +
+    '        <span class="menu-link-arrow">›</span>\n' +
+    '      </a>\n' +
     '    </div>\n' +
     '  </div>\n' +
     '  <div class="menu-group-row">\n' +
@@ -142,7 +189,7 @@
     backdrop.classList.add('open');
     btn.setAttribute('aria-expanded', 'true');
     nav.setAttribute('aria-hidden', 'false');
-    document.documentElement.style.overflow = 'hidden';
+
     if (wrap) wrap.classList.add('nav-hidden');
     if (logoFixed) logoFixed.classList.add('visible');
     if (logoFixed) logoFixed.setAttribute('aria-hidden', 'false');
@@ -154,7 +201,7 @@
     backdrop.classList.remove('open');
     btn.setAttribute('aria-expanded', 'false');
     nav.setAttribute('aria-hidden', 'true');
-    document.documentElement.style.overflow = '';
+
     if (wrap) wrap.classList.remove('nav-hidden');
     if (logoFixed) logoFixed.classList.remove('visible');
     if (logoFixed) logoFixed.setAttribute('aria-hidden', 'true');
@@ -168,7 +215,14 @@
   backdrop.addEventListener('click', closeMenu);
 
   nav.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', closeMenu);
+    a.addEventListener('click', function(e) {
+      var href = a.getAttribute('href');
+      // ページ内セクションへのリンク（#付き）の場合はスクロール無効化
+      if (href && href.indexOf('#') > 0) {
+        e.preventDefault();
+      }
+      closeMenu();
+    });
   });
 })();
 

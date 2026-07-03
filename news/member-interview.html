@@ -1,40 +1,705 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!--
-  ===========================================================================
-  社員インタビュー：長谷川
-  本番ではWordPressテーマの single.php に相当します。
-  ===========================================================================
--->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-<title>未経験から20年。開発の面白さは、今も変わらない | お知らせ | 株式会社ランステック</title>
-<meta name="description" content="家電量販店の販売員からエンジニアへ転身し、20年以上キャリアを積んだランステックのシステムエンジニア・長谷川へのインタビュー。入社のきっかけ、業務の変化、これからのチャレンジを聞きました。">
-<meta property="og:title" content="未経験から20年。開発の面白さは、今も変わらない | 株式会社ランステック">
+<title>より良いモノづくりを。| 長谷川順一 社員インタビュー | 株式会社ランステック</title>
+<meta name="description" content="ランステックのシステムエンジニア・長谷川順一へのインタビュー。1日のスケジュール、入社前後の業務の変化、コードレビューや技術的チャレンジ、AI活用、今後の目標について聞きました。">
+<meta property="og:title" content="より良いモノづくりを。| 株式会社ランステック">
 <meta property="og:description" content="家電量販店の販売員からエンジニアへ転身し、20年以上キャリアを積んだシステムエンジニアのインタビュー。">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="株式会社ランステック">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Oswald:wght@400;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/header.css">
 <link rel="stylesheet" href="/assets/css/footer.css">
-<link rel="stylesheet" href="/assets/css/background.css">
-<link rel="stylesheet" href="/assets/css/news-article.css">
+<link rel="stylesheet" href="/assets/css/floating-lines.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "/node_modules/three/build/three.module.js"
+  }
+}
+</script>
+<style>
+  :root {
+    --pink: #E07898;
+    --pink-dark: #C0587A;
+    --pink-light: #FBF0F4;
+    --blue: #4A90A4;
+    --blue-dark: #3A7A8F;
+    --ink: #333333;
+    --sub: #666666;
+    --bg: #ffffff;
+    --line: #e0e0e0;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: #ffffff; line-height: 1.75; font-weight: 400; }
+  html { scroll-behavior: smooth; }
+  .site-wrapper { background: transparent; margin: 0 120px; }
+  .wrap { max-width: 100%; margin: 0 auto; padding: 0 80px; }
+
+  /* Interview Page Specific */
+  body {
+    background: #ffffff;
+  }
+  body .site-wrapper {
+    background: #ffffff;
+    max-width: 100%;
+  }
+
+  /* Image Softening */
+  img {
+    image-rendering: auto;
+    filter: contrast(0.92) saturate(0.96) blur(0.3px);
+    -webkit-filter: contrast(0.92) saturate(0.96) blur(0.3px);
+  }
+
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    padding: 120px 0 60px;
+    background: #ffffff;
+    position: relative;
+    overflow: visible;
+    margin: 0;
+  }
+  .page-hero .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    padding: 0 40px;
+  }
+  .breadcrumb {
+    display: none;
+  }
+  .article-meta {
+    display: none;
+  }
+  .article-date {
+    font-size: 12px;
+    color: var(--sub);
+    font-weight: 400;
+  }
+  .article-cat {
+    display: inline-block;
+    background: var(--pink-light);
+    border: 1px solid var(--line);
+    color: var(--pink);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .article-title {
+    display: none;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .article-section {
+    padding: 0 0 100px;
+    background: #ffffff;
+  }
+  .article-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+  .article-body .lead {
+    font-size: 24px;
+    line-height: 1.9;
+    color: var(--pink);
+    margin-bottom: 24px;
+    margin-top: 80px;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    border-left: none;
+    font-weight: 600;
+  }
+
+  /* ── HERO IMAGE SECTION ── */
+  .iv-hero-full {
+    margin: 0 0 250px 0;
+    position: relative;
+    background: transparent;
+    padding: 0;
+    overflow: visible;
+  }
+  .iv-hero-full::before {
+    display: none;
+  }
+  .iv-hero-full-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .iv-hero-title {
+    color: var(--ink);
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: center;
+    letter-spacing: .04em;
+    margin-bottom: 0;
+    font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif;
+  }
+  .iv-hero-image-main {
+    display: none;
+  }
+  .iv-hero-image-main img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: contrast(0.95) saturate(0.98);
+    -webkit-filter: contrast(0.95) saturate(0.98);
+  }
+
+  /* ── PROFILE CARD ── */
+  .iv-profile {
+    position: relative;
+    background: var(--pink-light);
+    border: none;
+    border-radius: 24px;
+    overflow: visible;
+    margin: 0 auto 80px auto;
+    min-height: auto;
+    box-shadow: none;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 60px;
+    gap: 60px;
+  }
+  .iv-profile-photo {
+    position: absolute;
+    width: 280px;
+    height: 320px;
+    flex-shrink: 0;
+    left: 60px;
+    bottom: 0;
+  }
+  .iv-profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .iv-profile-info {
+    margin-left: 320px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    min-height: auto;
+    text-align: left;
+    align-items: flex-start;
+  }
+  .iv-profile-eyebrow {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--sub);
+    letter-spacing: .02em;
+    margin-bottom: 18px;
+    margin-top: 0;
+    padding-bottom: 18px;
+    position: relative;
+  }
+  .iv-profile-eyebrow::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 120px;
+    height: 2px;
+    background: var(--pink);
+  }
+  .iv-profile-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+    margin: 0;
+    margin-bottom: 0;
+  }
+  .iv-profile-role {
+    font-size: 16px;
+    color: var(--sub);
+    line-height: 1.8;
+    font-weight: 400;
+    margin: 0;
+  }
+  .iv-profile-tags {
+    display: none;
+  }
+  .iv-profile-tag {
+    display: inline-block;
+    background: rgba(212, 99, 126, 0.1);
+    color: #D4637E;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(212, 99, 126, 0.2);
+  }
+
+  /* ── DAILY SCHEDULE ── */
+  .iv-schedule {
+    background: #F8F9FA;
+    border-radius: 24px;
+    padding: 60px 60px 80px;
+    margin: 60px 0 80px;
+    position: relative;
+    overflow: visible;
+  }
+  .iv-schedule-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .iv-schedule-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #E8B4C3;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .iv-schedule-subtitle {
+    font-size: 15px;
+    color: var(--sub);
+    font-weight: 400;
+  }
+  .iv-schedule-timeline {
+    position: relative;
+    width: 100%;
+    padding: 0;
+  }
+  .iv-schedule-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 3px;
+    background: linear-gradient(90deg, #E8B4C3 0%, #D4637E 100%);
+    z-index: 0;
+    transform: translateY(-50%);
+  }
+  .iv-schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    position: relative;
+    min-height: 600px;
+  }
+  .iv-schedule-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .iv-schedule-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    background: #D4637E;
+    border: 4px solid #F8F9FA;
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .iv-schedule-time {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 24px));
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    z-index: 3;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+  .iv-schedule-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px 26px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    min-height: 160px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 1;
+  }
+  .iv-schedule-item:nth-child(odd) .iv-schedule-card {
+    position: absolute;
+    top: 0;
+  }
+  .iv-schedule-item:nth-child(even) .iv-schedule-card {
+    position: absolute;
+    bottom: 0;
+  }
+  .iv-schedule-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+  }
+  .iv-schedule-card-break {
+    background: #ffffff;
+  }
+  .iv-schedule-card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #D4637E;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  .iv-schedule-card-text {
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--sub);
+    margin: 0;
+  }
+
+  /* ── CONTENT SECTIONS ── */
+  .iv-section {
+    margin-bottom: 80px;
+  }
+  .iv-section-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+  .iv-section-2col:first-of-type {
+    margin-top: 120px;
+  }
+  .iv-section-2col.reverse {
+    direction: ltr;
+  }
+  .iv-section-2col.reverse .iv-section-image {
+    order: 2;
+  }
+  .iv-section-2col.reverse .iv-section-content {
+    order: 1;
+  }
+  .iv-section-image {
+    width: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: none;
+  }
+  .iv-section-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: contrast(0.95) saturate(0.98);
+    -webkit-filter: contrast(0.95) saturate(0.98);
+  }
+  .iv-section-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .iv-section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--pink);
+    margin-bottom: 16px;
+    line-height: 1.8;
+  }
+  .iv-section-text {
+    font-size: 15px;
+    line-height: 2;
+    color: var(--ink);
+    margin-bottom: 0;
+  }
+
+  /* ── QUOTE ── */
+  .iv-quote {
+    display: none;
+  }
+  .iv-quote-text {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.8;
+    margin-bottom: 16px;
+    letter-spacing: .02em;
+  }
+  .iv-quote-source {
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  /* ── FOOTER NAV ── */
+  .article-after {
+    background: #ffffff;
+    backdrop-filter: blur(10px);
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+  }
+  .article-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+  .back-to-list {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    transition: all .2s ease;
+  }
+  .back-to-list:hover {
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-left: -120px;
+    margin-right: -120px;
+    width: calc(100% + 240px);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .site-wrapper {
+      margin: 0 60px;
+    }
+    .page-hero {
+      margin: 0;
+    }
+    .wrap {
+      padding: 0 40px;
+    }
+    .page-hero .wrap {
+      padding: 0 40px;
+    }
+    .article-body {
+      padding: 0 40px;
+    }
+    .iv-hero-full-inner {
+      padding: 0 40px;
+    }
+    .iv-profile {
+      padding: 50px 50px;
+      gap: 40px;
+    }
+    .iv-section-2col {
+      gap: 40px;
+    }
+    .iv-schedule {
+      padding: 50px 60px;
+    }
+    .iv-schedule-card {
+      padding: 24px;
+    }
+    .footer {
+      margin-left: -60px;
+      margin-right: -60px;
+      width: calc(100% + 120px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .site-wrapper {
+      margin: 0 20px;
+    }
+    .page-hero {
+      margin: 0;
+      padding: 80px 0 40px;
+    }
+    .wrap {
+      padding: 0 20px;
+    }
+    .page-hero .wrap {
+      padding: 0 20px;
+    }
+    .article-section {
+      padding: 0 0 60px;
+    }
+    .article-body {
+      padding: 0 20px;
+    }
+    .iv-hero-full {
+      margin: 0 0 60px 0;
+    }
+    .iv-hero-full-inner {
+      padding: 0 20px;
+    }
+    .iv-hero-title {
+      font-size: 28px;
+      margin-bottom: 40px;
+    }
+    .iv-hero-image-main::before {
+      width: 100%;
+      opacity: 0.75;
+    }
+    .iv-profile {
+      min-height: 0;
+      border-radius: 16px;
+      margin-top: 60px;
+      padding-top: 280px;
+    }
+    .iv-profile-photo {
+      position: static;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 280px;
+    }
+    .iv-profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .iv-profile-info {
+      margin-left: 0;
+      padding: 28px;
+    }
+    .iv-profile-name {
+      font-size: 20px;
+    }
+    .iv-profile-eyebrow {
+      font-size: 12px;
+    }
+    .iv-profile-role {
+      font-size: 14px;
+    }
+    .iv-schedule {
+      padding: 40px 24px;
+      margin: 40px 0 60px;
+      border-radius: 16px;
+      overflow-x: visible;
+    }
+    .iv-schedule-header {
+      margin-bottom: 40px;
+    }
+    .iv-schedule-title {
+      font-size: 32px;
+    }
+    .iv-schedule-subtitle {
+      font-size: 13px;
+    }
+    .iv-schedule-timeline {
+      padding: 40px 0;
+    }
+    .iv-schedule-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .iv-schedule-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .iv-schedule-item:nth-child(odd) .iv-schedule-card,
+    .iv-schedule-item:nth-child(even) .iv-schedule-card {
+      margin: 0;
+    }
+    .iv-schedule-dot {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      margin-bottom: 8px;
+    }
+    .iv-schedule-line {
+      display: none;
+    }
+    .iv-schedule-time {
+      position: relative;
+      top: auto;
+      transform: none;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    .iv-schedule-card {
+      width: 100%;
+      padding: 20px;
+      min-height: auto;
+    }
+    .iv-schedule-card-title {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+    .iv-schedule-card-text {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .footer {
+      margin-left: -20px;
+      margin-right: -20px;
+      width: calc(100% + 40px);
+    }
+    .iv-section {
+      margin-bottom: 60px;
+    }
+    .iv-section-2col {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+    .iv-section-2col.reverse {
+      direction: ltr;
+    }
+    .iv-section-title {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    .iv-section-text {
+      font-size: 14px;
+      line-height: 1.9;
+    }
+    .article-foot {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
 </head>
 <body>
+
+<div class="site-wrapper">
 
 <div id="site-header"></div>
 
 <div class="page-hero">
   <div class="wrap">
-    <p class="breadcrumb"><a href="/">ホーム</a><span>/</span><a href="/news.html">お知らせ</a><span>/</span>社員インタビュー</p>
+    <p class="breadcrumb"><a href="/">ホーム</a><span>/</span><a href="/interview.html">社員インタビュー</a><span>/</span>長谷川順一</p>
     <div class="article-meta">
       <span class="article-date">2026.07.01</span>
       <span class="article-cat">社員インタビュー</span>
     </div>
-    <h1 class="article-title">未経験から20年。開発の面白さは、今も変わらない</h1>
+    <h1 class="article-title">より良いモノづくりを。</h1>
   </div>
 </div>
 
@@ -42,211 +707,140 @@
   <div class="wrap">
     <article class="article-body">
 
-      <p class="lead">家電量販店の販売員からエンジニアへ——プログラミング未経験でIT業界に飛び込み、20年以上が経ちました。グループ統合を経てランステックに合流したシステムエンジニアの長谷川さんに、入社のきっかけや業務の変化、これからのチャレンジについて聞きました。</p>
-
-      <!-- プロフィールカード -->
-      <div class="iv-hero">
-        <div class="iv-hero-photo">
-          <img src="/assets/images/interview-photo.png" alt="長谷川さんの写真" width="420" height="480">
+      <!-- Hero Section with Image -->
+      <div class="iv-hero-full">
+        <div class="iv-hero-full-inner">
+          <h2 class="iv-hero-title"><img src="/assets/images/interview-handwriting.png" alt="より良いモノづくりを。" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"></h2>
         </div>
-        <div class="iv-hero-info">
-          <p class="iv-hero-eyebrow">Member Interview</p>
-          <p class="iv-hero-name">長谷川</p>
-          <p class="iv-hero-role">システムエンジニア<br>グループ向け業務システムの開発・保守を担当</p>
-          <div class="iv-hero-tags">
-            <span class="iv-hero-tag">Laravel / PHP</span>
-            <span class="iv-hero-tag">中途入社</span>
-            <span class="iv-hero-tag">グループ統合</span>
+      </div>
+
+      <!-- Profile Card -->
+      <div class="iv-profile">
+        <div class="iv-profile-photo">
+          <img src="/assets/images/profile-photo.jpg" alt="長谷川順一" width="280" height="280">
+        </div>
+        <div class="iv-profile-info">
+          <h3 class="iv-profile-name">長谷川 順一</h3>
+          <p class="iv-profile-eyebrow">Junichi Hasegawa</p>
+          <p class="iv-profile-role">システムエンジニア<br>グループ向け業務システムの開発・保守・運用管理を担当</p>
+          <div class="iv-profile-tags">
+            <span class="iv-profile-tag">システムエンジニア</span>
           </div>
         </div>
       </div>
 
-      <!-- Chapter 01 -->
-      <div class="iv-chapter">
-        <span class="iv-chapter-num">Chapter 01</span>
-        <span class="iv-chapter-label">家電販売員から、エンジニアへ</span>
-      </div>
-
-      <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>エンジニアになったきっかけを教えてください。</p>
-        <div class="iv-a">
-          <span class="iv-mark" aria-hidden="true">A.</span>
-          <div class="iv-a-body">
-            <p>もともとは家電量販店の販売員として働いていました。当時、同じ現場で友人と一緒に働いていたんですが、その友人がアロウズ・システムという会社の社員で。自分が「そろそろ辞めようかな」と思っていたタイミングで「うちに来ないか」と声をかけてもらったのがきっかけです。</p>
-            <p>プログラミングは当時まったく経験がなくて、入社してから覚えました。家電量販店も4か月くらいしかいなかったんですが——辞めると言ったら同時に入った4人のうち3人が「じゃあ自分も」って言い出して（笑）。みんなで一緒に辞めてきてしまって、なんか自分のせいみたいな雰囲気になってしまいました。</p>
-          </div>
+      <div class="iv-section-2col">
+        <div class="iv-section-image">
+          <img src="/assets/images/interview-02.jpg" alt="オフィスで働く長谷川さん" width="1600" height="900">
+        </div>
+        <div class="iv-section-content">
+          <h2 class="iv-section-title">入社前後で業務内容はどう変わりましたか。</h2>
+          <p class="iv-section-text">入社前は一般化パッケージサービスでアウトソーサーとして受注したり、クライアントに常駐しての他部署との調整やドキュメント作成などが中心でした。</p>
+          <p class="iv-section-text">ランステックに入ってから、Laravelを使った自社グループ向けシステム開発がメインになりました。企画や要件定義の段階から関われるようになったので、自分たちで考えて、つくって、改善していくというサイクルを回せるのが魅力です。</p>
         </div>
       </div>
 
-      <!-- Chapter 02 -->
-      <div class="iv-chapter">
-        <span class="iv-chapter-num">Chapter 02</span>
-        <span class="iv-chapter-label">ランステックへの合流</span>
-      </div>
+      <p class="lead">1日のスケジュールを教えてください。</p>
 
-      <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>ランステックに入ったのはどういう経緯ですか？</p>
-        <div class="iv-a">
-          <span class="iv-mark" aria-hidden="true">A.</span>
-          <div class="iv-a-body">
-            <p>アロウズ・システムが西原商会グループに入って、その後ランステックもグループに参画して、アロウズはランステックに統合されたという流れです。なので「転職した」という実感はあまりなくて、気がついたらランステックにいた、という感じですね。</p>
-            <p>アロウズには20年以上いたので、統合前後で一緒に働いていた仲間が少しずつ離れていったのは正直寂しかったです。ただ、自分の気持ちよりも会社の流れに乗って移ってきた形なので、そこは受け入れています。</p>
-          </div>
+      <!-- Daily Schedule -->
+      <div class="iv-schedule">
+        <div class="iv-schedule-header">
+          <h3 class="iv-schedule-title">Daily Schedule</h3>
+          <p class="iv-schedule-subtitle">長谷川さんのとある1日（業務時間）</p>
         </div>
-      </div>
 
-      <!-- Chapter 03 -->
-      <div class="iv-chapter">
-        <span class="iv-chapter-num">Chapter 03</span>
-        <span class="iv-chapter-label">業務の変化と技術的なチャレンジ</span>
-      </div>
+        <div class="iv-schedule-timeline">
+          <div class="iv-schedule-line"></div>
 
-      <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>入社前後で業務内容は変わりましたか？</p>
-        <div class="iv-a">
-          <span class="iv-mark" aria-hidden="true">A.</span>
-          <div class="iv-a-body">
-            <p>かなり変わりました。前は上流・設計がメインで、開発はほとんどやらなかったんです。担当が一人でしたし、カスタマイズよりも既存ツールを使いこなす仕事が多くて、実装は人に任せる形でした。</p>
-            <p>ランステックに入ってからはLaravelを使ったシステム開発がメインになりました。PHPは入社前は触ったことがなかったんですが、今は開発が楽しくて。設計からデータベース設計まで全部やるようになったので、経験をちゃんと積んでいけているなとは思います。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>最近、印象に残っている技術的なチャレンジはありますか？</p>
-        <div class="iv-a">
-          <span class="iv-mark" aria-hidden="true">A.</span>
-          <div class="iv-a-body">
-            <p>Web Pushの実装は知識がまったくないところから始めました。通知をどうやって届けるのかも知らない状態でしたが、調べながら進めたら実装できて、それは良かったなと思います。カメラの自動検知も今回初めて担当しました。技術選定は先輩と一緒に調べて「これでいけそう」となってから実装する、という流れです。</p>
-            <p>ユニットテストはAIを活用して自動化を進めていて、カバレッジが自動で取れるようになりました。効率はだいぶ上がりましたね。ただ見た目の確認は必ず自分の目でやる必要があるので、そこだけは手を抜けません。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- プルクォート -->
-      <div class="iv-pull">
-        <p>「AIを活用して、開発が一人でどこまでできるか——その実感が持てたことが、入社してから一番の収穫かもしれません。」</p>
-        <p class="iv-pull-source">長谷川 / システムエンジニア</p>
-      </div>
-
-      <!-- Chapter 04 -->
-      <div class="iv-chapter">
-        <span class="iv-chapter-num">Chapter 04</span>
-        <span class="iv-chapter-label">働き方とチームの雰囲気</span>
-      </div>
-
-      <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>普段の働き方を教えてください。</p>
-        <div class="iv-a">
-          <span class="iv-mark" aria-hidden="true">A.</span>
-          <div class="iv-a-body">
-            <p>朝は6時20分ごろに起きます。家族で一番早くて、4人分の朝食の準備をしてから出発します。7時40分に家を出て、8時15分ごろには会社に着いていますね。退社は18時ごろで、家には19時前後に着く感じです。</p>
-            <p>出社はほぼ週5日です。自宅に仕事専用の環境がないので、出社したほうが気持ち的にも楽なんです。特に在宅派というわけでもないので、そのまま来ている感じです。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 1日のスケジュール図解（横タイムライン） -->
-      <figure class="iv-day">
-        <figcaption class="iv-day-title">Daily Schedule</figcaption>
-        <p class="iv-day-sub">長谷川さんのとある1日（業務時間）</p>
-        <div class="iv-day-scroll">
-          <div class="iv-day-track">
-            <div class="iv-day-bar">
-              <span class="iv-day-time" style="left:7.9%">8:15</span>
-              <span class="iv-day-time" style="left:17.4%">9:30</span>
-              <span class="iv-day-time" style="left:36.5%">12:00</span>
-              <span class="iv-day-time" style="left:44.1%">13:00</span>
-              <span class="iv-day-time" style="left:55.5%">14:30</span>
-              <span class="iv-day-time" style="left:82.2%">18:00</span>
+          <div class="iv-schedule-grid">
+            <div class="iv-schedule-item">
+              <div class="iv-schedule-card">
+                <h4 class="iv-schedule-card-title">出社・一日の準備</h4>
+                <p class="iv-schedule-card-text">Slackとタスクを確認し、その日にやることを整理します。</p>
+              </div>
+              <div class="iv-schedule-dot"></div>
+              <div class="iv-schedule-time">8:15</div>
             </div>
-            <div class="iv-day-event is-up" style="left:7.9%">
-              <span class="iv-day-node"></span>
-              <div class="iv-day-card">
-                <h4>出社・一日の準備</h4>
-                <p>Slackとタスクを確認し、その日にやることを整理します。</p>
+
+            <div class="iv-schedule-item">
+              <div class="iv-schedule-time">9:30</div>
+              <div class="iv-schedule-dot"></div>
+              <div class="iv-schedule-card">
+                <h4 class="iv-schedule-card-title">開発（午前）</h4>
+                <p class="iv-schedule-card-text">Laravelで設計から実装まで担当。未経験の実装は先輩と方針を相談。</p>
               </div>
             </div>
-            <div class="iv-day-event is-down" style="left:17.4%">
-              <span class="iv-day-node"></span>
-              <div class="iv-day-card">
-                <h4>開発（午前）</h4>
-                <p>Laravelで設計から実装まで担当。未経験の実装は先輩と方針を相談。</p>
+
+            <div class="iv-schedule-item">
+              <div class="iv-schedule-card iv-schedule-card-break">
+                <h4 class="iv-schedule-card-title">昼休み</h4>
+                <p class="iv-schedule-card-text">出社メンバーとランチへ。週2〜3回は外で食べます。テストはAIで自動化し効率化。</p>
+              </div>
+              <div class="iv-schedule-dot"></div>
+              <div class="iv-schedule-time">12:00</div>
+            </div>
+
+            <div class="iv-schedule-item">
+              <div class="iv-schedule-time">13:00</div>
+              <div class="iv-schedule-dot"></div>
+              <div class="iv-schedule-card">
+                <h4 class="iv-schedule-card-title">打ち合わせ</h4>
+                <p class="iv-schedule-card-text">1日1〜2回、仕様や進め方をチームですり合わせます。</p>
               </div>
             </div>
-            <div class="iv-day-event is-up" style="left:36.5%">
-              <span class="iv-day-node"></span>
-              <div class="iv-day-card">
-                <h4>昼休み</h4>
-                <p>出社メンバーとランチへ。週2〜3回は外で食べます。</p>
+
+            <div class="iv-schedule-item">
+              <div class="iv-schedule-card">
+                <h4 class="iv-schedule-card-title">開発（午後）</h4>
+                <p class="iv-schedule-card-text">DB設計や実装を進めます。</p>
               </div>
+              <div class="iv-schedule-dot"></div>
+              <div class="iv-schedule-time">14:30</div>
             </div>
-            <div class="iv-day-event is-down" style="left:44.1%">
-              <span class="iv-day-node"></span>
-              <div class="iv-day-card">
-                <h4>打ち合わせ</h4>
-                <p>1日1〜2回。仕様や進め方をチームですり合わせます。</p>
-              </div>
-            </div>
-            <div class="iv-day-event is-up" style="left:55.5%">
-              <span class="iv-day-node"></span>
-              <div class="iv-day-card">
-                <h4>開発（午後）</h4>
-                <p>DB設計や実装を進めます。テストはAIで自動化し効率化。</p>
-              </div>
-            </div>
-            <div class="iv-day-event is-down is-end" style="left:82.2%">
-              <span class="iv-day-node"></span>
-              <div class="iv-day-card">
-                <h4>退社・翌日の準備</h4>
-                <p>実装を見直し、進捗を共有して退社します。</p>
+
+            <div class="iv-schedule-item">
+              <div class="iv-schedule-time">18:00</div>
+              <div class="iv-schedule-dot"></div>
+              <div class="iv-schedule-card">
+                <h4 class="iv-schedule-card-title">退社・翌日の準備</h4>
+                <p class="iv-schedule-card-text">実装を見直し、進捗を共有して退社します。</p>
               </div>
             </div>
           </div>
         </div>
-      </figure>
+      </div>
 
-      <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>チームのコミュニケーションはどんな感じですか？</p>
-        <div class="iv-a">
-          <span class="iv-mark" aria-hidden="true">A.</span>
-          <div class="iv-a-body">
-            <p>Slackがメインですが、近くにいる人とは直接話すことも多いです。隣の方が質問に来てくれることもあるので、自然とやりとりは多くなりますね。</p>
-            <p>タスク管理ツールは……正直あまりうまく使えていなくて（笑）。登録はしているんですが、しっかり活用できているかというと微妙です。</p>
-          </div>
+      <div class="iv-section-2col reverse">
+        <div class="iv-section-image">
+          <img src="/assets/images/interview-03.jpg" alt="開発作業中の長谷川さん" width="1600" height="900">
+        </div>
+        <div class="iv-section-content">
+          <h2 class="iv-section-title">コードレビューや技術的なチャレンジについて教えてください。</h2>
+          <p class="iv-section-text">コードレビューは技術リーダーが中心に行っていますが、初級者でも疑問点があれば気軽に質問できる雰囲気です。指摘内容としては、セキュリティ、パフォーマンス、可読性が中心で、レビューを通じてコード品質が保たれていると思います。</p>
+          <p class="iv-section-text">技術的チャレンジとしては、Webpackなどフロントエンド開発での課題、新環境への移行も含めてモダンなスタックへの刷新を進めている最中です。新しいツールやフレームワークを積極的に試す文化があります。</p>
         </div>
       </div>
 
-      <!-- Chapter 05 -->
-      <div class="iv-chapter">
-        <span class="iv-chapter-num">Chapter 05</span>
-        <span class="iv-chapter-label">入社後の成長と、これからのこと</span>
-      </div>
-
-      <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>入社してから一番成長を感じた経験は何ですか？</p>
-        <div class="iv-a">
-          <span class="iv-mark" aria-hidden="true">A.</span>
-          <div class="iv-a-body">
-            <p>デザイナーと一緒にプロジェクトを進める経験ができたことですね。これまではデザインがある程度決まった状態で実装するパターンが多くて、デザイナーと協働したことがなかったんです。フロントエンドとバックエンドをそれぞれ別に作業して、一つのプロジェクトに統合していく進め方は初めてで、良い経験になりました。</p>
-            <p>開発でも、AIを活用してどこまでできるかの実感が持てたのは収穫でした。一人でも対応できる幅が広がってきている気がします。</p>
-          </div>
+      <div class="iv-section-2col">
+        <div class="iv-section-image">
+          <img src="/assets/images/profile-photo.jpg" alt="ミーティング中の様子" width="1600" height="900">
+        </div>
+        <div class="iv-section-content">
+          <h2 class="iv-section-title">単体テストやAI活用について教えてください。</h2>
+          <p class="iv-section-text">単体テストは自動化を進めており、PHPUnitやJestを使ってテストコードを書くようにしています。CI/CDパイプラインと連携させることで、コミット時に自動でテストが走る環境を整えました。</p>
+          <p class="iv-section-text">人間が書くよりも効率的に、AIの支援を受けながらテストコードを書けるようになったのは大きいです。デバッグやリファクタリングでもClaudeやCopilotを活用して、開発スピードと品質を両立させています。</p>
         </div>
       </div>
 
-      <div class="iv-block">
-        <p class="iv-q"><span class="iv-mark" aria-hidden="true">Q.</span>今後チャレンジしたいことはありますか？</p>
-        <div class="iv-a">
-          <span class="iv-mark" aria-hidden="true">A.</span>
-          <div class="iv-a-body">
-            <p>モバイルアプリの開発に挑戦してみたいですね。iOSやAndroidのアプリは今まで作ったことがないので、ぜひやってみたいです。AIを使えば今なら作れそうな気がしていて——Webのバックエンドもフロントエンドもできてきたので、アプリまで広げられたらおもしろいなと思っています。</p>
-          </div>
+      <div class="iv-section-2col reverse">
+        <div class="iv-section-image">
+          <img src="/assets/images/profile-photo.jpg" alt="今後の目標について" width="1600" height="900">
         </div>
-      </div>
-
-      <!-- 採用 CTA -->
-      <div class="article-note" style="margin-top:52px;">
-        採用に関するご質問・ご応募は、<a href="/contact.html?type=recruit">お問い合わせフォーム</a>（種別「採用への応募・ご質問」）よりお気軽にどうぞ。
+        <div class="iv-section-content">
+          <h2 class="iv-section-title">今後の目標について教えてください。</h2>
+          <p class="iv-section-text">今後はMongoDBやPostgreSQLなどのデータベース技術にも挑戦したいですし、クラウドネイティブな環境での開発にも興味があります。コンテナやKubernetesを使った運用も視野に入れています。</p>
+          <p class="iv-section-text">技術的にも成長しつつ、これまでの経験を後輩に還元していきたいと思っています。AI活用やテスト自動化など、今取り組んでいることをチーム全体に広げていけるよう、知見を共有していきたいです。</p>
+        </div>
       </div>
 
     </article>
@@ -256,21 +850,19 @@
 <div class="article-after">
   <div class="wrap">
     <div class="article-foot">
-      <a href="/news.html" class="back-to-list">お知らせ一覧</a>
-      <nav class="post-nav">
-        <a class="pn-prev" href="/news/recruit-restart.html"><svg class="pn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19L5 12L12 5"/></svg>前の記事</a>
-        <span></span>
-      </nav>
+      <a href="/interview.html" class="back-to-list">← インタビュー一覧へ</a>
     </div>
   </div>
 </div>
 
+<!-- FOOTER -->
 <div id="site-footer"></div>
+
+</div><!-- /.site-wrapper -->
 
 <script src="/assets/js/header.js"></script>
 <script src="/assets/js/footer.js"></script>
-<script src="/assets/js/lenis.min.js"></script>
-<script src="/assets/js/smooth-scroll.js"></script>
 <script src="/assets/js/review-mode.js"></script>
+<script type="module" src="/assets/js/init-floating-lines-white.js"></script>
 </body>
 </html>

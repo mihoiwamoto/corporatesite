@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+<title>社員インタビュー | 株式会社ランステック</title>
+<meta name="description" content="ランステックで働くエンジニアの生の声をお届けします。入社の理由、仕事のやりがい、職場の雰囲気など、実際に働くメンバーのインタビューをご覧ください。">
+<meta property="og:title" content="社員インタビュー | 株式会社ランステック">
+<meta property="og:description" content="ランステックで働くエンジニアの生の声をお届けします。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="株式会社ランステック">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Oswald:wght@400;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/header.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
+<link rel="stylesheet" href="/assets/css/floating-lines.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "/node_modules/three/build/three.module.js"
+  }
+}
+</script>
+<style>
+  :root {
+    --pink:        #E07898;
+    --pink-dark:   #C0587A;
+    --pink-light:  #FBF0F4;
+    --ink:         #333333;
+    --sub:         #666666;
+    --bg:          #ffffff;
+    --bg-soft:     #f7f7f7;
+    --line:        #e0e0e0;
+    --maxw:        100%;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: linear-gradient(180deg, #FBF0F4 0%, #E5F6F3 100%); line-height: 1.75; font-weight: 400; text-wrap: pretty; word-break: auto-phrase; min-height: 100vh; }
+  .site-wrapper { background: transparent; margin: 0 120px; }
+  html { scroll-behavior: smooth; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 80px; }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    padding: 120px 0 80px;
+    background: transparent;
+    backdrop-filter: none;
+    position: relative;
+    overflow: hidden;
+    margin: 0 -120px;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .page-hero .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    padding: 0 80px;
+  }
+  .breadcrumb {
+    font-size: 13px;
+    color: var(--sub);
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+  .breadcrumb a {
+    color: var(--sub);
+    text-decoration: none;
+    transition: color .15s;
+  }
+  .breadcrumb a:hover {
+    color: var(--ink);
+  }
+  .breadcrumb span {
+    margin: 0 8px;
+  }
+  .page-title-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .page-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--sub);
+    letter-spacing: .1em;
+  }
+  .page-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(48px, 8vw, 72px);
+    font-weight: 700;
+    color: var(--pink);
+    line-height: 1;
+    letter-spacing: -.02em;
+  }
+  .page-subtitle {
+    font-size: 16px;
+    color: var(--sub);
+    line-height: 1.9;
+    margin-top: 16px;
+  }
+
+  /* ── INTERVIEW LIST ── */
+  .interview-list-section {
+    padding: 100px 0 140px;
+    background: transparent;
+    backdrop-filter: none;
+    position: relative;
+  }
+  .interview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+  }
+  .interview-card {
+    background: #ffffff;
+    backdrop-filter: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: none;
+  }
+  .interview-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0,0,0,.12);
+  }
+  .interview-card-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: var(--pink-light);
+    position: relative;
+  }
+  .interview-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .4s ease;
+  }
+  .interview-card:hover .interview-card-image img {
+    transform: scale(1.05);
+  }
+  .interview-card-content {
+    padding: 32px;
+  }
+  .interview-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .interview-card-date {
+    font-size: 12px;
+    color: var(--sub);
+    font-weight: 400;
+    letter-spacing: .03em;
+  }
+  .interview-card-cat {
+    display: inline-block;
+    background: var(--pink-light);
+    border: 1px solid var(--line);
+    color: var(--pink);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .interview-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .interview-card-excerpt {
+    font-size: 14px;
+    color: var(--sub);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .interview-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--pink);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: gap .2s ease;
+  }
+  .interview-card-link:hover {
+    gap: 12px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .site-wrapper {
+      margin: 0 60px;
+    }
+    .page-hero {
+      margin: 0 -60px;
+    }
+    .wrap {
+      padding: 0 40px;
+    }
+    .page-hero .wrap {
+      padding: 0 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .site-wrapper {
+      margin: 0 20px;
+    }
+    .page-hero {
+      margin: 0 -20px;
+      padding: 80px 0 60px;
+    }
+    .wrap {
+      padding: 0 20px;
+    }
+    .page-hero .wrap {
+      padding: 0 20px;
+    }
+    .interview-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .interview-list-section {
+      padding: 60px 0 80px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-wrapper">
+
+<div id="site-header"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="/">ホーム</a><span>/</span>社員インタビュー</p>
+    <div class="page-title-wrapper">
+      <span class="page-label">社員の声</span>
+      <h1 class="page-title">Interview</h1>
+    </div>
+    <p class="page-subtitle">小さな改善を大切に。</p>
+  </div>
+</section>
+
+<!-- INTERVIEW LIST -->
+<section class="interview-list-section">
+  <div class="wrap">
+    <div class="interview-grid">
+
+      <!-- インタビュー記事1 -->
+      <article class="interview-card">
+        <a href="/interview/hasegawa.html" style="text-decoration: none; color: inherit;">
+          <div class="interview-card-image">
+            <img src="/assets/images/profile-photo.jpg" alt="長谷川さんのプロフィール写真">
+          </div>
+          <div class="interview-card-content">
+            <div class="interview-card-meta">
+              <span class="interview-card-date">2026.07.01</span>
+              <span class="interview-card-cat">社員インタビュー</span>
+            </div>
+            <h2 class="interview-card-title">より良いモノづくりを。</h2>
+            <p class="interview-card-excerpt">「要件定義だけ」「運用だけ」といった分業ではなく、企画から保守まで一貫して担当できる環境を求めて入社しました。実際に業務を見て、お客様と話しながらシステムを形にしていくプロセスが、一番やりがいを感じる部分です。</p>
+            <span class="interview-card-link">インタビューを読む →</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- 今後追加予定のインタビュー用プレースホルダー（コメントアウト）
+      <article class="interview-card">
+        <a href="/news/interview-02.html" style="text-decoration: none; color: inherit;">
+          <div class="interview-card-image">
+            <img src="/assets/images/interview-photo-02.png" alt="社員インタビュー">
+          </div>
+          <div class="interview-card-content">
+            <div class="interview-card-meta">
+              <span class="interview-card-date">2026.XX.XX</span>
+              <span class="interview-card-cat">社員インタビュー</span>
+            </div>
+            <h2 class="interview-card-title">タイトル</h2>
+            <p class="interview-card-excerpt">概要テキストが入ります...</p>
+            <span class="interview-card-link">インタビューを読む →</span>
+          </div>
+        </a>
+      </article>
+      -->
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div id="site-footer"></div>
+
+</div><!-- /.site-wrapper -->
+
+<script src="/assets/js/header.js"></script>
+<script src="/assets/js/footer.js"></script>
+<script src="/assets/js/review-mode.js"></script>
+<script type="module" src="/assets/js/init-floating-lines-white.js"></script>
+</body>
+</html>
