@@ -53,17 +53,16 @@
     '      <p class="menu-col-title">Company</p>\n' +
     '      <a href="/about.html#message" class="menu-section-link">社長メッセージ</a>\n' +
     '      <a href="/about.html#vision" class="menu-section-link">ビジョン・バリュー</a>\n' +
-    '      <a href="/about.html#company" class="menu-section-link">会社情報</a>\n' +
     '      <a href="/about.html#history" class="menu-section-link">沿革</a>\n' +
     '      <a href="/about.html#group" class="menu-section-link">グループ会社</a>\n' +
-    '      <a href="/about.html#members" class="menu-section-link">社員情報</a>\n' +
+    '      <a href="/about.html#company" class="menu-section-link">会社情報</a>\n' +
     '    </div>\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">Business</p>\n' +
     '      <a href="/service.html#planning" class="menu-section-link">企画・要件定義</a>\n' +
     '      <a href="/service.html#development" class="menu-section-link">設計・開発</a>\n' +
     '      <a href="/service.html#operation" class="menu-section-link">保守・運用</a>\n' +
-    '      <a href="/service.html#ai" class="menu-section-link">AI開発</a>\n' +
+    '      <a href="/service.html#ai-strength" class="menu-section-link">AI開発</a>\n' +
     '      <a href="/service.html#works" class="menu-section-link">開発実績</a>\n' +
     '    </div>\n' +
     '    <div class="menu-col">\n' +
@@ -197,10 +196,18 @@
   nav.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', function(e) {
       var href = a.getAttribute('href');
-      // ページ内セクションへのリンク（#付き）の場合はスクロール無効化
+      // 同一ページ内のセクションリンク（例: /service.html#planning）で、
+      // 現在のページと遷移先のページが一致する場合のみ、メニューを閉じてスクロール処理に任せる
       if (href && href.indexOf('#') > 0) {
-        e.preventDefault();
+        var url;
+        try { url = new URL(href, location.href); } catch (ex) { }
+        // 同じページ内のセクションへのリンクの場合、メニューを閉じるだけ
+        if (url && url.pathname === location.pathname) {
+          closeMenu();
+          return; // smooth-scroll.jsに処理を任せる
+        }
       }
+      // 別ページへの遷移の場合はメニューを閉じる
       closeMenu();
     });
   });

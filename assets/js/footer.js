@@ -20,17 +20,16 @@
     '          <p class="footer-col-title">Company</p>\n' +
     '          <a href="/about.html#message">社長メッセージ</a>\n' +
     '          <a href="/about.html#vision">ビジョン・バリュー</a>\n' +
-    '          <a href="/about.html#company">会社情報</a>\n' +
     '          <a href="/about.html#history">沿革</a>\n' +
     '          <a href="/about.html#group">グループ会社</a>\n' +
-    '          <a href="/about.html#members">社員情報</a>\n' +
+    '          <a href="/about.html#company">会社情報</a>\n' +
     '        </div>\n' +
     '        <div class="footer-col">\n' +
     '          <p class="footer-col-title">Business</p>\n' +
     '          <a href="/service.html#planning">企画・要件定義</a>\n' +
     '          <a href="/service.html#development">設計・開発</a>\n' +
     '          <a href="/service.html#operation">保守・運用</a>\n' +
-    '          <a href="/service.html#ai">AI開発</a>\n' +
+    '          <a href="/service.html#ai-strength">AI開発</a>\n' +
     '          <a href="/service.html#works">開発実績</a>\n' +
     '        </div>\n' +
     '        <div class="footer-col">\n' +

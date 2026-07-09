@@ -342,10 +342,10 @@ function initOrb() {
     try {
       new OrbBackground(orbContainer, {
         hue: 0,                    // Base hue (0 = original purple/blue colors)
-        hoverIntensity: 0.2,       // Hover distortion intensity (default from React Bits)
+        hoverIntensity: 0.5,       // Hover distortion intensity (React Bits default: 0.5)
         rotateOnHover: true,       // Enable rotation on hover
         forceHoverState: false,    // Don't force hover state
-        backgroundColor: '#000000' // Black background
+        backgroundColor: '#293444' // Dark background to match AI section (AIセクションの背景色に合わせた暗色)
       });
       console.log('Orb background initialized successfully');
     } catch (error) {
