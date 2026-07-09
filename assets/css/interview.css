@@ -108,6 +108,8 @@
   .iv2-pull { margin: 52px 0 8px; padding: 32px 36px; background: #2A3544; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 16px; text-align: center; box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5), 0 0 0 4px #2A3544, 0 0 0 6px rgba(255, 255, 255, 0.5), 0 8px 32px rgba(0, 0, 0, 0.08); }
   .iv2-pull p { font-size: 20px; font-weight: 700; line-height: 1.85; color: #ffffff; }
   .iv2-pull cite { display: block; font-style: normal; font-size: 13px; font-weight: 500; color: #ffffff; margin-top: 14px; }
+  .iv2-pull-frosted { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 8px 32px rgba(0, 0, 0, 0.08); }
+  .iv2-pull-frosted p { color: var(--pink); }
 
   /* ---- CTA ---- */
   .iv2-cta { margin-top: 56px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 26px; font-size: 15px; color: var(--sub); line-height: 1.9; }

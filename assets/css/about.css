@@ -91,39 +91,83 @@
   .values-title { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: clamp(28px, 3.5vw, 38px); font-weight: 700; line-height: 1.5; letter-spacing: -.02em; margin: 0; color: var(--ink); width: 100%; }
 
   /* VALUE CARDS */
-  .value-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; grid-auto-rows: 1fr; }
+  .value-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; grid-auto-rows: auto; }
   .value-card:nth-child(1), .value-card:nth-child(2), .value-card:nth-child(3) { grid-column: span 2; }
   .value-card:nth-child(4) { grid-column: 1 / 4; }
   .value-card:nth-child(5) { grid-column: 4 / 7; }
   .value-card { border-radius: var(--radius); padding: 24px; background: #fff; transition: all .35s cubic-bezier(.4,0,.2,1); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 18px; height: 100%; }
-  .value-card:nth-child(4), .value-card:nth-child(5) { padding: 20px; gap: 10px; }
+  .value-card:nth-child(4), .value-card:nth-child(5) { padding: 22px 24px 16px; gap: 12px; height: auto; }
   .value-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
   .value-card > div:first-child { position: relative; display: flex; flex-direction: column; gap: 4px; text-align: left; }
   .value-card-ja { font-size: 24px; font-weight: 700; color: var(--pink); margin: 0; line-height: 1.3; text-align: left; display: flex; align-items: center; gap: 10px; }
   .value-card-icon { width: 24px; height: 24px; flex-shrink: 0; color: var(--pink); }
   .value-card-en { font-size: 11px; font-weight: 500; color: var(--ink); letter-spacing: .08em; text-transform: uppercase; margin: 0; line-height: 1; text-align: left; }
-  .value-card-desc { font-size: 15px; color: var(--sub); line-height: 1.75; text-align: justify; text-justify: inter-character; margin: 0; word-wrap: break-word; overflow-wrap: break-word; }
+  .value-card-desc { font-size: 15px; color: var(--sub); line-height: 1.75; text-align: justify; text-justify: inter-character; margin: 0; word-wrap: break-word; overflow-wrap: break-word; letter-spacing: 0.04em; }
   .value-card-desc p { margin: 0; }
 
   /* INTERVIEW BADGE */
-  .interview-badge {
+  .interview-badge-wrapper {
     position: fixed;
     bottom: 60px;
     right: 32px;
     z-index: 9998;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 12px;
-    text-decoration: none;
-    box-shadow: 0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.08);
-    transition: all .35s cubic-bezier(.4,0,.2,1);
-    width: 175px;
     animation: interview-badge-slide-up 0.9s cubic-bezier(.16,1,.3,1) 0.5s both;
+    transition: opacity .3s ease, transform .3s ease;
+  }
+
+  .interview-badge-bg {
+    position: relative;
+  }
+
+  .interview-badge-close {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #D4637E;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(212,99,126,.3);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .interview-badge-wrapper:hover .interview-badge-close {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .interview-badge-close svg {
+    width: 16px;
+    height: 16px;
+    color: white;
+  }
+
+  .interview-badge-close:hover {
+    background: #C04C68;
+    transform: scale(1.1);
+  }
+
+  .interview-badge {
+    display: block;
+    text-decoration: none;
+    transition: all .35s cubic-bezier(.4,0,.2,1);
+  }
+
+  .interview-badge-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.08);
+    width: 200px;
   }
 
   @keyframes interview-badge-slide-up {
@@ -139,60 +183,50 @@
 
   /* フィードバックFABボタンの位置調整 */
   .fbp-fab {
-    bottom: 195px !important;
+    bottom: 230px !important;
   }
-  .interview-badge:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0,0,0,.16), 0 4px 12px rgba(0,0,0,.12);
-    border-color: var(--pink);
+
+  .interview-badge:hover .interview-badge-card {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
   }
-  .interview-badge-text {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
+
   .interview-badge-label {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
-    color: var(--pink-dark);
+    color: #D4637E;
     letter-spacing: .12em;
+    margin-bottom: 8px;
   }
+
   .interview-badge-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--ink);
     letter-spacing: .02em;
     line-height: 1.4;
+    margin-bottom: 16px;
   }
-  .interview-badge-action {
-    flex-shrink: 0;
-    display: flex;
+
+  .interview-badge-button {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     color: #fff;
-    background: var(--pink);
-    padding: 8px 16px;
+    background: #D4637E;
+    padding: 10px 24px;
     border-radius: 9999px;
     letter-spacing: .04em;
     transition: all .3s cubic-bezier(.4,0,.2,1);
-    margin-top: 2px;
     box-shadow: 0 2px 8px rgba(212,99,126,.2);
   }
-  .interview-badge-action svg {
-    width: 14px;
-    height: 14px;
-    transition: transform .3s cubic-bezier(.4,0,.2,1);
-  }
-  .interview-badge:hover .interview-badge-action {
-    background: var(--pink-dark);
+
+  .interview-badge:hover .interview-badge-button {
+    background: #C04C68;
+    box-shadow: 0 6px 16px rgba(212,99,126,.4);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(212,99,126,.3);
-  }
-  .interview-badge:hover .interview-badge-action svg {
-    transform: translateX(3px);
   }
 
   /* COMPANY INFO */
@@ -329,34 +363,54 @@
     .company-table tr { padding: 14px 0; border-bottom: 1px solid var(--line); }
     .company-table th { padding: 0 0 4px; font-size: 16px; font-weight: 700; color: var(--pink-dark); letter-spacing: .04em; }
     .company-table td { padding: 0; font-size: 16px; }
-    .officer { gap: 10px 16px; flex-wrap: wrap; }
-    .officer-title { min-width: 0; }
+    .officer {
+      gap: 10px 16px;
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .officer-title {
+      min-width: 0;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    .officer span {
+      font-size: 15px;
+    }
 
-    .interview-badge {
-      bottom: 16px;
+    .interview-badge-wrapper {
+      bottom: 56px;
       right: 16px;
-      width: 165px;
-      padding: 10px;
-      gap: 8px;
-      border-radius: 12px;
+    }
+    .interview-badge-card {
+      width: 180px;
+      padding: 16px;
+      border-radius: 14px;
+    }
+    .interview-badge-close {
+      width: 28px;
+      height: 28px;
+      top: -6px;
+      right: -6px;
+    }
+    .interview-badge-close svg {
+      width: 14px;
+      height: 14px;
     }
     .interview-badge-label {
-      font-size: 9px;
+      font-size: 10px;
+      margin-bottom: 6px;
     }
     .interview-badge-title {
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    .interview-badge-button {
       font-size: 12px;
-      line-height: 1.35;
-    }
-    .interview-badge-action {
-      font-size: 11px;
-      padding: 7px 12px;
-    }
-    .interview-badge-action svg {
-      width: 13px;
-      height: 13px;
+      padding: 8px 20px;
     }
     .fbp-fab {
-      bottom: 135px !important;
+      bottom: 210px !important;
     }
   }
 
@@ -371,31 +425,39 @@
     .value-card { padding: 24px 20px; }
     .value-card-ja { font-size: 18px; }
     .value-card-desc { font-size: 14px; }
-    .interview-badge {
-      bottom: 12px;
+    .interview-badge-wrapper {
+      bottom: 52px;
       right: 12px;
-      width: 155px;
-      padding: 9px;
-      gap: 6px;
+    }
+    .interview-badge-card {
+      width: 165px;
+      padding: 14px;
       border-radius: 12px;
+    }
+    .interview-badge-close {
+      width: 26px;
+      height: 26px;
+      top: -6px;
+      right: -6px;
+    }
+    .interview-badge-close svg {
+      width: 13px;
+      height: 13px;
     }
     .interview-badge-label {
       font-size: 9px;
+      margin-bottom: 6px;
     }
     .interview-badge-title {
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    .interview-badge-button {
       font-size: 11px;
-      line-height: 1.3;
-    }
-    .interview-badge-action {
-      font-size: 10px;
-      padding: 6px 10px;
-    }
-    .interview-badge-action svg {
-      width: 12px;
-      height: 12px;
+      padding: 7px 16px;
     }
     .fbp-fab {
-      bottom: 125px !important;
+      bottom: 195px !important;
     }
   }
 

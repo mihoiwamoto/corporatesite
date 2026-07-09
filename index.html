@@ -225,9 +225,14 @@ if (sessionStorage.getItem('op-done') ||
         height: 160px;
         padding: 10px;
       }
+      .service-item[data-step="03"] .service-item-icon {
+        padding: 0;
+      }
       .service-item-icon svg {
         max-width: 170px;
         max-height: 170px;
+        width: 100%;
+        height: auto;
       }
       .service-item-body {
         padding: 16px;
@@ -630,16 +635,14 @@ if (sessionStorage.getItem('op-done') ||
 <!-- GROUP -->
 <section class="group">
   <div class="wrap">
+    <div class="sec-heading reveal">
+      <p class="sec-label">グループ</p>
+      <h2 class="sec-title" data-ghost="GROUP">Group</h2>
+      <p class="sec-lead">西原商会グループの一員として</p>
+    </div>
     <div class="group-inner">
-      <div class="group-left reveal">
-        <div class="sec-heading">
-          <p class="sec-label">グループ</p>
-          <h2 class="sec-title" data-ghost="GROUP">Group</h2>
-          <p class="sec-lead">西原商会グループの一員として</p>
-        </div>
-        <div class="group-diagram">
-          <img src="/assets/images/diagram.png" alt="ランステックがシステム開発を担い、西原商会グループの各事業を支える関係図" width="4059" height="2400" loading="lazy" decoding="async">
-        </div>
+      <div class="group-diagram reveal">
+        <img src="/assets/images/diagram.png" alt="ランステックがシステム開発を担い、西原商会グループの各事業を支える関係図" width="4059" height="2400" loading="lazy" decoding="async">
       </div>
       <div class="group-text reveal">
         <h3>商社の安定基盤と、ITの専門性を掛け合わせる。</h3>
@@ -699,18 +702,24 @@ if (sessionStorage.getItem('op-done') ||
 </section>
 
 <!-- INTERVIEW BADGE -->
-<a href="interview/hasegawa.html" class="interview-badge" aria-label="社員インタビュー公開中">
-  <div class="interview-badge-text">
-    <div class="interview-badge-label">INTERVIEW</div>
-    <div class="interview-badge-title">社員インタビュー公開中</div>
+<div class="interview-badge-wrapper">
+  <div class="interview-badge-bg">
+    <button class="interview-badge-close" aria-label="閉じる">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+    <a href="interview/hasegawa.html" class="interview-badge" aria-label="社員インタビュー公開中">
+      <div class="interview-badge-card">
+        <div class="interview-badge-label">INTERVIEW</div>
+        <div class="interview-badge-title">社員インタビュー公開中</div>
+        <div class="interview-badge-button">
+          View More →
+        </div>
+      </div>
+    </a>
   </div>
-  <div class="interview-badge-action">
-    <span>View More</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M5 12h14M12 5l7 7-7 7"/>
-    </svg>
-  </div>
-</a>
+</div>
 
 <!-- FOOTER -->
 <div id="site-footer"></div>
@@ -723,6 +732,30 @@ if (sessionStorage.getItem('op-done') ||
 <script src="/assets/js/opening.js" defer></script>
 <script src="/assets/js/service-icons.js" defer></script>
 <script src="/assets/js/text-type.js" defer></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const closeBtn = document.querySelector('.interview-badge-close');
+  const badgeWrapper = document.querySelector('.interview-badge-wrapper');
+
+  if (closeBtn && badgeWrapper) {
+    closeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      badgeWrapper.style.opacity = '0';
+      badgeWrapper.style.transform = 'translateY(20px) scale(0.95)';
+      setTimeout(function() {
+        badgeWrapper.style.display = 'none';
+      }, 300);
+      sessionStorage.setItem('interviewBadgeClosed', 'true');
+    });
+
+    if (sessionStorage.getItem('interviewBadgeClosed') === 'true') {
+      badgeWrapper.style.display = 'none';
+    }
+  }
+});
+</script>
 
 <script>
 (function() {

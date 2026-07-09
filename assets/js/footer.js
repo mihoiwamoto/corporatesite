@@ -42,12 +42,6 @@
     '        </div>\n' +
     '      </nav>\n' +
     '    </div>\n' +
-    '    <div class="footer-pagetop-row">\n' +
-    '      <a class="footer-pagetop" href="#top" onclick="window.scrollTo({top:0,behavior:\'smooth\'});return false;">\n' +
-    '        <span>PAGE TOP</span>\n' +
-    '        <span class="footer-pagetop-btn" aria-hidden="true">↑</span>\n' +
-    '      </a>\n' +
-    '    </div>\n' +
     '    <hr class="footer-divider">\n' +
     '    <div class="footer-bottom">\n' +
     '      <p class="footer-copy">&copy; 2026 Lans Tech Co., Ltd. All rights reserved.</p>\n' +

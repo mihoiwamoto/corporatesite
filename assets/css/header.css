@@ -332,7 +332,8 @@ body .page-hero { padding-top: 100px; }
     top: 10px;
     width: calc(100% - 20px);
     height: auto;
-    max-height: calc(100vh - 80px);
+    max-height: calc(100vh - 90px);
+    max-height: calc(100svh - 90px);
     border-radius: 28px;
     clip-path: inset(0 0 100% 0 round 28px);
     mask-image: radial-gradient(circle at calc(100% - 28px) 28px, transparent 31px, #000 31.5px);

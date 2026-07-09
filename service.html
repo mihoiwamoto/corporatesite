@@ -806,24 +806,53 @@
 </section>
 
 <!-- INTERVIEW BADGE -->
-<a href="interview/hasegawa.html" class="interview-badge" aria-label="社員インタビュー公開中">
-  <div class="interview-badge-text">
-    <div class="interview-badge-label">INTERVIEW</div>
-    <div class="interview-badge-title">社員インタビュー公開中</div>
+<div class="interview-badge-wrapper">
+  <div class="interview-badge-bg">
+    <button class="interview-badge-close" aria-label="閉じる">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+    <a href="interview/hasegawa.html" class="interview-badge" aria-label="社員インタビュー公開中">
+      <div class="interview-badge-card">
+        <div class="interview-badge-label">INTERVIEW</div>
+        <div class="interview-badge-title">社員インタビュー公開中</div>
+        <div class="interview-badge-button">
+          View More →
+        </div>
+      </div>
+    </a>
   </div>
-  <div class="interview-badge-action">
-    <span>View More</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M5 12h14M12 5l7 7-7 7"/>
-    </svg>
-  </div>
-</a>
+</div>
 
 <div id="site-footer"></div>
 
 
 <script src="/assets/js/header.js"></script>
 <script src="/assets/js/footer.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const closeBtn = document.querySelector('.interview-badge-close');
+  const badgeWrapper = document.querySelector('.interview-badge-wrapper');
+
+  if (closeBtn && badgeWrapper) {
+    closeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      badgeWrapper.style.opacity = '0';
+      badgeWrapper.style.transform = 'translateY(20px) scale(0.95)';
+      setTimeout(function() {
+        badgeWrapper.style.display = 'none';
+      }, 300);
+      sessionStorage.setItem('interviewBadgeClosed', 'true');
+    });
+
+    if (sessionStorage.getItem('interviewBadgeClosed') === 'true') {
+      badgeWrapper.style.display = 'none';
+    }
+  }
+});
+</script>
 <script src="/assets/js/lenis.min.js"></script>
 <script src="/assets/js/smooth-scroll.js"></script>
 <script src="/assets/js/service-icons.js" defer></script>

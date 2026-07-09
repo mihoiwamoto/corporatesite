@@ -90,24 +90,68 @@
   html { scroll-behavior: smooth; }
 
   /* INTERVIEW BADGE */
-  .interview-badge {
+  .interview-badge-wrapper {
     position: fixed;
     bottom: 60px;
     right: 32px;
     z-index: 9998;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 12px;
-    text-decoration: none;
-    box-shadow: 0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.08);
-    transition: all .35s cubic-bezier(.4,0,.2,1);
-    width: 175px;
     animation: interview-badge-slide-up 0.9s cubic-bezier(.16,1,.3,1) 1.5s both;
+    transition: opacity .3s ease, transform .3s ease;
+  }
+
+  .interview-badge-bg {
+    position: relative;
+  }
+
+  .interview-badge-close {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #D4637E;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(212,99,126,.3);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .interview-badge-wrapper:hover .interview-badge-close {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .interview-badge-close svg {
+    width: 16px;
+    height: 16px;
+    color: white;
+  }
+
+  .interview-badge-close:hover {
+    background: #C04C68;
+    transform: scale(1.1);
+  }
+
+  .interview-badge {
+    display: block;
+    text-decoration: none;
+    transition: all .35s cubic-bezier(.4,0,.2,1);
+  }
+
+  .interview-badge-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.08);
+    width: 200px;
   }
 
   @keyframes interview-badge-slide-up {
@@ -123,60 +167,50 @@
 
   /* フィードバックFABボタンの位置調整 */
   .fbp-fab {
-    bottom: 195px !important;
+    bottom: 230px !important;
   }
-  .interview-badge:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0,0,0,.16), 0 4px 12px rgba(0,0,0,.12);
-    border-color: var(--pink);
+
+  .interview-badge:hover .interview-badge-card {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
   }
-  .interview-badge-text {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
+
   .interview-badge-label {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
-    color: var(--pink-dark);
+    color: #D4637E;
     letter-spacing: .12em;
+    margin-bottom: 8px;
   }
+
   .interview-badge-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--ink);
     letter-spacing: .02em;
     line-height: 1.4;
+    margin-bottom: 16px;
   }
-  .interview-badge-action {
-    flex-shrink: 0;
-    display: flex;
+
+  .interview-badge-button {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     color: #fff;
-    background: var(--pink);
-    padding: 8px 16px;
+    background: #D4637E;
+    padding: 10px 24px;
     border-radius: 9999px;
     letter-spacing: .04em;
     transition: all .3s cubic-bezier(.4,0,.2,1);
-    margin-top: 2px;
     box-shadow: 0 2px 8px rgba(212,99,126,.2);
   }
-  .interview-badge-action svg {
-    width: 14px;
-    height: 14px;
-    transition: transform .3s cubic-bezier(.4,0,.2,1);
-  }
-  .interview-badge:hover .interview-badge-action {
-    background: var(--pink-dark);
+
+  .interview-badge:hover .interview-badge-button {
+    background: #C04C68;
+    box-shadow: 0 6px 16px rgba(212,99,126,.4);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(212,99,126,.3);
-  }
-  .interview-badge:hover .interview-badge-action svg {
-    transform: translateX(3px);
   }
 
   /* タブレット中間帯：360pxサイドバー併存だとフォームが狭すぎるため縦積みに
@@ -199,43 +233,75 @@
     .field input[type="text"],
     .field input[type="email"],
     .field textarea { font-size: 16px; }
-    .interview-badge {
-      bottom: 60px;
-      right: 20px;
-      width: 170px;
-      padding: 10px;
-      gap: 8px;
+    .interview-badge-wrapper {
+      bottom: 56px;
+      right: 16px;
+    }
+    .interview-badge-card {
+      width: 180px;
+      padding: 16px;
+      border-radius: 14px;
+    }
+    .interview-badge-close {
+      width: 28px;
+      height: 28px;
+      top: -6px;
+      right: -6px;
+    }
+    .interview-badge-close svg {
+      width: 14px;
+      height: 14px;
+    }
+    .interview-badge-label {
+      font-size: 10px;
+      margin-bottom: 6px;
     }
     .interview-badge-title {
-      font-size: 12px;
+      font-size: 13px;
+      margin-bottom: 14px;
     }
-    .interview-badge-action {
-      font-size: 11px;
-      padding: 7px 14px;
+    .interview-badge-button {
+      font-size: 12px;
+      padding: 8px 20px;
     }
     .fbp-fab {
-      bottom: 180px !important;
+      bottom: 210px !important;
     }
   }
 
   @media (max-width: 480px) {
-    .interview-badge {
-      bottom: 60px;
-      width: 160px;
-      padding: 10px;
-      gap: 6px;
+    .interview-badge-wrapper {
+      bottom: 52px;
+      right: 12px;
+    }
+    .interview-badge-card {
+      width: 165px;
+      padding: 14px;
+      border-radius: 12px;
+    }
+    .interview-badge-close {
+      width: 26px;
+      height: 26px;
+      top: -6px;
+      right: -6px;
+    }
+    .interview-badge-close svg {
+      width: 13px;
+      height: 13px;
     }
     .interview-badge-label {
       font-size: 9px;
+      margin-bottom: 6px;
     }
     .interview-badge-title {
-      font-size: 11px;
+      font-size: 12px;
+      margin-bottom: 12px;
     }
-    .interview-badge-action {
-      font-size: 10px;
-      padding: 6px 12px;
+    .interview-badge-button {
+      font-size: 11px;
+      padding: 7px 16px;
     }
     .fbp-fab {
-      bottom: 170px !important;
+      bottom: 195px !important;
     }
   }

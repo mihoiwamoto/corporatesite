@@ -51,16 +51,6 @@
       </div>
     </div>
   </div>
-  <div class="about-gallery">
-    <div class="wrap">
-      <div class="about-gallery-track" tabindex="0" role="group" aria-label="オフィスの写真（左右にスクロールできます）">
-        <figure class="about-gallery-item"><img src="/assets/images/office04.jpg" alt="白い壁に設置されたLansTechのロゴサイン" loading="lazy" width="1200" height="798"></figure>
-        <figure class="about-gallery-item"><img src="/assets/images/office01.jpg" alt="モニターが並ぶ執務スペースで働く社員" loading="lazy" width="1200" height="798"></figure>
-        <figure class="about-gallery-item"><img src="/assets/images/office03.jpg" alt="観葉植物のそばでコードが表示されたノートPC" loading="lazy" width="1200" height="800"></figure>
-        <figure class="about-gallery-item"><img src="/assets/images/office05.jpg" alt="桜と、オフィスが入るヤマタネ深川のビル外観" loading="lazy" width="1100" height="733"></figure>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- TOP MESSAGE -->
@@ -142,9 +132,7 @@
           </div>
           <div class="value-card-en">cooperation and co-creation</div>
         </div>
-        <div class="value-card-desc">
-          <p>各メンバーのスキルや強みを活かして、チーム全体で目標達成に向けて協力し合うことを重視する。透明性を大切にした意見交換や情報共有を行い、共に成長できる環境を作る。</p>
-        </div>
+        <div class="value-card-desc">各メンバーのスキルや強みを活かして、チーム全体で目標達成に向けて協力し合うことを重視する。透明性を大切にした意見交換や情報共有を行い、共に成長できる環境を作る。</div>
       </div>
       <div class="value-card">
         <div>
@@ -334,24 +322,53 @@
 
 
 <!-- INTERVIEW BADGE -->
-<a href="interview/hasegawa.html" class="interview-badge" aria-label="社員インタビュー公開中">
-  <div class="interview-badge-text">
-    <div class="interview-badge-label">INTERVIEW</div>
-    <div class="interview-badge-title">社員インタビュー公開中</div>
+<div class="interview-badge-wrapper">
+  <div class="interview-badge-bg">
+    <button class="interview-badge-close" aria-label="閉じる">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+    <a href="interview/hasegawa.html" class="interview-badge" aria-label="社員インタビュー公開中">
+      <div class="interview-badge-card">
+        <div class="interview-badge-label">INTERVIEW</div>
+        <div class="interview-badge-title">社員インタビュー公開中</div>
+        <div class="interview-badge-button">
+          View More →
+        </div>
+      </div>
+    </a>
   </div>
-  <div class="interview-badge-action">
-    <span>View More</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M5 12h14M12 5l7 7-7 7"/>
-    </svg>
-  </div>
-</a>
+</div>
 
 <div id="site-footer"></div>
 
 <script src="/assets/js/header.js"></script>
 <script src="/assets/js/footer.js"></script>
 <script src="/assets/js/lenis.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const closeBtn = document.querySelector('.interview-badge-close');
+  const badgeWrapper = document.querySelector('.interview-badge-wrapper');
+
+  if (closeBtn && badgeWrapper) {
+    closeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      badgeWrapper.style.opacity = '0';
+      badgeWrapper.style.transform = 'translateY(20px) scale(0.95)';
+      setTimeout(function() {
+        badgeWrapper.style.display = 'none';
+      }, 300);
+      sessionStorage.setItem('interviewBadgeClosed', 'true');
+    });
+
+    if (sessionStorage.getItem('interviewBadgeClosed') === 'true') {
+      badgeWrapper.style.display = 'none';
+    }
+  }
+});
+</script>
 <script src="/assets/js/smooth-scroll.js"></script>
 
 <!-- GSAP and Plugins for SplitText Animation -->
