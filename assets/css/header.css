@@ -297,36 +297,149 @@ body .page-hero { padding-top: 100px; }
 /* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
   .site-nav { top: 10px; }
-  .nav-row { width: calc(100% - 20px); gap: 8px; }
-  .site-nav .wrap { height: 52px; padding: 0 16px 0 20px; gap: 0; }
-  .site-nav .logo img { height: 22px; }
-  .nav-standalone-btn { width: 52px; height: 52px; }
-  body .page-hero { padding-top: 80px; }
+  .nav-row {
+    width: calc(100% - 20px);
+    gap: 8px;
+    max-width: 100%;
+  }
+  .site-nav .wrap {
+    height: 56px;
+    padding: 0 12px 0 20px;
+    gap: 0;
+    width: 100%;
+  }
+  .site-nav .logo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  .site-nav .logo img {
+    height: 24px;
+    max-width: 100%;
+  }
+  .nav-standalone-btn {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+  }
+  .nav-standalone-btn span {
+    width: 20px;
+    height: 2px;
+  }
+  body .page-hero { padding-top: 86px; }
+
   .mobile-nav {
     top: 10px;
     width: calc(100% - 20px);
     height: auto;
     max-height: calc(100vh - 80px);
+    border-radius: 28px;
+    clip-path: inset(0 0 100% 0 round 28px);
+    mask-image: radial-gradient(circle at calc(100% - 28px) 28px, transparent 31px, #000 31.5px);
+    -webkit-mask-image: radial-gradient(circle at calc(100% - 28px) 28px, transparent 31px, #000 31.5px);
+  }
+  .mobile-nav.open {
+    clip-path: inset(0 0 0% 0 round 28px);
+  }
+
+  .menu-logo-fixed {
+    top: 10px;
+    width: calc(100% - 20px);
+    height: 56px;
+    padding-left: 21px;
+    border-radius: 28px;
+    mask-image: radial-gradient(circle at calc(100% - 28px) 28px, transparent 31px, #000 31.5px);
+    -webkit-mask-image: radial-gradient(circle at calc(100% - 28px) 28px, transparent 31px, #000 31.5px);
+  }
+  .menu-logo-fixed img {
+    height: 24px;
+  }
+
+  .menu-overlay-body {
+    padding: 70px 24px 40px;
+    min-height: auto;
+  }
+  .menu-group-row {
+    flex-wrap: wrap;
+    padding-top: 16px;
+    gap: 8px;
+  }
+  .menu-group-link {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+  .menu-nav-mobile {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .menu-link-ja {
+    font-size: 16px;
+  }
+  .menu-link-en {
+    font-size: 10px;
+  }
+  .menu-page-link-simple {
+    padding: 8px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-nav { top: 8px; }
+  .nav-row { width: calc(100% - 16px); }
+  .site-nav .wrap {
+    height: 52px;
+    padding: 0 10px 0 16px;
+  }
+  .site-nav .logo img { height: 22px; }
+  .nav-standalone-btn {
+    width: 52px;
+    height: 52px;
+  }
+  .nav-standalone-btn span {
+    width: 18px;
+  }
+  body .page-hero { padding-top: 76px; }
+
+  .mobile-nav {
+    top: 8px;
+    width: calc(100% - 16px);
     border-radius: 26px;
     clip-path: inset(0 0 100% 0 round 26px);
     mask-image: radial-gradient(circle at calc(100% - 26px) 26px, transparent 29px, #000 29.5px);
     -webkit-mask-image: radial-gradient(circle at calc(100% - 26px) 26px, transparent 29px, #000 29.5px);
   }
-  .mobile-nav.open { clip-path: inset(0 0 0% 0 round 26px); }
+  .mobile-nav.open {
+    clip-path: inset(0 0 0% 0 round 26px);
+  }
+
   .menu-logo-fixed {
-    top: 10px;
-    width: calc(100% - 20px);
+    top: 8px;
+    width: calc(100% - 16px);
     height: 52px;
-    padding-left: 21px;
+    padding-left: 17px;
     border-radius: 26px;
     mask-image: radial-gradient(circle at calc(100% - 26px) 26px, transparent 29px, #000 29.5px);
     -webkit-mask-image: radial-gradient(circle at calc(100% - 26px) 26px, transparent 29px, #000 29.5px);
   }
-  .menu-overlay-body { padding: 50px 32px 40px; min-height: auto; }
-  .menu-group-row { flex-wrap: wrap; padding-top: 16px; }
-  .menu-nav-mobile { gap: 0; margin-bottom: 20px; }
-}
-@media (max-width: 480px) {
-  .menu-overlay-body { padding: 50px 28px 32px; }
-  .menu-group-row { padding-top: 12px; }
+  .menu-logo-fixed img { height: 22px; }
+
+  .menu-overlay-body {
+    padding: 60px 20px 32px;
+  }
+  .menu-group-row {
+    padding-top: 12px;
+  }
+  .menu-group-link {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+  .menu-link-ja {
+    font-size: 15px;
+  }
+  .menu-link-en {
+    font-size: 9px;
+  }
+  .menu-page-link-simple {
+    padding: 6px 0;
+  }
 }

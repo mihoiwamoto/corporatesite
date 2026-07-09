@@ -51,30 +51,28 @@
     '  <div class="menu-nav-grid menu-nav-desktop">\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">Company</p>\n' +
-    '      <a href="/about.html" class="menu-page-link">私たちについて</a>\n' +
     '      <a href="/about.html#message" class="menu-section-link">社長メッセージ</a>\n' +
-    '      <a href="/about.html#vision" class="menu-section-link">ビジョン</a>\n' +
-    '      <a href="/about.html#values" class="menu-section-link">バリュー</a>\n' +
+    '      <a href="/about.html#vision" class="menu-section-link">ビジョン・バリュー</a>\n' +
     '      <a href="/about.html#company" class="menu-section-link">会社情報</a>\n' +
     '      <a href="/about.html#history" class="menu-section-link">沿革</a>\n' +
+    '      <a href="/about.html#group" class="menu-section-link">グループ会社</a>\n' +
+    '      <a href="/about.html#members" class="menu-section-link">社員情報</a>\n' +
     '    </div>\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">Business</p>\n' +
-    '      <a href="/service.html" class="menu-page-link">事業内容</a>\n' +
     '      <a href="/service.html#planning" class="menu-section-link">企画・要件定義</a>\n' +
     '      <a href="/service.html#development" class="menu-section-link">設計・開発</a>\n' +
     '      <a href="/service.html#operation" class="menu-section-link">保守・運用</a>\n' +
+    '      <a href="/service.html#ai" class="menu-section-link">AI開発</a>\n' +
     '      <a href="/service.html#works" class="menu-section-link">開発実績</a>\n' +
     '    </div>\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">News</p>\n' +
-    '      <a href="/news.html" class="menu-page-link">お知らせ</a>\n' +
-    '      <a href="/news.html#実績・事例" class="menu-section-link">実績・事例</a>\n' +
+    '      <a href="/news.html#お知らせ" class="menu-section-link">お知らせ一覧</a>\n' +
     '    </div>\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">Contact</p>\n' +
-    '      <a href="/contact.html" class="menu-page-link">お問い合わせ</a>\n' +
-    '      <a href="/privacy.html" class="menu-section-link">プライバシーポリシー</a>\n' +
+    '      <a href="/contact.html" class="menu-section-link">お問い合わせ</a>\n' +
     '    </div>\n' +
     '  </div>\n' +
     '  <div class="menu-nav-grid menu-nav-mobile">\n' +

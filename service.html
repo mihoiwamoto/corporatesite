@@ -43,73 +43,52 @@
   </div>
 </section>
 
-<!-- WHY ONE TEAM (一貫体制のメリット) -->
-<section class="benefits-section">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">WHY ONE TEAM</p>
-      <h2>一貫体制だから、できること。</h2>
-    </div>
-    <div class="benefits-grid">
-      <div class="benefit">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.8" style="fill:currentColor;stroke:none"/></svg>
-        </div>
-        <h3>業務に密着</h3>
-        <p>現場の業務を理解したチームが、そのまま設計・開発まで担当。だから、業務に本当に合った形へつくり込めます。</p>
-      </div>
-      <div class="benefit">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="7.4" y1="12" x2="10" y2="12"/><line x1="14" y1="12" x2="16.6" y2="12"/><circle cx="5" cy="12" r="2.4"/><circle cx="12" cy="12" r="2.4"/><circle cx="19" cy="12" r="2.4"/></svg>
-        </div>
-        <h3>工程で分断されない</h3>
-        <p>企画から運用までを同じ体制で。引き継ぎによる認識のズレや手戻りが起きにくく、決めたことがまっすぐ形になります。</p>
-      </div>
-      <div class="benefit">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-        </div>
-        <h3>改善し続けられる</h3>
-        <p>運用で見えた課題を、同じチームが次の企画へ。リリース後も、使いながら良くしていけます。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ONE TEAM, FULL CYCLE (一貫体制の図解) -->
 <section class="cycle-section">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow">ONE TEAM, FULL CYCLE</p>
       <h2>企画から運用まで、ひとつの流れで。</h2>
-      <p>工程ごとに担当を分けません。企画・開発・運用を同じ体制が一貫して担うから、業務に合わせてつくり込み、改善し続けられます。</p>
+      <p>工程ごとに担当を分けず、企画から運用まで同じ体制が一貫して担います。引き継ぎロスなく業務に合わせてつくり込み、改善し続けられます。</p>
     </div>
 
     <!-- 元の一貫体制図解 -->
     <div class="cycle">
       <div class="cycle-track">
-        <a class="cycle-node" href="#planning">
-          <span class="cycle-step">01</span>
-          <span class="cycle-en">PLANNING</span>
-          <span class="cycle-jp">企画・要件定義</span>
+        <a class="cycle-node" href="#planning" data-ghost="PLANNING">
+          <div class="cycle-node-content">
+            <span class="cycle-en-small">PLANNING & REQUIREMENTS</span>
+            <span class="cycle-jp">企画・要件定義</span>
+          </div>
+          <svg class="cycle-node-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </a>
         <div class="cycle-arrow">
           <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
           <span>要件</span>
         </div>
-        <a class="cycle-node" href="#development">
-          <span class="cycle-step">02</span>
-          <span class="cycle-en">DEVELOPMENT</span>
-          <span class="cycle-jp">設計・開発</span>
+        <a class="cycle-node" href="#development" data-ghost="DEV">
+          <div class="cycle-node-content">
+            <span class="cycle-en-small">DESIGN & DEVELOPMENT</span>
+            <span class="cycle-jp">設計・開発</span>
+          </div>
+          <svg class="cycle-node-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </a>
         <div class="cycle-arrow">
           <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
           <span>リリース</span>
         </div>
-        <a class="cycle-node" href="#operation">
-          <span class="cycle-step">03</span>
-          <span class="cycle-en">OPERATION</span>
-          <span class="cycle-jp">保守・運用</span>
+        <a class="cycle-node" href="#operation" data-ghost="OPERATION">
+          <div class="cycle-node-content">
+            <span class="cycle-en-small">MAINTENANCE & OPERATION</span>
+            <span class="cycle-jp">保守・運用</span>
+          </div>
+          <svg class="cycle-node-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </a>
       </div>
       <div class="cycle-loop">
@@ -119,44 +98,6 @@
     </div>
 
 
-  </div>
-</section>
-
-<!-- AI STRENGTH SECTION (独立したセクション) -->
-<section class="ai-section-wrapper">
-  <div class="orb-container"></div>
-  <div class="wrap">
-    <div class="ai-strength-section">
-      <p class="eyebrow">OUR STRENGTH</p>
-      <h2 class="ai-strength-title scroll-scale-title">AIを駆使する、私たちの開発力。</h2>
-      <p class="ai-strength-subtitle">少人数でも、速く、高い品質で。</p>
-      <p class="ai-strength-desc">企画から運用まで、同じチームが一貫して担う——そのすべての工程でAIを使いこなします。AIで生み出した余力は、業務の理解と品質の作り込みにそのまま還元します。</p>
-    </div>
-
-    <!-- AIを活用した開発力 -->
-    <div class="ai-power-grid">
-      <div class="ai-card">
-        <div class="ai-card-number">01</div>
-        <h3 class="ai-card-title" data-decrypt data-decrypt-trigger="view" data-decrypt-speed="60" data-decrypt-iterations="20">要件定義 × AI</h3>
-        <p class="ai-card-desc">打ち合わせメモや資料の整理をAIで効率化。空いた時間で、現場との対話と要件の見極めに充てます。</p>
-      </div>
-      <div class="ai-card">
-        <div class="ai-card-number">02</div>
-        <h3 class="ai-card-title" data-decrypt data-decrypt-trigger="view" data-decrypt-speed="60" data-decrypt-iterations="20">設計・開発 × AI</h3>
-        <p class="ai-card-desc">コード生成やレビューをAIで加速し、スピードと品質を両立。実装の最終判断は、開発したチーム自身が担います。</p>
-      </div>
-      <div class="ai-card">
-        <div class="ai-card-number">03</div>
-        <h3 class="ai-card-title">テスト × AI</h3>
-        <p class="ai-card-desc">ユニットテスト作成やカバレッジ取得を自動化。画面の見た目や使い勝手は、必ず人の目で確認します。</p>
-      </div>
-      <div class="ai-card ai-card--wide">
-        <div class="ai-card-badge">全体で推進</div>
-        <p class="ai-card-desc-main">開発の現場にとどまりません。社員一人ひとりが自らAIを使い、社内業務を効率化する仕組みづくりにも取り組んでいます。</p>
-      </div>
-    </div>
-    <div class="ai-footer-line"></div>
-    <div class="ai-footer-text">この開発力を土台に、企画・設計・運用のすべてを同じチームで。</div>
   </div>
 </section>
 
@@ -344,7 +285,7 @@
 <!-- SERVICE 2: 設計・開発 -->
 <section class="service-block alt" id="development">
   <div class="wrap">
-    <div class="service-inner reverse">
+    <div class="service-inner">
       <div class="service-text">
         <p class="eyebrow">DESIGN & DEVELOPMENT</p>
         <h2 class="service-title-ghost" data-ghost="DEVELOPMENT">設計・開発</h2>
@@ -524,7 +465,7 @@
 <!-- SERVICE 3: 保守・運用 -->
 <section class="service-block" id="operation">
   <div class="wrap">
-    <div class="service-inner reverse">
+    <div class="service-inner">
       <div class="service-text">
         <p class="eyebrow">MAINTENANCE & OPERATION</p>
         <h2 class="service-title-ghost" data-ghost="OPERATION">保守・運用</h2>
@@ -651,6 +592,44 @@
         <span class="tag">月次レポート</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- AI STRENGTH SECTION (独立したセクション) -->
+<section class="ai-section-wrapper">
+  <div class="orb-container"></div>
+  <div class="wrap">
+    <div class="ai-strength-section">
+      <p class="eyebrow">OUR STRENGTH</p>
+      <h2 class="ai-strength-title scroll-scale-title">AIを駆使する、私たちの開発力。</h2>
+      <p class="ai-strength-subtitle">少人数でも、速く、高い品質で。</p>
+      <p class="ai-strength-desc">企画から運用まで、同じチームが一貫して担う——そのすべての工程でAIを使いこなします。AIで生み出した余力は、業務の理解と品質の作り込みにそのまま還元します。</p>
+    </div>
+
+    <!-- AIを活用した開発力 -->
+    <div class="ai-power-grid">
+      <div class="ai-card">
+        <div class="ai-card-number">PLAN</div>
+        <h3 class="ai-card-title">要件定義 × AI</h3>
+        <p class="ai-card-desc">打ち合わせメモや資料の整理をAIで効率化。空いた時間で、現場との対話と要件の見極めに充てます。</p>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-number">DEV</div>
+        <h3 class="ai-card-title">設計・開発 × AI</h3>
+        <p class="ai-card-desc">コード生成やレビューをAIで加速し、スピードと品質を両立。実装の最終判断は、開発したチーム自身が担います。</p>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-number">TEST</div>
+        <h3 class="ai-card-title">テスト × AI</h3>
+        <p class="ai-card-desc">ユニットテスト作成やカバレッジ取得を自動化。画面の見た目や使い勝手は、必ず人の目で確認します。</p>
+      </div>
+      <div class="ai-card ai-card--wide">
+        <div class="ai-card-badge">全体で推進</div>
+        <p class="ai-card-desc-main">開発の現場にとどまりません。社員一人ひとりが自らAIを使い、社内業務を効率化する仕組みづくりにも取り組んでいます。</p>
+      </div>
+    </div>
+    <div class="ai-footer-line"></div>
+    <div class="ai-footer-text">この開発力を土台に、企画・設計・運用のすべてを同じチームで。</div>
   </div>
 </section>
 
@@ -829,6 +808,19 @@
   </div>
 </section>
 
+<!-- INTERVIEW BADGE -->
+<a href="interview/hasegawa.html" class="interview-badge" aria-label="社員インタビュー公開中">
+  <div class="interview-badge-text">
+    <div class="interview-badge-label">INTERVIEW</div>
+    <div class="interview-badge-title">社員インタビュー公開中</div>
+  </div>
+  <div class="interview-badge-action">
+    <span>View More</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  </div>
+</a>
 
 <div id="site-footer"></div>
 
@@ -840,7 +832,7 @@
 <script src="/assets/js/service-icons.js" defer></script>
 <script src="/assets/js/decrypted-text.js"></script>
 <script src="/assets/js/ai-section-scroll.js"></script>
-<script src="/assets/js/scroll-scale-title.js"></script>
+<script src="/assets/js/ai-title-animation.js"></script>
 
 <script type="module">
   import * as OGL from 'https://cdn.skypack.dev/ogl';

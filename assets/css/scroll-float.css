@@ -1,0 +1,41 @@
+.scroll-float {
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.scroll-float-text {
+  display: inline-block;
+  font-size: clamp(1.6rem, 8vw, 10rem);
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.5;
+  letter-spacing: 0;
+  transform-style: preserve-3d;
+}
+
+.char {
+  display: inline-block;
+  letter-spacing: normal;
+  transform-style: preserve-3d;
+}
+
+/* Override for vision-heading context */
+.vision-heading.scroll-float {
+  overflow: visible;
+}
+
+.vision-heading .scroll-float-text {
+  font-size: inherit;
+  font-weight: inherit;
+  text-align: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+.vision-heading .char {
+  letter-spacing: inherit;
+}
+
+.vision-heading .scroll-float-line {
+  display: block;
+}

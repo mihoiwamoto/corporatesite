@@ -118,6 +118,10 @@ if (sessionStorage.getItem('op-done') ||
       justify-content: center;
       padding: 20px;
     }
+    /* 保守・運用のイラストだけパディングなし */
+    .service-item[data-step="03"] .service-item-icon {
+      padding: 0;
+    }
     .service-item-icon svg {
       max-width: 280px;
       max-height: 280px;
@@ -146,7 +150,7 @@ if (sessionStorage.getItem('op-done') ||
       font-weight: 600;
       color: var(--sub);
       letter-spacing: 0.1em;
-      margin-bottom: 12px;
+      margin-bottom: 4px;
     }
     .service-item-body p:not(.service-item-en) {
       margin-bottom: 16px;
@@ -177,6 +181,70 @@ if (sessionStorage.getItem('op-done') ||
     }
     .service-item-body .service-item-link:hover::after {
       width: 60px;
+    }
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+      .service-item-icon {
+        height: 180px;
+        padding: 12px;
+      }
+      .service-item[data-step="03"] .service-item-icon {
+        padding: 0;
+      }
+      .service-item-icon svg {
+        max-width: 200px;
+        max-height: 200px;
+      }
+      .service-item-body {
+        padding: 18px;
+      }
+      .service-item-body h3 {
+        font-size: 13px;
+        padding: 5px 12px;
+      }
+      .service-item-body .service-item-en {
+        font-size: 10px;
+      }
+      .service-item-body p:not(.service-item-en) {
+        font-size: 14px;
+        line-height: 1.7;
+      }
+      .service-item-body .service-item-link {
+        font-size: 12px;
+        gap: 8px;
+      }
+      .service-item-body .service-item-link::after {
+        width: 30px;
+      }
+      .service-item-body .service-item-link:hover::after {
+        width: 44px;
+      }
+    }
+    @media (max-width: 480px) {
+      .service-item-icon {
+        height: 160px;
+        padding: 10px;
+      }
+      .service-item-icon svg {
+        max-width: 170px;
+        max-height: 170px;
+      }
+      .service-item-body {
+        padding: 16px;
+      }
+      .service-item-body h3 {
+        font-size: 12px;
+        padding: 4px 10px;
+      }
+      .service-item-body .service-item-en {
+        font-size: 9px;
+      }
+      .service-item-body p:not(.service-item-en) {
+        font-size: 13px;
+      }
+      .service-item-body .service-item-link {
+        font-size: 11px;
+      }
     }
     </style>
 
@@ -316,8 +384,8 @@ if (sessionStorage.getItem('op-done') ||
           </svg>
         </div>
         <div class="service-item-body">
+          <p class="service-item-en">PLANNING & REQUIREMENTS</p>
           <h3>企画・要件定義</h3>
-          <p class="service-item-en">PLANNING</p>
           <p>業務の課題をヒアリングし、システムで実現すべき機能と要件を整理します。AIで議事録作成やドキュメント整理を効率化し、ヒアリングに集中します。</p>
           <a href="service.html#planning" class="service-item-link">MORE</a>
         </div>
@@ -454,8 +522,8 @@ if (sessionStorage.getItem('op-done') ||
           </svg>
         </div>
         <div class="service-item-body">
+          <p class="service-item-en">DESIGN & DEVELOPMENT</p>
           <h3>設計・開発</h3>
-          <p class="service-item-en">DEVELOPMENT</p>
           <p>要件定義で固めた内容をもとに、システムを設計・実装します。ClaudeなどのAIツールを活用し、コード生成やレビュー支援を行うことで、開発スピードと品質を両立します。</p>
           <a href="service.html#development" class="service-item-link">MORE</a>
         </div>
@@ -464,7 +532,7 @@ if (sessionStorage.getItem('op-done') ||
       <!-- 3. 保守・運用 - デュアルモニターアニメーション -->
       <div class="service-item reveal reveal-delay-3" data-step="03">
         <div class="service-item-icon">
-          <svg viewBox="0 30 800 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="40 60 720 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
             <defs>
               <style>
                 .operation-stroke { stroke: var(--pink); stroke-width: 12; stroke-linecap: square; stroke-linejoin: miter; fill: none; }
@@ -549,8 +617,8 @@ if (sessionStorage.getItem('op-done') ||
           </svg>
         </div>
         <div class="service-item-body">
+          <p class="service-item-en">MAINTENANCE & OPERATION</p>
           <h3>保守・運用</h3>
-          <p class="service-item-en">OPERATION</p>
           <p>リリース後も、システムが安定して稼働し続けることを継続的に支えます。アラート監視・障害対応・セキュリティパッチ適用を担い、月次レポートで状況を可視化します。</p>
           <a href="service.html#operation" class="service-item-link">MORE</a>
         </div>

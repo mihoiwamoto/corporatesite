@@ -19,29 +19,23 @@
     '        <div class="footer-col">\n' +
     '          <p class="footer-col-title">Company</p>\n' +
     '          <a href="/about.html#message">社長メッセージ</a>\n' +
-    '          <a href="/about.html#vision">ビジョン</a>\n' +
-    '          <a href="/about.html#values">バリュー</a>\n' +
+    '          <a href="/about.html#vision">ビジョン・バリュー</a>\n' +
     '          <a href="/about.html#company">会社情報</a>\n' +
     '          <a href="/about.html#history">沿革</a>\n' +
+    '          <a href="/about.html#group">グループ会社</a>\n' +
+    '          <a href="/about.html#members">社員情報</a>\n' +
     '        </div>\n' +
     '        <div class="footer-col">\n' +
     '          <p class="footer-col-title">Business</p>\n' +
     '          <a href="/service.html#planning">企画・要件定義</a>\n' +
     '          <a href="/service.html#development">設計・開発</a>\n' +
     '          <a href="/service.html#operation">保守・運用</a>\n' +
+    '          <a href="/service.html#ai">AI開発</a>\n' +
     '          <a href="/service.html#works">開発実績</a>\n' +
     '        </div>\n' +
     '        <div class="footer-col">\n' +
-    '          <p class="footer-col-title">Recruit</p>\n' +
-    '          <a href="/recruit.html#jobs">募集職種</a>\n' +
-    '          <a href="/recruit.html#data">数字で見る</a>\n' +
-    '          <a href="/recruit.html#workstyle">働き方について</a>\n' +
-    '          <a href="/recruit.html#requirements">募集要項</a>\n' +
-    '        </div>\n' +
-    '        <div class="footer-col">\n' +
     '          <p class="footer-col-title">News</p>\n' +
-    '          <a href="/news.html#お知らせ">お知らせ</a>\n' +
-    '          <a href="/news.html#実績・事例">実績・事例</a>\n' +
+    '          <a href="/news.html#お知らせ">お知らせ一覧</a>\n' +
     '        </div>\n' +
     '        <div class="footer-col">\n' +
     '          <p class="footer-col-title">Contact</p>\n' +
