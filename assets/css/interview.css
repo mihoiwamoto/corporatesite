@@ -92,15 +92,18 @@
   .iv2-photo figcaption { font-size: 12px; color: var(--sub); margin-top: 10px; text-align: center; }
 
   /* ---- 2カラム（テキスト＋写真の左右配置） ---- */
-  .iv2-split { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; margin-top: 28px; }
+  .iv2-split { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: stretch; margin-top: 28px; }
   .iv2-split-text { min-width: 0; }
   .iv2-split-text .iv2-qa { margin-top: 0; }
-  .iv2-split-photo { margin: 0; height: 100%; display: flex; align-items: center; }
-  .iv2-split-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 68% center; border-radius: 14px; display: block; box-shadow: var(--shadow-sm); }
+  .iv2-split-photo { margin: 0; display: block; }
+  /* 写真はテキスト側の高さいっぱいに伸ばし、下の空白をなくす */
+  .iv2-split-photo img { width: 100%; height: 100%; min-height: 300px; object-fit: cover; object-position: center; border-radius: 14px; display: block; box-shadow: var(--shadow-sm); }
   .flip-image img { transform: scaleX(-1) !important; }
   .iv2-split.is-photo-left .iv2-split-photo { order: -1; }
-  @media (max-width: 900px) {
+  @media (max-width: 1200px) {
+    /* タブレット以下：2カラムを解除し、テキストの下に写真を配置（1カラム化） */
     .iv2-split { grid-template-columns: 1fr; gap: 20px; }
+    .iv2-split-photo img { height: auto; min-height: 0; aspect-ratio: 16 / 10; max-height: 60vh; }
     .iv2-split.is-photo-left .iv2-split-photo { order: 0; }
   }
 
@@ -136,7 +139,7 @@
   .iv-day .iv-day-title { font-size: 24px; font-weight: 700; color: var(--pink); opacity: .5; line-height: 1.2; letter-spacing: .01em; text-align: left; margin: 0 0 2px; }
   .iv-day .iv-day-sub { font-size: 13px; color: var(--sub); margin-bottom: 4px; }
   .iv-day-scroll { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; padding: 6px 0; }
-  .iv-day-track { position: relative; height: 300px; min-width: 640px; }
+  .iv-day-track { position: relative; height: 328px; min-width: 900px; }
   .iv-day-bar { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); height: 44px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 9999px; }
   .iv-day-time { position: absolute; top: 50%; transform: translate(-50%, -50%); font-size: 13px; font-weight: 700; color: var(--sub); white-space: nowrap; }
   .iv-day-event { position: absolute; top: 0; bottom: 0; width: 0; }
@@ -146,7 +149,7 @@
   .iv-day-event::before { content: ''; position: absolute; left: 0; width: 2px; transform: translateX(-50%); background: var(--line); }
   .iv-day-event.is-up::before { top: calc(50% - 56px); height: 34px; }
   .iv-day-event.is-down::before { top: calc(50% + 22px); height: 34px; }
-  .iv-day-card { position: absolute; left: 0; width: 150px; }
+  .iv-day-card { position: absolute; left: 0; width: 140px; }
   .iv-day-event.is-up .iv-day-card { bottom: calc(50% + 54px); }
   .iv-day-event.is-down .iv-day-card { top: calc(50% + 54px); }
   .iv-day-event.is-end .iv-day-card { left: auto; right: 0; text-align: right; }
@@ -182,7 +185,7 @@
     .wrap { padding: 0 20px; }
     .iv2-hero { padding: 88px 0 4px; }
     .iv2-hero-inner { gap: 28px; }
-    .iv2-hero-photo img { aspect-ratio: 1.3 / 1; }
+    .iv2-hero-photo img { aspect-ratio: auto; object-fit: contain; }
     .iv2-hero-bottom { grid-template-columns: 1fr; gap: 20px; align-items: start; }
     .iv2-title-handwriting { width: clamp(240px, 70vw, 400px); }
     .iv2-layout { grid-template-columns: 1fr; gap: 8px; margin-top: 32px; }
@@ -190,7 +193,8 @@
     .iv2-toc { position: static; margin-bottom: 8px; padding: 16px 18px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; }
     .iv2-toc-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
     .iv2-toc-link { border-left: none; padding: 7px 0; }
-    .iv2-toc-link.active { border-left: none; }
+    /* タブレット・SPではアクティブ項目もピンクにせず他と同じ見た目にする */
+    .iv2-toc-link.active { border-left: none; color: var(--sub); font-weight: 400; }
     .iv2-content { max-width: none; }
     .iv2-index-hero { padding: 84px 0 4px; }
     .iv-cards { grid-template-columns: 1fr; gap: 20px; }
@@ -198,3 +202,27 @@
   @media (min-width: 901px) and (max-width: 1080px) {
     .iv-cards { grid-template-columns: repeat(2, 1fr); }
   }
+  /* タイムラインは全画面で横スクロールをやめ、見切れない縦並びに統一する */
+  .iv-day { padding: 22px 20px 24px; }
+  .iv-day-scroll { overflow: visible; padding: 6px 0 0; }
+  .iv-day-track { min-width: 0; height: auto; padding-left: 84px; }
+  .iv-day-bar { display: none; }
+  .iv-day-time { display: none; }
+  .iv-day-event { position: relative; top: auto; bottom: auto; left: auto !important; width: auto; padding: 0 0 24px 24px; }
+  .iv-day-event:last-child { padding-bottom: 0; }
+  /* 左に通しの縦ライン（ノード中心から次のイベントまで繋げる） */
+  .iv-day-event::before,
+  .iv-day-event.is-up::before,
+  .iv-day-event.is-down::before { content: ''; position: absolute; left: 6px; top: 6px; width: 2px; height: 100%; transform: none; background: var(--line); }
+  .iv-day-event:last-child::before { display: none; }
+  /* ノードは左ライン上に配置 */
+  .iv-day-event .iv-day-node,
+  .iv-day-event.is-up .iv-day-node,
+  .iv-day-event.is-down .iv-day-node { top: 6px; left: 6px; transform: translate(-50%, 0); }
+  /* 時刻をノードの左側に表示 */
+  .iv-day-event::after { content: attr(data-time); position: absolute; left: -78px; top: -2px; width: 62px; text-align: right; font-size: 13px; font-weight: 700; color: var(--sub); }
+  /* カードはインラインで全幅、絶対配置を解除 */
+  .iv-day-card,
+  .iv-day-event.is-up .iv-day-card,
+  .iv-day-event.is-down .iv-day-card,
+  .iv-day-event.is-end .iv-day-card { position: static; left: auto; right: auto; top: auto; bottom: auto; width: auto; text-align: left; }

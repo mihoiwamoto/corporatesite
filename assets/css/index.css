@@ -132,7 +132,7 @@
   .about-content p:last-of-type { margin-bottom: 0; }
   .about-btn { margin-top: 40px; }
   .about-photo { height: clamp(280px, 36vw, 500px); margin-top: 56px; margin-bottom: 80px; margin-left: clamp(180px, 24vw, 380px); border-radius: clamp(32px, 5vw, 72px) 0 0 clamp(32px, 5vw, 72px); overflow: hidden; }
-  .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block; }
+  .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 47%; display: block; }
 
   /* EXTERIOR BAND */
   .exterior-band { position: relative; width: 100%; height: clamp(240px, 36vw, 520px); overflow: hidden; line-height: 0; }
@@ -243,12 +243,12 @@
     background: transparent !important;
     padding: 100px 0 160px; overflow-x: clip;
   }
-  .interview-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-top: 80px; }
+  .interview-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-top: 120px; }
   .interview-card { position: relative; background: var(--pink-light); border: none; border-radius: 24px; overflow: visible; min-height: 220px; box-shadow: none; transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s; }
   .interview-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.08); }
-  .interview-photo { position: absolute; bottom: 0; left: 0; width: 34%; }
-  .interview-photo img { width: 100%; height: auto; display: block; object-fit: cover; }
-  .interview-body { margin-left: 36%; padding: 36px 56px 36px 28px; display: flex; flex-direction: column; justify-content: flex-start; gap: 18px; min-height: 220px; }
+  .interview-photo { position: absolute; left: 24px; bottom: 0; width: 38%; z-index: 1; }
+  .interview-photo img { width: 100%; height: auto; display: block; }
+  .interview-body { margin-left: 42%; padding: 40px 56px 40px 32px; display: flex; flex-direction: column; justify-content: center; gap: 18px; min-height: 320px; }
   .interview-read-link { margin-top: auto; align-self: flex-end; }
   .interview-card h3 { font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.55; margin: 0; }
   .interview-card p { font-size: 16px; color: var(--sub); line-height: 1.8; font-weight: 400; margin: 0; }

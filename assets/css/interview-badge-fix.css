@@ -1,0 +1,27 @@
+/*
+ * interview-badge-fix.css
+ * 全ページ共通のフローティング「社員インタビュー」バナーの表示調整。
+ * 各ページ固有CSS(index/about/service/news/contact)の後に読み込み、上書きする。
+ *
+ * 目的:
+ *  - タッチデバイスでは閉じる(×)ボタンがホバーでしか出ず、バナーを閉じられない
+ *    → 本文(STEP説明文など)に永続的に重なる問題を解消する。
+ *  - hover非対応端末では×ボタンを常時表示し、ユーザーが閉じられるようにする。
+ */
+
+/* ホバーできない端末(スマホ・タブレット)では閉じるボタンを常時表示 */
+@media (hover: none) {
+  .interview-badge-close {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* タップ領域を確保しつつ、画面端で切れないよう内側に寄せる */
+@media (max-width: 768px) {
+  .interview-badge-close {
+    top: -10px !important;
+    right: -10px !important;
+    box-shadow: 0 2px 10px rgba(212, 99, 126, .45);
+  }
+}

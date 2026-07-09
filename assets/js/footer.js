@@ -34,7 +34,7 @@
     '        </div>\n' +
     '        <div class="footer-col">\n' +
     '          <p class="footer-col-title">News</p>\n' +
-    '          <a href="/news.html#お知らせ">お知らせ一覧</a>\n' +
+    '          <a href="/news.html#news">お知らせ一覧</a>\n' +
     '        </div>\n' +
     '        <div class="footer-col">\n' +
     '          <p class="footer-col-title">Contact</p>\n' +

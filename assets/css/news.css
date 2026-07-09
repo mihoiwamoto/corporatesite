@@ -50,8 +50,8 @@
   .filter-btn { height: 36px; padding: 0 18px; border-radius: 9999px; border: 1px solid var(--line); background: #fff; color: var(--sub); font-size: 13px; font-weight: 500; cursor: pointer; transition: all .25s cubic-bezier(.4,0,.2,1); font-family: inherit; }
   .filter-btn:hover:not(.active) { background: var(--pink-light); color: var(--pink-dark); border-color: var(--pink); }
   .filter-btn.active { background: var(--pink); color: #fff; border-color: var(--pink); font-weight: 700; }
-  .news-list { margin: 0 -16px; }
-  .news-item { display: flex; gap: 24px; align-items: center; padding: 22px 24px; border-bottom: 1px solid var(--line); border-radius: 8px; text-decoration: none; color: inherit; transition: background .2s ease; }
+  .news-list { margin: 0; }
+  .news-item { display: flex; gap: 24px; align-items: center; padding: 22px 4px; border-bottom: 1px solid var(--line); border-radius: 8px; text-decoration: none; color: inherit; transition: background .2s ease; }
   .news-item:last-child { border-bottom: none; }
   .news-item:hover { background: rgba(255,255,255,.6); }
   .news-item:hover .news-body h3 { color: var(--pink); }

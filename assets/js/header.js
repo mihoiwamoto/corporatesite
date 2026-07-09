@@ -67,7 +67,7 @@
     '    </div>\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">News</p>\n' +
-    '      <a href="/news.html#お知らせ" class="menu-section-link">お知らせ一覧</a>\n' +
+    '      <a href="/news.html#news" class="menu-section-link">お知らせ一覧</a>\n' +
     '    </div>\n' +
     '    <div class="menu-col">\n' +
     '      <p class="menu-col-title">Contact</p>\n' +

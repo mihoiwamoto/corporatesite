@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/assets/css/text-type.css">
 <link rel="stylesheet" href="/assets/css/opening.css">
 <link rel="stylesheet" href="/assets/css/index.css">
+<link rel="stylesheet" href="/assets/css/interview-badge-fix.css">
 </head>
 <body>
 
@@ -182,8 +183,26 @@ if (sessionStorage.getItem('op-done') ||
     .service-item-body .service-item-link:hover::after {
       width: 60px;
     }
+    /* タブレット・SP用の下部View Moreボタンはデフォルト非表示 */
+    .services-more-mobile {
+      display: none;
+    }
     /* レスポンシブ対応 */
     @media (max-width: 768px) {
+      /* ヘッダー横のボタンを隠し、カード下のボタンを表示 */
+      .services .sec-lead-row .sec-lead-btn {
+        display: none;
+      }
+      .services-more-mobile {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+      }
+      .services-more-mobile .btn-primary {
+        width: 100%;
+        justify-content: center;
+        padding: 15px 64px 15px 28px;
+      }
       .service-item-icon {
         height: 180px;
         padding: 12px;
@@ -628,6 +647,15 @@ if (sessionStorage.getItem('op-done') ||
           <a href="service.html#operation" class="service-item-link">MORE</a>
         </div>
       </div>
+    </div>
+    <!-- タブレット・SP用：カードの下に配置するView Moreボタン -->
+    <div class="services-more-mobile">
+      <a href="service.html" class="btn btn-primary sec-lead-btn">
+        View More
+        <span class="recruit-btn-primary-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
     </div>
   </div>
 </section>
