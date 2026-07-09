@@ -1,6 +1,12 @@
 .vercel
+.vercel.backup/
 .env*.local
 node_modules/
 .DS_Store
 AWSCLIV2.pkg
 .env*
+
+# バックアップファイル
+*.bak
+*.bak[0-9]
+*.backup
