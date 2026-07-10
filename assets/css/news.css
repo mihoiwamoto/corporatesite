@@ -23,7 +23,7 @@
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
-  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.8; text-wrap: pretty; word-break: auto-phrase; font-weight: 400; }
+  body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.8; text-wrap: wrap; word-break: normal; font-weight: 400; }
 
   /* BASE */
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
