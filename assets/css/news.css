@@ -12,6 +12,9 @@
     --bg-soft:     #F7F8FA;
     --line:        #E8ECF0;
     --radius:      12px;
+    --fs-body:     16px;
+    --fs-note:     14px;
+    --fs-tag:      12px;
     --maxw:        1200px;
     --shadow-sm:   0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
     --shadow-md:   0 4px 16px rgba(0,0,0,.05), 0 2px 6px rgba(0,0,0,.04);
@@ -37,12 +40,12 @@
 
   /* PAGE HERO */
   .page-hero { padding: 88px 0 64px; }
-  .breadcrumb { font-size: 12px; color: var(--sub); margin-bottom: 20px; }
+  .breadcrumb { font-size: var(--fs-note); color: var(--sub); margin-bottom: 20px; }
   .breadcrumb a { color: var(--sub); text-decoration: none; }
   .breadcrumb a:hover { color: var(--ink); }
   .breadcrumb span { margin: 0 6px; }
   .page-hero h1 { font-size: 36px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; }
-  .page-hero p.sub { font-size: 16px; color: var(--sub); margin-top: 12px; line-height: 1.8; max-width: 640px; }
+  .page-hero p.sub { font-size: var(--fs-body); color: var(--sub); margin-top: 12px; line-height: 1.8; max-width: 640px; }
 
   /* NEWS LIST */
   .news-section { padding: 120px 0; }
@@ -57,10 +60,10 @@
   .news-item:hover .news-body h3 { color: var(--pink); }
   .news-item:hover .news-arrow { border-color: var(--pink); transform: rotate(45deg); }
   .news-meta { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; width: 160px; }
-  .news-date { font-size: 13px; color: var(--sub); font-weight: 300; }
-  .news-cat { display: inline-block; background: var(--pink-light); border: 1px solid var(--pink-gradient); color: var(--pink-dark); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 9999px; width: fit-content; letter-spacing: .04em; }
+  .news-date { font-size: var(--fs-note); color: var(--sub); font-weight: 300; }
+  .news-cat { display: inline-block; background: var(--pink-light); border: 1px solid var(--pink-gradient); color: var(--pink-dark); font-size: var(--fs-tag); font-weight: 700; padding: 3px 10px; border-radius: 9999px; width: fit-content; letter-spacing: .04em; }
   .news-body h3 { font-size: 17px; font-weight: 700; line-height: 1.6; margin-bottom: 6px; transition: color .15s; }
-  .news-body p { font-size: 14px; color: var(--sub); line-height: 1.7; }
+  .news-body p { font-size: var(--fs-body); color: var(--sub); line-height: 1.7; }
   .news-arrow {
     margin-left: auto;
     margin-right: clamp(12px, 2vw, 32px);
@@ -72,7 +75,7 @@
     transform: rotate(45deg);
     transition: transform .18s ease, border-color .18s ease;
   }
-  .news-empty { padding: 56px 0; text-align: center; color: var(--sub); font-size: 14px; }
+  .news-empty { padding: 56px 0; text-align: center; color: var(--sub); font-size: var(--fs-note); }
 
   html { scroll-behavior: smooth; }
 
@@ -163,7 +166,7 @@
   }
 
   .interview-badge-label {
-    font-size: 11px;
+    font-size: var(--fs-tag);
     font-weight: 700;
     color: #D4637E;
     letter-spacing: .12em;
@@ -231,7 +234,6 @@
       height: 14px;
     }
     .interview-badge-label {
-      font-size: 10px;
       margin-bottom: 6px;
     }
     .interview-badge-title {
@@ -268,7 +270,6 @@
       height: 13px;
     }
     .interview-badge-label {
-      font-size: 9px;
       margin-bottom: 6px;
     }
     .interview-badge-title {

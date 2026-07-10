@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const aiSection = document.querySelector('.ai-section-wrapper');
   if (!aiSection) return;
 
+  // スマホ・タブレットではスクロール縮小演出を無効化する。
+  // （font-size をインラインで書き換えるため、モバイルのフォント指定や
+  //   タイトル表示アニメーションと競合してタイトルが見えなくなるのを防ぐ）
+  if (window.matchMedia('(max-width: 768px)').matches) return;
+
   // 初期のフォントサイズを保存
   const initialFontSize = parseFloat(window.getComputedStyle(title).fontSize);
   const minFontSize = initialFontSize * 0.5; // 50%まで縮小

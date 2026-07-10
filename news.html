@@ -55,6 +55,17 @@
         </div>
         <span class="news-arrow" aria-hidden="true"></span>
       </a>
+      <a href="/news/recruit-restart.html" class="news-item">
+        <div class="news-meta">
+          <span class="news-date">2026.07.01</span>
+          <span class="news-cat">採用</span>
+        </div>
+        <div class="news-body">
+          <h3>エンジニア採用を再開しました</h3>
+          <p>システムエンジニア（Web系）の採用を再開いたしました。事業拡大に伴い開発体制の強化を目指してまいります。</p>
+        </div>
+        <span class="news-arrow" aria-hidden="true"></span>
+      </a>
       <a href="/news/merger.html" class="news-item">
         <div class="news-meta">
           <span class="news-date">2025.06.02</span>
@@ -63,6 +74,28 @@
         <div class="news-body">
           <h3>合併に関するお知らせ</h3>
           <p>2025年6月1日（日）をもって、吸収合併を行いましたのでお知らせいたします。</p>
+        </div>
+        <span class="news-arrow" aria-hidden="true"></span>
+      </a>
+      <a href="/news/food-distribution-case.html" class="news-item">
+        <div class="news-meta">
+          <span class="news-date">2025.04.15</span>
+          <span class="news-cat">実績・事例</span>
+        </div>
+        <div class="news-body">
+          <h3>食品流通向け受発注システムの導入事例を公開</h3>
+          <p>食品流通業界向けに開発した受発注システムの導入事例を公開しました。業務効率化・ペーパーレス化の取り組みと成果をご紹介します。</p>
+        </div>
+        <span class="news-arrow" aria-hidden="true"></span>
+      </a>
+      <a href="/news/tech-study.html" class="news-item">
+        <div class="news-meta">
+          <span class="news-date">2025.03.10</span>
+          <span class="news-cat">イベント</span>
+        </div>
+        <div class="news-body">
+          <h3>社内技術勉強会を開催しました</h3>
+          <p>最新のWebアプリケーション技術をテーマに社内技術勉強会を開催しました。継続的な技術力向上への取り組みをご紹介します。</p>
         </div>
         <span class="news-arrow" aria-hidden="true"></span>
       </a>
@@ -134,12 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(function() {
         badgeWrapper.style.display = 'none';
       }, 300);
-      sessionStorage.setItem('interviewBadgeClosed', 'true');
     });
-
-    if (sessionStorage.getItem('interviewBadgeClosed') === 'true') {
-      badgeWrapper.style.display = 'none';
-    }
   }
 });
 </script>

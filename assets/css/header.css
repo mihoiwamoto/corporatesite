@@ -121,7 +121,7 @@ body .page-hero { padding-top: 100px; }
   transform: translateX(-50%);
   width: calc(100% - 32px);
   max-width: 1360px;
-  height: 480px;
+  height: auto;
   max-height: calc(100vh - 100px);
   z-index: 150;
   background: #fff;
@@ -157,9 +157,8 @@ body .page-hero { padding-top: 100px; }
   width: 100%;
   max-width: 1360px;
   margin: 0 auto;
-  padding: 80px 48px 60px;
+  padding: 80px 48px 48px;
   box-sizing: border-box;
-  min-height: 600px;
 }
 
 /* NAV GRID */

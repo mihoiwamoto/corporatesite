@@ -42,6 +42,9 @@
     --bg-soft:     #f7f7f7;
     --line:        #e0e0e0;
     --maxw:        100%;
+    --fs-body:     16px;
+    --fs-note:     14px;
+    --fs-tag:      12px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
@@ -180,7 +183,7 @@
     background: var(--pink-light);
     border: 1px solid var(--line);
     color: var(--pink);
-    font-size: 10px;
+    font-size: var(--fs-tag);
     font-weight: 700;
     padding: 3px 8px;
     border-radius: 4px;

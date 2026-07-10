@@ -370,12 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(function() {
         badgeWrapper.style.display = 'none';
       }, 300);
-      sessionStorage.setItem('interviewBadgeClosed', 'true');
     });
-
-    if (sessionStorage.getItem('interviewBadgeClosed') === 'true') {
-      badgeWrapper.style.display = 'none';
-    }
   }
 });
 </script>

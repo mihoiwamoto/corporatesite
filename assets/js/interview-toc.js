@@ -21,11 +21,18 @@
     if (linkById[id]) linkById[id].classList.add('active');
   }
 
+  // 目次クリック直後、スムーススクロールのアニメーション中は
+  // スクロールスパイによるハイライト上書きを抑制する（クリック先を保持）。
+  var spyLockUntil = 0;
+  function lockSpy(ms) { spyLockUntil = Date.now() + ms; }
+  function isSpyLocked() { return Date.now() < spyLockUntil; }
+
   // ---- スクロールスパイ（現在地の見出しをハイライト）----
   if ('IntersectionObserver' in window) {
     var visible = {};
 
     function chooseActive() {
+      if (isSpyLocked()) return;
       // 最下部付近では、最後のセクション（短くて判定ゾーンに入りきらない）を
       // 強制的にアクティブにする。これがないと直前の見出しが残ってしまう。
       var docHeight = Math.max(
@@ -59,20 +66,28 @@
     }, { passive: true });
   }
 
-  // ---- 目次クリックでスムーススクロール（固定ヘッダー分オフセット）----
-  links.forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      var id = (link.getAttribute('href') || '').replace('#', '');
+  // ---- 目次クリック時のハイライト制御 ----
+  // 実際のスクロールは smooth-scroll.js（Lenis）が document のキャプチャ段階で
+  // 処理し stopPropagation() する。そのためリンク要素のバブリング段階リスナーは
+  // 呼ばれない。ここでも同じキャプチャ段階で拾い、クリック先を即座にアクティブ化
+  // したうえでスパイをロックし、スクロール中に手前のセクションで上書きされるのを防ぐ。
+  document.addEventListener('click', function (e) {
+    var link = e.target && e.target.closest ? e.target.closest('.iv2-toc-link') : null;
+    if (!link) return;
+    var id = (link.getAttribute('href') || '').replace('#', '');
+    if (!linkById[id]) return;
+    setActive(id);
+    // Lenis の duration(1.5s) より少し長めにロックして、着地までクリック先を保持。
+    lockSpy(1800);
+    // Lenis が無い環境（prefers-reduced-motion 等）では自前でスクロール。
+    if (!window.__lenis) {
       var target = document.getElementById(id);
-      if (!target) return;
-      e.preventDefault();
-      setActive(id);
-      if (window.lenis && typeof window.lenis.scrollTo === 'function') {
-        window.lenis.scrollTo(target, { offset: -96 });
-      } else {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (target) {
+        e.preventDefault();
+        var top = target.getBoundingClientRect().top + window.pageYOffset - 96;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+        if (history.replaceState) history.replaceState(null, '', '#' + id);
       }
-      if (history.replaceState) history.replaceState(null, '', '#' + id);
-    });
-  });
+    }
+  }, true);
 })();

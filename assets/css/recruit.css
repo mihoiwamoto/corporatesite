@@ -12,6 +12,9 @@
     --bg-soft:     #F7F8FA;
     --line:        #E8ECF0;
     --radius:      12px;
+    --fs-body:     16px;
+    --fs-note:     14px;
+    --fs-tag:      12px;
     --maxw:        1200px;
     --shadow-sm:   0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
     --shadow-md:   0 4px 16px rgba(0,0,0,.05), 0 2px 6px rgba(0,0,0,.04);
@@ -27,7 +30,7 @@
   section { padding: 120px 0; }
   .eyebrow { font-size: 11px; font-weight: 700; color: var(--pink-dark); letter-spacing: .25em; text-transform: uppercase; margin-bottom: 20px; }
   h2.title { font-size: clamp(26px, 3vw, 38px); font-weight: 700; margin-bottom: 24px; line-height: 1.5; letter-spacing: -.02em; }
-  .lead-narrow { max-width: 720px; font-size: 16px; color: var(--sub); line-height: 1.9; margin-top: 4px; }
+  .lead-narrow { max-width: 720px; font-size: var(--fs-body); color: var(--sub); line-height: 1.9; margin-top: 4px; }
   .col-head { font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--ink); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
 
   .btn { display: inline-block; padding: 18px 40px; border-radius: 9999px; font-size: 15px; font-weight: 500; text-decoration: none; letter-spacing: .02em; transition: all .35s cubic-bezier(.4,0,.2,1); box-shadow: rgba(26,38,51,.1) 0px 6px 24px 0px; }
@@ -41,12 +44,12 @@
 
   /* PAGE HERO */
   .page-hero { padding: 88px 0 64px; }
-  .breadcrumb { font-size: 12px; color: var(--sub); margin-bottom: 20px; }
+  .breadcrumb { font-size: var(--fs-note); color: var(--sub); margin-bottom: 20px; }
   .breadcrumb a { color: var(--sub); text-decoration: none; }
   .breadcrumb a:hover { color: var(--ink); }
   .breadcrumb span { margin: 0 6px; }
   .page-hero h1 { font-size: 36px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; }
-  .page-hero p.sub { font-size: 16px; color: var(--sub); margin-top: 16px; line-height: 1.85; max-width: 640px; }
+  .page-hero p.sub { font-size: var(--fs-body); color: var(--sub); margin-top: 16px; line-height: 1.85; max-width: 640px; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
   .hero-actions .btn { padding: 15px 32px; font-size: 14px; }
 
@@ -63,7 +66,7 @@
   .message-section { background: var(--bg); }
   .message-inner { max-width: 880px; }
   .message-inner h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 700; line-height: 1.5; letter-spacing: -.02em; margin-bottom: 28px; }
-  .message-inner p { font-size: 17px; color: var(--sub); line-height: 1.95; }
+  .message-inner p { font-size: var(--fs-body); color: var(--sub); line-height: 1.95; }
   .message-inner p + p { margin-top: 20px; }
 
   /* WHY LANSTECH */
@@ -72,15 +75,15 @@
   .why-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px; }
   .why-k { display: block; font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: .08em; margin-bottom: 14px; }
   .why-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; line-height: 1.5; }
-  .why-card p { font-size: 14.5px; color: var(--sub); line-height: 1.85; }
+  .why-card p { font-size: var(--fs-body); color: var(--sub); line-height: 1.85; }
 
   /* POSITIONS */
   .jobs-section { background: var(--bg); }
   .jobs-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 40px; max-width: 640px; }
   .job-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px 28px; }
-  .job-badge { display: inline-block; background: var(--pink-light); border: 1px solid var(--line); color: var(--ink); font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 9999px; margin-bottom: 16px; }
+  .job-badge { display: inline-block; background: var(--pink-light); border: 1px solid var(--line); color: var(--ink); font-size: var(--fs-tag); font-weight: 700; padding: 3px 12px; border-radius: 9999px; margin-bottom: 16px; }
   .job-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
-  .job-card p { font-size: 15px; color: var(--sub); line-height: 1.75; margin-bottom: 20px; }
+  .job-card p { font-size: var(--fs-body); color: var(--sub); line-height: 1.75; margin-bottom: 20px; }
   .job-detail-link { display: inline-block; font-size: 13px; color: var(--ink); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; transition: color .2s, border-color .2s; }
   .job-detail-link:hover { color: var(--pink); border-bottom-color: var(--pink); }
 
@@ -96,14 +99,14 @@
   .work-step:last-child { border-bottom: none; }
   .work-num { font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: .06em; min-width: 28px; padding-top: 2px; }
   .work-step h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .work-step p { font-size: 14px; color: var(--sub); line-height: 1.7; }
-  .work-note { margin-top: 36px; background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--pink); border-radius: var(--radius); padding: 22px 26px; font-size: 15px; color: var(--sub); line-height: 1.85; }
+  .work-step p { font-size: var(--fs-body); color: var(--sub); line-height: 1.7; }
+  .work-note { margin-top: 36px; background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--pink); border-radius: var(--radius); padding: 22px 26px; font-size: var(--fs-note); color: var(--sub); line-height: 1.85; }
 
   /* TECH STACK */
   .tech-section { background: var(--bg); }
   .tech-cats { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-  .tech-cats li { background: var(--pink-light); border: 1px solid var(--line); border-radius: 9999px; padding: 8px 18px; font-size: 13px; font-weight: 500; color: var(--ink); }
-  .tech-pending { margin-top: 22px; font-size: 14px; color: var(--sub); line-height: 1.8; }
+  .tech-cats li { background: var(--pink-light); border: 1px solid var(--line); border-radius: 9999px; padding: 8px 18px; font-size: var(--fs-tag); font-weight: 500; color: var(--ink); }
+  .tech-pending { margin-top: 22px; font-size: var(--fs-note); color: var(--sub); line-height: 1.8; }
 
   /* WHO WE WANT */
   .who-section { background: var(--bg-soft); }
@@ -111,11 +114,11 @@
   .who-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
   .who-list li { position: relative; padding-left: 24px; font-size: 15px; color: var(--ink); line-height: 1.75; }
   .who-list li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--pink); font-weight: 700; }
-  .who-note { font-size: 12px; color: var(--sub); margin-top: 12px; }
+  .who-note { font-size: var(--fs-note); color: var(--sub); margin-top: 12px; }
   .mind-block { margin-top: 8px; }
   .mind-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; margin-top: 4px; }
   .mind-list li { font-size: 15px; color: var(--ink); line-height: 1.7; }
-  .mind-tag { display: inline-block; font-size: 11px; font-weight: 700; color: var(--pink); margin-left: 6px; }
+  .mind-tag { display: inline-block; font-size: var(--fs-tag); font-weight: 700; color: var(--pink); margin-left: 6px; }
 
   /* DATA */
   .num-section { background: var(--bg); }
@@ -124,7 +127,7 @@
   .num-item { background: #fafafa; text-align: center; padding: 32px 20px; }
   .num-val { font-size: 30px; font-weight: 700; color: var(--ink); line-height: 1.25; }
   .num-val small { font-size: 15px; font-weight: 400; }
-  .num-label { font-size: 12.5px; color: var(--sub); margin-top: 8px; line-height: 1.6; }
+  .num-label { font-size: var(--fs-note); color: var(--sub); margin-top: 8px; line-height: 1.6; }
 
   /* REQUIREMENTS TABLE */
   .ws-section { background: var(--bg-soft); }
@@ -137,26 +140,26 @@
   /* INTERVIEW */
   .interview-section { background: var(--bg); }
   .interview-card { max-width: 760px; margin: 44px auto 0; background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 48px 48px 44px; text-align: center; }
-  .interview-badge { display: inline-block; background: #fff; border: 1px solid var(--line); color: var(--pink); font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 9999px; margin-bottom: 20px; letter-spacing: .04em; }
+  .interview-badge { display: inline-block; background: #fff; border: 1px solid var(--line); color: var(--pink); font-size: var(--fs-tag); font-weight: 700; padding: 4px 14px; border-radius: 9999px; margin-bottom: 20px; letter-spacing: .04em; }
   .interview-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 16px; line-height: 1.5; }
-  .interview-card p { font-size: 15px; color: var(--sub); line-height: 1.9; max-width: 650px; margin: 0 auto; }
+  .interview-card p { font-size: var(--fs-body); color: var(--sub); line-height: 1.9; max-width: 650px; margin: 0 auto; }
   .interview-q { list-style: none; display: inline-flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 24px; }
   .interview-q li { background: #fff; border: 1px solid var(--line); border-radius: 9999px; padding: 5px 14px; font-size: 12px; color: var(--sub); }
   .interview-cta-wrap { text-align: center; margin-top: 28px; }
-  .interview-note { font-size: 14px; color: var(--sub); margin-bottom: 14px; }
+  .interview-note { font-size: var(--fs-note); color: var(--sub); margin-bottom: 14px; }
   .interview-cta { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--line); border-radius: 9999px; padding: 12px 28px; color: var(--ink); font-size: 14px; font-weight: 700; text-decoration: none; transition: all .35s cubic-bezier(.4,0,.2,1); }
   .interview-cta:hover { border-color: var(--pink); color: var(--pink); background: var(--bg-soft); transform: translateY(-2px); }
 
   /* FLOW */
   .flow-section { background: var(--bg-soft); }
-  .flow-lead { font-size: 15px; color: var(--sub); margin-top: 4px; }
+  .flow-lead { font-size: var(--fs-body); color: var(--sub); margin-top: 4px; }
   .flow-steps { display: flex; align-items: flex-start; gap: 0; margin-top: 44px; }
   .flow-item { flex: 1; text-align: center; position: relative; padding: 0 8px; }
   .flow-item::after { content: '→'; position: absolute; right: -8px; top: 18px; color: var(--sub); font-size: 18px; }
   .flow-item:last-child::after { display: none; }
   .flow-circle { width: 56px; height: 56px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
   .flow-label { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .flow-desc { font-size: 12px; color: var(--sub); line-height: 1.6; }
+  .flow-desc { font-size: var(--fs-note); color: var(--sub); line-height: 1.6; }
 
   /* FAQ */
   .faq-section { background: var(--bg); }
@@ -173,7 +176,7 @@
   .contact-cta .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
   .contact-cta .eyebrow { color: var(--pink-dark); }
   .contact-cta h2 { font-size: 26px; font-weight: 700; color: var(--ink); margin-top: 10px; margin-bottom: 10px; line-height: 1.45; }
-  .contact-cta p { font-size: 15px; color: var(--sub); line-height: 1.8; }
+  .contact-cta p { font-size: var(--fs-body); color: var(--sub); line-height: 1.8; }
   .contact-cta .btn-cta { display: inline-block; background: var(--ink); color: #fff; padding: 16px 40px; border-radius: 9999px; font-size: 14px; font-weight: 700; text-decoration: none; transition: all .35s cubic-bezier(.4,0,.2,1); white-space: nowrap; flex-shrink: 0; box-shadow: 0 6px 24px rgba(20,28,36,.12); }
   .contact-cta .btn-cta:hover { background: #2D3748; transform: translateY(-2px); box-shadow: 0 10px 36px rgba(20,28,36,.18); }
 
@@ -191,7 +194,6 @@
     .page-hero { padding: 48px 0 40px; }
     .page-hero h1 { font-size: 26px; }
     .message-inner h2 { line-height: 1.55; }
-    .message-inner p { font-size: 16px; }
     .why-grid { grid-template-columns: 1fr; }
     .hero-actions .btn { flex: 1 1 auto; text-align: center; }
     .job-summary { grid-template-columns: 1fr 1fr; }
@@ -241,8 +243,8 @@
     h2.title { font-size: 44px; }
     .recruit-lead h2 { font-size: 46px; }
     .recruit-layout { gap: 120px; }
-    .recruit-content p { font-size: 16px; line-height: 2.2; max-width: 680px; }
+    .recruit-content p { font-size: var(--fs-body); line-height: 2.2; max-width: 680px; }
     .interview-card { padding: 64px; max-width: 900px; }
     .interview-card h3 { font-size: 26px; }
-    .interview-card p { font-size: 16px; line-height: 2.1; max-width: 700px; }
+    .interview-card p { line-height: 2.1; max-width: 700px; }
   }

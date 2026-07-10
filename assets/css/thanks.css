@@ -8,6 +8,9 @@
     --bg:          #ffffff;
     --bg-soft:     #F7F8FA;
     --line:        #E8ECF0;
+    --fs-body:     16px;
+    --fs-note:     14px;
+    --fs-tag:      12px;
     --maxw:        1200px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,9 +27,9 @@
   .thanks-icon svg { width: 40px; height: 40px; }
   .thanks-eyebrow { font-size: 11px; font-weight: 700; color: var(--pink-dark); letter-spacing: .25em; text-transform: uppercase; margin-bottom: 18px; }
   .thanks-card h1 { font-size: 30px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; margin-bottom: 18px; }
-  .thanks-card p { font-size: 15px; color: var(--sub); line-height: 1.9; }
+  .thanks-card p { font-size: var(--fs-body); color: var(--sub); line-height: 1.9; }
   .thanks-card p strong { color: var(--ink); font-weight: 700; }
-  .thanks-note { font-size: 13px; margin-top: 14px; }
+  .thanks-note { font-size: var(--fs-note); margin-top: 14px; }
   .thanks-actions { margin-top: 36px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
   /* BUTTON */
