@@ -261,7 +261,7 @@
 
   /* HISTORY */
   .history { background: rgba(255, 255, 255, 0.6) !important; backdrop-filter: blur(16px) !important; -webkit-backdrop-filter: blur(16px) !important; }
-  .history-lead { font-size: var(--fs-body); color: var(--sub); line-height: 1.85; margin-top: 16px; margin-bottom: 64px; max-width: 640px; }
+  .history-lead { font-size: var(--fs-body); color: var(--sub); line-height: 1.85; margin-top: 16px; margin-bottom: 64px; word-break: auto-phrase; }
   .timeline { display: flex; flex-direction: column; }
   .timeline-year { display: grid; grid-template-columns: 140px 1fr; gap: 40px; align-items: start; }
   .timeline-year-num { font-family: 'Outfit', sans-serif; font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -.02em; color: var(--ink); }
