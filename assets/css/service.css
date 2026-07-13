@@ -589,7 +589,7 @@
     .service-text h2 { font-size: 22px; }
     .service-title-ghost::before { left: 0; }
     .service-tagline { font-size: 16px; }
-    .service-text p.lead { font-size: 15px; }
+    .service-text p.lead { font-size: 16px; }
     .tag { padding: 3px 10px; }
 
     /* フローステップ */
@@ -898,8 +898,8 @@
     .service-text .eyebrow { font-size: 10px; margin-bottom: 10px; }
     .service-title-ghost { font-size: 24px; margin-bottom: 12px; }
     .service-title-ghost::before { left: 0; }
-    .service-tagline { font-size: 15px; margin-bottom: 12px; }
-    .service-text p.lead { font-size: 14px; line-height: 1.85; }
+    .service-tagline { font-size: 16px; margin-bottom: 12px; }
+    .service-text p.lead { font-size: 16px; line-height: 1.85; }
 
     .service-visual { aspect-ratio: 4/3; }
 

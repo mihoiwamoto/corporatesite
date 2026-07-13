@@ -345,14 +345,14 @@
     .value-card-ja { font-size: 20px; }
     .value-card-en { font-size: 10px; }
 
-    .history-lead { font-size: var(--fs-body); margin-bottom: 48px; }
+    .history-lead { font-size: var(--fs-body); margin-bottom: 48px; text-align: left; word-break: normal; overflow-wrap: anywhere; text-wrap: wrap; }
     .timeline-year { grid-template-columns: 1fr; gap: 6px; }
     .timeline-year-num { font-size: 34px; margin-bottom: 4px; }
     .timeline-events { padding-left: 24px; padding-bottom: 36px; }
     .timeline-event { padding-bottom: 28px; }
     .timeline-event::before { left: -30px; }
-    .timeline-event-body h3 { font-size: 16px; }
-    .timeline-event-body p { font-size: var(--fs-body); }
+    .timeline-event-body h3 { font-size: 16px; text-align: left; word-break: normal; overflow-wrap: anywhere; text-wrap: wrap; }
+    .timeline-event-body p { font-size: var(--fs-body); text-align: left; word-break: normal; overflow-wrap: anywhere; text-wrap: wrap; }
 
     .group-layout { grid-template-columns: 1fr; gap: 32px; margin-top: 32px; }
     .group-desc h3 { font-size: 22px; margin-bottom: 16px; line-height: 1.6; }
@@ -364,7 +364,7 @@
     .company-table th { padding: 0 0 4px; font-size: 16px; font-weight: 700; color: var(--pink-dark); letter-spacing: .04em; }
     .company-table td { padding: 0; font-size: 16px; }
     .officer {
-      gap: 10px 16px;
+      gap: 2px 16px;
       flex-wrap: wrap;
       flex-direction: column;
       align-items: flex-start;
@@ -374,8 +374,8 @@
       font-size: 14px;
       margin-bottom: 2px;
     }
-    .officer span {
-      font-size: 15px;
+    .officer span:not(.officer-title) {
+      font-size: 16px;
     }
 
     .interview-badge-wrapper {
