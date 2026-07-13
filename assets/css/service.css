@@ -617,19 +617,19 @@
     }
     .ai-strength-title.animate-in { font-size: 34px; }
     .ai-strength-subtitle { font-size: 18px; }
-    .ai-strength-desc { font-size: 15px; }
+    .ai-strength-desc { font-size: 16px; }
     .ai-power-grid { margin-top: 36px; }
     .ai-card { padding: 28px 20px; }
     .ai-card-number { font-size: 64px; top: 16px; left: 16px; }
     .ai-card-title { font-size: 20px; margin-top: 32px; }
-    .ai-card-desc { font-size: 15px; }
+    .ai-card-desc { font-size: 16px; }
     .ai-card--wide {
       padding: 28px 24px;
       align-items: center;
       max-width: none;
     }
     .ai-card-badge { font-size: 18px; padding: 5px 12px; }
-    .ai-card-desc-main { font-size: 15px; text-align: center; }
+    .ai-card-desc-main { font-size: 16px; text-align: center; }
 
     /* ケーススタディ */
     .cases-section { padding: 56px 0; }
@@ -923,13 +923,13 @@
     .ai-strength-title { font-size: 30px; opacity: 1; transform: none; }
     .ai-strength-title.animate-in { font-size: 30px; }
     .ai-strength-subtitle { font-size: 16px; margin-bottom: 16px; }
-    .ai-strength-desc { font-size: 14px; line-height: 1.85; }
+    .ai-strength-desc { font-size: 16px; line-height: 1.85; }
 
     .ai-power-grid { gap: 12px; margin-top: 32px; padding: 0 16px; }
     .ai-card { padding: 24px 16px; border-radius: 10px; }
     .ai-card-number { font-size: 56px; top: 12px; left: 12px; }
     .ai-card-title { font-size: 18px; margin-top: 28px; margin-bottom: 10px; }
-    .ai-card-desc { font-size: 14px; line-height: 1.75; }
+    .ai-card-desc { font-size: 16px; line-height: 1.75; }
     .ai-card--wide {
       padding: 24px 20px;
       border-radius: 16px;
@@ -937,10 +937,10 @@
       max-width: none;
     }
     .ai-card-badge { font-size: 16px; padding: 4px 10px; margin-bottom: 12px; }
-    .ai-card-desc-main { font-size: 14px; line-height: 1.8; text-align: center; }
+    .ai-card-desc-main { font-size: 16px; line-height: 1.8; text-align: center; }
 
     .ai-footer-line { margin: 32px auto 20px; padding: 0 16px; }
-    .ai-footer-text { font-size: 14px; padding: 0 16px; }
+    .ai-footer-text { font-size: 16px; padding: 0 16px; }
 
     /* ケーススタディ */
     .cases-section { padding: 48px 0; }
